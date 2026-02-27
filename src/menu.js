@@ -42,14 +42,6 @@ exports.menuMessage = (groupJid) => {
 ▢
 ╰━━─「🌌」─━━
 
-╭━━⪩ MATRIMONIO ⪨━━
-▢
-▢ • ${prefix}casarse
-▢ • ${prefix}divorce
-▢ • ${prefix}infomatrimonio
-▢
-╰━━─「🌌」─━━
-
 ╭━━⪩ ADMINS ⪨━━
 ▢
 ▢ • ${prefix}add-auto-responder
@@ -65,7 +57,6 @@ exports.menuMessage = (groupJid) => {
 ▢ • ${prefix}agregar
 ▢ • ${prefix}ban
 ▢ • ${prefix}afk
-▢ • ${prefix}tts
 ▢ • ${prefix}clear
 ▢ • ${prefix}close
 ▢ • ${prefix}delete
@@ -76,12 +67,14 @@ exports.menuMessage = (groupJid) => {
 ▢ • ${prefix}link-group
 ▢ • ${prefix}list-auto-responder
 ▢ • ${prefix}mute
+▢ • ${prefix}unmute
+▢ • ${prefix}warn
+▢ • ${prefix}unwarn
 ▢ • ${prefix}only-admin (1/0)
 ▢ • ${prefix}open
 ▢ • ${prefix}promote
 ▢ • ${prefix}reveal
 ▢ • ${prefix}schedule-message
-▢ • ${prefix}unmute
 ▢ • ${prefix}welcome (1/0)
 ▢
 ╰━━─「⭐」─━━
@@ -130,6 +123,9 @@ exports.menuMessage = (groupJid) => {
 
 ╭━━⪩ PRINCIPAL ⪨━━
 ▢
+▢ • ${prefix}casarse
+▢ • ${prefix}divorce
+▢ • ${prefix}infomatrimonio
 ▢ • ${prefix}attp
 ▢ • ${prefix}fake-chat
 ▢ • ${prefix}generate-link
@@ -142,6 +138,7 @@ exports.menuMessage = (groupJid) => {
 ▢ • ${prefix}samples-of-messages
 ▢ • ${prefix}sticker
 ▢ • ${prefix}to-image
+▢ • ${prefix}tts
 ▢ • ${prefix}ttp
 ▢ • ${prefix}yt-search
 ▢
