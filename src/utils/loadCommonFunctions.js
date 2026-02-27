@@ -14,8 +14,9 @@ const {
   onlyNumbers,
 } = require(".");
 const fs = require("node:fs");
-const { delay } = require("baileys");
+const { delay } = require("../utils/baileys_adapter");
 
+  
 exports.loadCommonFunctions = ({ socket, webMessage }) => {
   const {
     args,
@@ -717,6 +718,7 @@ exports.loadCommonFunctions = ({ socket, webMessage }) => {
     replyJid,
     socket,
     userJid,
+    m: webMessage,
     webMessage,
     deleteMessage,
     downloadAudio,

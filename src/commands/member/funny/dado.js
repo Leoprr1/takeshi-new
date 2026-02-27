@@ -1,16 +1,8 @@
-/**
- * Desenvolvido por: Mkg
- * Refatorado por: Dev Gui
- *
- * @author Dev Gui
- */
-const { delay } = require("baileys");
-
 const { getRandomNumber } = require(`${BASE_DIR}/utils`);
-
 const { PREFIX, ASSETS_DIR } = require(`${BASE_DIR}/config`);
 const { DangerError } = require(`${BASE_DIR}/errors`);
 const path = require("node:path");
+const { getBaileysHelpers } = require(`${BASE_DIR}/utils/baileys_adapter`);
 
 module.exports = {
   name: "dado",
@@ -18,10 +10,6 @@ module.exports = {
     "¡Lanza un dado del 1 al 6 e intenta acertar el número para ganar!",
   commands: ["dado", "dice"],
   usage: `${PREFIX}dado número`,
-  /**
-   * @param {CommandHandleProps} props
-   * @returns {Promise<void>}
-   */
   handle: async ({
     args,
     sendWaitReply,
@@ -30,6 +18,8 @@ module.exports = {
     sendReact,
     webMessage,
   }) => {
+    const { delay } = await getBaileysHelpers(); // <-- acá obtenemos delay
+
     const number = parseInt(args[0]);
 
     if (!number || number < 1 || number > 6) {
@@ -48,7 +38,7 @@ module.exports = {
       path.resolve(ASSETS_DIR, "stickers", "dice", `${result}.webp`)
     );
 
-    await delay(2000);
+    await delay(2000); // <-- funciona correctamente ahora
 
     if (number === result) {
       await sendReact("🏆");

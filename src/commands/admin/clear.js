@@ -1,4 +1,5 @@
-const { delay } = require("baileys");
+const { getBaileysHelpers } = require(`${BASE_DIR}/utils/baileys_adapter`);
+
 const { BOT_EMOJI } = require(`${BASE_DIR}/config`);
 
 const { PREFIX } = require(`${BASE_DIR}/config`);
@@ -14,6 +15,8 @@ module.exports = {
    * @returns {Promise<void>}
    */
   handle: async ({ socket, remoteJid, isGroup, sendSuccessReact }) => {
+    const { delay } = await getBaileysHelpers(); // <-- acá obtenemos delay
+
     if (!isGroup) {
       throw new WarningError("Este comando solo puede ser usado en grupos.");
     }

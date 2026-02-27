@@ -4,6 +4,8 @@
  *
  * @author Dev Gui
  */
+const { checkAntiSpam } = require("./antiSpam");
+
 const {
   DangerError,
   WarningError,
@@ -52,28 +54,53 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
 
   const activeGroup = isActiveGroup(remoteJid);
 
-  if (activeGroup && isActiveAntiLinkGroup(remoteJid) && isLink(fullMessage)) {
-    if (!userJid) {
-      return;
-    }
+  // 🔹 Anti-link modificado para ignorar comandos sin links
+  if (activeGroup && isActiveAntiLinkGroup(remoteJid)) {
+    if (!userJid) return;
 
-    if (!(await isAdmin({ remoteJid, userJid, socket }))) {
-      await socket.groupParticipantsUpdate(remoteJid, [userJid], "remove");
+    const groupPrefix = getPrefix(remoteJid);
 
-      await sendReply(
-        "¡Anti-link activado! ¡Fuiste removido por enviar un enlace!"
-      );
+    // Si es un comando, revisar solo lo que está después del nombre del comando
+    if (fullMessage.startsWith(groupPrefix)) {
+      const afterCommand = fullMessage.slice(groupPrefix.length).trim();
+      const parts = afterCommand.split(/\s+/);
+      parts.shift(); // quitar nombre del comando
+      const remainingText = parts.join(" ");
 
-      await socket.sendMessage(remoteJid, {
-        delete: {
-          remoteJid,
-          fromMe: false,
-          id: webMessage.key.id,
-          participant: webMessage.key.participant,
-        },
-      });
-
-      return;
+      if (isLink(remainingText)) {
+        if (!(await isAdmin({ remoteJid, userJid, socket }))) {
+          await socket.groupParticipantsUpdate(remoteJid, [userJid], "remove");
+          await sendReply(
+            "¡Anti-link activado! ¡Fuiste removido por enviar un enlace en un comando!"
+          );
+          await socket.sendMessage(remoteJid, {
+            delete: {
+              remoteJid,
+              fromMe: false,
+              id: webMessage.key.id,
+              participant: webMessage.key.participant,
+            },
+          });
+          return;
+        }
+      }
+    } else if (isLink(fullMessage)) {
+      // Mensajes normales con enlace
+      if (!(await isAdmin({ remoteJid, userJid, socket }))) {
+        await socket.groupParticipantsUpdate(remoteJid, [userJid], "remove");
+        await sendReply(
+          "¡Anti-link activado! ¡Fuiste removido por enviar un enlace!"
+        );
+        await socket.sendMessage(remoteJid, {
+          delete: {
+            remoteJid,
+            fromMe: false,
+            id: webMessage.key.id,
+            participant: webMessage.key.participant,
+          },
+        });
+        return;
+      }
     }
   }
 
@@ -116,10 +143,13 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
   }
 
   if (!isBotOwner({ userJid, isLid }) && !activeGroup) {
+    
     if (
       verifyPrefix(prefix, remoteJid) &&
       hasTypeAndCommand({ type, command })
     ) {
+
+      
       if (command.name !== "on") {
         await sendWarningReply(
           "¡Este grupo está desactivado! ¡Pide al dueño del grupo que active el bot!"
@@ -147,7 +177,6 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
     await sendReply(
       `¡Este es mi prefijo! ¡Usa ${groupPrefix}menu para ver los comandos disponibles!`
     );
-
     return;
   }
 
@@ -155,15 +184,33 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
     await sendWarningReply(
       `¡Comando no encontrado! ¡Usa ${groupPrefix}menu para ver los comandos disponibles!`
     );
-
     return;
   }
+  // 🚫 ANTI SPAM SYSTEM
+if (!isBotOwner({ userJid, isLid })) {
+  const antiSpam = checkAntiSpam(userJid);
+
+  if (antiSpam.blocked) {
+    if (antiSpam.suspended) {
+      await sendErrorReply(
+        `🚫 Has sido suspendido por spam.\nIntenta nuevamente en ${antiSpam.remainingMinutes} minuto(s).`
+      );
+    } else {
+      await sendWarningReply(
+        `⏳ Espera ${antiSpam.remainingSeconds}s antes de usar otro comando.\nAdvertencias restantes: ${antiSpam.remainingWarnings}`
+      );
+    }
+    return;
+  }
+}
+
 
   try {
     await command.handle({
       ...paramsHandler,
       type,
       startProcess,
+      m: webMessage, // ✅ FIX agregado aquí
     });
   } catch (error) {
     if (badMacHandler.handleError(error, `command:${command?.name}`)) {
@@ -199,14 +246,14 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
         `Ocurrió un error al ejecutar una llamada remota a ${
           isSpiderAPIError ? "la API de Spider X" : url
         } en el comando ${command.name}!
-      
+        
 📄 *Detalles*: ${messageText}`
       );
     } else {
       errorLog("Error al ejecutar comando", error);
       await sendErrorReply(
         `Ocurrió un error al ejecutar el comando ${command.name}!
-      
+        
 📄 *Detalles*: ${error.message}`
       );
     }

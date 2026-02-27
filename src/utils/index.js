@@ -3,7 +3,11 @@
  *
  * @author Dev Gui
  */
-const { downloadContentFromMessage, delay } = require("baileys");
+const { downloadContentFromMessage, delay } = require("../utils/baileys_adapter");
+
+exports.isAtLeastMinutesInPast = (timestamp, minimumMinutes = 5) => {
+  return Math.floor((Date.now() / 1000 - timestamp) / 60) >= minimumMinutes;
+};
 const { PREFIX, COMMANDS_DIR, TEMP_DIR, ASSETS_DIR } = require("../config");
 const path = require("node:path");
 const fs = require("node:fs");
@@ -12,15 +16,26 @@ const readline = require("node:readline");
 const axios = require("axios");
 const { errorLog } = require("./logger");
 
+// ---------------------
+// Logs
+// ---------------------
+exports.infoLog = (msg) => console.log(msg);
+exports.errorLog = (msg, err) => console.error(msg, err || "");
+
+// ---------------------
+// Pregunta por consola
+// ---------------------
 exports.question = (message) => {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-
   return new Promise((resolve) => rl.question(message, resolve));
 };
 
+// ---------------------
+// Extraer datos de mensajes
+// ---------------------
 exports.extractDataFromMessage = (webMessage) => {
   const textMessage = webMessage.message?.conversation;
   const extendedTextMessage = webMessage.message?.extendedTextMessage;
@@ -63,7 +78,6 @@ exports.extractDataFromMessage = (webMessage) => {
 
   const [command, ...args] = fullMessage.split(" ");
   const prefix = command.charAt(0);
-
   const commandWithoutPrefix = command.replace(new RegExp(`^[${PREFIX}]+`), "");
 
   return {
@@ -82,11 +96,7 @@ exports.extractDataFromMessage = (webMessage) => {
 exports.splitByCharacters = (str, characters) => {
   characters = characters.map((char) => (char === "\\" ? "\\\\" : char));
   const regex = new RegExp(`[${characters.join("")}]`);
-
-  return str
-    .split(regex)
-    .map((str) => str.trim())
-    .filter(Boolean);
+  return str.split(regex).map((str) => str.trim()).filter(Boolean);
 };
 
 exports.formatCommand = (text) => {
@@ -95,106 +105,66 @@ exports.formatCommand = (text) => {
   );
 };
 
-exports.isGroup = (remoteJid) => {
-  return remoteJid.endsWith("@g.us");
-};
+exports.isGroup = (remoteJid) => remoteJid.endsWith("@g.us");
+exports.onlyLettersAndNumbers = (text) => text.replace(/[^a-zA-Z0-9]/g, "");
+exports.removeAccentsAndSpecialCharacters = (text) =>
+  text ? text.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
 
-exports.onlyLettersAndNumbers = (text) => {
-  return text.replace(/[^a-zA-Z0-9]/g, "");
-};
-
-exports.removeAccentsAndSpecialCharacters = (text) => {
-  if (!text) return "";
-
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-};
-
-exports.baileysIs = (webMessage, context) => {
-  return !!this.getContent(webMessage, context);
-};
+exports.baileysIs = (webMessage, context) => !!this.getContent(webMessage, context);
 
 exports.getContent = (webMessage, context) => {
   return (
     webMessage?.message?.[`${context}Message`] ||
-    webMessage?.message?.extendedTextMessage?.contextInfo?.quotedMessage?.[
-      `${context}Message`
-    ] ||
+    webMessage?.message?.extendedTextMessage?.contextInfo?.quotedMessage?.[`${context}Message`] ||
     webMessage?.message?.viewOnceMessage?.message?.[`${context}Message`] ||
-    webMessage?.message?.extendedTextMessage?.contextInfo?.quotedMessage
-      ?.viewOnceMessage?.message?.[`${context}Message`] ||
+    webMessage?.message?.extendedTextMessage?.contextInfo?.quotedMessage?.viewOnceMessage?.message?.[`${context}Message`] ||
     webMessage?.message?.viewOnceMessageV2?.message?.[`${context}Message`] ||
-    webMessage?.message?.extendedTextMessage?.contextInfo?.quotedMessage
-      ?.viewOnceMessageV2?.message?.[`${context}Message`]
+    webMessage?.message?.extendedTextMessage?.contextInfo?.quotedMessage?.viewOnceMessageV2?.message?.[`${context}Message`]
   );
 };
 
 exports.download = async (webMessage, fileName, context, extension) => {
   const content = this.getContent(webMessage, context);
-
-  if (!content) {
-    return null;
-  }
+  if (!content) return null;
 
   const stream = await downloadContentFromMessage(content, context);
-
   let buffer = Buffer.from([]);
-
-  for await (const chunk of stream) {
-    buffer = Buffer.concat([buffer, chunk]);
-  }
+  for await (const chunk of stream) buffer = Buffer.concat([buffer, chunk]);
 
   const filePath = path.resolve(TEMP_DIR, `${fileName}.${extension}`);
-
   await writeFile(filePath, buffer);
-
   return filePath;
 };
 
+// ---------------------
+// Leer directorios
+// ---------------------
 function readDirectoryRecursive(dir) {
   const results = [];
   const list = fs.readdirSync(dir, { withFileTypes: true });
-
   for (const item of list) {
     const itemPath = path.join(dir, item.name);
-    if (item.isDirectory()) {
-      results.push(...readDirectoryRecursive(itemPath));
-    } else if (
-      !item.name.startsWith("_") &&
-      (item.name.endsWith(".js") || item.name.endsWith(".ts"))
-    ) {
-      results.push(itemPath);
-    }
+    if (item.isDirectory()) results.push(...readDirectoryRecursive(itemPath));
+    else if (!item.name.startsWith("_") && (item.name.endsWith(".js") || item.name.endsWith(".ts"))) results.push(itemPath);
   }
-
   return results;
 }
 
 exports.findCommandImport = (commandName) => {
   const command = this.readCommandImports();
-
   let typeReturn = "";
   let targetCommandReturn = null;
 
   for (const [type, commands] of Object.entries(command)) {
-    if (!commands.length) {
-      continue;
-    }
-
+    if (!commands.length) continue;
     try {
       const targetCommand = commands.find((cmd) => {
         if (!cmd?.commands || !Array.isArray(cmd.commands)) {
-          errorLog(
-            `Error en el comando del tipo "${type}": ¡La propiedad "commands" necesita existir y ser un ["array"] con los nombres de los comandos! Archivo erróneo: ${cmd.name}.js`
-          );
-
+          errorLog(`Error en el comando del tipo "${type}": ¡La propiedad "commands" necesita existir y ser un ["array"] con los nombres de los comandos! Archivo erróneo: ${cmd.name}.js`);
           return false;
         }
-
-        return cmd.commands
-          .map((cmdName) => this.formatCommand(cmdName))
-          .includes(commandName);
+        return cmd.commands.map((cmdName) => this.formatCommand(cmdName)).includes(commandName);
       });
-
       if (targetCommand) {
         typeReturn = type;
         targetCommandReturn = targetCommand;
@@ -205,116 +175,53 @@ exports.findCommandImport = (commandName) => {
     }
   }
 
-  return {
-    type: typeReturn,
-    command: targetCommandReturn,
-  };
+  return { type: typeReturn, command: targetCommandReturn };
 };
 
 exports.readCommandImports = () => {
-  const subdirectories = fs
-    .readdirSync(COMMANDS_DIR, { withFileTypes: true })
-    .filter((directory) => directory.isDirectory())
-    .map((directory) => directory.name);
-
+  const subdirectories = fs.readdirSync(COMMANDS_DIR, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name);
   const commandImports = {};
-
   for (const subdir of subdirectories) {
     const subdirectoryPath = path.join(COMMANDS_DIR, subdir);
-
     const files = readDirectoryRecursive(subdirectoryPath)
-      .map((filePath) => {
-        try {
-          return require(filePath);
-        } catch (err) {
-          console.error(`Error al importar ${filePath}:`, err);
-          return null;
-        }
+      .map(filePath => {
+        try { return require(filePath); } catch (err) { console.error(`Error al importar ${filePath}:`, err); return null; }
       })
       .filter(Boolean);
-
     commandImports[subdir] = files;
   }
-
   return commandImports;
 };
 
+// ---------------------
+// Utils varios
+// ---------------------
 const onlyNumbers = (text) => text.replace(/[^0-9]/g, "");
-
 exports.onlyNumbers = onlyNumbers;
-
-function toUserJid(number) {
-  return `${onlyNumbers(number)}@s.whatsapp.net`;
-}
-
+function toUserJid(number) { return `${onlyNumbers(number)}@s.whatsapp.net`; }
 exports.toUserJid = toUserJid;
-
 exports.toUserLid = (value) => `${onlyNumbers(value)}@lid`;
 
-exports.getBuffer = (url, options) => {
-  return new Promise((resolve, reject) => {
-    axios({
-      method: "get",
-      url,
-      headers: {
-        DNT: 1,
-        "Upgrade-Insecure-Request": 1,
-        range: "bytes=0-",
-      },
-      ...options,
-      responseType: "arraybuffer",
-      proxy: options?.proxy || false,
-    })
-      .then((res) => {
-        resolve(res.data);
-      })
-      .catch(reject);
+exports.getBuffer = (url, options) =>
+  new Promise((resolve, reject) => {
+    axios({ method: "get", url, headers: { DNT: 1, "Upgrade-Insecure-Request": 1, range: "bytes=0-" }, ...options, responseType: "arraybuffer", proxy: options?.proxy || false })
+      .then((res) => resolve(res.data)).catch(reject);
   });
-};
 
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-exports.readMore = () => {
-  const invisibleBreak = "\u200B".repeat(950);
-  return invisibleBreak;
-};
-
+function getRandomNumber(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+exports.readMore = () => "\u200B".repeat(950);
 exports.getRandomNumber = getRandomNumber;
-
 exports.getRandomName = (extension) => {
   const fileName = `takeshi_temp_${getRandomNumber(0, 999999)}`;
-
-  if (!extension) {
-    return fileName.toString();
-  }
-
-  return `${fileName}.${extension}`;
+  return extension ? `${fileName}.${extension}` : fileName.toString();
 };
 
 exports.getImageBuffer = async (url, options = {}) => {
   try {
-    const defaultOptions = {
-      method: "GET",
-      headers: {
-        Accept: "image/*",
-      },
-    };
-
-    const fetchOptions = { ...defaultOptions, ...options };
-
-    const response = await fetch(url, fetchOptions);
-
-    if (!response.ok) {
-      throw new Error(
-        `Fallo al obtener imagen: ${response.status} ${response.statusText}`
-      );
-    }
-
-    const buffer = await response.arrayBuffer();
-
-    return buffer;
+    const defaultOptions = { method: "GET", headers: { Accept: "image/*" } };
+    const response = await fetch(url, { ...defaultOptions, ...options });
+    if (!response.ok) throw new Error(`Fallo al obtener imagen: ${response.status} ${response.statusText}`);
+    return await response.arrayBuffer();
   } catch (error) {
     errorLog(`Error al obtener el buffer de la imagen: ${error.message}`);
     throw error;
@@ -326,76 +233,74 @@ exports.randomDelay = async () => {
   return await delay(values[getRandomNumber(0, values.length - 1)]);
 };
 
-exports.isAtLeastMinutesInPast = (timestamp, minimumMinutes = 5) => {
-  const currentTimestamp = Math.floor(Date.now() / 1000);
-
-  const diffInSeconds = currentTimestamp - timestamp;
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60);
-
-  return diffInMinutes >= minimumMinutes;
-};
+exports.isAtLeastMinutesInPast = (timestamp, minimumMinutes = 5) => Math.floor((Math.floor(Date.now() / 1000) - timestamp) / 60) >= minimumMinutes;
 
 exports.getLastTimestampCreds = () => {
-  const credsJson = JSON.parse(
-    fs.readFileSync(
-      path.resolve(ASSETS_DIR, "auth", "baileys", "creds.json"),
-      "utf-8"
-    )
-  );
-
+  const credsJson = JSON.parse(fs.readFileSync(path.resolve(ASSETS_DIR, "auth", "baileys", "creds.json"), "utf-8"));
   return credsJson.lastAccountSyncTimestamp;
 };
 
 const normalizeNumber = (number) => {
-  if (!number.startsWith("55")) {
-    return number;
-  }
-
+  if (!number.startsWith("55")) return number;
   const withoutCountryCode = number.slice(2);
   const ddd = withoutCountryCode.slice(0, 2);
   const phoneNumber = withoutCountryCode.slice(2);
-
-  if (phoneNumber.length === 9) {
-    const withoutNinthDigit = phoneNumber.slice(1);
-    return {
-      with9: `55${ddd}${phoneNumber}`,
-      without9: `55${ddd}${withoutNinthDigit}`,
-    };
-  }
-
-  if (phoneNumber.length === 8) {
-    const withNinthDigit = `9${phoneNumber}`;
-    return {
-      with9: `55${ddd}${withNinthDigit}`,
-      without9: `55${ddd}${phoneNumber}`,
-    };
-  }
-
+  if (phoneNumber.length === 9) return { with9: `55${ddd}${phoneNumber}`, without9: `55${ddd}${phoneNumber.slice(1)}` };
+  if (phoneNumber.length === 8) return { with9: `55${ddd}9${phoneNumber}`, without9: `55${ddd}${phoneNumber}` };
   return { with9: number, without9: number };
 };
 
 exports.compareUserJidWithOtherNumber = ({ userJid, otherNumber }) => {
-  if (!userJid || !otherNumber) {
-    return false;
-  }
-
-  if (!otherNumber.startsWith("55")) {
-    return userJid === toUserJid(otherNumber);
-  }
-
+  if (!userJid || !otherNumber) return false;
+  if (!otherNumber.startsWith("55")) return userJid === toUserJid(otherNumber);
   const userNumber = onlyNumbers(userJid);
   const userVariations = normalizeNumber(userNumber);
   const ownerVariations = normalizeNumber(otherNumber);
-
-  return (
-    userVariations.with9 === ownerVariations.with9 ||
-    userVariations.with9 === ownerVariations.without9 ||
-    userVariations.without9 === ownerVariations.with9 ||
-    userVariations.without9 === ownerVariations.without9
-  );
+  return userVariations.with9 === ownerVariations.with9 ||
+         userVariations.with9 === ownerVariations.without9 ||
+         userVariations.without9 === ownerVariations.with9 ||
+         userVariations.without9 === ownerVariations.without9;
 };
 
 exports.GROUP_PARTICIPANT_ADD = 27;
 exports.GROUP_PARTICIPANT_LEAVE = 32;
 exports.isAddOrLeave = [27, 32];
+
+// ---------------------
+// Botones con Baileys 6.x
+// ---------------------
+exports.sendButtonsReply = async (sock, jid, text, buttons = [], footer = '') => {
+  if (!sock || !jid || !text || !buttons.length) throw new Error("Faltan parámetros para sendButtonsReply");
+  const formattedButtons = buttons.map((btn, index) => ({
+    buttonId: `btn_${index + 1}`,
+    buttonText: { displayText: btn },
+    type: 1,
+  }));
+  await sock.sendMessage(jid, { text, footer, buttons: formattedButtons, headerType: 1 });
+};
+
+exports.sendReply = async (sock, jid, text) => {
+  if (!sock || !jid || !text) throw new Error("Faltan parámetros para sendReply");
+  await sock.sendMessage(jid, { text });
+};
+
+exports.waitButtonResponse = (sock, userJid, buttonIds = [], timeout = 30000) => {
+  return new Promise((resolve) => {
+    const handler = (msgUpdate) => {
+      try {
+        const msg = msgUpdate.messages?.[0];
+        if (!msg?.message?.buttonsResponseMessage) return;
+        const from = msg.key.participant || msg.key.remoteJid;
+        const selectedId = msg.message.buttonsResponseMessage.selectedButtonId;
+        if (from === userJid && buttonIds.includes(selectedId)) {
+          sock.ev.off("messages.upsert", handler);
+          resolve(selectedId);
+        }
+      } catch (e) { console.error("Error en waitButtonResponse:", e); }
+    };
+    sock.ev.on("messages.upsert", handler);
+    setTimeout(() => { sock.ev.off("messages.upsert", handler); resolve(null); }, timeout);
+  });
+};
+
+

@@ -1,84 +1,85 @@
-const { OWNER_NUMBER } = require("../../config");
+const path = require("path");
+const BASE_DIR = path.resolve(__dirname, "../../..");
 
-const { PREFIX, BOT_NUMBER } = require(`${BASE_DIR}/config`);
-const { DangerError, InvalidParameterError } = require(`${BASE_DIR}/errors`);
-const { toUserJid, onlyNumbers } = require(`${BASE_DIR}/utils`);
+const { OWNER_NUMBER } = require("../../config");
+const { PREFIX, BOT_NUMBER } = require(`${BASE_DIR}/src/config`);
+const { InvalidParameterError } = require(`${BASE_DIR}/src/errors`);
+const { toUserJid, onlyNumbers } = require(`${BASE_DIR}/src/utils`);
+
+// Función para convertir cualquier formato de número o mención a JID válido
+function parseToJid(input) {
+  if (!input) return null;
+
+  // Si ya es un JID válido con @, lo retorna directamente
+  if (input.includes("@")) return input;
+
+  // Si es mención @123456789, quitar la @
+  if (input.startsWith("@")) input = input.slice(1);
+
+  // Limpiar caracteres que no sean números ni +
+  let cleaned = input.replace(/[^0-9+]/g, "");
+
+  // Si empieza con +, quitar +
+  if (cleaned.startsWith("+")) cleaned = cleaned.slice(1);
+
+  // Si no empieza con código de país (ejemplo 54 Argentina), agregarlo (modificar según tu país)
+  if (!cleaned.startsWith("54")) cleaned = "54" + cleaned;
+
+  return cleaned + "@s.whatsapp.net";
+}
 
 module.exports = {
   name: "ban",
-  description: "Elimino un miembro del grupo",
+  description: "Elimina un miembro del grupo respondiendo a su mensaje o mencionándolo",
   commands: ["ban", "kick"],
-  usage: `${PREFIX}ban @mencionar_miembro 
-  
-o 
+  usage: `${PREFIX}ban @mencionar_miembro\nO\n${PREFIX}ban (respondiendo a un mensaje)`,
 
-${PREFIX}ban (mencionando un mensaje)`,
-  /**
-   * @param {CommandHandleProps} props
-   * @returns {Promise<void>}
-   */
   handle: async ({
     args,
     isReply,
+    replyJid,
     socket,
     remoteJid,
-    replyJid,
     sendReply,
     userJid,
-    isLid,
     sendSuccessReact,
   }) => {
-    if (!args.length && !isReply) {
-      throw new InvalidParameterError(
-        "¡Necesitas mencionar o marcar un miembro!"
-      );
-    }
+    console.log("[BAN] Comando iniciado por:", userJid);
 
-    let memberToRemoveId = null;
+    let memberToRemoveJid;
 
-    if (isLid) {
-      const [result] = await socket.onWhatsApp(onlyNumbers(args[0]));
-
-      if (!result) {
-        throw new WarningError(
-          "¡El número proporcionado no está registrado en WhatsApp!"
-        );
-      }
-
-      memberToRemoveId = result.lid;
+    if (isReply && replyJid) {
+      memberToRemoveJid = replyJid;
+      console.log("[BAN] Usando replyJid:", memberToRemoveJid);
+    } else if (args.length) {
+      memberToRemoveJid = parseToJid(args[0]);
+      console.log("[BAN] Usando args parseados a JID:", memberToRemoveJid);
     } else {
-      const memberToRemoveJid = isReply ? replyJid : toUserJid(args[0]);
-      const memberToRemoveNumber = onlyNumbers(memberToRemoveJid);
-
-      if (memberToRemoveNumber.length < 7 || memberToRemoveNumber.length > 15) {
-        throw new InvalidParameterError("¡Número inválido!");
-      }
-
-      if (memberToRemoveJid === userJid) {
-        throw new DangerError("¡No puedes eliminarte a ti mismo!");
-      }
-
-      if (memberToRemoveNumber === OWNER_NUMBER) {
-        throw new DangerError("¡No puedes eliminar al dueño del bot!");
-      }
-
-      const botJid = toUserJid(BOT_NUMBER);
-
-      if (memberToRemoveJid === botJid) {
-        throw new DangerError("¡No puedes eliminarme!");
-      }
-
-      memberToRemoveId = memberToRemoveJid;
+      throw new InvalidParameterError("¡Necesitas mencionar o responder a un miembro!");
     }
 
-    await socket.groupParticipantsUpdate(
-      remoteJid,
-      [memberToRemoveId],
-      "remove"
-    );
+    const memberNumber = onlyNumbers(memberToRemoveJid);
+    const botJid = toUserJid(BOT_NUMBER);
 
-    await sendSuccessReact();
+    // Prevenir eliminar a: usuario mismo, dueño del bot y al bot
+    if (memberToRemoveJid === userJid) {
+      return await sendReply("❌ No puedes eliminarte a ti mismo.");
+    }
+    if (memberNumber === OWNER_NUMBER) {
+      return await sendReply("❌ No puedes eliminar al dueño del bot.");
+    }
+    if (memberToRemoveJid === botJid) {
+      return await sendReply("❌ No puedes eliminarme a mí.");
+    }
 
-    await sendReply("¡Miembro eliminado con éxito!");
+    try {
+      console.log(`[BAN] Intentando eliminar a ${memberToRemoveJid} del grupo ${remoteJid}`);
+      await socket.groupParticipantsUpdate(remoteJid, [memberToRemoveJid], "remove");
+      if (typeof sendSuccessReact === "function") await sendSuccessReact();
+      await sendReply("✅ ¡Miembro eliminado con éxito!");
+    } catch (error) {
+      console.error("[BAN] Error al eliminar al miembro:", error);
+      await sendReply("❌ No se pudo eliminar al miembro. Puede ser administrador o WhatsApp rechazó la acción.");
+    }
   },
 };

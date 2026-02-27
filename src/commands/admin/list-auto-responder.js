@@ -1,4 +1,5 @@
-const { delay } = require("baileys");
+const { getBaileysHelpers } = require(`${BASE_DIR}/utils/baileys_adapter`);
+
 const { readMore } = require(`${BASE_DIR}/utils`);
 const { listAutoResponderItems } = require(`${BASE_DIR}/utils/database`);
 
@@ -20,6 +21,8 @@ module.exports = {
    * @returns {Promise<void>}
    */
   handle: async ({ sendSuccessReply, sendWaitReact }) => {
+    const { delay } = await getBaileysHelpers(); // <-- acá obtenemos delay
+
     await sendWaitReact();
 
     await delay(1000);
@@ -45,3 +48,4 @@ module.exports = {
     await sendSuccessReply(message);
   },
 };
+

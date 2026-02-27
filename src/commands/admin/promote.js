@@ -6,41 +6,61 @@ module.exports = {
   name: "promote",
   description: "Promueve a un usuario a administrador del grupo",
   commands: ["promote", "add-adm"],
-  usage: `${PREFIX}promote @usuario`,
+  usage: `${PREFIX}promote @usuario o ${PREFIX}promote número`,
+
   /**
    * @param {CommandHandleProps} props
    * @returns {Promise<void>}
    */
   handle: async ({
-    args,
+    sock,
     remoteJid,
-    socket,
+    m,
+    args,
     sendWarningReply,
     sendSuccessReply,
     sendErrorReply,
   }) => {
-    if (!isGroup(remoteJid)) {
-      return sendWarningReply(
-        "¡Este comando solo puede ser usado en un grupo!"
-      );
-    }
-
-    if (!args.length || !args[0]) {
-      return sendWarningReply(
-        "Por favor, etiqueta a un usuario para promover."
-      );
-    }
-
-    const userId = args[0].replace("@", "") + "@s.whatsapp.net";
-
     try {
-      await socket.groupParticipantsUpdate(remoteJid, [userId], "promote");
-      await sendSuccessReply("¡Usuario promovido con éxito!");
-    } catch (error) {
-      errorLog(`Error al promover usuario: ${error.message}`);
-      await sendErrorReply(
-        "Ocurrió un error al intentar promover al usuario. ¡Necesito ser administrador del grupo para promover a otros usuarios!"
-      );
+      console.log("🐞 DEBUG m:", m ? JSON.stringify(m, null, 2) : "undefined");
+      console.log("🐞 DEBUG args:", args);
+
+      if (!m || typeof m !== "object") {
+        return sendWarningReply("🤖 ⚠️ ¡Atención! No se recibió el mensaje correctamente.");
+      }
+
+      if (!isGroup(remoteJid)) {
+        return sendWarningReply("👥 Este comando solo puede usarse en grupos.");
+      }
+
+      let userId = null;
+
+      // Extraer menciones
+      const mentions =
+        m.message?.extendedTextMessage?.contextInfo?.mentionedJid ||
+        m.message?.contextInfo?.mentionedJid ||
+        [];
+
+      if (mentions.length > 0) {
+        userId = mentions[0];
+      } else if (args && args.length > 0) {
+        const cleaned = args[0].replace(/[^0-9]/g, "");
+        if (cleaned.length >= 5) {
+          userId = `${cleaned}@s.whatsapp.net`;
+        }
+      }
+
+      if (!userId) {
+        return sendWarningReply("👤 Por favor etiqueta a un usuario o pasa su número para promover.");
+      }
+
+      // Promover usuario
+      await sock.groupParticipantsUpdate(remoteJid, [userId], "promote");
+      return sendSuccessReply("✅ ¡Usuario promovido con éxito!");
+    } catch (err) {
+      errorLog(`❌ ERROR EN EL COMANDO PROMOTE: ${err.message}`);
+      console.error("❌ ERROR DETALLADO:", err);
+      return sendErrorReply("⚠️ Ocurrió un error al intentar promover al usuario.");
     }
   },
 };

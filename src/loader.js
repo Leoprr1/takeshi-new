@@ -14,6 +14,7 @@ const { badMacHandler } = require("./utils/badMacHandler");
 
 exports.load = (socket) => {
   global.BASE_DIR = path.resolve(__dirname);
+
   const safeEventHandler = async (callback, data, eventName) => {
     try {
       await callback(data);
@@ -23,7 +24,6 @@ exports.load = (socket) => {
       }
 
       errorLog(`Error al procesar evento ${eventName}: ${error.message}`);
-
       if (error.stack) {
         errorLog(`Stack trace: ${error.stack}`);
       }
@@ -32,10 +32,12 @@ exports.load = (socket) => {
 
   socket.ev.on("messages.upsert", async (data) => {
     const startProcess = Date.now();
-    setTimeout(() => {
-      safeEventHandler(
-        () =>
-          onMessagesUpsert({
+
+    // Ejecutamos con timeout pero dentro de async
+    setTimeout(async () => {
+      await safeEventHandler(
+        async () =>
+          await onMessagesUpsert({
             socket,
             messages: data.messages,
             startProcess,

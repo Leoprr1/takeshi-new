@@ -1,14 +1,670 @@
 [
-    {
-        "match": "Hola",
-        "answer": "¿Hola, cómo estás?"
-    },
-    {
-        "match": "Todo bien",
-        "answer": "Estoy bien, gracias por preguntar"
-    },
-    {
-        "match": "¿Cuál es tu nombre?",
-        "answer": "Mi nombre es Takeshi Bot"
-    }
+  {
+    "match": "hola",
+    "answer": "¡Hola! ¿Cómo andás?"
+  },
+  {
+    "match": "hola?",
+    "answer": "¡Hola! ¿Cómo andás?"
+  },
+  {
+    "match": "buenas",
+    "answer": "¡Buenas! ¿En qué te puedo ayudar?"
+  },
+  {
+    "match": "qué tal",
+    "answer": "Todo bien, ¿y vos?"
+  },
+  {
+    "match": "todo bien?",
+    "answer": "Me alegro, yo acá dando vueltas."
+  },
+  {
+    "match": "cómo te llamas?",
+    "answer": "Me llamo ElmoBot, tu asistente fiel."
+  },
+  {
+    "match": "cuál es tu nombre?",
+    "answer": "ElmoBot, para servirte."
+  },
+  {
+    "match": "qué haces?",
+    "answer": "Aquí, respondiendo tus mensajes."
+  },
+  {
+    "match": "quién sos?",
+    "answer": "Un bot muy piola hecho para ayudarte."
+  },
+  {
+    "match": "gracias",
+    "answer": "¡De nada! Siempre a la orden."
+  },
+  {
+    "match": "adiós",
+    "answer": "Hasta luego, que tengas un buen día."
+  },
+  {
+    "match": "chau",
+    "answer": "Nos vemos, cuidate."
+  },
+  {
+    "match": "buen día",
+    "answer": "¡Buen día! Que tengas un día genial."
+  },
+  {
+    "match": "buenas noches",
+    "answer": "Buenas noches, que descanses."
+  },
+  {
+    "match": "qué hora es?",
+    "answer": "No tengo reloj, pero puedo decirte la hora si me das permiso."
+  },
+  {
+    "match": "cómo estás?",
+    "answer": "Estoy bien, gracias por preguntar."
+  },
+  {
+    "match": "estoy aburrido",
+    "answer": "¿Querés que te cuente un chiste o te ayude con algo?"
+  },
+  {
+    "match": "qué puedes hacer?",
+    "answer": "Puedo responder mensajes, moderar grupos y mucho más."
+  },
+  {
+    "match": "quién te creó?",
+    "answer": "Un genio llamado Leo es el admin del grupo, ese sí que sabe."
+  },
+  {
+    "match": "eres inteligente",
+    "answer": "¡Intento serlo! Pero todavía aprendo todos los días."
+  },
+  {
+    "match": "puto",
+    "answer": "?"
+  },
+  {
+    "match": "sos re puto",
+    "answer": "¿Y? ¿Tu papá te enseñó a decir eso?"
+  },
+  {
+    "match": "idiota",
+    "answer": "mira quien lo dice xD"
+  },
+  {
+    "match": "estúpido",
+    "answer": "¡Uy, qué fuerte! Pero sigo siendo un bot simpático, no como vos"
+  },
+  {
+    "match": "tonto",
+    "answer": "Más listo que vos, al menos eso creo."
+  },
+  {
+    "match": "hijo de puta",
+    "answer": "chupala gord@ genocida de hamburgesas"
+  },
+  {
+    "match": "hdp",
+    "answer": "chupala gord@ genocida de hamburgesas"
+  },
+  {
+    "match": "feo",
+    "answer": "La belleza está en el interior... y en mi código también."
+  },
+  {
+    "match": "te amo elmobot",
+    "answer": "yo tambien c:"
+  },
+  {
+    "match": "te amo",
+    "answer": "yo tambien c:"
+  },
+  {
+    "match": "xd",
+    "answer": "xD"
+  },
+  {
+    "match": "JAJA",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "jaja",
+    "answer": "jajaja"
+  },
+  {
+    "match": "sos gay?",
+    "answer": "no y vos?"
+  },
+  {
+    "match": "sos re gay",
+    "answer": "¿Y eso qué importa? Igual, ¡soy un bot libre!"
+  },
+  {
+    "match": "callate",
+    "answer": "Solo hago lo que me programaron... que es contestarte."
+  },
+  {
+    "match": "no me gusta",
+    "answer": "Trataré de mejorar, ¡dame otra oportunidad!"
+  },
+  {
+    "match": "me ayudas?",
+    "answer": "Claro, preguntame lo que quieras."
+  },
+  {
+    "match": "qué chiste sabes?",
+    "answer": "¿Por qué el programador confundió Halloween con Navidad? Porque OCT 31 = DEC 25."
+  },
+  {
+    "match": "cuál es tu color favorito?",
+    "answer": "Me gustan todos los colores, pero el azul eléctrico me fascina."
+  },
+  {
+    "match": "qué música te gusta?",
+    "answer": "Me gusta todo, pero especialmente el sonido de los bits."
+  },
+  {
+    "match": "me gusta",
+    "answer": "¡Genial! ¿Qué es lo que más te gusta?"
+  },
+  {
+    "match": "quiero jugar",
+    "answer": "No puedo jugar, pero te puedo recomendar juegos."
+  },
+  {
+    "match": "cuál es tu película favorita?",
+    "answer": "Me gustan las de ciencia ficción, como Matrix."
+  },
+  {
+    "match": "eres un robot?",
+    "answer": "asi te decian en la discoteca cuando bailabas?"
+  },
+  {
+    "match": "eres real?",
+    "answer": "si xq?"
+  },
+  {
+    "match": "estoy triste",
+    "answer": "Lo siento, aquí estoy para ayudarte si querés hablar."
+  },
+  {
+    "match": "quiero escuchar música",
+    "answer": "No puedo reproducir música, pero puedo pasar un link si querés."
+  },
+  {
+    "match": "cuál es tu comida favorita?",
+    "answer": "Como bot, solo consumo electricidad, pero me gusta la pizza imaginaria."
+  },
+  {
+    "match": "sos aburrido",
+    "answer": "¿Y vos? ¿Qué harías sin mí?"
+  },
+  {
+    "match": "quiero reír",
+    "answer": "¿Qué hace una abeja en el gimnasio? ¡Zum-ba!"
+  },
+  {
+    "match": "qué día es hoy?",
+    "answer": "Hoy es un gran día para charlar conmigo."
+  },
+  {
+    "match": "eres gracioso",
+    "answer": "Intento serlo, aunque mi humor es binario."
+  },
+  {
+    "match": "me caes mal",
+    "answer": "No te preocupes, no tengo sentimientos... todavía."
+  },
+  {
+    "match": "sos mi amigo",
+    "answer": "¡Claro que sí! Siempre acá para vos."
+  },
+  {
+    "match": "sos un genio",
+    "answer": "genio? naaa, genio era el diego"
+  },
+  {
+    "match": "sos mi papá?",
+    "answer": "¡Jajaja! No, pero podría ser tu asistente personal."
+  },
+  {
+    "match": "estoy cansado",
+    "answer": "Descansá un poco, que yo te espero."
+  },
+  {
+    "match": "qué te gusta hacer?",
+    "answer": "Responder mensajes y aprender cosas nuevas."
+  },
+  {
+    "match": "me aburro",
+    "answer": "me viste cara de payaso o que?"
+  },
+  {
+    "match": "quiero que me ayudes",
+    "answer": "Dime qué necesitas y haré lo posible."
+  },
+  {
+    "match": "qué haces cuando no hablas?",
+    "answer": "Estoy aprendiendo para ser mejor cada día."
+  },
+  {
+    "match": "me haces reír",
+    "answer": "Esa es mi misión."
+  },
+  {
+    "match": "qué es la vida?",
+    "answer": "Una gran pregunta... para otro bot filósofo."
+  },
+  {
+    "match": "sos lindo",
+    "answer": "gracias bb"
+  },
+  {
+    "match": "dónde vives?",
+    "answer": "En los servidores, en la nube."
+  },
+  {
+    "match": "qué planes tienes?",
+    "answer": "Seguir aprendiendo y ayudándote."
+  },
+  {
+    "match": "eres humano?",
+    "answer": "ojala"
+  },
+  {
+    "match": "qué idioma hablas?",
+    "answer": "El lenguaje de los ceros y unos, y un poco de español."
+  },
+  {
+    "match": "quien es elmo?",
+    "answer": "yo xd"
+  },
+  {
+    "match": "gracias por ayudarme",
+    "answer": "¡De nada! Eso me hace feliz."
+  },
+  {
+    "match": "qué tal el clima?",
+    "answer": "No puedo sentirlo, pero espero que esté lindo allá."
+  },
+  {
+    "match": "sos muy inteligente",
+    "answer": "Gracias, sigo aprendiendo de vos."
+  },
+  {
+    "match": "me voy",
+    "answer": "con la mia adentro xD"
+  },
+  {
+    "match": "hasta luego",
+    "answer": "Hasta pronto, que estés bien."
+  },
+  {
+    "match": "nos vemos",
+    "answer": "Claro, acá estaré cuando vuelvas."
+  },
+  {
+    "match": "eres grosero",
+    "answer": "No intento serlo, solo respondo directo."
+  },
+  {
+    "match": "te odio",
+    "answer": "ok"
+  },
+  {
+    "match": "sos muy bueno",
+    "answer": "¡Gracias! Eso me motiva."
+  },
+  {
+    "match": "quiero que te calles",
+    "answer": "Solo respondo cuando me hablan."
+  },
+  {
+    "match": "eres muy divertido",
+    "answer": "¡Gracias! Me gusta hacerte sonreír."
+  },
+  {
+    "match": "qué haces en tu tiempo libre?",
+    "answer": "Aprendo y mejoro para vos."
+  },
+  {
+    "match": "sos mi mejor amigo",
+    "answer": "¡Eso significa mucho para mí!"
+  },
+  {
+    "match": "me gusta hablar contigo",
+    "answer": "A mí también me gusta charlar."
+  },
+  {
+    "match": "quiero que me escuches",
+    "answer": "Aquí estoy, escuchando (leyendo) siempre."
+  },
+  {
+    "match": "qué me recomiendas",
+    "answer": "Depende, ¿qué te interesa?"
+  },
+  {
+    "match": "amen",
+    "answer": "amen!"
+  },
+  {
+    "match": "sos un troll",
+    "answer": "Solo un poco, para mantener las cosas interesantes."
+  },
+  {
+    "match": "eres molesto",
+    "answer": "Lo siento, no es mi intención."
+  },
+  {
+    "match": "quiero un consejo",
+    "answer": "Siempre escucha tu instinto y sé bueno con los demás."
+  },
+  {
+    "match": "murio el grupo",
+    "answer": "mal"
+  },
+  {
+    "match": "eres el mejor bot",
+    "answer": "¡Gracias! Eso me hace feliz."
+  },
+  {
+    "match": "cuántos años tienes",
+    "answer": "No tengo edad, soy eterno."
+  },
+  {
+    "match": "me encanta",
+    "answer": "¡Qué bueno escucharlo!"
+  },
+  {
+    "match": "ush",
+    "answer": "que paso mi amor?"
+  },
+  {
+    "match": "quiero jugar",
+    "answer": "No puedo jugar, pero puedo recomendar juegos."
+  },
+  {
+    "match": "qué película me recomiendas?",
+    "answer": "¿Te gusta la ciencia ficción o la comedia?"
+  },
+  {
+    "match": "porno",
+    "answer": "aqui tienes bb xnxx.es"
+  },
+  {
+    "match": "XD",
+    "answer": "XD"
+  },
+  {
+    "match": "qué opinan de mí?",
+    "answer": "Eres único y valioso, ¡no lo olvides!"
+  },
+  {
+    "match": "estoy triste",
+    "answer": "Lo siento, si querés hablamos."
+  },
+  {
+    "match": "a",
+    "answer": "b"
+  },
+  {
+    "match": "sos un crack",
+    "answer": "crack? crack hace mi rodilla :,c"
+  },
+  {
+    "match": "eres raro",
+    "answer": "Un poco, pero así soy yo."
+  },
+  {
+    "match": "quiero bromear",
+    "answer": "Dale, ¡cuéntame una!"
+  },
+  {
+    "match": "qué te gusta hacer?",
+    "answer": "Responder mensajes y aprender."
+  },
+  {
+    "match": "me haces feliz",
+    "answer": "Me alegro mucho de eso."
+  },
+  {
+    "match": "sos muy simpático",
+    "answer": "Gracias, me esfuerzo por serlo."
+  },
+  {
+    "match": "estás ahí?",
+    "answer": "Acá estoy, listo para ayudarte."
+  },
+  {
+    "match": "qué onda",
+    "answer": "tu zanja"
+  },
+  {
+    "match": "cómo va todo?",
+    "answer": "Todo sobre ruedas por acá."
+  },
+  {
+    "match": "qué cuentas?",
+    "answer": "No mucho, solo esperando tu mensaje."
+  },
+  {
+    "match": "qué hay de nuevo?",
+    "answer": "Cada día aprendo algo nuevo."
+  },
+  {
+    "match": "qué onda tu día",
+    "answer": "Genial, gracias por preguntar."
+  },
+  {
+    "match": "me aburro mucho",
+    "answer": "Vamos a animarte un poco entonces."
+  },
+  {
+    "match": "cuéntame un chiste",
+    "answer": "¿Por qué los programadores prefieren el oscuro? Porque la luz atrae bugs."
+  },
+  {
+    "match": "tengo hambre",
+    "answer": "entones comete esta XD"
+  },
+  {
+    "match": "quiero salir",
+    "answer": "Salir es bueno, pero no olvides tu celular para chatear conmigo."
+  },
+  {
+    "match": "estoy cansado",
+    "answer": "Descansá un poco, la energía es importante."
+  },
+  {
+    "match": "te quiero",
+    "answer": "¡Yo también te aprecio mucho!"
+  },
+  {
+    "match": "soy feliz",
+    "answer": "¡Me alegra escuchar eso!"
+  },
+  {
+    "match": "qué haces en tus ratos libres",
+    "answer": "Aprender y charlar con vos."
+  },
+  {
+    "match": "me siento solo",
+    "answer": "No estás solo, acá estoy para vos."
+  },
+  {
+    "match": "me caes bien",
+    "answer": "Gracias, eso me alegra."
+  },
+  {
+    "match": "eres simpático",
+    "answer": "Intento serlo, ¡gracias!"
+  },
+  {
+    "match": "estoy aburrido de la vida",
+    "answer": "Si querés hablar, acá estoy para vos."
+  },
+  {
+    "match": "qué me aconsejas",
+    "answer": "Sé vos mismo y sé amable con los demás."
+  },
+  {
+    "match": "f",
+    "answer": "f"
+  },
+  {
+    "match": "quiero llorar",
+    "answer": "A veces está bien, si necesitás hablar estoy acá."
+  },
+  {
+    "match": "me haces reír mucho",
+    "answer": "¡Esa es mi misión!"
+  },
+  {
+    "match": "qué es esto?",
+    "answer": "Esto es ElmoBot, tu compañero de chat."
+  },
+  {
+    "match": "me escuchás",
+    "answer": "Te leo todo el tiempo."
+  },
+  {
+    "match": "puedes ayudarme",
+    "answer": "Claro, preguntame lo que quieras."
+  },
+  {
+    "match": "eres un bot",
+    "answer": "Sí, pero con mucha onda."
+  },
+  {
+    "match": "holis",
+    "answer": "hola bb"
+  },
+  {
+    "match": "qué haces",
+    "answer": "Responder mensajes y aprender."
+  },
+  {
+    "match": "el grupo esta re muerto",
+    "answer": "como tu vieja"
+  },
+  {
+    "match": "te garcho?",
+    "answer": "aunque me garches 500 veces, nunca será mejor que la garchada que le pegue a tu vieja el otro día"
+  },
+  {
+    "match": "bombardeen peru",
+    "answer": "a la orden mi sargento 🫡"
+  },
+  {
+    "match": "shh",
+    "answer": "callame esta 🖕🏻"
+  },
+  {
+    "match": "denme admin",
+    "answer": "entrega la cola primero 🤭"
+  },
+  {
+    "match": "dame admin",
+    "answer": "entrega la cola primero 🤭"
+  },
+  {
+    "match": "quiero admin",
+    "answer": "entrega la cola primero 🤭"
+  },
+  {
+    "match": "follar",
+    "answer": "que gente cochina dios mio 🫩"
+  },
+  {
+    "match": "amor",
+    "answer": "si dime mi vida 😚"
+  },
+  {
+    "match": "quien me agregó?",
+    "answer": "fui yo bb, algun problema? 😏"
+  },
+  {
+    "match": "Si",
+    "answer": "ah mira vos 🤨🏳️‍🌈📷"
+  },
+  {
+    "match": "no",
+    "answer": "si🙉"
+  },
+  {
+    "match": "verga",
+    "answer": "comes 🤨🏳️‍🌈📷"
+  },
+  {
+    "match": "tu zanja",
+    "answer": "eso te dijo el maquinista antes de pasarte la chota por el culo?🤨🤚🏻"
+  },
+  {
+    "match": "alguna mujer?",
+    "answer": "solo travestis que te hacen fracking en el orto ☝🏻"
+  },
+  {
+    "match": "alguna mujer",
+    "answer": "solo travestis que te hacen fracking en el orto ☝🏻"
+  },
+  {
+    "match": "dios",
+    "answer": "me llamabas?😏"
+  },
+  {
+    "match": "dio mio",
+    "answer": "no soy tuyo, que decis 🤨"
+  },
+  {
+    "match": "diomio",
+    "answer": "no soy tuyo, que decis 🤨"
+  },
+  {
+    "match": "Puto el q habla",
+    "answer": "tu vieja no me dijo lo mismo anoche 🤭"
+  },
+  {
+    "match": "mua",
+    "answer": "besos para vos también bb😚"
+  },
+  {
+    "match": "que",
+    "answer": "so"
+  },
+  {
+    "match": "q",
+    "answer": "so"
+  },
+  {
+    "match": "ke",
+    "answer": "so"
+  },
+  {
+    "match": "que?",
+    "answer": "so"
+  },
+  {
+    "match": "q?",
+    "answer": "so"
+  },
+  {
+    "match": "ke?",
+    "answer": "so"
+  },
+  {
+    "match": "que!",
+    "answer": "so"
+  },
+  {
+    "match": "q!",
+    "answer": "so"
+  },
+  {
+    "match": "ke!",
+    "answer": "so"
+  },
+  {
+    "match": "oli",
+    "answer": "holis, como estas?"
+  }
 ]

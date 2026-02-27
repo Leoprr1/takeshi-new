@@ -15,16 +15,20 @@ exports.verifyPrefix = (prefix, groupJid) => {
 
 exports.hasTypeAndCommand = ({ type, command }) => !!type && !!command;
 
-exports.isLink = (text) => {
+// ------------------------------------------------------------------
+// DETECCIÓN DE LINKS (ignora comandos con prefijo)
+// ------------------------------------------------------------------
+exports.isLink = (text, prefix = ".") => {
   const cleanText = text.trim();
 
-  if (/^\d+$/.test(cleanText)) {
-    return false;
-  }
+  // Ignorar comandos con el prefijo
+  if (cleanText.startsWith(prefix)) return false;
 
-  if (/[.]{2,3}/.test(cleanText)) {
-    return false;
-  }
+  // Ignorar números puros
+  if (/^\d+$/.test(cleanText)) return false;
+
+  // Ignorar puntos consecutivos tipo '..' o '...'
+  if (/[.]{2,3}/.test(cleanText)) return false;
 
   try {
     const url = new URL(cleanText);
@@ -51,6 +55,7 @@ exports.isLink = (text) => {
     }
   }
 };
+
 
 exports.isAdmin = async ({ remoteJid, userJid, socket }) => {
   const { participants, owner } = await socket.groupMetadata(remoteJid);

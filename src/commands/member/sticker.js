@@ -1,21 +1,20 @@
 /**
- * Desarrollado por: Dev Gui
- * Implementación de metadatos hecha por: MRX
+ * Comando sticker next-gen: detecta imagen/GIF/Video y crea sticker WebP automáticamente
  *
- * @author Dev Gui
+ * @author MRX + Dev Gui
  */
-const { getRandomName } = require(`${BASE_DIR}/utils`);
 const fs = require("node:fs");
+const { getRandomName } = require(`${BASE_DIR}/utils`);
 const { addStickerMetadata } = require(`${BASE_DIR}/services/sticker`);
 const { InvalidParameterError } = require(`${BASE_DIR}/errors`);
 const { PREFIX, BOT_NAME, BOT_EMOJI } = require(`${BASE_DIR}/config`);
-const { exec } = require("child_process");
+const Ffmpeg = require(`${BASE_DIR}/services/ffmpeg`); // ✅ Importar el ffmpeg centralizado
 
 module.exports = {
   name: "sticker",
-  description: "Crea stickers de imagen, gif o video (máximo 10 segundos).",
+  description: "Crea stickers de cualquier imagen, GIF o video ≤10s automáticamente",
   commands: ["f", "s", "sticker", "fig", "adhesivo", "calcomanía"],
-  usage: `${PREFIX}sticker (marca o responde a una imagen/gif/video)`,
+  usage: `${PREFIX}sticker (marca o responde a media)`,
   handle: async ({
     isImage,
     isVideo,
@@ -30,7 +29,7 @@ module.exports = {
   }) => {
     if (!isImage && !isVideo) {
       throw new InvalidParameterError(
-        `¡Necesitas marcar o responder a una imagen/gif/video!`
+        `¡Necesitas marcar o responder a una imagen/GIF/video!`
       );
     }
 
@@ -42,7 +41,7 @@ module.exports = {
       userJid.replace(/@s.whatsapp.net/, "");
 
     const metadata = {
-      username: username,
+      username,
       botName: `${BOT_EMOJI} ${BOT_NAME}`,
     };
 
@@ -50,98 +49,37 @@ module.exports = {
     let inputPath = null;
 
     try {
-      if (isImage) {
-        for (let attempt = 1; attempt <= 3; attempt++) {
-          try {
-            inputPath = await downloadImage(webMessage, getRandomName());
-            break;
-          } catch (downloadError) {
-            console.error(
-              `Intento ${attempt} de descarga de imagen falló:`,
-              downloadError.message
-            );
+      // -------------------
+      // DESCARGA
+      // -------------------
+      inputPath = isImage
+        ? await downloadImage(webMessage, getRandomName())
+        : await downloadVideo(webMessage, getRandomName());
 
-            if (attempt === 3) {
-              throw new Error(
-                `Fallo al descargar imagen después de 3 intentos: ${downloadError.message}`
-              );
-            }
-
-            await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
-          }
-        }
-
-        await new Promise((resolve, reject) => {
-          const cmd = `ffmpeg -i "${inputPath}" -vf "scale=512:512:force_original_aspect_ratio=decrease" -f webp -quality 90 "${outputPath}"`;
-
-          exec(cmd, (error, _, stderr) => {
-            if (error) {
-              console.error("Error de FFmpeg:", stderr);
-              reject(error);
-            } else {
-              resolve();
-            }
-          });
-        });
-      } else {
-        for (let attempt = 1; attempt <= 3; attempt++) {
-          try {
-            inputPath = await downloadVideo(webMessage, getRandomName());
-            break;
-          } catch (downloadError) {
-            console.error(
-              `Intento ${attempt} de descarga de video falló:`,
-              downloadError.message
-            );
-
-            if (attempt === 3) {
-              throw new Error(
-                `Fallo al descargar video después de 3 intentos. Problema de conexión con WhatsApp.`
-              );
-            }
-
-            await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
-          }
-        }
-
-        const maxDuration = 10;
-        const seconds =
-          webMessage.message?.videoMessage?.seconds ||
-          webMessage.message?.extendedTextMessage?.contextInfo?.quotedMessage
-            ?.videoMessage?.seconds;
-
-        if (!seconds || seconds > maxDuration) {
-          if (inputPath && fs.existsSync(inputPath)) {
-            fs.unlinkSync(inputPath);
-          }
+      // -------------------
+      // VERIFICAR DURACIÓN PARA VIDEO/GIF
+      // -------------------
+      if (isVideo) {
+        const duration = await Ffmpeg.getDuration(inputPath);
+        if (duration > 10) {
+          await Ffmpeg.cleanup(inputPath);
           return sendErrorReply(
-            `¡El video enviado tiene más de ${maxDuration} segundos! Envía un video más corto.`
+            `¡El video/GIF tiene más de 10 segundos! Envía uno más corto.`
           );
         }
-
-        await new Promise((resolve, reject) => {
-          const cmd = `ffmpeg -y -i "${inputPath}" -vcodec libwebp -fs 0.99M -filter_complex "[0:v] scale=512:512, fps=15, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse" -f webp "${outputPath}"`;
-
-          exec(cmd, (error, _, stderr) => {
-            if (error) {
-              console.error("Error de FFmpeg:", stderr);
-              reject(error);
-            } else {
-              resolve();
-            }
-          });
-        });
       }
 
-      if (inputPath && fs.existsSync(inputPath)) {
-        fs.unlinkSync(inputPath);
-        inputPath = null;
-      }
+      // -------------------
+      // CONVERTIR A STICKER WEBP
+      // -------------------
+      await Ffmpeg.convertToSticker(inputPath, outputPath, isImage);
 
-      if (!fs.existsSync(outputPath)) {
-        throw new Error("El archivo de salida no fue creado por FFmpeg");
-      }
+      if (!fs.existsSync(outputPath))
+        throw new Error("FFmpeg no creó el archivo de salida");
 
+      // -------------------
+      // AGREGAR METADATOS
+      // -------------------
       const stickerPath = await addStickerMetadata(
         await fs.promises.readFile(outputPath),
         metadata
@@ -149,62 +87,23 @@ module.exports = {
 
       await sendSuccessReact();
 
-      for (let attempt = 1; attempt <= 3; attempt++) {
-        try {
-          await sendStickerFromFile(stickerPath);
-          break;
-        } catch (stickerError) {
-          console.error(
-            `Intento ${attempt} de envío de sticker falló:`,
-            stickerError.message
-          );
+      // -------------------
+      // ENVIAR STICKER
+      // -------------------
+      await sendStickerFromFile(stickerPath);
 
-          if (attempt === 3) {
-            throw new Error(
-              `Fallo al enviar sticker después de 3 intentos: ${stickerError.message}`
-            );
-          }
+      // -------------------
+      // LIMPIEZA
+      // -------------------
+      await Ffmpeg.cleanup(inputPath);
+      await Ffmpeg.cleanup(outputPath);
+      await Ffmpeg.cleanup(stickerPath);
 
-          await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
-        }
-      }
-
-      if (fs.existsSync(outputPath)) {
-        fs.unlinkSync(outputPath);
-      }
-
-      if (fs.existsSync(stickerPath)) {
-        fs.unlinkSync(stickerPath);
-      }
-    } catch (error) {
-      console.error("Error detallado en el comando sticker:", error);
-
-      if (inputPath && fs.existsSync(inputPath)) {
-        fs.unlinkSync(inputPath);
-      }
-      if (fs.existsSync(outputPath)) {
-        fs.unlinkSync(outputPath);
-      }
-
-      if (
-        error.message.includes("ETIMEDOUT") ||
-        error.message.includes("AggregateError") ||
-        error.message.includes("getaddrinfo ENOTFOUND") ||
-        error.message.includes("connect ECONNREFUSED") ||
-        error.message.includes("mmg.whatsapp.net")
-      ) {
-        throw new Error(
-          `Error de conexión al descargar media de WhatsApp. Inténtalo de nuevo en unos segundos.`
-        );
-      }
-
-      if (error.message.includes("FFmpeg")) {
-        throw new Error(
-          `Error al procesar media con FFmpeg. Verifica que el archivo no esté corrupto.`
-        );
-      }
-
-      throw new Error(`Error al procesar el sticker: ${error.message}`);
+    } catch (err) {
+      console.error("Error detallado en sticker:", err);
+      if (inputPath) await Ffmpeg.cleanup(inputPath);
+      if (fs.existsSync(outputPath)) await Ffmpeg.cleanup(outputPath);
+      return sendErrorReply(`❌ Error al procesar el sticker: ${err.message}`);
     }
   },
 };

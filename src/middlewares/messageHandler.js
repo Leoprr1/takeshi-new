@@ -1,8 +1,3 @@
-/**
- * Validador de mensajes
- *
- * @author MRX
- */
 const { getContent, compareUserJidWithOtherNumber } = require("../utils");
 const { errorLog } = require("../utils/logger");
 const {
@@ -68,3 +63,4 @@ exports.messageHandler = async (socket, webMessage) => {
     );
   }
 };
+

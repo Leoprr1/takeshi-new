@@ -75,35 +75,71 @@ const { badMacHandler } = require("./src/utils/badMacHandler");
 const {
   successLog,
   errorLog,
-  warningLog,
   bannerLog,
   infoLog,
+  warningLog,
 } = require("./src/utils/logger");
 
-process.on("uncaughtException", (error) => {
-  if (badMacHandler.handleError(error, "uncaughtException")) {
-    return;
-  }
+let socketGlobal;
+let reconnecting = false;
 
+// ----------------------------
+// Manejo global de errores
+// ----------------------------
+process.on("uncaughtException", (error) => {
+  if (badMacHandler.handleError(error, "uncaughtException")) return;
   errorLog(`Error crítico no capturado: ${error.message}`);
   errorLog(error.stack);
-
-  if (
-    !error.message.includes("ENOTFOUND") &&
-    !error.message.includes("timeout")
-  ) {
+  if (!error.message.includes("ENOTFOUND") && !error.message.includes("timeout"))
     process.exit(1);
-  }
 });
 
-process.on("unhandledRejection", (reason, promise) => {
-  if (badMacHandler.handleError(reason, "unhandledRejection")) {
-    return;
+// Eliminamos log global de promesas rechazadas
+process.on("unhandledRejection", () => {});
+
+// ----------------------------
+// Reconexión controlada sin spam
+// ----------------------------
+async function handleReconnect(reason) {
+  if (reconnecting) return;
+  reconnecting = true;
+  global.reconnecting = true;
+
+  infoLog(`⚠️ Reconexión iniciada por: ${reason}`);
+
+  try {
+    await new Promise((r) => setTimeout(r, 30_000)); // espera 30s antes de reconectar
+
+    const newSocket = await connect();
+    socketGlobal = newSocket;
+    load(socketGlobal);
+
+    // Capturamos cualquier promesa rechazada interna del socket
+    if (socketGlobal?.ws) {
+      socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
+    }
+
+    // Listener de reconexión
+    socketGlobal.ev.removeAllListeners("connection.update");
+    socketGlobal.ev.on("connection.update", (update) => {
+      const { connection, lastDisconnect } = update;
+      if (connection === "close" || connection === "error" || lastDisconnect?.error) {
+        handleReconnect(lastDisconnect?.error?.output?.statusCode || connection);
+      }
+    });
+
+    successLog("✅ Reconexión exitosa");
+  } catch (err) {
+    errorLog("❌ Reconexión fallida, se intentará nuevamente cuando ocurra otra desconexión");
+  } finally {
+    reconnecting = false;
+    global.reconnecting = false;
   }
+}
 
-  errorLog(`Promesa rechazada no manejada:`, reason);
-});
-
+// ----------------------------
+// Función principal de inicio
+// ----------------------------
 async function startBot() {
   try {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -114,34 +150,103 @@ async function startBot() {
 
     const stats = badMacHandler.getStats();
     if (stats.errorCount > 0) {
-      warningLog(
-        `Estadísticas de BadMacHandler: ${stats.errorCount}/${stats.maxRetries} errores`
-      );
+      infoLog(`Estadísticas de BadMacHandler: ${stats.errorCount}/${stats.maxRetries} errores`);
     }
 
-    const socket = await connect();
+    async function initSocket() {
+      try {
+        const socket = await connect();
+        socketGlobal = socket;
+        load(socketGlobal);
 
-    load(socket);
+        // Capturamos promesas rechazadas internas
+        if (socketGlobal?.ws) {
+          socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
+        }
 
-    successLog("✅ ¡Bot iniciado con éxito!");
+        // Listener de reconexión
+        socketGlobal.ev.removeAllListeners("connection.update");
+        socketGlobal.ev.on("connection.update", (update) => {
+          const { connection, lastDisconnect } = update;
+          if (connection === "close" || connection === "error" || lastDisconnect?.error) {
+            handleReconnect(lastDisconnect?.error?.output?.statusCode || connection);
+          }
+        });
 
+        // --- Lógica de checks de WhatsApp para dos tildes ---
+        socketGlobal.ev.on("messages.upsert", ({ messages }) => {
+          messages.forEach((msg) => {
+            if (msg.key && msg.key.fromMe) {
+              if (msg.status === 0) infoLog("✓"); // enviado
+              if (msg.status === 1) infoLog("✓✓"); // recibido
+              if (msg.status === 2) infoLog("✓✓ (azul)"); // leído
+            }
+          });
+        });
+        // ---------------------------------------------------
+
+        successLog("✅ Bot conectado y listo.");
+      } catch {
+        setTimeout(initSocket, 5000); // reintento simple sin spam
+      }
+    }
+
+    await initSocket();
+
+    // ----------------------------
+    // Auto limpieza y optimización de memoria
+    // ----------------------------
+    const AUTO_CLEAN_INTERVAL = 60_000;
+    setInterval(() => {
+      try {
+        if (global.IDROPS) {
+          const now = Date.now();
+          global.IDROPS = global.IDROPS.filter((drop) => now - drop.creado < 60_000);
+        }
+
+        if (global.gc) global.gc();
+        infoLog("🧹 Auto limpieza ejecutada");
+
+        if (reconnecting) {
+          if (global.IDROPS) global.IDROPS = [];
+          if (global.gc) global.gc();
+          infoLog("⚡ Limpieza agresiva ejecutada durante reconexión");
+        }
+      } catch (err) {
+        errorLog("Error durante la auto limpieza:", err.message);
+      }
+    }, AUTO_CLEAN_INTERVAL);
+
+    // ----------------------------
+    // Keep-alive: enviar presencia cada 25s
+    // ----------------------------
+    setInterval(() => {
+      if (socketGlobal?.sendPresenceUpdate) {
+        try {
+          socketGlobal.sendPresenceUpdate("available");
+        } catch {}
+      }
+    }, 25_000);
+
+    // ----------------------------
+    // Logs BadMacHandler cada 5 minutos
+    // ----------------------------
     setInterval(() => {
       const currentStats = badMacHandler.getStats();
       if (currentStats.errorCount > 0) {
-        warningLog(
-          `Estadísticas de BadMacHandler: ${currentStats.errorCount}/${currentStats.maxRetries} errores`
-        );
+        infoLog(`Estadísticas de BadMacHandler: ${currentStats.errorCount}/${currentStats.maxRetries} errores`);
       }
     }, 300_000);
+
+    // ----------------------------
+    // Log manual para PM2 cada 1 min
+    // ----------------------------
+    setInterval(() => infoLog("🔄 Actualizando sesión (manteniendo bot vivo)"), 60_000);
+
   } catch (error) {
     if (badMacHandler.handleError(error, "bot-startup")) {
-      warningLog(
-        "Error de Bad MAC durante la inicialización, intentando nuevamente..."
-      );
-
-      setTimeout(() => {
-        startBot();
-      }, 5000);
+      infoLog("Error de Bad MAC durante la inicialización, intentando nuevamente...");
+      setTimeout(startBot, 5000);
       return;
     }
 
