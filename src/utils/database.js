@@ -170,35 +170,50 @@ exports.getAutoResponderResponse = (match) => {
 
   const normalizedMessage = normalizeText(match);
 
-  for (const response of responses) {
+  // 🔥 Ordenar por longitud (más largas primero)
+  const sortedResponses = [...responses].sort(
+    (a, b) => b.match.length - a.match.length
+  );
+
+  // 1️⃣ Coincidencia exacta primero
+  for (const response of sortedResponses) {
     const normalizedRule = normalizeText(response.match);
 
-    // 🚨 Si la regla es de 1 solo carácter
-    if (normalizedRule.length === 1) {
-      if (normalizedMessage === normalizedRule) {
-        return response.answer;
-      }
-      continue; // ⬅️ ignorar includes y similitud
+    if (normalizedRule === normalizedMessage) {
+      return response.answer;
     }
+  }
 
-    // Coincidencia por inclusión (para palabras normales)
+  // 2️⃣ Includes (solo reglas > 1 carácter)
+  for (const response of sortedResponses) {
+    const normalizedRule = normalizeText(response.match);
+
+    if (normalizedRule.length === 1) continue; // 🚫 ignorar letras sueltas
+
     if (normalizedMessage.includes(normalizedRule)) {
       return response.answer;
     }
+  }
 
-    // Similitud fuzzy SOLO para reglas mayores a 1 carácter
+  // 3️⃣ Similitud (solo reglas > 2 caracteres)
+  for (const response of sortedResponses) {
+    const normalizedRule = normalizeText(response.match);
+
+    if (normalizedRule.length <= 2) continue; // 🚫 evitar ruido
+
     const similarity = stringSimilarity.compareTwoStrings(
       normalizedMessage,
       normalizedRule
     );
 
-    if (similarity >= 0.7) {
+    if (similarity >= 0.75) {
       return response.answer;
     }
   }
 
   return null;
 };
+
 
 
 exports.activateAutoResponderGroup = (groupId) => {

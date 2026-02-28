@@ -662,5 +662,41 @@
   {
     "match": "oli",
     "answer": "holis, como estas?"
+  },
+  {
+    "match": "en 4",
+    "answer": "te ponen 😏"
+  },
+  {
+    "match": "tremenda paja",
+    "answer": "tremenda paja me hice yo con tu foto 🤭"
+  },
+  {
+    "match": "sexo",
+    "answer": "sexoooo🥵🔥💦"
+  },
+  {
+    "match": "paja",
+    "answer": "eso me estaba haciendo hasta que me interrumpiste 😑"
+  },
+  {
+    "match": "messi",
+    "answer": "mi papi 🥵🔥"
+  },
+  {
+    "match": "momento bover",
+    "answer": "re si🇵🇭"
+  },
+  {
+    "match": "un peruano",
+    "answer": "ala mier** un peruano 🫣"
+  },
+  {
+    "match": "argenfifa",
+    "answer": "tipico de persona color cartón con la rosca glaseada por un argentino 🤷🏻😂"
+  },
+  {
+    "match": "hambrentina",
+    "answer": "callate persona de bajos recursos 🤏🏻"
   }
 ]
