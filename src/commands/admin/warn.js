@@ -10,7 +10,7 @@ const {
 } = require(`${BASE_DIR}/src/utils/database`);
 
 const MAX_WARNINGS = 3;
-const SUSPENSION_TIME = 15 * 1000; // 30 minutos
+const SUSPENSION_TIME = 30 * 60 * 1000; // 30 minutos
 
 module.exports = {
   name: "warn",
