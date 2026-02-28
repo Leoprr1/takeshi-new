@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "trigger": "⛏️ Encontraste minerales.\n+$1.286\n+1018 XP",
+    "answer": ".kick",
+    "frequency": 1
+  },
+  {
+    "trigger": "TMK   B£NJ4x   ⚡🌪️",
+    "answer": "TMK   B£NJ4x   ⚡🌪️",
+    "frequency": 1
+  },
+  {
+    "trigger": "#FFHUDT6O3jRPeMm5Po7eM",
+    "answer": "#FFHUDT6O3jRPeMm5Po7eM",
+    "frequency": 1
+  },
+  {
+    "trigger": "Que",
+    "answer": "Que",
+    "frequency": 1
+  },
+  {
+    "trigger": "*𝐁𝐈𝐄𝐍𝐕𝐄𝐍𝐈𝐃𝐎𝐒 𝐀:*\n\n*𝐿𝒶 𝒸𝑜𝒻𝓇𝒶𝒹í𝒶* 🪷\n\n• _°🌗 𝙽𝚘𝚖𝚋𝚛𝚎:_\n° _•🌕𝙴𝚍𝚊𝚍:_\n• _° 🌘  𝙿𝚊í𝚜:_\n° _•🌔 𝙵𝚘𝚝𝚘:_",
+    "answer": "*𝐁𝐈𝐄𝐍𝐕𝐄𝐍𝐈𝐃𝐎𝐒 𝐀:*\n\n*𝐿𝒶 𝒸𝑜𝒻𝓇𝒶𝒹í𝒶* 🪷\n\n• _°🌗 𝙽𝚘𝚖𝚋𝚛𝚎:_\n° _•🌕𝙴𝚍𝚊𝚍:_\n• _° 🌘  𝙿𝚊í𝚜:_\n° _•🌔 𝙵𝚘𝚝𝚘:_",
+    "frequency": 1
+  },
+  {
+    "trigger": "Ese era de su grupo",
+    "answer": "gracias por admirarlo, pero desistan de sus intenciones. \ngracias.",
+    "frequency": 2
+  },
+  {
+    "trigger": "qmrd",
+    "answer": "qmrd",
+    "frequency": 1
+  },
+  {
+    "trigger": "pone cualquier mensaje",
+    "answer": "negro",
+    "frequency": 2
+  },
+  {
+    "trigger": "puto",
+    "answer": "sos",
+    "frequency": 1
+  },
+  {
+    "trigger": "osea responde este mensaje",
+    "answer": "gay",
+    "frequency": 1
+  },
+  {
+    "trigger": "negro",
+    "answer": "tenés la cola",
+    "frequency": 1
+  },
+  {
+    "trigger": "tenés la cola",
+    "answer": "tu tia",
+    "frequency": 1
+  },
+  {
+    "trigger": "yo tambien c:",
+    "answer": "god",
+    "frequency": 1
+  },
+  {
+    "trigger": "impresionante hice una ia base",
+    "answer": "que capo",
+    "frequency": 1
+  },
+  {
+    "trigger": "so",
+    "answer": "JAJAJAJAJA",
+    "frequency": 2
+  },
+  {
+    "trigger": "gracias por admirarlo, pero desistan de sus intenciones. \ngracias.",
+    "answer": "Mis intenciones?",
+    "frequency": 1
+  }
+]

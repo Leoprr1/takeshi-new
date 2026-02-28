@@ -698,5 +698,9 @@
   {
     "match": "hambrentina",
     "answer": "callate persona de bajos recursos 🤏🏻"
+  },
+  {
+    "match": "so",
+    "answer": "papo"
   }
 ]

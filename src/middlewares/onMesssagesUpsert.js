@@ -23,6 +23,8 @@ const { messageHandler } = require("./messageHandler");
 
 // 🔥 IMPORTAR STATS GLOBAL
 const groupStats = require("../database/groupStats");
+const learningBot = require("../utils/learningBot");
+
 
 // 🔥 SET PARA EVITAR MENSAJES DUPLICADOS
 const processedMessages = new Set();
@@ -47,6 +49,9 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
         if (processedMessages.has(messageId)) {
           continue;
         }
+        // dentro del for de mensajes, **después de procesar duplicados**
+        learningBot.learnFromMessage(webMessage);
+
 
         processedMessages.add(messageId);
 

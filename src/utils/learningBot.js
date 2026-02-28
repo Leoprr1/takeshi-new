@@ -1,40 +1,61 @@
-// learningBot.js
-const { readJSON, writeJSON, getAutoResponderResponse } = require("./database");
+// 🔥 learningBot.js
+const db = require("./database"); // Tu database.js
 const stringSimilarity = require("string-similarity");
 
-const LEARNING_FILE = "learning.json";
-const AUTO_RESPONDER_FILE = "auto-responder";
+const LEARNING_FILE = "learning"; // archivo temporal
+const FREQUENCY_THRESHOLD = 3; // mínimo para pasar a auto-responder
 
-// Umbral de frecuencia para pasar de learning.json a auto-responder.json
-const FREQUENCY_THRESHOLD = 3; 
+/**
+ * 🔹 Aprende un mensaje del grupo y su respuesta
+ * Ignora cualquier mensaje enviado por el bot
+ * @param {object} webMessage Mensaje recibido de WhatsApp
+ */
+function learnFromMessage(webMessage) {
+  if (!webMessage?.message) return;
 
-// Normalización usando abbreviations y database.js
-function normalizeText(text) {
-  if (!text) return "";
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  // 🔹 Ignorar mensajes enviados por el bot
+  if (webMessage?.key?.fromMe) return;
+
+  // Extraer texto del mensaje actual
+  const answerText = extractTextFromMessage(webMessage.message);
+  if (!answerText || answerText.length < 2) return;
+
+  // 🔹 Ver si es respuesta a otro mensaje
+  let triggerText = null;
+  const quoted =
+    webMessage.message.extendedTextMessage?.contextInfo?.quotedMessage;
+
+  if (quoted) {
+    triggerText = extractTextFromMessage(quoted);
+
+    // 🔹 Ignorar si el mensaje citado fue enviado por el bot
+    const fromBotQuoted =
+      webMessage.message.extendedTextMessage?.contextInfo?.participant ===
+      webMessage.key?.fromMe;
+    if (fromBotQuoted) return;
+  }
+
+  // Si no hay trigger, no aprendemos (evitamos guardar mensaje→mensaje mismo)
+  if (!triggerText) return;
+
+  saveLearning(triggerText, answerText);
 }
 
-// 🔥 Aprender un nuevo par trigger → answer
-function learnResponse(trigger, answer) {
-  if (!trigger || !answer) return;
+/**
+ * 🔹 Guardar el par trigger -> answer en learning.json
+ */
+function saveLearning(trigger, answer) {
+  const learning = db.readJSON(LEARNING_FILE, []);
 
-  const normalizedTrigger = normalizeText(trigger);
-  const normalizedAnswer = normalizeText(answer);
+  const normalizedTrigger = normalize(trigger);
 
-  // Ignorar triggers/respuestas muy cortas
-  if (normalizedTrigger.length <= 2 || normalizedAnswer.length <= 2) return;
-
-  const learning = readJSON(LEARNING_FILE, []);
+  // Verificar si ya existe el trigger
   const existing = learning.find(
-    (item) =>
-      normalizeText(item.trigger) === normalizedTrigger &&
-      normalizeText(item.answer) === normalizedAnswer
+    (item) => normalize(item.trigger) === normalizedTrigger
   );
 
   if (existing) {
+    existing.answer = answer.trim(); // reemplaza la respuesta con la más reciente
     existing.frequency = (existing.frequency || 1) + 1;
   } else {
     learning.push({
@@ -44,67 +65,72 @@ function learnResponse(trigger, answer) {
     });
   }
 
-  // Revisar si supera el umbral para pasar a auto-responder
-  const toPromote = learning.filter((item) => item.frequency >= FREQUENCY_THRESHOLD);
+  db.writeJSON(LEARNING_FILE, learning);
 
-  if (toPromote.length > 0) {
-    const autoResponses = readJSON(AUTO_RESPONDER_FILE, []);
-
-    toPromote.forEach((item) => {
-      // Evitar duplicados en auto-responder
-      const existsInAuto = autoResponses.find(
-        (r) =>
-          normalizeText(r.match) === normalizeText(item.trigger) &&
-          normalizeText(r.answer) === normalizeText(item.answer)
-      );
-      if (!existsInAuto) {
-        autoResponses.push({ match: item.trigger, answer: item.answer });
-      }
-
-      // Eliminar del learning temporal
-      const index = learning.indexOf(item);
-      if (index !== -1) learning.splice(index, 1);
-    });
-
-    writeJSON(AUTO_RESPONDER_FILE, autoResponses);
-  }
-
-  // Guardar cambios en learning.json
-  writeJSON(LEARNING_FILE, learning);
+  // Intentar pasar al auto-responder
+  checkAndExportToAutoResponder();
 }
 
-// 🔥 Obtener respuesta aprendida de learning.json
-function getLearnedResponse(message) {
-  const normalizedMessage = normalizeText(message);
-  const learning = readJSON(LEARNING_FILE, []);
+/**
+ * 🔹 Extraer texto de cualquier tipo de mensaje
+ */
+function extractTextFromMessage(message) {
+  if (!message) return "";
 
-  // Ordenar por longitud de trigger y frecuencia para que sea “humano”
-  const sorted = learning.sort(
-    (a, b) =>
-      b.trigger.length - a.trigger.length || (b.frequency || 1) - (a.frequency || 1)
-  );
+  if (message.conversation) return message.conversation;
 
-  for (const item of sorted) {
-    const normalizedTrigger = normalizeText(item.trigger);
+  if (message.extendedTextMessage?.text) return message.extendedTextMessage.text;
 
-    // 1️⃣ Coincidencia exacta
-    if (normalizedMessage === normalizedTrigger) return item.answer;
+  if (message.buttonsResponseMessage?.selectedDisplayText)
+    return message.buttonsResponseMessage.selectedDisplayText;
 
-    // 2️⃣ Includes (solo triggers > 1 caracter)
-    if (normalizedTrigger.length > 1 && normalizedMessage.includes(normalizedTrigger))
-      return item.answer;
+  if (message.listResponseMessage?.singleSelectReply?.selectedRowId)
+    return message.listResponseMessage.singleSelectReply.selectedRowId;
 
-    // 3️⃣ Similitud (solo triggers > 2 caracteres)
-    if (normalizedTrigger.length > 2) {
-      const similarity = stringSimilarity.compareTwoStrings(
-        normalizedMessage,
-        normalizedTrigger
-      );
-      if (similarity >= 0.75) return item.answer;
+  return "";
+}
+
+/**
+ * 🔹 Normalizar texto para comparar
+ */
+function normalize(text = "") {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,!?¿¡;]/g, "")
+    .trim();
+}
+
+/**
+ * 🔹 Revisar aprendizaje frecuente y pasarlo a auto-responder
+ */
+function checkAndExportToAutoResponder() {
+  const learning = db.readJSON(LEARNING_FILE, []);
+  const remainingLearning = [];
+
+  for (const item of learning) {
+    if ((item.frequency || 0) >= FREQUENCY_THRESHOLD) {
+      const added = db.addAutoResponderItem(item.trigger, item.answer);
+
+      if (!added) {
+        const allResponses = db.readJSON("auto-responder", []);
+        const index = allResponses.findIndex(
+          (r) => normalize(r.match) === normalize(item.trigger)
+        );
+        if (index !== -1) {
+          allResponses[index].answer = item.answer.trim();
+          db.writeJSON("auto-responder", allResponses);
+        } else {
+          remainingLearning.push(item);
+        }
+      }
+    } else {
+      remainingLearning.push(item);
     }
   }
 
-  return null;
+  db.writeJSON(LEARNING_FILE, remainingLearning);
 }
 
-module.exports = { learnResponse, getLearnedResponse };
+module.exports = { learnFromMessage };
