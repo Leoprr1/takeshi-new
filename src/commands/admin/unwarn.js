@@ -30,9 +30,15 @@ module.exports = {
     global.mutedDB = global.mutedDB || {};
     if (!global.mutedDB[remoteJid]) global.mutedDB[remoteJid] = {};
     if (!global.mutedDB[remoteJid][targetJid])
-      global.mutedDB[remoteJid][targetJid] = { mutedUntil: 0, warnings: 0 };
+      global.mutedDB[remoteJid][targetJid] = { mutedUntil: 0, warnings: 0, timeoutId: null };
 
     const userData = global.mutedDB[remoteJid][targetJid];
+
+    // Cancelar cualquier timeout de notificación pendiente
+    if (userData.timeoutId) {
+      clearTimeout(userData.timeoutId);
+      userData.timeoutId = null;
+    }
 
     // Reset warnings
     userData.warnings = 0;

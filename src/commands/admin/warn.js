@@ -10,7 +10,7 @@ const {
 } = require(`${BASE_DIR}/src/utils/database`);
 
 const MAX_WARNINGS = 3;
-const SUSPENSION_TIME = 30 * 60 * 1000; // 30 minutos
+const SUSPENSION_TIME = 15 * 1000; // 30 minutos
 
 module.exports = {
   name: "warn",
@@ -41,7 +41,11 @@ module.exports = {
     global.mutedDB = global.mutedDB || {};
     if (!global.mutedDB[remoteJid]) global.mutedDB[remoteJid] = {};
     if (!global.mutedDB[remoteJid][targetJid])
-      global.mutedDB[remoteJid][targetJid] = { mutedUntil: 0, warnings: 0 };
+      global.mutedDB[remoteJid][targetJid] = {
+        mutedUntil: 0,
+        warnings: 0,
+        timeoutId: null,
+      };
 
     const userData = global.mutedDB[remoteJid][targetJid];
     const now = Date.now();
@@ -66,14 +70,21 @@ module.exports = {
         console.error("[WARN] Error al mutear al usuario:", err);
       }
 
+      // Cancelar timeout anterior si existía
+      if (userData.timeoutId) {
+        clearTimeout(userData.timeoutId);
+        userData.timeoutId = null;
+      }
+
       // Desmuteo automático con notificación
-      setTimeout(async () => {
+      userData.timeoutId = setTimeout(async () => {
         if (checkIfMemberIsMuted(remoteJid, targetJid)) {
           unmuteMember(remoteJid, targetJid);
         }
         if (global.mutedDB[remoteJid] && global.mutedDB[remoteJid][targetJid]) {
           global.mutedDB[remoteJid][targetJid].warnings = 0;
           global.mutedDB[remoteJid][targetJid].mutedUntil = 0;
+          global.mutedDB[remoteJid][targetJid].timeoutId = null;
         }
 
         // Notificación en el grupo
