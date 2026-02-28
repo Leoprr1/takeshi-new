@@ -107,18 +107,21 @@ class FfmpegService {
 
       return this._runFfmpeg(inputPath, outputPath, options);
     } else {
-      // 🎥 Video/GIF → WebP animado compatible WhatsApp
-      const options = [
-        "-vcodec libwebp",
-        `-vf ${scaleFilter},fps=15`,
-        "-loop 0",
-        "-an",
-        "-t 10", // máximo 10s
-        "-preset default",
-        "-lossless 0",
-        "-compression_level 6",
-        "-qscale 80"
-      ];
+      // 🎥 Video/GIF → WebP animado ultra comprimido
+const options = [
+  "-vcodec libwebp",
+  `-vf ${scaleFilter},fps=12`, // menos FPS = menos peso
+  "-loop 0",
+  "-an",
+  "-t 8", // recorta a 8s máximo
+  "-preset picture", // mejor compresión
+  "-lossless 0",
+  "-compression_level 6",
+  "-qscale 60", // menor calidad = mucho menos peso
+  "-metadata", "title=",
+  "-metadata", "author="
+];
+
 
       return this._runFfmpeg(inputPath, outputPath, options);
     }
