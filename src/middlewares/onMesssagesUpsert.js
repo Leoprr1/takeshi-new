@@ -35,6 +35,12 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
   for (const webMessage of messages) {
     try {
       const messageId = webMessage?.key?.id;
+      
+       // 🚫 IGNORAR MENSAJES DEL PROPIO BOT (ANTI-LOOP)
+    if (webMessage?.key?.fromMe) {
+      continue;
+    }
+
 
       // 🚫 IGNORAR MENSAJES DUPLICADOS
       if (messageId) {

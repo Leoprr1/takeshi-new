@@ -21,6 +21,17 @@ const PREFIX_GROUPS_FILE = "prefix-groups";
 const RESTRICTED_MESSAGES_FILE = "restricted-messages";
 const WELCOME_GROUPS_FILE = "welcome-groups";
 
+const stringSimilarity = require("string-similarity");
+
+function normalizeText(text = "") {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // quitar tildes
+    .replace(/[.,!?¿¡;]/g, "") // quitar signos
+    .trim();
+}
+
 function createIfNotExists(fullPath, formatIfNotExists = []) {
   if (!fs.existsSync(fullPath)) {
     fs.writeFileSync(fullPath, JSON.stringify(formatIfNotExists));
@@ -153,21 +164,42 @@ exports.isActiveGroup = (groupId) => {
 
 exports.getAutoResponderResponse = (match) => {
   const filename = AUTO_RESPONDER_FILE;
+  const responses = readJSON(filename, []);
 
-  const responses = readJSON(filename);
+  if (!match) return null;
 
-  const matchUpperCase = match.toLocaleUpperCase();
+  const normalizedMessage = normalizeText(match);
 
-  const data = responses.find(
-    (response) => response.match.toLocaleUpperCase() === matchUpperCase
-  );
+  for (const response of responses) {
+    const normalizedRule = normalizeText(response.match);
 
-  if (!data) {
-    return null;
+    // 🚨 Si la regla es de 1 solo carácter
+    if (normalizedRule.length === 1) {
+      if (normalizedMessage === normalizedRule) {
+        return response.answer;
+      }
+      continue; // ⬅️ ignorar includes y similitud
+    }
+
+    // Coincidencia por inclusión (para palabras normales)
+    if (normalizedMessage.includes(normalizedRule)) {
+      return response.answer;
+    }
+
+    // Similitud fuzzy SOLO para reglas mayores a 1 carácter
+    const similarity = stringSimilarity.compareTwoStrings(
+      normalizedMessage,
+      normalizedRule
+    );
+
+    if (similarity >= 0.7) {
+      return response.answer;
+    }
   }
 
-  return data.answer;
+  return null;
 };
+
 
 exports.activateAutoResponderGroup = (groupId) => {
   const filename = AUTO_RESPONDER_GROUPS_FILE;
