@@ -162,53 +162,83 @@ exports.isActiveGroup = (groupId) => {
   return !inactiveGroups.includes(groupId);
 };
 
-exports.getAutoResponderResponse = (match) => {
-  const filename = AUTO_RESPONDER_FILE;
-  const responses = readJSON(filename, []);
+// 🔹 Cargar abreviaturas
+const abbreviationsPath = path.resolve(databasePath, "abbreviations.json");
+const abbreviations = fs.existsSync(abbreviationsPath)
+  ? JSON.parse(fs.readFileSync(abbreviationsPath, "utf8"))
+  : {};
 
-  if (!match) return null;
+// 🔹 Normalizar texto: quita acentos, emojis repetidos, duplicación de letras, todo lowercase
+function normalizeText(text) {
+  if (!text) return "";
+  let normalized = text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // quitar acentos
+    .replace(/(.)\1{2,}/g, "$1") // quita letras duplicadas más de 2
+    .replace(/[^\w\s]/g, ""); // quitar símbolos excepto espacios
+
+  // aplicar abreviaturas
+  for (const [key, value] of Object.entries(abbreviations)) {
+    const regex = new RegExp(`\\b${key}\\b`, "gi");
+    normalized = normalized.replace(regex, value);
+  }
+
+  // eliminar stopwords cortas
+  const stopwords = ["de", "la", "el", "y", "a", "en", "lo", "un", "una"];
+  normalized = normalized
+    .split(/\s+/)
+    .filter((w) => !stopwords.includes(w))
+    .join(" ");
+
+  return normalized.trim();
+}
+
+exports.getAutoResponderResponse = (match) => {
+  const responses = readJSON(AUTO_RESPONDER_FILE, []);
+  if (!match || !responses.length) return null;
 
   const normalizedMessage = normalizeText(match);
 
-  // 🔥 Ordenar por longitud (más largas primero)
+  // 🔹 Ordenar respuestas por longitud de frase (más largas primero)
   const sortedResponses = [...responses].sort(
     (a, b) => b.match.length - a.match.length
   );
 
-  // 1️⃣ Coincidencia exacta primero
+  // 1️⃣ Coincidencia exacta
   for (const response of sortedResponses) {
     const normalizedRule = normalizeText(response.match);
-
-    if (normalizedRule === normalizedMessage) {
-      return response.answer;
-    }
+    if (normalizedRule === normalizedMessage) return response.answer;
   }
 
-  // 2️⃣ Includes (solo reglas > 1 carácter)
+  // 2️⃣ Coincidencia por palabra completa
+  const messageWords = normalizedMessage.split(/\s+/);
   for (const response of sortedResponses) {
     const normalizedRule = normalizeText(response.match);
+    if (normalizedRule.length <= 2) continue;
 
-    if (normalizedRule.length === 1) continue; // 🚫 ignorar letras sueltas
-
-    if (normalizedMessage.includes(normalizedRule)) {
-      return response.answer;
-    }
+    const ruleWords = normalizedRule.split(/\s+/);
+    if (ruleWords.every((w) => messageWords.includes(w))) return response.answer;
   }
 
-  // 3️⃣ Similitud (solo reglas > 2 caracteres)
+  // 3️⃣ Includes parcial
   for (const response of sortedResponses) {
     const normalizedRule = normalizeText(response.match);
+    if (normalizedRule.length <= 2) continue;
 
-    if (normalizedRule.length <= 2) continue; // 🚫 evitar ruido
+    if (normalizedMessage.includes(normalizedRule)) return response.answer;
+  }
+
+  // 4️⃣ Similitud fuzzy
+  for (const response of sortedResponses) {
+    const normalizedRule = normalizeText(response.match);
+    if (normalizedRule.length <= 3) continue;
 
     const similarity = stringSimilarity.compareTwoStrings(
       normalizedMessage,
       normalizedRule
     );
-
-    if (similarity >= 0.75) {
-      return response.answer;
-    }
+    if (similarity >= 0.75) return response.answer;
   }
 
   return null;
@@ -480,3 +510,8 @@ exports.removeAutoResponderItemByKey = (key) => {
 
   return true;
 };
+
+// 🔹 Exportar funciones base para LearningBot
+exports.readJSON = readJSON;
+exports.writeJSON = writeJSON;
+exports.addAutoResponderItem = exports.addAutoResponderItem;
