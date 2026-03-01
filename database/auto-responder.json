@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "¡Hola! ¿Cómo andás?"
+    "answer": "Tdo biem?"
   },
   {
     "match": "hola?",
@@ -9,7 +9,7 @@
   },
   {
     "match": "buenas",
-    "answer": "¡Buenas! ¿En qué te puedo ayudar?"
+    "answer": "Hola"
   },
   {
     "match": "qué tal",
@@ -45,7 +45,7 @@
   },
   {
     "match": "chau",
-    "answer": "Nos vemos, cuidate."
+    "answer": "ok"
   },
   {
     "match": "buen día",
@@ -81,7 +81,7 @@
   },
   {
     "match": "puto",
-    "answer": "?"
+    "answer": "genocida de hamburguesas"
   },
   {
     "match": "sos re puto",
@@ -581,11 +581,11 @@
   },
   {
     "match": "Si",
-    "answer": "ah mira vos 🤨🏳️‍🌈📷"
+    "answer": "no"
   },
   {
     "match": "no",
-    "answer": "si🙉"
+    "answer": "Si y punto final"
   },
   {
     "match": "verga",
@@ -625,7 +625,7 @@
   },
   {
     "match": "que",
-    "answer": "so"
+    "answer": "Si no?"
   },
   {
     "match": "q",
@@ -700,7 +700,767 @@
     "answer": "callate persona de bajos recursos 🤏🏻"
   },
   {
+    "match": "JAJAJJ",
+    "answer": "JAJAJAJAJ"
+  },
+  {
+    "match": "pene",
+    "answer": "comes"
+  },
+  {
+    "match": "Les ordeno que revivan",
+    "answer": "no"
+  },
+  {
+    "match": "aguante river",
+    "answer": "seee"
+  },
+  {
+    "match": "Yo me estoy por ir a comprar los útiles 🥲",
+    "answer": "Yo:"
+  },
+  {
+    "match": "Cuando me grabaron llendo al colegio?",
+    "answer": "Yo"
+  },
+  {
+    "match": "vos sabras",
+    "answer": "Yo solo quise ayudar"
+  },
+  {
+    "match": "ay dios mio clarence",
+    "answer": "Que paso"
+  },
+  {
+    "match": "hubieramos empezado por ahi culeado",
+    "answer": "Culiado mal"
+  },
+  {
+    "match": "*𝐁𝐈𝐄𝐍𝐕𝐄𝐍𝐈𝐃𝐎𝐒 𝐀:*\n\n*𝐿𝒶 𝒸𝑜𝒻𝓇𝒶𝒹í𝒶* 🪷\n\n• _°🌗 𝙽𝚘𝚖𝚋𝚛𝚎:_\n° _•🌕𝙴𝚍𝚊𝚍:_\n• _° 🌘  𝙿𝚊í𝚜:_\n° _•🌔 𝙵𝚘𝚝𝚘:_",
+    "answer": "igual, de dónde sacaste eso?"
+  },
+  {
+    "match": "Culiado mal",
+    "answer": "JAJSJ"
+  },
+  {
+    "match": "igual, de dónde sacaste eso?",
+    "answer": "Eso me dio lili"
+  },
+  {
+    "match": "Ustedes ni justificacion de xq me sacaron",
+    "answer": "eh?"
+  },
+  {
+    "match": "cierto que vos ya estabas",
+    "answer": "Si"
+  },
+  {
+    "match": "Le ayudaba en cuando entraban nuevos",
+    "answer": "el tema es que debido a unas capturas no puedo confiar en vos"
+  },
+  {
+    "match": "el tema es que debido a unas capturas no puedo confiar en vos",
+    "answer": "Q capturas martincho"
+  },
+  {
+    "match": "Q no vieron que bombardearon Qatar",
+    "answer": "JAJAJAJ enserio?"
+  },
+  {
+    "match": "fuck",
+    "answer": "caca"
+  },
+  {
+    "match": "que innovador",
+    "answer": "pene sangriento"
+  },
+  {
+    "match": "comes",
+    "answer": "chupala"
+  },
+  {
+    "match": "chupala",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "JAJAJAJA",
+    "answer": "puto"
+  },
+  {
+    "match": "?",
+    "answer": "Ahí les mando foto pija así activan"
+  },
+  {
+    "match": "wtf",
+    "answer": "lo puse para que aprenda de una"
+  },
+  {
     "match": "so",
-    "answer": "papo"
+    "answer": "se enamoro del so"
+  },
+  {
+    "match": "Quien está mandando fotopenw",
+    "answer": "yo"
+  },
+  {
+    "match": "foto pene",
+    "answer": "foto teta"
+  },
+  {
+    "match": "genocida de hamburguesas",
+    "answer": "tu viejo"
+  },
+  {
+    "match": "Q capturas martincho",
+    "answer": "la de tu culo y mi chota"
+  },
+  {
+    "match": "la de tu culo y mi chota",
+    "answer": "La cajeta de tu madre"
+  },
+  {
+    "match": "metan a Guada y Bianca",
+    "answer": "No se le puede meter todavía"
+  },
+  {
+    "match": "Eh mande lo del grupo nms y q?asi tenias mas gente",
+    "answer": "y pero sabiendo que tenemos problemas con ellos se lo mandas"
+  },
+  {
+    "match": "Y a guada recien mañana puede entrar creo",
+    "answer": "fo"
+  },
+  {
+    "match": "y pero sabiendo que tenemos problemas con ellos se lo mandas",
+    "answer": "problemas con nosotros?"
+  },
+  {
+    "match": "tu viejo",
+    "answer": "el tuyo"
+  },
+  {
+    "match": "Yo q pt iva a saber",
+    "answer": "iba"
+  },
+  {
+    "match": "iba",
+    "answer": "Gracias"
+  },
+  {
+    "match": "aprende a escribir gil",
+    "answer": "Vos aprende a ser blanco"
+  },
+  {
+    "match": "No se le puede meter todavía",
+    "answer": "A quien hay que metersela?"
+  },
+  {
+    "match": "Vos aprende a ser blanco",
+    "answer": "x lo menos sé escribir"
+  },
+  {
+    "match": "A alan?",
+    "answer": "Yo me prendo"
+  },
+  {
+    "match": "x lo menos sé escribir",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "mira que no los saco por que no es mi grupo",
+    "answer": "Xd"
+  },
+  {
+    "match": "Che esta re muero el grupo",
+    "answer": "malmal"
+  },
+  {
+    "match": "metan gente",
+    "answer": "Publica el enlace"
+  },
+  {
+    "match": "Publica el enlace",
+    "answer": "Yo ns como se hace"
+  },
+  {
+    "match": "tranquilamente podrias ser un topo",
+    "answer": "Na"
+  },
+  {
+    "match": "@all si meten gente entrego el culo",
+    "answer": "Que oferton"
+  },
+  {
+    "match": "anda vos",
+    "answer": "Ptm"
+  },
+  {
+    "match": "ahí tenes el link del grupo",
+    "answer": "Oka"
+  },
+  {
+    "match": "A esperar ahora pue",
+    "answer": "viste q fscil"
+  },
+  {
+    "match": "viste q fscil",
+    "answer": "Me dio paja igual jajaja"
+  },
+  {
+    "match": "Hay gente buenos aires?",
+    "answer": "si"
+  },
+  {
+    "match": ".",
+    "answer": "Parce pase el perico"
+  },
+  {
+    "match": "Me dio paja igual jajaja",
+    "answer": "jajajaja"
+  },
+  {
+    "match": "De donde sos",
+    "answer": "rio negro vos"
+  },
+  {
+    "match": "Parce pase el perico",
+    "answer": "Quere soplar el dedo de momia?"
+  },
+  {
+    "match": "@all hablen giles",
+    "answer": "No puedo em"
+  },
+  {
+    "match": "Un hambre",
+    "answer": "mall"
+  },
+  {
+    "match": "No te calentes un dos tres",
+    "answer": "Quien carajos sos vos"
+  },
+  {
+    "match": "Quien carajos sos vos",
+    "answer": "Galo, un gusto"
+  },
+  {
+    "match": "recién entro mogo",
+    "answer": "Ya se bobo"
+  },
+  {
+    "match": "Lindo recibimiento",
+    "answer": "acostumbrate"
+  },
+  {
+    "match": "Estoy jugando resident evil 4 Remake amigo",
+    "answer": "AJAJAJAJA"
+  },
+  {
+    "match": "Ya se bobo",
+    "answer": "bueno tarada"
+  },
+  {
+    "match": "bueno tarada",
+    "answer": "Cállate enfermito"
+  },
+  {
+    "match": "Cállate enfermito",
+    "answer": "no"
+  },
+  {
+    "match": "Quere soplar el dedo de momia?",
+    "answer": "El sin orillas te voy soplar para inflarlo"
+  },
+  {
+    "match": "un laburo ni a palo",
+    "answer": "No amigo"
+  },
+  {
+    "match": "El sin orillas te voy soplar para inflarlo",
+    "answer": "Sabes que es un dedo de momia x las dudas?"
+  },
+  {
+    "match": "Tire cv pero no me llaman",
+    "answer": "x algo sera"
+  },
+  {
+    "match": "si te dije",
+    "answer": "no"
+  },
+  {
+    "match": "Sii",
+    "answer": "no"
+  },
+  {
+    "match": "Sabes que es un dedo de momia x las dudas?",
+    "answer": "No me la nombre amigo q ando con la atn ahora"
+  },
+  {
+    "match": "Si y punto final",
+    "answer": "no"
+  },
+  {
+    "match": "q es gto",
+    "answer": "Guardabarro de la moto lo estoy arreglando pa pintar"
+  },
+  {
+    "match": "Holaaaaaa",
+    "answer": "Vo chupala"
+  },
+  {
+    "match": "Guardabarro de la moto lo estoy arreglando pa pintar",
+    "answer": "chetoo"
+  },
+  {
+    "match": "q estaba roto?",
+    "answer": "Estaba re mil rayado y en una parte estaba roto"
+  },
+  {
+    "match": "Así q le mande y lija y masilla",
+    "answer": "osa"
+  },
+  {
+    "match": "Ya mañana pintó y fuee",
+    "answer": "de q color"
+  },
+  {
+    "match": "No me la nombre amigo q ando con la atn ahora",
+    "answer": "Pa tra wacho jaja"
+  },
+  {
+    "match": "problemas con nosotros?",
+    "answer": "no, fran"
+  },
+  {
+    "match": "gay",
+    "answer": "Tu gueco"
+  },
+  {
+    "match": "Lesbiana",
+    "answer": "no"
+  },
+  {
+    "match": "de q color",
+    "answer": "El gris plata q es de ella le queda piola"
+  },
+  {
+    "match": "El gris plata q es de ella le queda piola",
+    "answer": "chetoo"
+  },
+  {
+    "match": "Pa tra wacho jaja",
+    "answer": "Mal amigo crocante de seco"
+  },
+  {
+    "match": "@232478375694576 holaa",
+    "answer": "Hola"
+  },
+  {
+    "match": "Como tas",
+    "answer": "Bn y vs"
+  },
+  {
+    "match": "Bn y vs",
+    "answer": "Me alegro"
+  },
+  {
+    "match": "Maso",
+    "answer": "Por"
+  },
+  {
+    "match": "Por",
+    "answer": "Cansado"
+  },
+  {
+    "match": "Que haces",
+    "answer": "Nd estoy al pedo"
+  },
+  {
+    "match": "Eeaa",
+    "answer": "pillo"
+  },
+  {
+    "match": "@all revivan petes",
+    "answer": "Recién llego de cortarme el pelo"
+  },
+  {
+    "match": "Y si no quiero?",
+    "answer": "T cojo"
+  },
+  {
+    "match": "Nd estoy al pedo",
+    "answer": "Ah como yo"
+  },
+  {
+    "match": "pillo",
+    "answer": "Gay"
+  },
+  {
+    "match": "T cojo",
+    "answer": "Xq no me los coho yo a los 2?"
+  },
+  {
+    "match": "los voy a cagar a piñas",
+    "answer": "dale"
+  },
+  {
+    "match": "párate de mano",
+    "answer": "voy"
+  },
+  {
+    "match": "lo cojemos los dos",
+    "answer": "Dale"
+  },
+  {
+    "match": "mi primita es re down",
+    "answer": "viene d familia"
+  },
+  {
+    "match": "viene d familia",
+    "answer": "no es sangre mia"
+  },
+  {
+    "match": "mientras el cornudo de mi tío está acá mi tia está en una cena con una AMIGA",
+    "answer": "Amiga\""
+  },
+  {
+    "match": "Xq no me los coho yo a los 2?",
+    "answer": "No, ya decidimos q los dos te cojemos a vos"
+  },
+  {
+    "match": "Bue trato de hablar y me clava el visto",
+    "answer": "quien"
+  },
+  {
+    "match": "No, ya decidimos q los dos te cojemos a vos",
+    "answer": "No me parece eticamente correcto"
+  },
+  {
+    "match": "Tirando rostro",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "No me parece eticamente correcto",
+    "answer": "@82643928498250"
+  },
+  {
+    "match": "Ahí les mando foto pija así activan",
+    "answer": "No asi no era wacho"
+  },
+  {
+    "match": "no andén de pajeros",
+    "answer": "Q te haces anoche no decías lo mismo"
+  },
+  {
+    "match": "disculpa vos quien sos?",
+    "answer": "Yo soy yo"
+  },
+  {
+    "match": "marcos no rompas las pelotas",
+    "answer": "Quien le dio admin a esta"
+  },
+  {
+    "match": "Quien le dio admin a esta",
+    "answer": "si te fijas yo hice el grupo corazon"
+  },
+  {
+    "match": "si te fijas yo hice el grupo corazon",
+    "answer": "Ahh voh lo hiciste"
+  },
+  {
+    "match": "negro come ñaco",
+    "answer": "Jajaja"
+  },
+  {
+    "match": "q paso",
+    "answer": "Ni idea la verdad"
+  },
+  {
+    "match": "Un buzz cut con un corazón roto",
+    "answer": "chetooo"
+  },
+  {
+    "match": "Que onda",
+    "answer": "ng vos?"
+  },
+  {
+    "match": "chetooo",
+    "answer": "Na mentira lo normal"
+  },
+  {
+    "match": ".kick",
+    "answer": "Ajaksjaj"
+  },
+  {
+    "match": "ng vos?",
+    "answer": "Recién llegó de la iglesia"
+  },
+  {
+    "match": "Na mentira lo normal",
+    "answer": "q es lo normal"
+  },
+  {
+    "match": "q es lo normal",
+    "answer": "Redondo"
+  },
+  {
+    "match": "Yisus",
+    "answer": "crazy?"
+  },
+  {
+    "match": "Jajaja",
+    "answer": "jajabak"
+  },
+  {
+    "match": "el tuyo",
+    "answer": "te gusta? 🫦😂"
+  },
+  {
+    "match": "te gusta? 🫦😂",
+    "answer": "a mi me gusta mi novia"
+  },
+  {
+    "match": "¡Genial! ¿Qué es lo que más te gusta?",
+    "answer": "cállate"
+  },
+  {
+    "match": "Solo hago lo que me programaron... que es contestarte.",
+    "answer": "pene sangriento"
+  },
+  {
+    "match": "pichula sangrienta",
+    "answer": "comes"
+  },
+  {
+    "match": "no le deja",
+    "answer": "Hasta mañana mepa"
+  },
+  {
+    "match": "@all quien para un plato?",
+    "answer": "yo m r duermo gto jajaja"
+  },
+  {
+    "match": "Tu gueco",
+    "answer": "Un frefire vamos a jugar"
+  },
+  {
+    "match": "tengo 12%",
+    "answer": "Prm"
+  },
+  {
+    "match": "Bue ni un aprovechar el finde jaja",
+    "answer": "ne"
+  },
+  {
+    "match": "Un frefire vamos a jugar",
+    "answer": "Mesi"
+  },
+  {
+    "match": "Que ejercicios haces para tener cuadrados",
+    "answer": "Con un plumon te rayas pa y listo"
+  },
+  {
+    "match": "nada",
+    "answer": "Como jssjjsjs"
+  },
+  {
+    "match": "Como jssjjsjs",
+    "answer": "no hago nd"
+  },
+  {
+    "match": "Con un plumon te rayas pa y listo",
+    "answer": "Jjjjjsj yo haciendo plancha por dia"
+  },
+  {
+    "match": "toy comando gancia",
+    "answer": "Como comas gancia?"
+  },
+  {
+    "match": "no hago nd",
+    "answer": "Que me recomiendas"
+  },
+  {
+    "match": "Como comas gancia?",
+    "answer": "TOMANDO ERA"
+  },
+  {
+    "match": "no vas a enamorar a todas x mandar foto tuya sabes",
+    "answer": "si ni hay minas aca"
+  },
+  {
+    "match": "TOMANDO ERA",
+    "answer": "Y no invita"
+  },
+  {
+    "match": "si ni hay minas aca",
+    "answer": "ah mal"
+  },
+  {
+    "match": "Jjjjjsj yo haciendo plancha por dia",
+    "answer": "Pq planchar la ropa va a dar abdomen?"
+  },
+  {
+    "match": "Y no invita",
+    "answer": "veni"
+  },
+  {
+    "match": "Pq planchar la ropa va a dar abdomen?",
+    "answer": "Jaja"
+  },
+  {
+    "match": "veni",
+    "answer": "Pasa ub jaja"
+  },
+  {
+    "match": "Pasa ub jaja",
+    "answer": "ahrr jakabakab"
+  },
+  {
+    "match": "ahrr jakabakab",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "hace cuanto no tomo fernet",
+    "answer": "Justamente tengo uno"
+  },
+  {
+    "match": "Que es frenet?",
+    "answer": "fernet"
+  },
+  {
+    "match": "Justamente tengo uno",
+    "answer": "daaa"
+  },
+  {
+    "match": "fernet",
+    "answer": "Frenet"
+  },
+  {
+    "match": "No soy de argentina mamon, capaz y le digo de otra forma",
+    "answer": "Ahh"
+  },
+  {
+    "match": "Frenet",
+    "answer": "fernet dije"
+  },
+  {
+    "match": "fernet dije",
+    "answer": "Pero el vago dijo frenet jajaja"
+  },
+  {
+    "match": "Pero el vago dijo frenet jajaja",
+    "answer": "La misma mmda"
+  },
+  {
+    "match": "@19310810534110 che y mi cuñada no va a entrar mas?",
+    "answer": "eeee"
+  },
+  {
+    "match": "si lo vi",
+    "answer": "Tarde"
+  },
+  {
+    "match": "Barbie supuestamente ya ha ejercido todas las profesiones, eso significa que también fue cariñosa?",
+    "answer": "que"
+  },
+  {
+    "match": "Tarde",
+    "answer": "si"
+  },
+  {
+    "match": "Che",
+    "answer": "tos"
+  },
+  {
+    "match": "Si no?",
+    "answer": "que cosa"
+  },
+  {
+    "match": "Mi amiga la antinegros no aparecio hoy",
+    "answer": "quien es la anti negros"
+  },
+  {
+    "match": "que cosa",
+    "answer": "De que?"
+  },
+  {
+    "match": "tos",
+    "answer": "Vs"
+  },
+  {
+    "match": "Como asi? Jajaja",
+    "answer": "si"
+  },
+  {
+    "match": "lo mire mal",
+    "answer": "Mira, no hay hombre que aguante una patada en las bolas"
+  },
+  {
+    "match": "@all hola",
+    "answer": "Chau"
+  },
+  {
+    "match": "Como rompes los huevos chabom",
+    "answer": "y salite gto"
+  },
+  {
+    "match": "Ola",
+    "answer": "Hola"
+  },
+  {
+    "match": "Holaa",
+    "answer": "chau"
+  },
+  {
+    "match": "y salite gto",
+    "answer": "Trolito"
+  },
+  {
+    "match": "Mtte",
+    "answer": "eh?"
+  },
+  {
+    "match": "Trolito",
+    "answer": "tontita"
+  },
+  {
+    "match": "eh?",
+    "answer": "matate"
+  },
+  {
+    "match": "matate",
+    "answer": "vos"
+  },
+  {
+    "match": "Ensima q rompes el choto td el dia con el @",
+    "answer": "bancatela"
+  },
+  {
+    "match": "Si o no",
+    "answer": "Ci"
+  },
+  {
+    "match": "God",
+    "answer": "Me dicen así aveces🗣"
+  },
+  {
+    "match": "Un compañero de natación también se llama andres",
+    "answer": "God"
+  },
+  {
+    "match": "Joder como quiero un laburo",
+    "answer": "Grabate en tanguita y lo vendes"
+  },
+  {
+    "match": "Exepto 5 novias",
+    "answer": "Me faltan las novias"
+  },
+  {
+    "match": "No soy gay",
+    "answer": "La coma bro"
+  },
+  {
+    "match": "Desi que no la pusiste a la coma culiaaaaaa",
+    "answer": "JAJ"
   }
 ]

@@ -3,7 +3,7 @@ const db = require("./database"); // Tu database.js
 const stringSimilarity = require("string-similarity");
 
 const LEARNING_FILE = "learning"; // archivo temporal
-const FREQUENCY_THRESHOLD = 3; // mínimo para pasar a auto-responder
+const FREQUENCY_THRESHOLD = 1; // mínimo para pasar a auto-responder
 
 /**
  * 🔹 Aprende un mensaje del grupo y su respuesta
