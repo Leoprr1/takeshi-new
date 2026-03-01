@@ -7,9 +7,9 @@ const path = require("node:path");
 const fs = require("node:fs");
 
 const databasePath = path.resolve(__dirname, "../../database");
-const GENERATED_MEMORY_FILE = "generated-memory.json";
+const GENERATED_MEMORY_FILE = "generated-memory";
 
-const MIN_CONFIDENCE = 0.45;
+const MIN_CONFIDENCE = 0.8;
 
 // 🔒 Memoria interna anti-loop
 let lastGeneratedMessage = null;

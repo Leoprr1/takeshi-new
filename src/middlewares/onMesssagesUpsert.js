@@ -21,12 +21,12 @@ const { badMacHandler } = require("../utils/badMacHandler");
 const { checkIfMemberIsMuted } = require("../utils/database");
 const { messageHandler } = require("./messageHandler");
 
-
 // 🔥 IMPORTAR STATS GLOBAL
 const groupStats = require("../database/groupStats");
 const learningBot = require("../utils/learningBot");
 
-
+// 🧠 IMPORTAR ELMOBOTIA (AGREGADO)
+const { getElmoBotiaResponse } = require("../utils/ElmoBotia");
 
 // 🔥 SET PARA EVITAR MENSAJES DUPLICADOS
 const processedMessages = new Set();
@@ -40,20 +40,18 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
     try {
       const messageId = webMessage?.key?.id;
       
-       // 🚫 IGNORAR MENSAJES DEL PROPIO BOT (ANTI-LOOP)
-    if (webMessage?.key?.fromMe) {
-      continue;
-    }
-
+      // 🚫 IGNORAR MENSAJES DEL PROPIO BOT (ANTI-LOOP)
+      if (webMessage?.key?.fromMe) {
+        continue;
+      }
 
       // 🚫 IGNORAR MENSAJES DUPLICADOS
       if (messageId) {
         if (processedMessages.has(messageId)) {
           continue;
         }
-        // dentro del for de mensajes, **después de procesar duplicados**
-        learningBot.learnFromMessage(webMessage);
 
+        learningBot.learnFromMessage(webMessage);
 
         processedMessages.add(messageId);
 
@@ -80,7 +78,6 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
         const userJid =
           webMessage?.key?.participant || webMessage?.key?.remoteJid;
 
-        // Solo grupos
         if (remoteJid && remoteJid.endsWith("@g.us") && userJid) {
           if (!groupStats[remoteJid]) groupStats[remoteJid] = {};
 
@@ -95,9 +92,7 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
           const userData = groupStats[remoteJid][userJid];
           const now = Date.now();
 
-          // Sumar tiempo AFK acumulado
           userData.totalAfk += now - userData.lastMessage;
-
           userData.messages++;
           userData.lastMessage = now;
         }
@@ -156,7 +151,34 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
         continue;
       }
 
+      // 🔥 SISTEMA NORMAL
       await dynamicCommand(commonFunctions, startProcess);
+
+      // 🧠 ELMOBOTIA (AGREGADO)
+      try {
+        const elmoReply = getElmoBotiaResponse(webMessage);
+
+        if (elmoReply) {
+          // 🧠 ELMOBOTIA
+try {
+  const elmoReply = getElmoBotiaResponse(webMessage);
+
+  if (elmoReply) {
+   await socket.sendMessage(
+  webMessage.key.remoteJid,
+  { text: elmoReply },
+  { quoted: webMessage }
+);
+
+  }
+} catch (err) {
+  errorLog(`Error en ElmoBotia: ${err.message}`);
+}
+        }
+      } catch (err) {
+        errorLog(`Error en ElmoBotia: ${err.message}`);
+      }
+
     } catch (error) {
       if (badMacHandler.handleError(error, "message-processing")) {
         continue;

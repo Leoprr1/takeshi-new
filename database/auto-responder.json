@@ -45,7 +45,7 @@
   },
   {
     "match": "chau",
-    "answer": "ok"
+    "answer": "boe"
   },
   {
     "match": "buen día",
@@ -797,7 +797,7 @@
   },
   {
     "match": "so",
-    "answer": "ahora es re noob pero veremos cuando aprenda mas"
+    "answer": "viste?"
   },
   {
     "match": "Quien está mandando fotopenw",
@@ -1661,7 +1661,7 @@
   },
   {
     "match": "¡Función de auto-respuesta desactivado con éxito!",
-    "answer": "sos messi?"
+    "answer": "hola"
   },
   {
     "match": "Tampoco le vas a robar las palomas",
@@ -1702,5 +1702,109 @@
   {
     "match": "Si tiene numero fisico si",
     "answer": "Omg"
+  },
+  {
+    "match": "Que es complejo",
+    "answer": "El sistema del doxeo para argentinos es complejo"
+  },
+  {
+    "match": "Pero tengo amigos que doxean argentinos",
+    "answer": "Si tuviera plata les pagaría 🥲"
+  },
+  {
+    "match": "Si tuviera plata les pagaría 🥲",
+    "answer": "Pagame a mi me lo hacen gratis"
+  },
+  {
+    "match": "Para que doxeen al q se habla con mi ex",
+    "answer": "Jajajaj"
+  },
+  {
+    "match": "Chavales",
+    "answer": "Diga"
+  },
+  {
+    "match": "Como andas andress",
+    "answer": "Bien vos milton?"
+  },
+  {
+    "match": "2:30 me duermo",
+    "answer": "Yo me tengo q empezar a dormir temprano, el martes empiezo el colegio a la mañana"
+  },
+  {
+    "match": "Bien vos milton?",
+    "answer": "Bien acá"
+  },
+  {
+    "match": "Me tengo q levantar 7:30 o 8",
+    "answer": "Faaa"
+  },
+  {
+    "match": "Mal lo bueno que capaz me dan plata",
+    "answer": "Por que???"
+  },
+  {
+    "match": "Por que???",
+    "answer": "Tengo q ir a algún lado en bici"
+  },
+  {
+    "match": "Tengo q ir a algún lado en bici",
+    "answer": "Aaaa claro jajaj"
+  },
+  {
+    "match": "Si no no duermo nada",
+    "answer": "Bueno bro duerma bien"
+  },
+  {
+    "match": "gracias por ponerle el . s y . reveal",
+    "answer": "de nada crack 😎🤙🏻"
+  },
+  {
+    "match": "Yo me tengo q empezar a dormir temprano, el martes empiezo el colegio a la mañana",
+    "answer": "Nuu"
+  },
+  {
+    "match": "animarte un argentino",
+    "answer": "sos re puto"
+  },
+  {
+    "match": "metersela",
+    "answer": "METÉRSELA"
+  },
+  {
+    "match": "watajei?",
+    "answer": "esta aprendiendo"
+  },
+  {
+    "match": "discoteca cuando me tengo q es la atn ahora es de ellos se si la otra oportunidad",
+    "answer": "viste bro?"
+  },
+  {
+    "match": "que los programadores prefieren el enlace",
+    "answer": "te amo"
+  },
+  {
+    "match": "no pero puedo jugar pero todavia aprendo y hare lo mismo y no tengo la informacion de novio con",
+    "answer": "uy eres un picaro"
+  },
+  {
+    "match": "juntada familiar",
+    "answer": "ya vas a aprender bro"
+  },
+  {
+    "match": "salir es binario",
+    "answer": "cual es tu color favorito"
+  },
+  {
+    "match": "m re si que la de tu foto teta",
+    "answer": "JAJAJAJAJA"
+  },
+  {
+    "match": "anoche no intento serlo solo hago lo estoy aca estoy para vos milton",
+    "answer": "JAJAJAJAJAJA"
+  },
+  {
+    "match": "ah como vos que yo te puedo recomendar juegos",
+    "answer": "excelente"
   }
 ]
