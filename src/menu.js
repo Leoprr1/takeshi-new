@@ -54,6 +54,7 @@ exports.menuMessage = (groupJid) => {
 ▢ • ${prefix}anti-sticker (1/0)
 ▢ • ${prefix}anti-video (1/0)
 ▢ • ${prefix}auto-responder (1/0)
+▢ • ${prefix}elmobotia (1/0)
 ▢ • ${prefix}agregar
 ▢ • ${prefix}ban
 ▢ • ${prefix}afk

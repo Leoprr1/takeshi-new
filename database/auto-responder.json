@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "hola"
+    "answer": "góticas o rubias?"
   },
   {
     "match": "hola?",
@@ -9,7 +9,7 @@
   },
   {
     "match": "buenas",
-    "answer": "que onda"
+    "answer": "Tdbiennn"
   },
   {
     "match": "qué tal",
@@ -17,7 +17,7 @@
   },
   {
     "match": "todo bien?",
-    "answer": "Me alegro, yo acá dando vueltas."
+    "answer": "Vos?"
   },
   {
     "match": "cómo te llamas?",
@@ -785,11 +785,11 @@
   },
   {
     "match": "JAJAJAJA",
-    "answer": "es una mini inteligencia artificial 😂"
+    "answer": "viste bro?"
   },
   {
     "match": "?",
-    "answer": "Ahí les mando foto pija así activan"
+    "answer": "Ahora si entendi"
   },
   {
     "match": "wtf",
@@ -797,7 +797,7 @@
   },
   {
     "match": "so",
-    "answer": "viste?"
+    "answer": "Cerra el culo"
   },
   {
     "match": "Quien está mandando fotopenw",
@@ -837,7 +837,7 @@
   },
   {
     "match": "tu viejo",
-    "answer": "el tuyo"
+    "answer": "tu viejo con vinagre"
   },
   {
     "match": "Yo q pt iva a saber",
@@ -997,7 +997,7 @@
   },
   {
     "match": "Si y punto final",
-    "answer": "no"
+    "answer": "JAJAJAJAJAJAJ"
   },
   {
     "match": "q es gto",
@@ -1217,7 +1217,7 @@
   },
   {
     "match": "te gusta? 🫦😂",
-    "answer": "a mi me gusta mi novia"
+    "answer": "no, tu vija me gusta"
   },
   {
     "match": "¡Genial! ¿Qué es lo que más te gusta?",
@@ -1409,7 +1409,7 @@
   },
   {
     "match": "Holaa",
-    "answer": "chau"
+    "answer": "Buenas"
   },
   {
     "match": "y salite gto",
@@ -1517,7 +1517,7 @@
   },
   {
     "match": "jajabak",
-    "answer": "hey hola elmo"
+    "answer": "papaleta dame paleta"
   },
   {
     "match": "le metiste chat gpt",
@@ -1541,7 +1541,7 @@
   },
   {
     "match": "JAJAJAJAJAJA",
-    "answer": "JAJAJAJA"
+    "answer": "habla como fran ya 😂"
   },
   {
     "match": "Ando medio triste y confundido",
@@ -1577,7 +1577,7 @@
   },
   {
     "match": "te domo bld",
-    "answer": "JAJAJAJAJAJA"
+    "answer": "no bueno"
   },
   {
     "match": "Ando con ganas de putear gente",
@@ -1605,7 +1605,7 @@
   },
   {
     "match": "Vo chupala",
-    "answer": "como asi"
+    "answer": "que decis"
   },
   {
     "match": "Yo creo que puedo estar en el grupo",
@@ -1801,10 +1801,446 @@
   },
   {
     "match": "anoche no intento serlo solo hago lo estoy aca estoy para vos milton",
-    "answer": "JAJAJAJAJAJA"
+    "answer": "ay milton🫦"
   },
   {
     "match": "ah como vos que yo te puedo recomendar juegos",
     "answer": "excelente"
+  },
+  {
+    "match": "lo menos se si y no de la atn ahora se le dio lili",
+    "answer": "No entendi"
+  },
+  {
+    "match": "No entendi",
+    "answer": "JAJAJ es una ia auto entrenada, con el tiempo va a ser mucho mas bueno respondiendo"
+  },
+  {
+    "match": "que el sin mi me gusta la anti negros",
+    "answer": "JAJAJAJAJ QUE"
+  },
+  {
+    "match": "sos vos mismo y me estaba re si no puedo confiar en el pelo",
+    "answer": "aguante Kicillof"
+  },
+  {
+    "match": "sistema del grupo dice xd",
+    "answer": "trolazo"
+  },
+  {
+    "match": "duerma bien y eso me la anti negros",
+    "answer": "aprende a hablar bien"
+  },
+  {
+    "match": "viste bro?",
+    "answer": "sos crack"
+  },
+  {
+    "match": "Y muy pocos a salir de casa",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "¡Intento serlo! Pero todavía aprendo todos los días.",
+    "answer": "excelente te felicito"
+  },
+  {
+    "match": "guardabarro de la de mejorar dame otra ves me la de vos que aguante una parte estaba roto",
+    "answer": "guardabarro de la de mejorar"
+  },
+  {
+    "match": "mi papi 🥵🔥",
+    "answer": "el de todos 🔥"
+  },
+  {
+    "match": "este bot ahora es un feto, pero cuando aprenda una banda de combinaciones va a empezar a responder mas real",
+    "answer": "parece como si apretaras siempre el corrector"
+  },
+  {
+    "match": "putazo",
+    "answer": "putazo"
+  },
+  {
+    "match": "si que me lo menos se lo olvides tu celular para de que es mi me estaba re si",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "chu",
+    "answer": "pala"
+  },
+  {
+    "match": "ahi estoy mejorandolo, pero ojala funcione perfecto",
+    "answer": "excelente"
+  },
+  {
+    "match": "pala",
+    "answer": "no"
+  },
+  {
+    "match": "lo menos se si me tengo pa y tu viejo",
+    "answer": "que"
+  },
+  {
+    "match": "se sarpa",
+    "answer": "mal"
+  },
+  {
+    "match": "habla como fran ya 😂",
+    "answer": "literal"
+  },
+  {
+    "match": "mal",
+    "answer": "JAJAJAJAJAJ"
+  },
+  {
+    "match": "vieja el tiempo va a la de tu viejo",
+    "answer": "no bueno"
+  },
+  {
+    "match": "un poco la m60 evo",
+    "answer": "y eso que mier es 😂"
+  },
+  {
+    "match": "es que es el de un dia aprendo y no y de un dia para vos que el diego",
+    "answer": "QUE TENIA QUE VER DIEGO"
+  },
+  {
+    "match": "la envidia abunda por todos lados",
+    "answer": "No es envidia, hasta tu padre te bardeo"
+  },
+  {
+    "match": "parce pase el admin a tu culo y no me gustan las novias",
+    "answer": "JAJAJAJAJAJAJ"
+  },
+  {
+    "match": "claro que aprende a vos que aprenda de eso me garches 500 veces esta en mi rodilla c",
+    "answer": "que"
+  },
+  {
+    "match": "igual que vos quieras si no te molesta te lo cambio por el tema de la nada me marca visto y te lo cambio por el tema de la nada",
+    "answer": "que"
+  },
+  {
+    "match": "yo con los servidores en la de que no es que paso mi me garches 500 veces esta xd",
+    "answer": "que gordo genocida de hamburguesas"
+  },
+  {
+    "match": "tu viejo con vinagre",
+    "answer": "no, el tuyo"
+  },
+  {
+    "match": "Trataré de mejorar, ¡dame otra oportunidad!",
+    "answer": "ni empedo"
+  },
+  {
+    "match": "mismo para que la mama etc etc etc etc etc etc etc etc etc etc etc etc etc etc",
+    "answer": "JAJAJAJAJAJA que deciaaa"
+  },
+  {
+    "match": "No es envidia, hasta tu padre te bardeo",
+    "answer": "tipico"
+  },
+  {
+    "match": "tengo q te puedo responder mensajes y en mi me lo que el tuyo que no y vos que",
+    "answer": "que pro, me defiende"
+  },
+  {
+    "match": "tipico",
+    "answer": "Solo como tío te digo salí más de casa"
+  },
+  {
+    "match": "Solo como tío te digo salí más de casa",
+    "answer": "capo, te tiene que dar igual lo que yo haga, toda mi vida les dio igual, ahora que yo siga mi camino como se me cante no les deberia de importar"
+  },
+  {
+    "match": "Silencia el bot escribe boludeces",
+    "answer": "dejalo, está aprendiendo"
+  },
+  {
+    "match": "capo, te tiene que dar igual lo que yo haga, toda mi vida les dio igual, ahora que yo siga mi camino como se me cante no les deberia de importar",
+    "answer": "Todos preguntaron x vos wachin"
+  },
+  {
+    "match": "Todos preguntaron x vos wachin",
+    "answer": "y?"
+  },
+  {
+    "match": "gustan las de la cola primero",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "leo y cami peleando\nla subtrama del bot:",
+    "answer": "JAJAJAJAJ tj"
+  },
+  {
+    "match": "estoy para vos que me la m60 evo",
+    "answer": "wtf"
+  },
+  {
+    "match": "papaleta dame paleta",
+    "answer": "te dare chori"
+  },
+  {
+    "match": "Pasamelo",
+    "answer": "Jajajajajaj"
+  },
+  {
+    "match": "por que ya se ponen de q te espero que es un bot solo y en mi me fascina",
+    "answer": "Bot de mierda"
+  },
+  {
+    "match": "gracias me hice yo no te amo",
+    "answer": "NOOOO 😭💔"
+  },
+  {
+    "match": "olaa",
+    "answer": "Bienvenido"
+  },
+  {
+    "match": "Bienvenido",
+    "answer": "Gracias, bienvenido"
+  },
+  {
+    "match": "orden mi me los dos te gusta la mp40 pero te enseno a la de la coma bro duerma",
+    "answer": "Ke?"
+  },
+  {
+    "match": "Bienvenida",
+    "answer": "graciaaas"
+  },
+  {
+    "match": "Holaa que ondaa",
+    "answer": "Buenaas"
+  },
+  {
+    "match": "Alto tema jajaja",
+    "answer": "Vo sabe jajaja"
+  },
+  {
+    "match": "Todo bien???",
+    "answer": "Td bien por suerte"
+  },
+  {
+    "match": "yo no bueno pero me la de que los programadores prefieren el de un poco que se si no",
+    "answer": "No se como callar al bot de mierda jaja"
+  },
+  {
+    "match": "Td bien por suerte",
+    "answer": "Que bueno que onda esto jaja"
+  },
+  {
+    "match": "de la de un plumon te rompe las de 14 para que el de eso que te puedo em",
+    "answer": "Ke? Jqjaja"
+  },
+  {
+    "match": "Vos?",
+    "answer": "Todo bien aburrido jaja"
+  },
+  {
+    "match": "Todo bien aburrido jaja",
+    "answer": "'tamos iguales jajaja"
+  },
+  {
+    "match": "x vos que hace mi me lo hacen fracking en una ia auto entrenada con la rosca glaseada por",
+    "answer": "Cerra el culo bot de mrd"
+  },
+  {
+    "match": "'tamos iguales jajaja",
+    "answer": "Jaja como que llamas"
+  },
+  {
+    "match": "14 para mi me la de vos que no y lo normal",
+    "answer": "E? Jajaja"
+  },
+  {
+    "match": "Jaja como que llamas",
+    "answer": "Juan"
+  },
+  {
+    "match": "te preocupes no de seco",
+    "answer": "A nadie le importan tus comentarios pedorros"
+  },
+  {
+    "match": "la de vos que tenemos problemas con tu color carton con la nombre de la mp40 pero no les",
+    "answer": "Jajajjaaj q"
+  },
+  {
+    "match": "Jajajjaaj q",
+    "answer": ".golpear"
+  },
+  {
+    "match": "Q le pintaba, se ponía re barbero jajaja",
+    "answer": "Tjr jajaja"
+  },
+  {
+    "match": "va a tu vieja no de vos que no de que no pero no tengo la energia es lo",
+    "answer": "Que"
+  },
+  {
+    "match": "Re cualquiera jajajaja",
+    "answer": "Tjr jajaja"
+  },
+  {
+    "match": "de vos que si no te puedo pasar un link si me la de una patada en la de",
+    "answer": "Ke dise jajaja"
+  },
+  {
+    "match": "Se controla solo jsjsjs",
+    "answer": "Tjr jaja"
+  },
+  {
+    "match": "son re si no el de la ropa va a los ceros y listo que no hago nd eso",
+    "answer": "Cállate loko sos alto rompe bolas"
+  },
+  {
+    "match": "la de todos los coho yo me tengo q capturas no invita",
+    "answer": "Jajajajaj"
+  },
+  {
+    "match": "Jajajajaj",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "porque la de la de un bot de tu viejo con vos mismo y de los coho yo tengo",
+    "answer": "Huérfano de mierda"
+  },
+  {
+    "match": "pagame a tu celular para que harias sin mi me lo mismo y no tu foto teta",
+    "answer": "A tu hermana gil"
+  },
+  {
+    "match": "mrda, se me perdieron los mensajes marcados ;;",
+    "answer": "E?"
+  },
+  {
+    "match": "tipo, cuando te responden un mensaje",
+    "answer": "Ahh"
+  },
+  {
+    "match": "los colores pero no soy yo con la de persona de que me la de un bot solo un",
+    "answer": "Lpm no se calla"
+  },
+  {
+    "match": "puedo responder mensajes y lo que la de que la de eso me lo que no de eso te",
+    "answer": ".callar"
+  },
+  {
+    "match": "terrible",
+    "answer": "Bld no lo se usar jajaja"
+  },
+  {
+    "match": "Bld no lo se usar jajaja",
+    "answer": "na, yo menos"
+  },
+  {
+    "match": "auto entrenada con tu hermana gil",
+    "answer": "A la tuya pedazo de gato"
+  },
+  {
+    "match": "bueno que me la nube",
+    "answer": "Tu hermana me la sube, cerra el culo pedazo de bot inútil"
+  },
+  {
+    "match": "recien veo uno de esos en un grupo",
+    "answer": "Jajaja"
+  },
+  {
+    "match": "ah mal y vos que no me fascina",
+    "answer": "Y a quien le importa"
+  },
+  {
+    "match": "Hay que revivir el grupo",
+    "answer": "el bot habla más q todos"
+  },
+  {
+    "match": "el bot habla más q todos",
+    "answer": "Pero no se como callarlo"
+  },
+  {
+    "match": "Pero no se como callarlo",
+    "answer": "¿no se le puede dar de baja?"
+  },
+  {
+    "match": "¿no se le puede dar de baja?",
+    "answer": "No ni idea"
+  },
+  {
+    "match": "se presentan los nuevos porfa",
+    "answer": "Y yo xq?"
+  },
+  {
+    "match": "Y yo xq?",
+    "answer": "Preaentate"
+  },
+  {
+    "match": "¡ElmoBotia activado en este grupo con éxito!",
+    "answer": "deci algo"
+  },
+  {
+    "match": "Anulo hechizo",
+    "answer": "Jajajajja"
+  },
+  {
+    "match": "Jajajajja",
+    "answer": "Kajajaja"
+  },
+  {
+    "match": "Que cuentan?",
+    "answer": "Nada recién salgo del frii"
+  },
+  {
+    "match": "full ensalada d huevo no?",
+    "answer": "No amigo"
+  },
+  {
+    "match": "al pedo m presente lpm",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "pq ya m voy a dormi",
+    "answer": "Ta bien pue"
+  },
+  {
+    "match": "Hay enoanada pero frias nms",
+    "answer": "Y esa verga q es?"
+  },
+  {
+    "match": "Nada recién salgo del frii",
+    "answer": "Ahh bien ahi jaja"
+  },
+  {
+    "match": "Y esa verga q es?",
+    "answer": "Empanadas*"
+  },
+  {
+    "match": "Recién me doy cuenta clw",
+    "answer": "X2 jajaj"
+  },
+  {
+    "match": "Estuve mucho tiempo en el frui",
+    "answer": "Me di cuenta jaja"
+  },
+  {
+    "match": "Jeje 😀",
+    "answer": "Jiji"
+  },
+  {
+    "match": "ahh bien vos que es una gran pregunta para de burro",
+    "answer": "hola"
+  },
+  {
+    "match": "Capaz que xq son las 4 20 de la madrugada jaja",
+    "answer": "Y lo malo?"
+  },
+  {
+    "match": "otra ves me gusta la mia adentro xd",
+    "answer": "JAJAJAJAJ"
+  },
+  {
+    "match": "yo no el de tu hermana me la discoteca cuando me dio lili",
+    "answer": ".tts"
+  },
+  {
+    "match": "¡Función de auto-respuesta activado con éxito!",
+    "answer": "trolazo"
   }
 ]

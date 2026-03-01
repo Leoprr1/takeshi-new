@@ -25,39 +25,31 @@ const { messageHandler } = require("./messageHandler");
 const groupStats = require("../database/groupStats");
 const learningBot = require("../utils/learningBot");
 
-// 🧠 IMPORTAR ELMOBOTIA (AGREGADO)
-const { getElmoBotiaResponse } = require("../utils/ElmoBotia");
+// 🧠 IMPORTAR ELMOBOTIA
+const { getElmoBotiaResponse } = require("../utils/elmobotia");
+const { isActiveElmoBotiaGroup } = require("../utils/elmobotiamanager");
 
 // 🔥 SET PARA EVITAR MENSAJES DUPLICADOS
 const processedMessages = new Set();
 
 exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
-  if (!messages || !messages.length) {
-    return;
-  }
+  if (!messages || !messages.length) return;
 
   for (const webMessage of messages) {
     try {
       const messageId = webMessage?.key?.id;
-      
+
       // 🚫 IGNORAR MENSAJES DEL PROPIO BOT (ANTI-LOOP)
-      if (webMessage?.key?.fromMe) {
-        continue;
-      }
+      if (webMessage?.key?.fromMe) continue;
 
       // 🚫 IGNORAR MENSAJES DUPLICADOS
       if (messageId) {
-        if (processedMessages.has(messageId)) {
-          continue;
-        }
+        if (processedMessages.has(messageId)) continue;
 
         learningBot.learnFromMessage(webMessage);
 
         processedMessages.add(messageId);
-
-        setTimeout(() => {
-          processedMessages.delete(messageId);
-        }, 60_000);
+        setTimeout(() => processedMessages.delete(messageId), 60_000);
       }
 
       if (DEVELOPER_MODE) {
@@ -75,12 +67,10 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
       // 🔥 ========= SISTEMA AFK / STATS ========= 🔥
       if (webMessage?.message) {
         const remoteJid = webMessage?.key?.remoteJid;
-        const userJid =
-          webMessage?.key?.participant || webMessage?.key?.remoteJid;
+        const userJid = webMessage?.key?.participant || remoteJid;
 
         if (remoteJid && remoteJid.endsWith("@g.us") && userJid) {
           if (!groupStats[remoteJid]) groupStats[remoteJid] = {};
-
           if (!groupStats[remoteJid][userJid]) {
             groupStats[remoteJid][userJid] = {
               messages: 0,
@@ -91,7 +81,6 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
 
           const userData = groupStats[remoteJid][userJid];
           const now = Date.now();
-
           userData.totalAfk += now - userData.lastMessage;
           userData.messages++;
           userData.lastMessage = now;
@@ -103,18 +92,13 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
         await messageHandler(socket, webMessage);
       }
 
-      if (isAtLeastMinutesInPast(timestamp)) {
-        continue;
-      }
+      if (isAtLeastMinutesInPast(timestamp)) continue;
 
       if (isAddOrLeave.includes(webMessage.messageStubType)) {
         let action = "";
-
-        if (webMessage.messageStubType === GROUP_PARTICIPANT_ADD) {
-          action = "add";
-        } else if (webMessage.messageStubType === GROUP_PARTICIPANT_LEAVE) {
+        if (webMessage.messageStubType === GROUP_PARTICIPANT_ADD) action = "add";
+        else if (webMessage.messageStubType === GROUP_PARTICIPANT_LEAVE)
           action = "remove";
-        }
 
         await onGroupParticipantsUpdate({
           userJid: webMessage.messageStubParameters[0],
@@ -126,14 +110,8 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
         continue;
       }
 
-      const commonFunctions = await loadCommonFunctions({
-        socket,
-        webMessage,
-      });
-
-      if (!commonFunctions) {
-        continue;
-      }
+      const commonFunctions = await loadCommonFunctions({ socket, webMessage });
+      if (!commonFunctions) continue;
 
       const isMuted = await checkIfMemberIsMuted(
         commonFunctions.remoteJid,
@@ -154,36 +132,23 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
       // 🔥 SISTEMA NORMAL
       await dynamicCommand(commonFunctions, startProcess);
 
-      // 🧠 ELMOBOTIA (AGREGADO)
-      try {
-        const elmoReply = getElmoBotiaResponse(webMessage);
-
-        if (elmoReply) {
-          // 🧠 ELMOBOTIA
-try {
-  const elmoReply = getElmoBotiaResponse(webMessage);
-
-  if (elmoReply) {
-   await socket.sendMessage(
-  webMessage.key.remoteJid,
-  { text: elmoReply },
-  { quoted: webMessage }
-);
-
-  }
-} catch (err) {
-  errorLog(`Error en ElmoBotia: ${err.message}`);
-}
+      // 🧠 ELMOBOTIA
+      if (isActiveElmoBotiaGroup(webMessage.key.remoteJid)) {
+        try {
+          const elmoReply = getElmoBotiaResponse(webMessage);
+          if (elmoReply) {
+            await socket.sendMessage(
+              webMessage.key.remoteJid,
+              { text: elmoReply },
+              { quoted: webMessage }
+            );
+          }
+        } catch (err) {
+          errorLog(`Error en ElmoBotia: ${err.message}`);
         }
-      } catch (err) {
-        errorLog(`Error en ElmoBotia: ${err.message}`);
       }
-
     } catch (error) {
-      if (badMacHandler.handleError(error, "message-processing")) {
-        continue;
-      }
-
+      if (badMacHandler.handleError(error, "message-processing")) continue;
       if (badMacHandler.isSessionError(error)) {
         errorLog(`Error de sesión al procesar mensaje: ${error.message}`);
         continue;
