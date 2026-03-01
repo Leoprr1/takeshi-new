@@ -120,9 +120,9 @@
       "totalAfk": 858924
     },
     "202044321316883@lid": {
-      "messages": 223,
-      "lastMessage": 1772387081313,
-      "totalAfk": 268969194
+      "messages": 227,
+      "lastMessage": 1772387922734,
+      "totalAfk": 269810615
     },
     "174286149054474@lid": {
       "messages": 962,
@@ -165,9 +165,9 @@
       "totalAfk": 177979334
     },
     "82643928498250@lid": {
-      "messages": 2564,
-      "lastMessage": 1772385440599,
-      "totalAfk": 256677519
+      "messages": 2567,
+      "lastMessage": 1772388621934,
+      "totalAfk": 259858854
     },
     "132259407523859@lid": {
       "messages": 58,
@@ -380,9 +380,9 @@
       "totalAfk": 1076317
     },
     "257062802079856@lid": {
-      "messages": 517,
-      "lastMessage": 1772358294355,
-      "totalAfk": 188834829
+      "messages": 519,
+      "lastMessage": 1772389833057,
+      "totalAfk": 220373531
     },
     "135914458235032@lid": {
       "messages": 270,
@@ -590,9 +590,9 @@
       "totalAfk": 60309
     },
     "218279431950387@lid": {
-      "messages": 151,
-      "lastMessage": 1772386643559,
-      "totalAfk": 149270151
+      "messages": 162,
+      "lastMessage": 1772387761711,
+      "totalAfk": 150388303
     },
     "82880118136974@lid": {
       "messages": 10,
@@ -660,9 +660,9 @@
       "totalAfk": 19224
     },
     "243645408104632@lid": {
-      "messages": 9,
-      "lastMessage": 1772385683732,
-      "totalAfk": 135777186
+      "messages": 10,
+      "lastMessage": 1772387926862,
+      "totalAfk": 138020316
     },
     "45243621732453@lid": {
       "messages": 11,
@@ -690,9 +690,9 @@
       "totalAfk": 0
     },
     "129862782177480@lid": {
-      "messages": 12,
-      "lastMessage": 1772337660197,
-      "totalAfk": 72826333
+      "messages": 14,
+      "lastMessage": 1772388105395,
+      "totalAfk": 123271531
     },
     "162097082200188@lid": {
       "messages": 1,
@@ -974,6 +974,11 @@
       "messages": 2,
       "lastMessage": 1772321643945,
       "totalAfk": 47837
+    },
+    "279709795500232@lid": {
+      "messages": 1,
+      "lastMessage": 1772388626737,
+      "totalAfk": 0
     }
   },
   "120363285906936143@g.us": {
@@ -988,31 +993,31 @@
       "totalAfk": 0
     },
     "19310810534110@lid": {
-      "messages": 5,
-      "lastMessage": 1772339474957,
-      "totalAfk": 2821465
+      "messages": 6,
+      "lastMessage": 1772389057074,
+      "totalAfk": 52403582
     },
     "165656989319239@lid": {
-      "messages": 2,
-      "lastMessage": 1772339341933,
-      "totalAfk": 23723
+      "messages": 3,
+      "lastMessage": 1772389041850,
+      "totalAfk": 49723640
     }
   },
   "120363405117756367@g.us": {
     "65919745306692@lid": {
-      "messages": 54,
-      "lastMessage": 1772386952175,
-      "totalAfk": 75859235
+      "messages": 60,
+      "lastMessage": 1772389663423,
+      "totalAfk": 78570483
     },
     "88262081273896@lid": {
-      "messages": 4,
-      "lastMessage": 1772384912821,
-      "totalAfk": 73819039
+      "messages": 28,
+      "lastMessage": 1772388676748,
+      "totalAfk": 77582966
     },
     "235407610486832@lid": {
-      "messages": 12,
-      "lastMessage": 1772311899279,
-      "totalAfk": 801708
+      "messages": 14,
+      "lastMessage": 1772389833804,
+      "totalAfk": 78736233
     },
     "96250619801819@lid": {
       "messages": 36,
@@ -1025,14 +1030,14 @@
       "totalAfk": 207703
     },
     "223256997032099@lid": {
-      "messages": 38,
-      "lastMessage": 1772386766151,
-      "totalAfk": 1840165
+      "messages": 46,
+      "lastMessage": 1772389699738,
+      "totalAfk": 4773752
     },
     "224614592590070@lid": {
-      "messages": 3,
-      "lastMessage": 1772385176668,
-      "totalAfk": 34443
+      "messages": 21,
+      "lastMessage": 1772389736810,
+      "totalAfk": 4594585
     },
     "274607860899972@lid": {
       "messages": 76,
@@ -1043,6 +1048,11 @@
       "messages": 1,
       "lastMessage": 1772385346069,
       "totalAfk": 0
+    },
+    "29326389035202@lid": {
+      "messages": 31,
+      "lastMessage": 1772388932377,
+      "totalAfk": 849463
     }
   }
 }

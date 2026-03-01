@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "Como tai?"
+    "answer": "tu nariz contra mis bolas"
   },
   {
     "match": "hola?",
@@ -797,7 +797,7 @@
   },
   {
     "match": "so",
-    "answer": "Tuputamadre"
+    "answer": "Estás aprendiendo a ablar?"
   },
   {
     "match": "Quien está mandando fotopenw",
@@ -1061,7 +1061,7 @@
   },
   {
     "match": "Bn y vs",
-    "answer": "Me alegro"
+    "answer": "Bienn"
   },
   {
     "match": "Maso",
@@ -1225,7 +1225,7 @@
   },
   {
     "match": "Solo hago lo que me programaron... que es contestarte.",
-    "answer": "CAPOOO"
+    "answer": "Chupame la chota"
   },
   {
     "match": "pichula sangrienta",
@@ -1605,7 +1605,7 @@
   },
   {
     "match": "Vo chupala",
-    "answer": "por que?"
+    "answer": "JAJAJAJAJAJA"
   },
   {
     "match": "Yo creo que puedo estar en el grupo",
@@ -2205,7 +2205,7 @@
   },
   {
     "match": "Nada recién salgo del frii",
-    "answer": "Ahh bien ahi jaja"
+    "answer": "Pedazo de manco"
   },
   {
     "match": "Y esa verga q es?",
@@ -2273,7 +2273,7 @@
   },
   {
     "match": "@all revivan o les muestro la cotorra",
-    "answer": "muero"
+    "answer": "Mostrala"
   },
   {
     "match": "dejen cagar",
@@ -2409,7 +2409,7 @@
   },
   {
     "match": "Jiji",
-    "answer": "jiji q"
+    "answer": "Solo funcionas aca verdad elmo?"
   },
   {
     "match": "jiji q",
@@ -2590,5 +2590,89 @@
   {
     "match": "Quien me sigue en insta? 😛",
     "answer": "Nadie"
+  },
+  {
+    "match": "rpg",
+    "answer": "Gracias gt"
+  },
+  {
+    "match": "a tu la cola primero pero no mucho de vos que no te gusta la de la bot habla",
+    "answer": "Como?"
+  },
+  {
+    "match": "Me siguen pero yo no sigo",
+    "answer": "Ush"
+  },
+  {
+    "match": "Creo que perdió la percepción lineal de tiempo",
+    "answer": "Osea, si cerebro ya no organiza el entorno, las acciones y demás en pasado presente y futuro"
+  },
+  {
+    "match": "que es la primero pero me llamaron",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "Solo funcionas aca verdad elmo?",
+    "answer": "en donde esté"
+  },
+  {
+    "match": "Despues te va a dominar",
+    "answer": "JAJAJAJ probablemente"
+  },
+  {
+    "match": "amigos alla y lo que importa igual de momia x vos que se si pero no tu instinto y",
+    "answer": "Que te pasa man"
+  },
+  {
+    "match": "se vos mismo y vos que se lo de vos que si pero puedo responder mensajes y no bueno",
+    "answer": "cada vez responde de forma mas inteligente"
+  },
+  {
+    "match": "la de mi codigo tambien te felicito",
+    "answer": "ah?"
+  },
+  {
+    "match": "ah?",
+    "answer": "habla solo"
+  },
+  {
+    "match": "sabados o cosas nuevas",
+    "answer": "que?"
+  },
+  {
+    "match": "habla solo",
+    "answer": "JAJJAJA"
+  },
+  {
+    "match": "no le des bola",
+    "answer": "hola dieguito"
+  },
+  {
+    "match": "hola dieguito",
+    "answer": "tdnn"
+  },
+  {
+    "match": "vos que los ceros y un poco la garchada que soy de la tuya pedazo de persona de ellos",
+    "answer": "😔😔"
+  },
+  {
+    "match": "chupala gord@ genocida de hamburgesas",
+    "answer": "ay"
+  },
+  {
+    "match": "b",
+    "answer": "b que?"
+  },
+  {
+    "match": "de eso es mi me tengo q te pasa man",
+    "answer": "🖕🏻🖕🏻"
+  },
+  {
+    "match": "tdnn",
+    "answer": "Q hacéi?"
+  },
+  {
+    "match": "bien mojadita",
+    "answer": "Q shico"
   }
 ]

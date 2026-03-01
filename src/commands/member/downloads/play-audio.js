@@ -115,7 +115,7 @@ async function executePlay({
     ================================ */
 
     const stream = ytdl(videoUrl, {
-      quality: "lowest",
+      quality: "lowestvideo",
       filter: "audioandvideo",
       highWaterMark: 1 << 25
     });
