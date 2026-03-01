@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "Tdo biem?"
+    "answer": "hola"
   },
   {
     "match": "hola?",
@@ -9,7 +9,7 @@
   },
   {
     "match": "buenas",
-    "answer": "Hola"
+    "answer": "que onda"
   },
   {
     "match": "qué tal",
@@ -29,7 +29,7 @@
   },
   {
     "match": "qué haces?",
-    "answer": "Aquí, respondiendo tus mensajes."
+    "answer": "Estoy en una juntada familiar"
   },
   {
     "match": "quién sos?",
@@ -81,7 +81,7 @@
   },
   {
     "match": "puto",
-    "answer": "genocida de hamburguesas"
+    "answer": "te domo bld"
   },
   {
     "match": "sos re puto",
@@ -785,7 +785,7 @@
   },
   {
     "match": "JAJAJAJA",
-    "answer": "puto"
+    "answer": "es una mini inteligencia artificial 😂"
   },
   {
     "match": "?",
@@ -797,7 +797,7 @@
   },
   {
     "match": "so",
-    "answer": "se enamoro del so"
+    "answer": "ahora es re noob pero veremos cuando aprenda mas"
   },
   {
     "match": "Quien está mandando fotopenw",
@@ -1462,5 +1462,245 @@
   {
     "match": "Desi que no la pusiste a la coma culiaaaaaa",
     "answer": "JAJ"
+  },
+  {
+    "match": "Ete Ya ta Mueltoo",
+    "answer": "Hay que revivirlo jaja"
+  },
+  {
+    "match": "Mal que aburrimiento",
+    "answer": "Siii"
+  },
+  {
+    "match": "Siii",
+    "answer": "que haces"
+  },
+  {
+    "match": "Volví",
+    "answer": "que onda máquina"
+  },
+  {
+    "match": "que onda máquina",
+    "answer": "M re extrañaron seguro"
+  },
+  {
+    "match": "M re extrañaron seguro",
+    "answer": "no 😂"
+  },
+  {
+    "match": "na mentira si",
+    "answer": "Que te haces si preguntabas por mi"
+  },
+  {
+    "match": "Que te haces si preguntabas por mi",
+    "answer": "pregunte por que no volviste mas 😂 y el grupo dice 4"
+  },
+  {
+    "match": "Estoy en una juntada familiar",
+    "answer": "JAJAJA RE CUALQUIERA"
+  },
+  {
+    "match": "JAJAJA RE CUALQUIERA",
+    "answer": "JAJAJAJ sisis"
+  },
+  {
+    "match": "Que ondaaa",
+    "answer": "Tanto tiempo"
+  },
+  {
+    "match": "Te acordas de mi",
+    "answer": "Como no y vos"
+  },
+  {
+    "match": "Me deprimi",
+    "answer": "Yo fui a la iglesia"
+  },
+  {
+    "match": "jajabak",
+    "answer": "hey hola elmo"
+  },
+  {
+    "match": "le metiste chat gpt",
+    "answer": "no, le hice un cerebro que aprende solo y se entrena asi mismo para responder inteligentemente"
+  },
+  {
+    "match": "se enamoro del so",
+    "answer": "JAJAJAJAJAJAJAJA"
+  },
+  {
+    "match": "boe",
+    "answer": "cobra, sos vos?"
+  },
+  {
+    "match": "cobra, sos vos?",
+    "answer": "si"
+  },
+  {
+    "match": "Yo fui a la iglesia",
+    "answer": "Yo no voy hace cómo 7 años"
+  },
+  {
+    "match": "JAJAJAJAJAJA",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "Ando medio triste y confundido",
+    "answer": "Tamo iguales"
+  },
+  {
+    "match": "Pero voy a ir los domingos nomas",
+    "answer": "Yo voy siempre los sábados o domingo avia reunión de jóvenes pero ahora se pelearon"
+  },
+  {
+    "match": "Yo no voy hace cómo 7 años",
+    "answer": "También"
+  },
+  {
+    "match": "U te juntaste o que paso",
+    "answer": "Me empezaron a caer mal y me mudé"
+  },
+  {
+    "match": "A vos te hace bien?",
+    "answer": "Si voy por que ya tengo amigos allá y nd eso son re piolas y nd descuelgo un poco de estar encerrado y eso"
+  },
+  {
+    "match": "Yo voy siempre los sábados o domingo avia reunión de jóvenes pero ahora se pelearon",
+    "answer": "Porque"
+  },
+  {
+    "match": "Si voy por que ya tengo amigos allá y nd eso son re piolas y nd descuelgo un poco de estar encerrado y eso",
+    "answer": "Que bueno"
+  },
+  {
+    "match": "Porque",
+    "answer": "Ni idea temas de ellos o por qué se ponen de novio con alguien o cosas asi"
+  },
+  {
+    "match": "te domo bld",
+    "answer": "JAJAJAJAJAJA"
+  },
+  {
+    "match": "Ando con ganas de putear gente",
+    "answer": "para de manos entonces"
+  },
+  {
+    "match": "para de manos entonces",
+    "answer": "Para de manos?, \"parate\" será pedazo de burro"
+  },
+  {
+    "match": "También",
+    "answer": "Creo"
+  },
+  {
+    "match": "Entro a la iglesia se me salen 7 demonios",
+    "answer": "Mejor"
+  },
+  {
+    "match": "Me escribió mi ex y la mandé a la mierda😐",
+    "answer": "Uhhh"
+  },
+  {
+    "match": "Para de manos?, \"parate\" será pedazo de burro",
+    "answer": "JAJAJAJ se re calentaba"
+  },
+  {
+    "match": "Vo chupala",
+    "answer": "como asi"
+  },
+  {
+    "match": "Yo creo que puedo estar en el grupo",
+    "answer": "Sii, hay de 14 para arriba"
+  },
+  {
+    "match": "Sii, hay de 14 para arriba",
+    "answer": "Ahh bienn"
+  },
+  {
+    "match": "No gracias",
+    "answer": "Oka"
+  },
+  {
+    "match": "Che vendo bot de telegram que doxea peruanos por 1060 diamantes en el free",
+    "answer": "Y xq no de Colombia?"
+  },
+  {
+    "match": "No uso telegram y se los metería a mi cuenta a los diamantes",
+    "answer": "Yo quiero la mp40 pero no tengo pa recargar con transferencia"
+  },
+  {
+    "match": "Que es doxear",
+    "answer": "Sacarle hasta la altura y nombre de la mama etc etc"
+  },
+  {
+    "match": "igual le puse un sistema que aprende de lo que le enseñamos y va a crear sus propias respuestas",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "Yo quiero la mp40 pero no tengo pa recargar con transferencia",
+    "answer": "Yo tengo la m60 evo"
+  },
+  {
+    "match": "Sacarle hasta la altura y nombre de la mama etc etc",
+    "answer": "Omg"
+  },
+  {
+    "match": "es una mini inteligencia artificial 😂",
+    "answer": "literalmente fran"
+  },
+  {
+    "match": "literalmente fran",
+    "answer": "te juro 🤣"
+  },
+  {
+    "match": "Almenos yo saco mucho con el bot que doxea peruanos",
+    "answer": "Y de q sirve tener la información de un peruano?"
+  },
+  {
+    "match": "Y de q sirve tener la información de un peruano?",
+    "answer": "Por si te rompe las bolas"
+  },
+  {
+    "match": "¡Función de auto-respuesta desactivado con éxito!",
+    "answer": "sos messi?"
+  },
+  {
+    "match": "Tampoco le vas a robar las palomas",
+    "answer": "Y no se si las palomas jajajaj"
+  },
+  {
+    "match": "Y no se si las palomas jajajaj",
+    "answer": "Arruinar su vida"
+  },
+  {
+    "match": "te juro 🤣",
+    "answer": "ala"
+  },
+  {
+    "match": "Arruinar su vida",
+    "answer": "Na"
+  },
+  {
+    "match": "ala",
+    "answer": "ahi estoy mejorandolo, pero ojala funcione perfecto"
+  },
+  {
+    "match": "Capaz si uno le hace infiel",
+    "answer": "Si la otra ves me mandaron pa eso"
+  },
+  {
+    "match": "En argentina sería mejor",
+    "answer": "Si estaria piola"
+  },
+  {
+    "match": "Y xq no de Colombia?",
+    "answer": "No tengo bot"
+  },
+  {
+    "match": "Podes tener información de un famoso peruano?",
+    "answer": "Si tiene numero fisico si"
+  },
+  {
+    "match": "Si tiene numero fisico si",
+    "answer": "Omg"
   }
 ]

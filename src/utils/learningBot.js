@@ -1,4 +1,5 @@
 // 🔥 learningBot.js
+require("./brainbuilder");
 const db = require("./database"); // Tu database.js
 const stringSimilarity = require("string-similarity");
 

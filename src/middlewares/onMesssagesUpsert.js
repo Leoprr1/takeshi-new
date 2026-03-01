@@ -21,9 +21,11 @@ const { badMacHandler } = require("../utils/badMacHandler");
 const { checkIfMemberIsMuted } = require("../utils/database");
 const { messageHandler } = require("./messageHandler");
 
+
 // 🔥 IMPORTAR STATS GLOBAL
 const groupStats = require("../database/groupStats");
 const learningBot = require("../utils/learningBot");
+
 
 
 // 🔥 SET PARA EVITAR MENSAJES DUPLICADOS
