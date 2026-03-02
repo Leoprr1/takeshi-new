@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "tu nariz contra mis bolas"
+    "answer": "Holass"
   },
   {
     "match": "hola?",
@@ -17,7 +17,7 @@
   },
   {
     "match": "todo bien?",
-    "answer": "Vos?"
+    "answer": "Si bro"
   },
   {
     "match": "cómo te llamas?",
@@ -37,7 +37,7 @@
   },
   {
     "match": "gracias",
-    "answer": "¡De nada! Siempre a la orden."
+    "answer": "Nadapp"
   },
   {
     "match": "adiós",
@@ -45,7 +45,7 @@
   },
   {
     "match": "chau",
-    "answer": "boe"
+    "answer": "ok"
   },
   {
     "match": "buen día",
@@ -533,7 +533,7 @@
   },
   {
     "match": "holis",
-    "answer": "hola bb"
+    "answer": "hols ahus"
   },
   {
     "match": "qué haces",
@@ -581,11 +581,11 @@
   },
   {
     "match": "Si",
-    "answer": "cómo no sabías de mi"
+    "answer": "El bot es mio, y si el dueño no quiere no lo voy a poner para todos"
   },
   {
     "match": "no",
-    "answer": "Tonc ?? Por qie me pusiste el punto ?"
+    "answer": "Si"
   },
   {
     "match": "verga",
@@ -797,7 +797,7 @@
   },
   {
     "match": "so",
-    "answer": "Tu puta madre"
+    "answer": "Quete"
   },
   {
     "match": "Quien está mandando fotopenw",
@@ -1217,7 +1217,7 @@
   },
   {
     "match": "te gusta? 🫦😂",
-    "answer": "no, tu vija me gusta"
+    "answer": "Ay vale maldito marica"
   },
   {
     "match": "¡Genial! ¿Qué es lo que más te gusta?",
@@ -1241,7 +1241,7 @@
   },
   {
     "match": "Tu gueco",
-    "answer": "bobo"
+    "answer": "El tuyo que se me abre"
   },
   {
     "match": "tengo 12%",
@@ -1385,7 +1385,7 @@
   },
   {
     "match": "tos",
-    "answer": "Vs"
+    "answer": "La tuya"
   },
   {
     "match": "Como asi? Jajaja",
@@ -1409,7 +1409,7 @@
   },
   {
     "match": "Holaa",
-    "answer": "Buenas"
+    "answer": "me decía hola mnomadlpm"
   },
   {
     "match": "y salite gto",
@@ -1605,7 +1605,7 @@
   },
   {
     "match": "Vo chupala",
-    "answer": "JAJAJAJAJAJA"
+    "answer": "tu mama la chupa"
   },
   {
     "match": "Yo creo que puedo estar en el grupo",
@@ -1857,7 +1857,7 @@
   },
   {
     "match": "putazo",
-    "answer": "putazo"
+    "answer": "Tu"
   },
   {
     "match": "si que me lo menos se lo olvides tu celular para de que es mi me estaba re si",
@@ -1873,7 +1873,7 @@
   },
   {
     "match": "pala",
-    "answer": "no"
+    "answer": "pala?"
   },
   {
     "match": "lo menos se si me tengo pa y tu viejo",
@@ -2033,7 +2033,7 @@
   },
   {
     "match": "Vos?",
-    "answer": "Digamos bien, ansiosa pero bien"
+    "answer": "Bienn cansao"
   },
   {
     "match": "Todo bien aburrido jaja",
@@ -2641,7 +2641,7 @@
   },
   {
     "match": "habla solo",
-    "answer": "si si me di cuenta"
+    "answer": "eso me copiaste a mi"
   },
   {
     "match": "no le des bola",
@@ -3429,7 +3429,7 @@
   },
   {
     "match": "Holi",
-    "answer": "Que holi ni que holi"
+    "answer": "ROMITAAAA"
   },
   {
     "match": "Que holi ni que holi",
@@ -3878,5 +3878,621 @@
   {
     "match": "Cande?",
     "answer": "es un bot 😂 responde en base de lo que aprende"
+  },
+  {
+    "match": "Nada trabajando nomás y vos amigo",
+    "answer": "Aca al p2 nms"
+  },
+  {
+    "match": "yo comiendo el miercoles",
+    "answer": "Que comes el miercoles?"
+  },
+  {
+    "match": "estoy limando detalles para que me envie la última noticia, manda noticias pero no la última última",
+    "answer": "Aaaah"
+  },
+  {
+    "match": "y cande se me la mia adentro xd jaja si la bot que me fusta esa es lo se",
+    "answer": "que"
+  },
+  {
+    "match": "Q manera de dormir x2",
+    "answer": "Quien pudiera"
+  },
+  {
+    "match": "Dormir? Yo solo 3 horas",
+    "answer": "Te quedaste en la compu"
+  },
+  {
+    "match": "Que comes el miercoles?",
+    "answer": "comienzo eras"
+  },
+  {
+    "match": "Quien pudiera",
+    "answer": "Desayunando mates x2"
+  },
+  {
+    "match": "Desayunando mates x2",
+    "answer": "No cualquiera esta a ese nivel jaja"
+  },
+  {
+    "match": "Nada hago un grupo de anorexia",
+    "answer": "Ah fuiste vos? Pensé que fue Ari xd"
+  },
+  {
+    "match": "Ah fuiste vos? Pensé que fue Ari xd",
+    "answer": "Eso lo dije yo hace mucho"
+  },
+  {
+    "match": "tengo sueño",
+    "answer": "Te tiro un consejo"
+  },
+  {
+    "match": "Vos que haces",
+    "answer": "Recien termino de limpiar y ahora estoy x comer jaja"
+  },
+  {
+    "match": "Recien termino de limpiar y ahora estoy x comer jaja",
+    "answer": "Piola"
+  },
+  {
+    "match": "Y yo nacido en santa fe",
+    "answer": "Ay montañas jaj"
+  },
+  {
+    "match": "Ay montañas jaj",
+    "answer": "Donde que no me entere jajaja"
+  },
+  {
+    "match": "Tierra de nada jaja",
+    "answer": "Tierra de Messi"
+  },
+  {
+    "match": "Tierra de Messi",
+    "answer": "E velda"
+  },
+  {
+    "match": "¡Sistema de noticias TyC activado en este grupo!",
+    "answer": "Calla"
+  },
+  {
+    "match": "ÑFLFLGLFKKF LLEGO LA GOAT",
+    "answer": "ROMAAAAA"
+  },
+  {
+    "match": "Como va",
+    "answer": "hola gt"
+  },
+  {
+    "match": "Hola Axel",
+    "answer": "hola bot"
+  },
+  {
+    "match": "Amigo quien tiene mercado pago",
+    "answer": "yo"
+  },
+  {
+    "match": "yo",
+    "answer": "Cuanto tienes"
+  },
+  {
+    "match": "me vas a transferir?",
+    "answer": "Estoy re pobre culpa del casino"
+  },
+  {
+    "match": "Perdí 5k",
+    "answer": "ah"
+  },
+  {
+    "match": "si supieras lo q perdía yo antes jjaka",
+    "answer": "Cuanto"
+  },
+  {
+    "match": "bien y vos",
+    "answer": "Bien"
+  },
+  {
+    "match": "cómo 60 Lucas perdi",
+    "answer": "Yo 70k 2 veces después me fajaron jaja"
+  },
+  {
+    "match": "Yo 70k 2 veces después me fajaron jaja",
+    "answer": "Gane 70k 2 veces y los perdi"
+  },
+  {
+    "match": "q hdp",
+    "answer": "Mal tengo miedo ahora q se enteren ahora que perdí 5k"
+  },
+  {
+    "match": "Bien",
+    "answer": "Me alegro"
+  },
+  {
+    "match": "Que haces bro",
+    "answer": "nada acá tranqui comiendo un coso de cumpleaños"
+  },
+  {
+    "match": "voy a publicar",
+    "answer": "Q cosa"
+  },
+  {
+    "match": "nada acá tranqui comiendo un coso de cumpleaños",
+    "answer": "Ah oka brou"
+  },
+  {
+    "match": "Piola",
+    "answer": "si mal"
+  },
+  {
+    "match": "Como el arquero portugués",
+    "answer": "cuál gt?"
+  },
+  {
+    "match": "no ví ese arquero",
+    "answer": "Saure"
+  },
+  {
+    "match": "cómo Juan rama",
+    "answer": "No"
+  },
+  {
+    "match": "bolcip roma",
+    "answer": "holi"
+  },
+  {
+    "match": "cmotas",
+    "answer": "biemyvoddd"
+  },
+  {
+    "match": "biemyvoddd",
+    "answer": "m alwgrp, bienm"
+  },
+  {
+    "match": "si mal",
+    "answer": "Mal"
+  },
+  {
+    "match": "nada eso es la de la de bot que soy un bot de un dia que onda esto no",
+    "answer": "tremendo"
+  },
+  {
+    "match": "Pongan el bot para tdos",
+    "answer": "No"
+  },
+  {
+    "match": "El negro",
+    "answer": "ni idea gr"
+  },
+  {
+    "match": "Yo soy rama",
+    "answer": "poke no"
+  },
+  {
+    "match": "dale mala onda",
+    "answer": "Pregúntale a Renzo"
+  },
+  {
+    "match": "#playaudio mvp ramma",
+    "answer": "#playaudio mvp ramma"
+  },
+  {
+    "match": "hola bot",
+    "answer": "Cómo estás"
+  },
+  {
+    "match": "Hola nena",
+    "answer": "Holi cm estás reina"
+  },
+  {
+    "match": "Cómo te fue?",
+    "answer": "Sigo acá ahora tengo quimica"
+  },
+  {
+    "match": "Holi cm estás reina",
+    "answer": "Bien bien gracias"
+  },
+  {
+    "match": "Sigo acá ahora tengo quimica",
+    "answer": "Fuaaaa"
+  },
+  {
+    "match": "Pero cm yo termine nose q hacer la profe dijo q no corrige",
+    "answer": "Fuaaaaa"
+  },
+  {
+    "match": "Te falta mucho?",
+    "answer": "Salgo recién a las 20"
+  },
+  {
+    "match": "Salgo recién a las 20",
+    "answer": "Te falta una banda"
+  },
+  {
+    "match": "Mierda",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "Te falta una banda",
+    "answer": "Jsjsjs si,\nCm t fue en el examen"
+  },
+  {
+    "match": "Me tomé 6 shots de tequila",
+    "answer": "Si no te caiste en medio de la calle, no tabas tan mal"
+  },
+  {
+    "match": "ROMITAAAA",
+    "answer": "holi te am9"
+  },
+  {
+    "match": "Jsjsjs si,\nCm t fue en el examen",
+    "answer": "Aprobé"
+  },
+  {
+    "match": "Si no te caiste en medio de la calle, no tabas tan mal",
+    "answer": "amigo querés ver un vídeo jajaja"
+  },
+  {
+    "match": "amigo querés ver un vídeo jajaja",
+    "answer": "A ver"
+  },
+  {
+    "match": "Mañana me dan los resultados",
+    "answer": "Aa entiendo reina, seguro aprobaste"
+  },
+  {
+    "match": "Aa entiendo reina, seguro aprobaste",
+    "answer": "Te acordás de Elíseo?"
+  },
+  {
+    "match": "Ojalá",
+    "answer": "Me quiero ir"
+  },
+  {
+    "match": "Te acordás de Elíseo?",
+    "answer": "Sisi"
+  },
+  {
+    "match": "Me quiero ir",
+    "answer": "Ya te voy a buscarlo"
+  },
+  {
+    "match": "Sisi",
+    "answer": "Me hablo"
+  },
+  {
+    "match": "Ya te voy a buscarlo",
+    "answer": "Jsjs dale"
+  },
+  {
+    "match": "Por el estado de anoche",
+    "answer": "Sisi"
+  },
+  {
+    "match": "Cómo estás",
+    "answer": "bien y vos"
+  },
+  {
+    "match": "Se tiraba, una pinta de que tienen un pedo",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "T dijo algo malo?",
+    "answer": "Que lo perdone nomás"
+  },
+  {
+    "match": "holi te am9",
+    "answer": "HOLAA"
+  },
+  {
+    "match": "Ni me acuerdo de eso",
+    "answer": "Que cagadas te abras mandado Renzo"
+  },
+  {
+    "match": "Onvres",
+    "answer": "T juro me pasó casi lo mismo  jsjsjs con coso"
+  },
+  {
+    "match": "Que cagadas te abras mandado Renzo",
+    "answer": "ninguna por"
+  },
+  {
+    "match": "T juro me pasó casi lo mismo  jsjsjs con coso",
+    "answer": "Hay que matarlos"
+  },
+  {
+    "match": "Soy hombre fiel yo",
+    "answer": "No lo dije por eso"
+  },
+  {
+    "match": "No lo dije por eso",
+    "answer": "AHHH"
+  },
+  {
+    "match": "ninguna por",
+    "answer": "Yo digo de cosas que sin alcohol en sangre no harías"
+  },
+  {
+    "match": "Hay que matarlos",
+    "answer": "Jsjsjs"
+  },
+  {
+    "match": "Yo digo de cosas que sin alcohol en sangre no harías",
+    "answer": "De todo KSKQKQKQ"
+  },
+  {
+    "match": "Hoola",
+    "answer": "Todo bien?"
+  },
+  {
+    "match": "me gaste toda la plata encima",
+    "answer": "Cagamos"
+  },
+  {
+    "match": "Si bro",
+    "answer": "Me alegro"
+  },
+  {
+    "match": "Le voy a comprar unas rosas",
+    "answer": "Que bonito el amor"
+  },
+  {
+    "match": "Sos chica?",
+    "answer": "Si, soy la dueña del bot boba"
+  },
+  {
+    "match": "Si, soy la dueña del bot boba",
+    "answer": "Bueno no me hables, soy fiel, dea"
+  },
+  {
+    "match": "Bueno no me hables, soy fiel, dea",
+    "answer": "Yo tmb"
+  },
+  {
+    "match": "tdo bien por suerte",
+    "answer": "Me alegrooo :)"
+  },
+  {
+    "match": "Porque te cambias el nombre",
+    "answer": "Pq entre aún grupo"
+  },
+  {
+    "match": "Podés creer que nos trajo la profe a mi casa",
+    "answer": "Naaa bue"
+  },
+  {
+    "match": "Y me olvidé mis camperas en el bar",
+    "answer": "Ahora se mata"
+  },
+  {
+    "match": "tdo tranqui",
+    "answer": "Por ahora si"
+  },
+  {
+    "match": "Ahora se mata",
+    "answer": "me quiero morir"
+  },
+  {
+    "match": "Todo bien",
+    "answer": "Me alegro"
+  },
+  {
+    "match": "Naaa bue",
+    "answer": "KAJAJAJAJA y bueno"
+  },
+  {
+    "match": "me quiero morir",
+    "answer": "Y yo calculo"
+  },
+  {
+    "match": "jola",
+    "answer": "Holis"
+  },
+  {
+    "match": "dormí",
+    "answer": "Q vaa ya por la noche"
+  },
+  {
+    "match": "era imposible estás en el colegio en ese estado",
+    "answer": "Hoy hay paro"
+  },
+  {
+    "match": "Hoy hay paro",
+    "answer": "Yo tenía clases normales"
+  },
+  {
+    "match": "Yo tenía clases normales",
+    "answer": "Mi hermanita tmb"
+  },
+  {
+    "match": "que mal",
+    "answer": "Oye delfi te hblas un rato"
+  },
+  {
+    "match": "Tuve derecho económico, sic y física",
+    "answer": "Todo en pedo en clase"
+  },
+  {
+    "match": "Son re jedes",
+    "answer": "Si"
+  },
+  {
+    "match": "hols ahus",
+    "answer": "Cómo tas?"
+  },
+  {
+    "match": "Todo en pedo en clase",
+    "answer": "Literalmente"
+  },
+  {
+    "match": "me decía hola mnomadlpm",
+    "answer": "te extrañe romita"
+  },
+  {
+    "match": "Amigo ando mas seco que volante de masaa jaja",
+    "answer": "Mal"
+  },
+  {
+    "match": "Cómo tas?",
+    "answer": "buiem y hos"
+  },
+  {
+    "match": "y bueno",
+    "answer": "Ya son la 7 de la tarde"
+  },
+  {
+    "match": "como?",
+    "answer": "Si pdo hblar jaja"
+  },
+  {
+    "match": "Amigo necesito en mp❤️",
+    "answer": "Amigo ando mas seco que volante de masaa jaja"
+  },
+  {
+    "match": "buiem y hos",
+    "answer": "Que bueno me alegro"
+  },
+  {
+    "match": "Que te digo sino",
+    "answer": "Que le digas holateamomas"
+  },
+  {
+    "match": "Ya son la 7 de la tarde",
+    "answer": "a bueno"
+  },
+  {
+    "match": "Si pdo hblar jaja",
+    "answer": "y estás hablando"
+  },
+  {
+    "match": "Bienvenido bro",
+    "answer": "Gracias"
+  },
+  {
+    "match": "Que le digas holateamomas",
+    "answer": "JAJAJAJAJS"
+  },
+  {
+    "match": "Tienen",
+    "answer": "Anda a trabajar"
+  },
+  {
+    "match": "Soy fiel dije",
+    "answer": "Ahí va"
+  },
+  {
+    "match": "Que estuviste haciendo",
+    "answer": "llorando"
+  },
+  {
+    "match": "es re feo estar sin celu",
+    "answer": "Cómo tenés WhatsApp"
+  },
+  {
+    "match": "Cómo tenés WhatsApp",
+    "answer": "i hace"
+  },
+  {
+    "match": "y mi admin",
+    "answer": "Es que ya somos una banda"
+  },
+  {
+    "match": "Es que ya somos una banda",
+    "answer": "ah"
+  },
+  {
+    "match": "ah",
+    "answer": "#peronista"
+  },
+  {
+    "match": "#peronista",
+    "answer": "《✧》El comando *peronista* no existe.\nPara ver la lista de comandos usa:\n» *#help*"
+  },
+  {
+    "match": "entiendo",
+    "answer": "#promote"
+  },
+  {
+    "match": "#promote",
+    "answer": "✿ *@5491164579600* ha sido promovido a administrador del grupo!"
+  },
+  {
+    "match": "@italianpretifacr",
+    "answer": "Callate"
+  },
+  {
+    "match": "Nose porque siempre te trato mal",
+    "answer": "mao que te pasaa"
+  },
+  {
+    "match": "Que bueno me alegro",
+    "answer": "graciasss"
+  },
+  {
+    "match": "les voy a pegar a todos los profesores",
+    "answer": "ñfkieldJFLEKUWKEJW"
+  },
+  {
+    "match": "m dluele la cabeza",
+    "answer": "eso por negra"
+  },
+  {
+    "match": "eso por negra",
+    "answer": "aifmp soy blanca"
+  },
+  {
+    "match": "Gola",
+    "answer": "goma"
+  },
+  {
+    "match": ".Tag hola chicos y gente nueva se pueden presentar los nuevos? y bienvenidos al grupo",
+    "answer": "me presento?"
+  },
+  {
+    "match": "Me presento?",
+    "answer": "vos no"
+  },
+  {
+    "match": "Se levanto con la tanga cruzada la señora",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "presentense",
+    "answer": "Ahora ya me ofendi y no me quiero presentar"
+  },
+  {
+    "match": "me saco ahora td así nomas",
+    "answer": "Jajaja"
+  },
+  {
+    "match": "Ahora ya me ofendi y no me quiero presentar",
+    "answer": "q bobo q sos"
+  },
+  {
+    "match": "yo no me voy a presentar",
+    "answer": "Dale presentate"
+  },
+  {
+    "match": "*¡¡¡ATENCION SCREAMER!!",
+    "answer": "streamer?"
+  },
+  {
+    "match": "67 años",
+    "answer": "Me calento ps"
+  },
+  {
+    "match": "streamer?",
+    "answer": "screamer"
+  },
+  {
+    "match": "Dale presentate",
+    "answer": "no"
+  },
+  {
+    "match": "ni sabia q tenía la foto de ese todavía",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "Ahora me presento yo",
+    "answer": "dale"
   }
 ]
