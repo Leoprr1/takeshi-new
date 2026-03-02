@@ -138,11 +138,18 @@ async function fetchNewsDetails(items) {
         await wait(1500);
 
         const detail = await page.evaluate(() => {
-          const captionEl = document.querySelector("article span");
+          const spanEls = Array.from(document.querySelectorAll("article span"));
           const timeEl = document.querySelector("time");
           const imgEl = document.querySelector("article img");
+
+          // Concatenar solo el texto real de todos los spans para la descripción
+          const summaryText = spanEls
+            .map(span => span.innerText.trim())
+            .filter(t => t && t.length > 0)
+            .join("\n");
+
           return {
-            summary: captionEl ? captionEl.innerText.trim() : "",
+            summary: summaryText,
             time: timeEl ? new Date(timeEl.getAttribute("datetime")).toISOString() : "",
             imageUrl: imgEl ? imgEl.src : "",
           };

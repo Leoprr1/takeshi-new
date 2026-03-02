@@ -581,7 +581,7 @@
   },
   {
     "match": "Si",
-    "answer": "No"
+    "answer": "Shhh"
   },
   {
     "match": "no",
@@ -1605,7 +1605,7 @@
   },
   {
     "match": "Vo chupala",
-    "answer": "tu mama la chupa"
+    "answer": "Maleducado"
   },
   {
     "match": "Yo creo que puedo estar en el grupo",
@@ -1749,7 +1749,7 @@
   },
   {
     "match": "Tengo q ir a algún lado en bici",
-    "answer": "Aaaa claro jajaj"
+    "answer": "no bro, tenes que trabajar para mi 🤭"
   },
   {
     "match": "Si no no duermo nada",
@@ -3837,7 +3837,7 @@
   },
   {
     "match": "xq m dijo q lo una en grupos",
-    "answer": "exactamente"
+    "answer": "interesante"
   },
   {
     "match": "No escribí mal",
@@ -4449,7 +4449,7 @@
   },
   {
     "match": "Me presento?",
-    "answer": "vos no"
+    "answer": "Si por vafor"
   },
   {
     "match": "Se levanto con la tanga cruzada la señora",
@@ -4533,7 +4533,7 @@
   },
   {
     "match": "se reveló",
-    "answer": "lit"
+    "answer": "Tu abuela"
   },
   {
     "match": "seee, me costó un huevo eso si 😂",
@@ -4697,7 +4697,7 @@
   },
   {
     "match": "Joda amigo",
-    "answer": "amiga*"
+    "answer": "Lo se"
   },
   {
     "match": "q falta de respeto de @all",
@@ -4930,5 +4930,125 @@
   {
     "match": "#bots",
     "answer": "「✦」Lista de bots activos (*2,459* sesiones)\n\n❖ Principales » *23* sesiones\n✰ Premiums » *1,428* sesiones\n✿ Subs » *1,008* sesiones\nⴵ Temporales » *0* sesiones\n\n❏ En este grupo: *1*\n\t\t• [Premium *ᴛ፝֟ɪɴᴀ*] » @5493544627604"
+  },
+  {
+    "match": "Pensé que era la estefi",
+    "answer": "Ay"
+  },
+  {
+    "match": "Si por vafor",
+    "answer": "X fin alguien que me deja presentarme lpm jajaj"
+  },
+  {
+    "match": "X fin alguien que me deja presentarme lpm jajaj",
+    "answer": "En éste grupo somos inclusives"
+  },
+  {
+    "match": "En éste grupo somos inclusives",
+    "answer": "Si pero ni la cande ni carol me dejan presentarme"
+  },
+  {
+    "match": "Tiene un punto jajaja",
+    "answer": "No hay fallas en mi lógica"
+  },
+  {
+    "match": "No hay fallas en mi lógica",
+    "answer": "Claaa jaja"
+  },
+  {
+    "match": "También está prohibido el bultomanoteo",
+    "answer": "Pero xq?"
+  },
+  {
+    "match": "Narcomenudeo perdon",
+    "answer": "Y eso que es?? Jajau"
+  },
+  {
+    "match": "Capas era gorda pobre",
+    "answer": "Yo ya crei que estabas x hacer un chiste de autos jajaj"
+  },
+  {
+    "match": "\"Me voy a la mierda \"",
+    "answer": "Tjr jajaja"
+  },
+  {
+    "match": "Estas al p2?",
+    "answer": "Bastante si"
+  },
+  {
+    "match": "Bastante si",
+    "answer": "Ya me habia dado cuenta igual jajaja"
+  },
+  {
+    "match": "Bancame 1 min",
+    "answer": "D1d1"
+  },
+  {
+    "match": "Un pool que tanto jaja",
+    "answer": "Dale dale"
+  },
+  {
+    "match": "olam",
+    "answer": "Candesitaa"
+  },
+  {
+    "match": "Wenas",
+    "answer": "No"
+  },
+  {
+    "match": "Casi hasta parece una persona normal",
+    "answer": "No lo es?"
+  },
+  {
+    "match": "No lo es?",
+    "answer": "No"
+  },
+  {
+    "match": "Sera?",
+    "answer": "Puto"
+  },
+  {
+    "match": "JAJAJAJAJA",
+    "answer": "Fuera de pedo es una ia o es real?"
+  },
+  {
+    "match": "Candesitaa",
+    "answer": "wiill"
+  },
+  {
+    "match": "Fuera de pedo es una ia o es real?",
+    "answer": "No rial es el bot que hizo @223256997032099"
+  },
+  {
+    "match": "wiill",
+    "answer": "Dijo que no"
+  },
+  {
+    "match": "Otakuu",
+    "answer": "Shut your bitch ass out"
+  },
+  {
+    "match": "No rial es el bot que hizo @223256997032099",
+    "answer": "si, es un bot que aprende en base de lo que ustedes escriben, entonces con el tiempo se vuelve mas inteligente, de hecho este que responde ahora es una versión basica, esta elmobotia que es muchísimo más complejo y esta aprendiendo, con el tiempo va a poder responder como si fuera una persona real, pero necesita aprender"
+  },
+  {
+    "match": "si, es un bot que aprende en base de lo que ustedes escriben, entonces con el tiempo se vuelve mas inteligente, de hecho este que responde ahora es una versión basica, esta elmobotia que es muchísimo más complejo y esta aprendiendo, con el tiempo va a poder responder como si fuera una persona real, pero necesita aprender",
+    "answer": "Que mieo"
+  },
+  {
+    "match": "​",
+    "answer": "Alm"
+  },
+  {
+    "match": "Que mieo",
+    "answer": "JAJAJA es un bot que aprende solo, yo solo lo mantengo prendido 😂 (claramente lo hice yo)"
+  },
+  {
+    "match": "por si alguien quiere ver las publicaciones de tyc sports",
+    "answer": "Que es eso"
+  },
+  {
+    "match": "Que es eso",
+    "answer": "cada vez que tyc sports la pagina de noticias deportivas publique algo, el bot lo comparte por aca"
   }
 ]
