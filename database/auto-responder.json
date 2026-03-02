@@ -3798,5 +3798,9 @@
   {
     "match": "Que honda man?",
     "answer": "Nada trabajando nomás y vos amigo"
+  },
+  {
+    "match": "#help",
+    "answer": "funciona con el ."
   }
 ]

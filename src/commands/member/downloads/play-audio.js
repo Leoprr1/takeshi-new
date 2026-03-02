@@ -114,7 +114,7 @@ async function executePlay({
     let info;
     let formats;
     let attempts = 0;
-    const maxAttempts = 5;
+    const maxAttempts = 15;
 
     while (attempts < maxAttempts) {
       attempts++;
