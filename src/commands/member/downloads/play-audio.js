@@ -20,12 +20,9 @@ module.exports = {
   usage: `${PREFIX}play duki goteo`,
 
   handle: async (ctx) => {
-
-    // 🔥 TODO pasa por la cola
     await queue.add(async () => {
       await executePlay(ctx);
     });
-
   },
 };
 
@@ -111,12 +108,37 @@ async function executePlay({
     tempOgg = path.join(os.tmpdir(), `${uniqueId}.ogg`);
 
     /* ===============================
-       ⬇ DESCARGA MÁS LIVIANA POSIBLE
+       ⬇ DESCARGA CON REINTENTO AUTOMÁTICO
     ================================ */
 
-    const stream = ytdl(videoUrl, {
-      quality: "lowestvideo",
-      filter: "audioandvideo",
+    let info;
+    let formats;
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    while (attempts < maxAttempts) {
+      attempts++;
+
+      info = await ytdl.getInfo(videoUrl);
+      formats = ytdl.filterFormats(info.formats, "audioandvideo");
+
+      if (formats.length) break;
+
+      console.log(`Reintentando obtener formatos (${attempts}/${maxAttempts})...`);
+      await new Promise(r => setTimeout(r, 700));
+    }
+
+    if (!formats || !formats.length) {
+      throw new Error("No hay formatos audio+video disponibles");
+    }
+
+    // Ordenar por menor bitrate (más liviano real)
+    formats.sort((a, b) => (a.bitrate || 0) - (b.bitrate || 0));
+
+    const lowestFormat = formats[0];
+
+    const stream = ytdl.downloadFromInfo(info, {
+      format: lowestFormat,
       highWaterMark: 1 << 25
     });
 
@@ -155,31 +177,23 @@ async function executePlay({
     });
 
     /* ===============================
-       📤 ENVIAR AUDIO + IMAGEN JUNTOS
+       📤 ENVIAR AUDIO + IMAGEN
     ================================ */
 
     const buffer = fs.readFileSync(tempOgg);
 
-    const sendTasks = [];
-    
+    if (thumb) {
+      await sendImageFromURL(
+        thumb,
+        `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}`
+      ).catch(() => {});
+    }
 
-   // 🖼 1️⃣ Enviar imagen primero y esperar confirmación
-if (thumb) {
-  await sendImageFromURL(
-    thumb,
-    `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}`
-  ).catch(() => {});
-}
-
-// 🎵 2️⃣ Enviar audio inmediatamente después
-await socket.sendMessage(remoteJid, {
-  audio: buffer,
-  mimetype: "audio/ogg; codecs=opus",
-  ptt: true
-});
-
-    // 🔥 Espera a que ambos terminen antes de liberar la cola
-    await Promise.all(sendTasks);
+    await socket.sendMessage(remoteJid, {
+      audio: buffer,
+      mimetype: "audio/ogg; codecs=opus",
+      ptt: true
+    });
 
     await sendSuccessReact();
 

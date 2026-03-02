@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cacheable/node-cache": "^2.0.1",
+    "@cacheable/node-cache": "^2.0.2",
     "@distube/ytdl-core": "^4.16.12",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@whiskeysockets/baileys": "^7.0.0-rc.9",
-    "axios": "^1.13.5",
+    "axios": "^1.13.6",
     "baileys": "npm:@whiskeysockets/baileys",
     "correios-brasil": "^3.0.6",
     "curl": "^0.1.4",

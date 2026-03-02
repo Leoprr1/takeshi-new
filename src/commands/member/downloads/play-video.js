@@ -17,7 +17,6 @@ module.exports = {
 
   handle: async (ctx) => {
 
-    // 🔥 EXACTAMENTE IGUAL QUE PM
     await queue.add(async () => {
 
       const {
@@ -50,7 +49,6 @@ module.exports = {
         if (ytdl.validateURL(query)) {
 
           videoUrl = query;
-
           const basic = await yts({ videoId: ytdl.getURLVideoID(query) });
 
           title = basic.title;
@@ -82,9 +80,55 @@ module.exports = {
         const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
         const tempFile = path.join(os.tmpdir(), `${Date.now()}-${safeTitle}.mp4`);
 
-        const stream = ytdl(videoUrl, {
-          quality: "18",
-          filter: "audioandvideo",
+        /* ===============================
+           🔥 DESCARGA ESTABLE CON REINTENTO
+        ================================ */
+
+        let info;
+        let formats;
+        let attempts = 0;
+        const maxAttempts = 5;
+
+        while (attempts < maxAttempts) {
+          attempts++;
+
+          info = await ytdl.getInfo(videoUrl);
+
+          // Solo formatos combinados (audio + video)
+          formats = ytdl.filterFormats(info.formats, "audioandvideo");
+
+          if (formats.length) break;
+
+          console.log(`Reintentando formatos video (${attempts}/${maxAttempts})`);
+          await new Promise(r => setTimeout(r, 700));
+        }
+
+        if (!formats || !formats.length) {
+          throw new Error("No hay formatos de video disponibles");
+        }
+
+        // 🎯 Filtrar hasta 480p máximo
+        formats = formats.filter(f => {
+          if (!f.qualityLabel) return false;
+          const height = parseInt(f.qualityLabel);
+          return height <= 480;
+        });
+
+        if (!formats.length) {
+          throw new Error("No hay formatos 360p/480p disponibles");
+        }
+
+        // Ordenar por resolución más baja primero (más rápido)
+        formats.sort((a, b) => {
+          const hA = parseInt(a.qualityLabel) || 9999;
+          const hB = parseInt(b.qualityLabel) || 9999;
+          return hA - hB;
+        });
+
+        const selectedFormat = formats[0]; // el más liviano <= 480p
+
+        const stream = ytdl.downloadFromInfo(info, {
+          format: selectedFormat,
           highWaterMark: 1 << 24
         });
 
@@ -93,26 +137,18 @@ module.exports = {
         stream.pipe(writeStream);
 
         writeStream.on("finish", async () => {
-  try {
+          try {
 
-    const sendTasks = [];
+            if (thumb) {
+              await sendImageFromURL(
+                thumb,
+                `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}\n*Calidad*: ${selectedFormat.qualityLabel}`
+              ).catch(() => {});
+            }
 
-      // 🖼 1️⃣ Enviar imagen primero
-    if (thumb) {
-      await sendImageFromURL(
-        thumb,
-        `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}`
-      ).catch(() => {});
-    }
+            await sendVideoFromURL(tempFile);
 
-    // 🎬 2️⃣ Enviar video inmediatamente después
-    await sendVideoFromURL(tempFile);
-
-
-    // 🔥 Espera que ambos terminen
-    await Promise.all(sendTasks);
-
-    await sendSuccessReact();
+            await sendSuccessReact();
 
           } catch (err) {
             console.error("Error enviando video:", err);
@@ -130,7 +166,7 @@ module.exports = {
 
       } catch (err) {
         console.error("Error en play-video:", err);
-        await sendErrorReply("❌ Ocurrió un error al reproducir el video.");
+        await sendErrorReply(`❌ Ocurrió un error: ${err.message}`);
       }
 
     });
