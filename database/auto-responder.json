@@ -2557,7 +2557,7 @@
   },
   {
     "match": "cande lo unió a su grupo y ahi ha estado aprendíendo 😂",
-    "answer": "aah"
+    "answer": "Cande?"
   },
   {
     "match": "los colores pero con el color de los coho yo soy no se lo se hace mi me lo",
@@ -3802,5 +3802,81 @@
   {
     "match": "#help",
     "answer": "funciona con el ."
+  },
+  {
+    "match": "funciona con el .",
+    "answer": "Thanks"
+  },
+  {
+    "match": ".bofetada @62178895855731",
+    "answer": "Lo peor de la traición es que jamás viene de un enemigo"
+  },
+  {
+    "match": "Lo peor de la traición es que jamás viene de un enemigo",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "con vida propia",
+    "answer": "yyy tendrian conflictos entre si en algunos comandos"
+  },
+  {
+    "match": "yyy tendrian conflictos entre si en algunos comandos",
+    "answer": "mm"
+  },
+  {
+    "match": "vava",
+    "answer": "por?"
+  },
+  {
+    "match": "Cansado",
+    "answer": "JAAJA"
+  },
+  {
+    "match": "por?",
+    "answer": "xq m dijo q lo una en grupos"
+  },
+  {
+    "match": "xq m dijo q lo una en grupos",
+    "answer": "quien?"
+  },
+  {
+    "match": "No escribí mal",
+    "answer": "bueno"
+  },
+  {
+    "match": "quien?",
+    "answer": "el bot bld"
+  },
+  {
+    "match": "el bot bld",
+    "answer": "como te va a decir el bot que pongas otro bot 😂"
+  },
+  {
+    "match": "como te va a decir el bot que pongas otro bot 😂",
+    "answer": "pero"
+  },
+  {
+    "match": "y que los narcos jajaj es un genio naaa genio naaa genio era el pelo",
+    "answer": "CÁLLATE"
+  },
+  {
+    "match": "bueno que me hace como se si siempre el de un genio naaa genio llamado leo es un dia",
+    "answer": "fuaa te amo bro"
+  },
+  {
+    "match": "leo genio",
+    "answer": "viste que cada vez se pone mas inteligente, solo debe de aprender lo suficiente"
+  },
+  {
+    "match": "viste que cada vez se pone mas inteligente, solo debe de aprender lo suficiente",
+    "answer": "si"
+  },
+  {
+    "match": "@62178895855731  donde me fuiste a meter tu",
+    "answer": "Miraba tis tos"
+  },
+  {
+    "match": "Cande?",
+    "answer": "es un bot 😂 responde en base de lo que aprende"
   }
 ]

@@ -1,97 +1,68 @@
 /**
- * newtyc.js
- * Sistema de noticias TyC Sports para WhatsApp
- * Compatible con ffmpeg.js para descargar imágenes correctamente
+ * newtyc.js — Sistema de noticias TyC Sports (funcional y optimizado)
+ * Extrae noticias reales desde tycsports.com
  */
 
 const puppeteer = require("puppeteer");
 const fs = require("node:fs");
 const { readJSON, writeJSON } = require("./database");
-const ffmpegService = require("../services/ffmpeg"); // <-- tu ffmpeg.js actualizado
+const ffmpegService = require("../services/ffmpeg");
 
 let intervalStarted = false;
-const MAX_ARTICLES = 5; // Máximo de noticias a enviar
+const MAX_ARTICLES = 1;
 
 // ----------------------------
-// Obtener las últimas noticias con Puppeteer
+// Obtener últimas noticias reales desde TyC
 // ----------------------------
 async function getLatestNews(limit = MAX_ARTICLES) {
   let browser;
   try {
-    browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] });
-    const page = await browser.newPage();
-    await page.goto("https://www.tycsports.com/noticias.html", { waitUntil: "networkidle2", timeout: 30000 });
-    await new Promise(r => setTimeout(r, 2000));
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
 
-    const newsLinks = await page.evaluate((max) => {
-      const links = [];
-      const all = Array.from(document.querySelectorAll("a[href*='/noticias/']"));
-      for (const a of all) {
+    const page = await browser.newPage();
+    await page.goto("https://www.tycsports.com/", {
+      waitUntil: "networkidle2",
+      timeout: 30000,
+    });
+
+    await new Promise((r) => setTimeout(r, 2000));
+
+    const newsItems = await page.evaluate((max) => {
+      const results = [];
+      const newsUrlRegex = /-id\d+\.html$/;
+
+      const links = Array.from(document.querySelectorAll("a[href^='https://www.tycsports.com/']"));
+
+      for (const a of links) {
+        if (results.length >= max) break;
+
         const url = a.href.trim();
-        const title = a.innerText.trim();
-        if (!title || !url.includes("tycsports.com")) continue;
-        if (links.find(l => l.url === url)) continue;
-        links.push({ title, url });
-        if (links.length >= max) break;
+        if (!newsUrlRegex.test(url)) continue;
+
+        // Extraemos título provisional del enlace
+        let title = a.querySelector("h3")?.innerText.trim() || "";
+
+        // Imagen provisional
+        const imgEl = a.querySelector("img");
+        const imageUrl = imgEl ? imgEl.getAttribute("data-src") || imgEl.src || "" : "";
+
+        if (results.find(r => r.url === url)) continue;
+
+        results.push({ title, url, imageUrl });
       }
-      return links;
+
+      return results;
     }, limit);
 
-    const articles = [];
-
-    for (const news of newsLinks) {
-      try {
-        const newsPage = await browser.newPage();
-        await newsPage.goto(news.url, { waitUntil: "networkidle2", timeout: 30000 });
-        await new Promise(r => setTimeout(r, 1000));
-
-        const data = await newsPage.evaluate(() => {
-          const titleEl = document.querySelector("h1") || document.querySelector("h2");
-          const summaryEl = document.querySelector("p") || document.querySelector(".MuiTypography-root");
-          const timeEl = document.querySelector("time");
-          const imgEl = document.querySelector("img[data-src]") || document.querySelector("picture img");
-
-          const title = titleEl ? titleEl.innerText.trim() : "";
-          const summary = summaryEl ? summaryEl.innerText.trim() : "";
-          const timeRaw = timeEl ? timeEl.getAttribute("datetime") : "";
-          const time = timeRaw ? new Date(timeRaw).toLocaleString("es-AR") : "";
-          const imageUrl = imgEl ? (imgEl.getAttribute("data-src") || imgEl.src) : "";
-
-          return { title, summary, time, imageUrl };
-        });
-
-        let imageBuffer = null;
-        if (data.imageUrl) {
-          try {
-            const tempPath = await ffmpegService._createTempFilePath("jpg");
-            await ffmpegService.downloadImage(data.imageUrl, tempPath);
-            imageBuffer = fs.readFileSync(tempPath); // buffer real para enviar
-            await ffmpegService.cleanup(tempPath); // limpiar temp
-          } catch (e) {
-            console.error("Error descargando imagen:", e.message);
-          }
-        }
-
-        articles.push({
-          title: data.title || news.title,
-          url: news.url,
-          summary: data.summary,
-          time: data.time,
-          imageBuffer
-        });
-
-        await newsPage.close();
-      } catch (err) {
-        console.error("Error abriendo noticia:", news.url, err.message);
-      }
-    }
-
-    return articles;
+    await browser.close();
+    return newsItems;
   } catch (err) {
     console.error("TyC Puppeteer scraping error:", err.message);
-    return [];
-  } finally {
     if (browser) await browser.close();
+    return [];
   }
 }
 
@@ -104,21 +75,84 @@ async function sendNewsToGroups(sock, newsList, db) {
   for (const group of db.groupsEnabled) {
     for (const latest of newsList) {
       try {
-        const msgOptions = {};
-        if (latest.imageBuffer) {
-          msgOptions.image = latest.imageBuffer;
-          msgOptions.caption = `📰 *Noticias TyC Sports*\n\n*${latest.title}*\n${latest.summary ? `\n_${latest.summary}_\n` : ""}${latest.time ? `\n🕒 ${latest.time}\n` : ""}\n🔗 ${latest.url}`;
-        } else {
-          msgOptions.text = `📰 *Noticias TyC Sports*\n\n*${latest.title}*\n${latest.summary ? `\n_${latest.summary}_\n` : ""}${latest.time ? `\n🕒 ${latest.time}\n` : ""}\n🔗 ${latest.url}`;
-        }
+        const msgOptions = latest.imageBuffer
+          ? { image: latest.imageBuffer, caption: `📰 *Noticias TyC Sports*\n\n*${latest.title}*\n${latest.summary ? `\n_${latest.summary}_\n` : ""}\n🔗 ${latest.url}` }
+          : { text: `📰 *Noticias TyC Sports*\n\n*${latest.title}*\n${latest.summary ? `\n_${latest.summary}_\n` : ""}\n🔗 ${latest.url}` };
 
         await sock.sendMessage(group, msgOptions);
-        console.log(`✅ Noticia enviada a ${group}: ${latest.title}`);
+        console.log(`✅ Noticia enviada: ${latest.title}`);
       } catch (err) {
         console.error("Error enviando noticia:", err.message);
       }
     }
   }
+}
+
+// ----------------------------
+// Obtener detalles completos de cada noticia
+// ----------------------------
+async function fetchNewsDetails(items) {
+  const articles = [];
+  let browser;
+  try {
+    browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] });
+
+    for (const item of items) {
+      try {
+        const detailPage = await browser.newPage();
+        await detailPage.goto(item.url, { waitUntil: "networkidle2", timeout: 30000 });
+        await new Promise((r) => setTimeout(r, 1000));
+
+        // Extraemos resumen, título real y hora
+        const detail = await detailPage.evaluate(() => {
+          const titleEl = document.querySelector("h1") || document.querySelector("h2") || document.querySelector("h3");
+          const summaryEl = document.querySelector(".lead, .intro, p");
+          const timeEl = document.querySelector("time");
+          const imgEl = document.querySelector("figure img");
+
+          const title = titleEl ? titleEl.innerText.trim() : "";
+          const summary = summaryEl ? summaryEl.innerText.trim() : "";
+          const timeRaw = timeEl ? timeEl.getAttribute("datetime") || "" : "";
+          const time = timeRaw ? new Date(timeRaw).toLocaleString("es-AR") : "";
+          const imageUrl = imgEl ? imgEl.getAttribute("data-src") || imgEl.src || "" : "";
+
+          return { title, summary, time, imageUrl };
+        });
+
+        await detailPage.close();
+
+        let imageBuffer = null;
+        const finalImageUrl = detail.imageUrl || item.imageUrl;
+        if (finalImageUrl) {
+          try {
+            const tmpPath = await ffmpegService._createTempFilePath("jpg");
+            await ffmpegService.downloadImage(finalImageUrl, tmpPath);
+            imageBuffer = fs.readFileSync(tmpPath);
+            await ffmpegService.cleanup(tmpPath);
+          } catch (e) {
+            console.error("Error bajando imagen:", e.message);
+          }
+        }
+
+        articles.push({
+          title: detail.title || item.title,
+          url: item.url,
+          summary: detail.summary,
+          time: detail.time,
+          imageBuffer
+        });
+
+      } catch (err) {
+        console.error("Error procesando noticia:", err.message);
+      }
+    }
+  } catch (err) {
+    console.error("Error en browser de detalles:", err.message);
+  } finally {
+    if (browser) await browser.close();
+  }
+
+  return articles;
 }
 
 // ----------------------------
@@ -128,15 +162,15 @@ async function checkNews(sock) {
   const db = readJSON("news-tyc", { lastUrl: "", groupsEnabled: [] });
   if (!db.groupsEnabled.length) return;
 
-  const latest = await getLatestNews(1);
-  if (!latest.length) return;
+  const scraped = await getLatestNews(MAX_ARTICLES);
+  if (!scraped.length) return;
+  if (scraped[0].url === db.lastUrl) return;
 
-  if (latest[0].url === db.lastUrl) return;
-
-  db.lastUrl = latest[0].url;
+  db.lastUrl = scraped[0].url;
   writeJSON("news-tyc", db);
 
-  await sendNewsToGroups(sock, [latest[0]], db);
+  const articles = await fetchNewsDetails(scraped);
+  await sendNewsToGroups(sock, articles, db);
 }
 
 // ----------------------------
@@ -146,17 +180,18 @@ async function sendLatestOnStart(sock) {
   const db = readJSON("news-tyc", { lastUrl: "", groupsEnabled: [] });
   if (!db.groupsEnabled.length) return;
 
-  const latest = await getLatestNews(MAX_ARTICLES);
-  if (!latest.length) return;
+  const scraped = await getLatestNews(MAX_ARTICLES);
+  if (!scraped.length) return;
 
-  await sendNewsToGroups(sock, latest, db);
-
-  db.lastUrl = latest[0].url;
+  db.lastUrl = scraped[0].url;
   writeJSON("news-tyc", db);
+
+  const articles = await fetchNewsDetails(scraped);
+  await sendNewsToGroups(sock, articles, db);
 }
 
 // ----------------------------
-// Inicializar sistema de noticias TyC
+// Inicializar sistema TyC
 // ----------------------------
 function startTyCSystem(sock) {
   if (intervalStarted) return;
@@ -172,7 +207,7 @@ function startTyCSystem(sock) {
     } catch (err) {
       console.error("TyC interval error:", err.message);
     }
-  }, 20 * 1000);
+  }, 1 * 60 * 1000);
 }
 
 module.exports = { startTyCSystem };
