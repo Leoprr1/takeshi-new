@@ -79,6 +79,8 @@ const {
   infoLog,
   warningLog,
 } = require("./src/utils/logger");
+const { startTyCSystem } = require("./src/utils/newstyc");
+
 
 let socketGlobal;
 let reconnecting = false;
@@ -186,6 +188,7 @@ async function startBot() {
         // ---------------------------------------------------
 
         successLog("✅ Bot conectado y listo.");
+        setTimeout(() => {startTyCSystem(socketGlobal);}, 10_000);
       } catch {
         setTimeout(initSocket, 5000); // reintento simple sin spam
       }

@@ -585,7 +585,7 @@
   },
   {
     "match": "no",
-    "answer": "Si"
+    "answer": "Tonc ?? Por qie me pusiste el punto ?"
   },
   {
     "match": "verga",
@@ -789,7 +789,7 @@
   },
   {
     "match": "?",
-    "answer": "Ahora si entendi"
+    "answer": "Que mandan"
   },
   {
     "match": "wtf",
@@ -2033,7 +2033,7 @@
   },
   {
     "match": "Vos?",
-    "answer": "Todo bien aburrido jaja"
+    "answer": "Digamos bien, ansiosa pero bien"
   },
   {
     "match": "Todo bien aburrido jaja",
@@ -3642,5 +3642,161 @@
   {
     "match": "cómo no sabías de mi",
     "answer": "no se"
+  },
+  {
+    "match": "Te vas a enojar??",
+    "answer": "No"
+  },
+  {
+    "match": "Buen día gente",
+    "answer": "Hola linda"
+  },
+  {
+    "match": "Hola linda",
+    "answer": "Cm tas reina?"
+  },
+  {
+    "match": "Suerte hoy",
+    "answer": "Jsjs gracias"
+  },
+  {
+    "match": "Cm tas reina?",
+    "answer": "Sin dormir, cansada y en breve tengo un exámen"
+  },
+  {
+    "match": "Tonc ?? Por qie me pusiste el punto ?",
+    "answer": "Ns ya no me acuerdo"
+  },
+  {
+    "match": "Ns ya no me acuerdo",
+    "answer": "Ahiva"
+  },
+  {
+    "match": "Sin dormir, cansada y en breve tengo un exámen",
+    "answer": "Ay, de q es tu examen reina?"
+  },
+  {
+    "match": "Ahiva",
+    "answer": "Damiancito si no apruebo más tarde me pegó un tiro"
+  },
+  {
+    "match": "Damiancito si no apruebo más tarde me pegó un tiro",
+    "answer": "Non9"
+  },
+  {
+    "match": "Weno me voy a trabajar",
+    "answer": "Suerte"
+  },
+  {
+    "match": "Ay, de q es tu examen reina?",
+    "answer": "Economía"
+  },
+  {
+    "match": "Non9",
+    "answer": "Sisi"
+  },
+  {
+    "match": "Así podés tener otra hermana tranquilo",
+    "answer": "Tengo otra hermana y estas en el mismo grupo que ella"
+  },
+  {
+    "match": "Tengo otra hermana y estas en el mismo grupo que ella",
+    "answer": "ª entonces es verdad"
+  },
+  {
+    "match": "ª entonces es verdad",
+    "answer": "PUAJAJJAAA DIOSSSSS"
+  },
+  {
+    "match": "Deja Damian",
+    "answer": "Agustina la concha e tu hermana"
+  },
+  {
+    "match": "Agustina la concha e tu hermana",
+    "answer": "De la otra hermana tuya"
+  },
+  {
+    "match": "Tomto",
+    "answer": "Agus volvió tu amigo"
+  },
+  {
+    "match": "Agus volvió tu amigo",
+    "answer": "Sisi ya estuvimos hablando anoche"
+  },
+  {
+    "match": "Sisi ya estuvimos hablando anoche",
+    "answer": "Tenes amigos bien ahi"
+  },
+  {
+    "match": "Es lunessss lokoooooo",
+    "answer": "Que pajaaa"
+  },
+  {
+    "match": "Te mando lo que me dijo en priv",
+    "answer": "Dale"
+  },
+  {
+    "match": "Que pajaaa",
+    "answer": "Tj"
+  },
+  {
+    "match": "Dale",
+    "answer": "Uu"
+  },
+  {
+    "match": "No tuve clases😛",
+    "answer": "Yo tampoco jaja"
+  },
+  {
+    "match": "Vs empezas el 11 hdp",
+    "answer": "No"
+  },
+  {
+    "match": "Ahora tengo q caminar media hora 😔",
+    "answer": "Uuu que brg"
+  },
+  {
+    "match": "Encima ni dormí 😔",
+    "answer": "Auris y musica al palo y solucionado"
+  },
+  {
+    "match": "De la otra hermana tuya",
+    "answer": "Pujajajak"
+  },
+  {
+    "match": "Tenes amigos bien ahi",
+    "answer": "Es Luke lct"
+  },
+  {
+    "match": "Pujajajak",
+    "answer": "Deja nomás"
+  },
+  {
+    "match": "No me hables",
+    "answer": "Weno"
+  },
+  {
+    "match": "Que mandan",
+    "answer": "Nose jajsjaj"
+  },
+  {
+    "match": "Nose jajsjaj",
+    "answer": "Que"
+  },
+  {
+    "match": "Anda el bot?",
+    "answer": "Si"
+  },
+  {
+    "match": "Buenass",
+    "answer": "Que honda man?"
+  },
+  {
+    "match": "bueno no me saluden",
+    "answer": "Hola Axel"
+  },
+  {
+    "match": "Que honda man?",
+    "answer": "Nada trabajando nomás y vos amigo"
   }
 ]

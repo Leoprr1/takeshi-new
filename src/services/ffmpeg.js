@@ -5,6 +5,8 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const https = require("https");
+const http = require("http");
 const ffmpeg = require("fluent-ffmpeg");
 const { exec } = require("node:child_process");
 
@@ -14,7 +16,7 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 const { getRandomNumber } = require("../utils");
 const { errorLog } = require("../utils/logger");
-const { TEMP_DIR } = require(`${BASE_DIR}/config`);
+const { TEMP_DIR } = require("../config");
 
 class FfmpegService {
   constructor() {
@@ -29,6 +31,24 @@ class FfmpegService {
       this.tempDir,
       `${getRandomNumber(10000, 99999)}.${extension}`
     );
+  }
+
+  // -------------------
+  // DESCARGAR IMAGEN DESDE URL
+  // -------------------
+  async downloadImage(url, outputPath) {
+    return new Promise((resolve, reject) => {
+      const client = url.startsWith("https") ? https : http;
+      client.get(url, (res) => {
+        if (res.statusCode !== 200)
+          return reject(new Error(`HTTP ${res.statusCode}`));
+        const file = fs.createWriteStream(outputPath);
+        res.pipe(file);
+        file.on("finish", () => {
+          file.close(resolve);
+        });
+      }).on("error", reject);
+    });
   }
 
   // -------------------
@@ -52,36 +72,28 @@ class FfmpegService {
   // -------------------
   async applyBlur(inputPath, intensity = "7:5") {
     const outputPath = await this._createTempFilePath();
-    return this._runFfmpeg(inputPath, outputPath, [
-      `-vf boxblur=${intensity}`
-    ]);
+    return this._runFfmpeg(inputPath, outputPath, [`-vf boxblur=${intensity}`]);
   }
 
   async convertToGrayscale(inputPath) {
     const outputPath = await this._createTempFilePath();
-    return this._runFfmpeg(inputPath, outputPath, [
-      "-vf format=gray"
-    ]);
+    return this._runFfmpeg(inputPath, outputPath, ["-vf format=gray"]);
   }
 
   async mirrorImage(inputPath) {
     const outputPath = await this._createTempFilePath();
-    return this._runFfmpeg(inputPath, outputPath, [
-      "-vf hflip"
-    ]);
+    return this._runFfmpeg(inputPath, outputPath, ["-vf hflip"]);
   }
 
   async adjustContrast(inputPath, contrast = 1.2) {
     const outputPath = await this._createTempFilePath();
-    return this._runFfmpeg(inputPath, outputPath, [
-      `-vf eq=contrast=${contrast}`
-    ]);
+    return this._runFfmpeg(inputPath, outputPath, [`-vf eq=contrast=${contrast}`]);
   }
 
   async applyPixelation(inputPath) {
     const outputPath = await this._createTempFilePath();
     return this._runFfmpeg(inputPath, outputPath, [
-      "-vf scale=iw/6:ih/6,scale=iw*6:ih*6:flags=neighbor"
+      "-vf scale=iw/6:ih/6,scale=iw*6:ih*6:flags=neighbor",
     ]);
   }
 
@@ -96,33 +108,30 @@ class FfmpegService {
       "pad=512:512:(ow-iw)/2:(oh-ih)/2:color=0x00000000";
 
     if (isImage) {
-      // 🖼 Imagen → WebP estático
       const options = [
         "-vcodec libwebp",
         `-vf ${scaleFilter}`,
         "-lossless 0",
         "-compression_level 6",
-        "-qscale 90"
+        "-qscale 90",
       ];
-
       return this._runFfmpeg(inputPath, outputPath, options);
     } else {
-      // 🎥 Video/GIF → WebP animado ultra comprimido
-const options = [
-  "-vcodec libwebp",
-  `-vf ${scaleFilter},fps=12`, // menos FPS = menos peso
-  "-loop 0",
-  "-an",
-  "-t 8", // recorta a 8s máximo
-  "-preset picture", // mejor compresión
-  "-lossless 0",
-  "-compression_level 6",
-  "-qscale 60", // menor calidad = mucho menos peso
-  "-metadata", "title=",
-  "-metadata", "author="
-];
-
-
+      const options = [
+        "-vcodec libwebp",
+        `-vf ${scaleFilter},fps=12`,
+        "-loop 0",
+        "-an",
+        "-t 8",
+        "-preset picture",
+        "-lossless 0",
+        "-compression_level 6",
+        "-qscale 60",
+        "-metadata",
+        "title=",
+        "-metadata",
+        "author=",
+      ];
       return this._runFfmpeg(inputPath, outputPath, options);
     }
   }
@@ -132,22 +141,19 @@ const options = [
   // -------------------
   async getDuration(inputPath) {
     return new Promise((resolve) => {
-      exec(
-        `"${ffmpegPath}" -i "${inputPath}" 2>&1`,
-        (err, stdout, stderr) => {
-          const output = stderr || stdout;
-          if (!output) return resolve(0);
+      exec(`"${ffmpegPath}" -i "${inputPath}" 2>&1`, (err, stdout, stderr) => {
+        const output = stderr || stdout;
+        if (!output) return resolve(0);
 
-          const match = output.match(/Duration: (\d+):(\d+):([\d.]+)/);
-          if (!match) return resolve(0);
+        const match = output.match(/Duration: (\d+):(\d+):([\d.]+)/);
+        if (!match) return resolve(0);
 
-          const hours = parseInt(match[1], 10);
-          const minutes = parseInt(match[2], 10);
-          const seconds = parseFloat(match[3]);
+        const hours = parseInt(match[1], 10);
+        const minutes = parseInt(match[2], 10);
+        const seconds = parseFloat(match[3]);
 
-          resolve(hours * 3600 + minutes * 60 + seconds);
-        }
-      );
+        resolve(hours * 3600 + minutes * 60 + seconds);
+      });
     });
   }
 
@@ -157,14 +163,7 @@ const options = [
   async convertToOggOpus(inputPath, outputPath = null) {
     if (!outputPath) outputPath = await this._createTempFilePath("ogg");
 
-    const options = [
-      "-vn",
-      "-c:a libopus",
-      "-ar 48000",
-      "-ac 1",
-      "-b:a 64k"
-    ];
-
+    const options = ["-vn", "-c:a libopus", "-ar 48000", "-ac 1", "-b:a 64k"];
     return this._runFfmpeg(inputPath, outputPath, options);
   }
 
@@ -172,11 +171,8 @@ const options = [
   // LIMPIEZA
   // -------------------
   async cleanup(filePath) {
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-    }
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
   }
 }
 
 module.exports = new FfmpegService();
-

@@ -80,6 +80,7 @@ const {
   infoLog,
 } = require("./utils/logger");
 
+
 process.on("uncaughtException", (error) => {
   if (badMacHandler.handleError(error, "uncaughtException")) {
     return;
@@ -124,6 +125,7 @@ async function startBot() {
     load(socket);
 
     successLog("✅ ¡Bot iniciado con éxito!");
+
 
     setInterval(() => {
       const currentStats = badMacHandler.getStats();
