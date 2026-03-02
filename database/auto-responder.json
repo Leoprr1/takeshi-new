@@ -1409,7 +1409,7 @@
   },
   {
     "match": "Holaa",
-    "answer": "me decía hola mnomadlpm"
+    "answer": "Wenas"
   },
   {
     "match": "y salite gto",
@@ -4858,5 +4858,37 @@
   {
     "match": "Tráfico de órganos?",
     "answer": "E buena tambien"
+  },
+  {
+    "match": "ed2142",
+    "answer": "Y eso??"
+  },
+  {
+    "match": "Y eso??",
+    "answer": "se me fue el teclado perdon aajajaja"
+  },
+  {
+    "match": "se me fue el teclado perdon aajajaja",
+    "answer": "Jajaja no pasa nd"
+  },
+  {
+    "match": "Pinto etiquetar a @all nms",
+    "answer": "Etiqueta a tu vieja ctmee"
+  },
+  {
+    "match": "Etiqueta a tu vieja ctmee",
+    "answer": "No puedo"
+  },
+  {
+    "match": "No esta en el grupo",
+    "answer": "Increible"
+  },
+  {
+    "match": "Al próximo que me etiqueta le como la hermana",
+    "answer": "No tengo hermana amigo"
+  },
+  {
+    "match": "No tengo hermana amigo",
+    "answer": "No hay negocio en no tener hermana"
   }
 ]
