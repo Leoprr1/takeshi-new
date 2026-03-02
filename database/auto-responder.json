@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "Holass"
+    "answer": "a vs ni 10 centavos t paso timbero"
   },
   {
     "match": "hola?",
@@ -53,7 +53,7 @@
   },
   {
     "match": "buenas noches",
-    "answer": "Buenas noches, que descanses."
+    "answer": "dormite vos"
   },
   {
     "match": "qué hora es?",
@@ -141,7 +141,7 @@
   },
   {
     "match": "callate",
-    "answer": "okey"
+    "answer": "No"
   },
   {
     "match": "no me gusta",
@@ -581,11 +581,11 @@
   },
   {
     "match": "Si",
-    "answer": "El bot es mio, y si el dueño no quiere no lo voy a poner para todos"
+    "answer": "No"
   },
   {
     "match": "no",
-    "answer": "Xq no le regalas un mensajuto al chico"
+    "answer": "si"
   },
   {
     "match": "verga",
@@ -1617,7 +1617,7 @@
   },
   {
     "match": "No gracias",
-    "answer": "Oka"
+    "answer": "E xq a mi no"
   },
   {
     "match": "Che vendo bot de telegram que doxea peruanos por 1060 diamantes en el free",
@@ -2033,7 +2033,7 @@
   },
   {
     "match": "Vos?",
-    "answer": "Bienn cansao"
+    "answer": "Vos"
   },
   {
     "match": "Todo bien aburrido jaja",
@@ -3181,7 +3181,7 @@
   },
   {
     "match": "@all",
-    "answer": "no"
+    "answer": ":o"
   },
   {
     "match": "Comiendo",
@@ -3837,7 +3837,7 @@
   },
   {
     "match": "xq m dijo q lo una en grupos",
-    "answer": "quien?"
+    "answer": "exactamente"
   },
   {
     "match": "No escribí mal",
@@ -4626,5 +4626,237 @@
   {
     "match": "ke carajos",
     "answer": "sos cos"
+  },
+  {
+    "match": "sos cos",
+    "answer": "aaahh"
+  },
+  {
+    "match": "Ave deci algo en chino tncs",
+    "answer": "no"
+  },
+  {
+    "match": "@all buen día me desperté d la siesta",
+    "answer": "Buenas noches"
+  },
+  {
+    "match": "X2",
+    "answer": "me ibas a decir y dormíamos juntos beba"
+  },
+  {
+    "match": "Polno",
+    "answer": "aqui tienes bb xnxx.es"
+  },
+  {
+    "match": "me ibas a decir y dormíamos juntos beba",
+    "answer": "Recien la pienso pue"
+  },
+  {
+    "match": "buena",
+    "answer": "viste?😂"
+  },
+  {
+    "match": "Pero yo te cojo a vo",
+    "answer": "no"
+  },
+  {
+    "match": "yo. avos",
+    "answer": "No"
+  },
+  {
+    "match": "Hacemo el trencito de la alegria",
+    "answer": "no gracias"
+  },
+  {
+    "match": "no hay chance q ponga @all y la única que hablé es la pelotuda de carol",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "@all el próximo que hablé y no sea Agustín le transfiero una luca",
+    "answer": "Hola"
+  },
+  {
+    "match": "ahora ni Carol habla",
+    "answer": "Soy muda"
+  },
+  {
+    "match": "Soy muda",
+    "answer": "una buena en este grupo x fin"
+  },
+  {
+    "match": "a vs ni 10 centavos t paso timbero",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "Vo no jugas jajaja",
+    "answer": "bue"
+  },
+  {
+    "match": "bue",
+    "answer": "Joda amigo"
+  },
+  {
+    "match": "Joda amigo",
+    "answer": "amiga*"
+  },
+  {
+    "match": "q falta de respeto de @all",
+    "answer": "Y le mencionaba a @all"
+  },
+  {
+    "match": "amiga*",
+    "answer": "E belda, mala mia"
+  },
+  {
+    "match": "Y le mencionaba a @all",
+    "answer": "No mencionen a @all"
+  },
+  {
+    "match": "ahora tenemos tyc sports en el grupo",
+    "answer": "Oaa"
+  },
+  {
+    "match": "No mencionen a @all",
+    "answer": "Mencionamos a @all y?"
+  },
+  {
+    "match": "Xq despues @all se enojan",
+    "answer": "El grupo está para que hablen @all"
+  },
+  {
+    "match": "el próximo q escribe me lo cojo",
+    "answer": "@all"
+  },
+  {
+    "match": "El grupo está para que hablen @all",
+    "answer": "Si pero capas que de @all hay alguno trabajando"
+  },
+  {
+    "match": "Si pero capas que de @all hay alguno trabajando",
+    "answer": "q van a trabajar si son r vagos @all"
+  },
+  {
+    "match": "mírala a carol",
+    "answer": "No soy yo tarado"
+  },
+  {
+    "match": "No soy yo tarado",
+    "answer": "sos vos"
+  },
+  {
+    "match": "sos vos",
+    "answer": "Mátate"
+  },
+  {
+    "match": "q van a trabajar si son r vagos @all",
+    "answer": "Buen punto"
+  },
+  {
+    "match": "Mátate",
+    "answer": "vos mogo"
+  },
+  {
+    "match": "vos mogo",
+    "answer": "Morite"
+  },
+  {
+    "match": "@81819680636966 revivi y preparate unos mates clw",
+    "answer": "D1 pa"
+  },
+  {
+    "match": "qn es ese",
+    "answer": "Un amigo jaja"
+  },
+  {
+    "match": "Un amigo jaja",
+    "answer": "igual de boludo q vs?"
+  },
+  {
+    "match": "igual de boludo q vs?",
+    "answer": "No, igual que vs"
+  },
+  {
+    "match": "No, igual que vs",
+    "answer": "cheto"
+  },
+  {
+    "match": "te callo yo",
+    "answer": "Cállame"
+  },
+  {
+    "match": "Cállame",
+    "answer": "a bifes t voy a callar carol"
+  },
+  {
+    "match": "Como que mi nombre salio del grupo",
+    "answer": "JAJAJAJAJAJA"
+  },
+  {
+    "match": "pobrecito",
+    "answer": "Jajajaja"
+  },
+  {
+    "match": "a bifes t voy a callar carol",
+    "answer": "Mátate"
+  },
+  {
+    "match": "Epa",
+    "answer": "Shshss"
+  },
+  {
+    "match": "Shshss",
+    "answer": "Quere que te calle yo ahora?"
+  },
+  {
+    "match": "Quere que te calle yo ahora?",
+    "answer": "No, gracias"
+  },
+  {
+    "match": "Che tengo una idea",
+    "answer": "publicamos el link del grupo con una ft de tu orto?"
+  },
+  {
+    "match": "t están buscando los villeros",
+    "answer": "Me mato"
+  },
+  {
+    "match": "publicamos el link del grupo con una ft de tu orto?",
+    "answer": "Tambien e buena"
+  },
+  {
+    "match": "Ay que hacer actividades que mo que nos muevan y nos motiven a ser mas unidos como grupo, unas ideas pueden ser iniciar una red de narcotrafico, lavado de dinero, cocina de meta o lo que a ustedes les parezca",
+    "answer": "Trágico de órganos?"
+  },
+  {
+    "match": "Me mato",
+    "answer": "corte te moris x ellos?"
+  },
+  {
+    "match": "Tráfico de niños?",
+    "answer": "No e mala"
+  },
+  {
+    "match": "No e mala",
+    "answer": "Pero con alan no xq nos lo devuelven al tk"
+  },
+  {
+    "match": "Como anda mi amiga la antinegros?",
+    "answer": "Bien amigo, y vos?"
+  },
+  {
+    "match": "corte te moris x ellos?",
+    "answer": "BASTA"
+  },
+  {
+    "match": "Bien amigo, y vos?",
+    "answer": "Por ahora bien"
+  },
+  {
+    "match": "BASTA",
+    "answer": "no dijiste q no"
+  },
+  {
+    "match": "Tráfico de órganos?",
+    "answer": "E buena tambien"
   }
 ]

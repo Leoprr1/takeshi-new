@@ -93,7 +93,6 @@ async function getLatestNews(limit = MAX_ARTICLES) {
     await waitForFeed(page);
 
     const posts = await page.evaluate((max) => {
-      // Captura tanto posts normales como reels
       const links = Array.from(
         document.querySelectorAll("a[href*='/p/'], a[href*='/reel/']")
       ).slice(0, max);
@@ -102,7 +101,7 @@ async function getLatestNews(limit = MAX_ARTICLES) {
         const img = a.querySelector("img");
         return {
           url: a.href,
-          title: img ? img.alt || "" : "",
+          title: "", // se asignará más tarde desde el caption real
           imageUrl: img ? img.src : "",
         };
       });
@@ -138,11 +137,21 @@ async function fetchNewsDetails(items) {
         await wait(1500);
 
         const detail = await page.evaluate(() => {
-          const captionEl = document.querySelector("article span");
-          const timeEl = document.querySelector("time");
-          const imgEl = document.querySelector("article img");
+          const article = document.querySelector("article");
+
+          let summary = "";
+          if (article) {
+            const spans = Array.from(article.querySelectorAll("span"))
+              .map(s => s.innerText.trim())
+              .filter(text => text && !text.startsWith("Photo by"));
+            summary = spans.join("\n");
+          }
+
+          const timeEl = article ? article.querySelector("time") : null;
+          const imgEl = article ? article.querySelector("img") : null;
+
           return {
-            summary: captionEl ? captionEl.innerText.trim() : "",
+            summary: summary || "Noticia TyC Sports",
             time: timeEl ? new Date(timeEl.getAttribute("datetime")).toISOString() : "",
             imageUrl: imgEl ? imgEl.src : "",
           };
@@ -164,8 +173,11 @@ async function fetchNewsDetails(items) {
           }
         }
 
+        // Crear un título limpio a partir del caption (primeras 50 caracteres del primer renglón)
+        const cleanTitle = detail.summary ? detail.summary.split("\n")[0].slice(0, 50) : "Noticia TyC Sports";
+
         articles.push({
-          title: item.title,
+          title: cleanTitle,
           url: item.url,
           summary: detail.summary,
           time: detail.time,
