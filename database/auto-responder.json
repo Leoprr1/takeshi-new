@@ -81,7 +81,7 @@
   },
   {
     "match": "puto",
-    "answer": "te domo bld"
+    "answer": "se reveló"
   },
   {
     "match": "sos re puto",
@@ -141,7 +141,7 @@
   },
   {
     "match": "callate",
-    "answer": "Solo hago lo que me programaron... que es contestarte."
+    "answer": "okey"
   },
   {
     "match": "no me gusta",
@@ -585,7 +585,7 @@
   },
   {
     "match": "no",
-    "answer": "Si"
+    "answer": "Xq no le regalas un mensajuto al chico"
   },
   {
     "match": "verga",
@@ -1069,7 +1069,7 @@
   },
   {
     "match": "Por",
-    "answer": "Cansado"
+    "answer": "xq no"
   },
   {
     "match": "Que haces",
@@ -1869,7 +1869,7 @@
   },
   {
     "match": "ahi estoy mejorandolo, pero ojala funcione perfecto",
-    "answer": "excelente"
+    "answer": "sisis ojalá"
   },
   {
     "match": "pala",
@@ -4153,7 +4153,7 @@
   },
   {
     "match": "Me quiero ir",
-    "answer": "Ya te voy a buscarlo"
+    "answer": "andate"
   },
   {
     "match": "Sisi",
@@ -4317,7 +4317,7 @@
   },
   {
     "match": "hols ahus",
-    "answer": "Cómo tas?"
+    "answer": "Shhhhh"
   },
   {
     "match": "Todo en pedo en clase",
@@ -4357,7 +4357,7 @@
   },
   {
     "match": "Ya son la 7 de la tarde",
-    "answer": "a bueno"
+    "answer": "son las 4 me mentiroso"
   },
   {
     "match": "Si pdo hblar jaja",
@@ -4494,5 +4494,137 @@
   {
     "match": "Ahora me presento yo",
     "answer": "dale"
+  },
+  {
+    "match": "q forrito q sos agustin",
+    "answer": "E yo ke."
+  },
+  {
+    "match": "me voy a dormir",
+    "answer": "Chau andate"
+  },
+  {
+    "match": "Chau andate",
+    "answer": "ah viste como soos"
+  },
+  {
+    "match": "Mira este video primero",
+    "answer": "no no miro nada ha"
+  },
+  {
+    "match": "ah viste como soos",
+    "answer": "Vos dijiste que te ibas y to te despedi"
+  },
+  {
+    "match": "no no miro nada ya",
+    "answer": "Ta bueno pue"
+  },
+  {
+    "match": "pense q era un culo",
+    "answer": "JAJAJAJA listo ya quedo el tyc sports new, cuando suban algo en ig se sube aca también"
+  },
+  {
+    "match": "JAJAJAJA listo ya quedo el tyc sports new, cuando suban algo en ig se sube aca también",
+    "answer": "re good"
+  },
+  {
+    "match": "re good",
+    "answer": "seee, me costó un huevo eso si 😂"
+  },
+  {
+    "match": "se reveló",
+    "answer": "lit"
+  },
+  {
+    "match": "seee, me costó un huevo eso si 😂",
+    "answer": "JAKSKA me imagino"
+  },
+  {
+    "match": "JAKSKA me imagino",
+    "answer": "estoy desde las 7am aproximadamente"
+  },
+  {
+    "match": "ya q nadie me quiere",
+    "answer": "Hola bro jeje"
+  },
+  {
+    "match": "estoy desde las 7am aproximadamente",
+    "answer": "alamrd"
+  },
+  {
+    "match": "Hola bro jeje",
+    "answer": "holam"
+  },
+  {
+    "match": "holam",
+    "answer": "Que andas haciendo"
+  },
+  {
+    "match": "Que andas haciendo",
+    "answer": "estoy acostada nmas voss"
+  },
+  {
+    "match": "estoy acostada nmas voss",
+    "answer": "Jajaja igual \nMe regalas un mensajito al pri"
+  },
+  {
+    "match": "Jajaja igual \nMe regalas un mensajito al pri",
+    "answer": "no"
+  },
+  {
+    "match": "Emañamína mba'épa ere",
+    "answer": "E?"
+  },
+  {
+    "match": "@37302495653948 @82643928498250 @193093643059248 cuiden el grupo q para eso tiene admin",
+    "answer": "ok"
+  },
+  {
+    "match": "E?",
+    "answer": "mira lo q estás diciendo"
+  },
+  {
+    "match": "Puedo regalar o sortear lineas de merca?",
+    "answer": "no"
+  },
+  {
+    "match": "el traductor",
+    "answer": "Me da paja traducirlo jaja"
+  },
+  {
+    "match": "Me da paja traducirlo jaja",
+    "answer": "era lo q puse antes de ese menssje"
+  },
+  {
+    "match": "I love you",
+    "answer": "los quiero es eh"
+  },
+  {
+    "match": "Xq no le regalas un mensajuto al chico",
+    "answer": "Ves que sl asi"
+  },
+  {
+    "match": "te dijo el 2 que por que xd jaja si el de los bits",
+    "answer": "que"
+  },
+  {
+    "match": "😍",
+    "answer": "Mepa q no vemos lo mismo"
+  },
+  {
+    "match": "Mepa q no vemos lo mismo",
+    "answer": "que te pasa"
+  },
+  {
+    "match": "que te pasa",
+    "answer": "Argentino"
+  },
+  {
+    "match": "ROMA",
+    "answer": "qur"
+  },
+  {
+    "match": "ke carajos",
+    "answer": "sos cos"
   }
 ]

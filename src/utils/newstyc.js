@@ -2,6 +2,7 @@
  * newtyc.js — Sistema de noticias desde Instagram (TyC Sports)
  * Login manual solo la primera vez + cookies + detección de sesión expirada
  * Siempre envía al menos la última publicación
+ * Ahora soporta posts y reels
  */
 
 const puppeteer = require("puppeteer");
@@ -61,7 +62,7 @@ async function waitForFeed(page) {
   let feedDetected = false;
 
   while (!feedDetected && Date.now() - startTime < timeout) {
-    feedDetected = await page.evaluate(() => !!document.querySelector("a[href*='/p/']"));
+    feedDetected = await page.evaluate(() => !!document.querySelector("a[href*='/p/'], a[href*='/reel/']"));
     if (!feedDetected) {
       await page.evaluate(() => window.scrollBy(0, 500));
       await wait(1000);
@@ -74,7 +75,7 @@ async function waitForFeed(page) {
 }
 
 // --------------------------------------------------
-// OBTENER ÚLTIMAS PUBLICACIONES
+// OBTENER ÚLTIMAS PUBLICACIONES (POSTS Y REELS)
 // --------------------------------------------------
 async function getLatestNews(limit = MAX_ARTICLES) {
   let browser;
@@ -92,7 +93,11 @@ async function getLatestNews(limit = MAX_ARTICLES) {
     await waitForFeed(page);
 
     const posts = await page.evaluate((max) => {
-      const links = Array.from(document.querySelectorAll("a[href*='/p/']")).slice(0, max);
+      // Captura tanto posts normales como reels
+      const links = Array.from(
+        document.querySelectorAll("a[href*='/p/'], a[href*='/reel/']")
+      ).slice(0, max);
+
       return links.map(a => {
         const img = a.querySelector("img");
         return {
