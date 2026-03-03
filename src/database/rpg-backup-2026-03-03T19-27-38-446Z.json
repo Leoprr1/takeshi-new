@@ -4314,12 +4314,12 @@
   },
   "88262081273896@lid": {
     "nivel": 50,
-    "xp": 931,
+    "xp": 2854,
     "hp": 1560,
     "hpMax": 1080,
     "mana": 590,
     "manamax": 590,
-    "monedas": 18375000026544,
+    "monedas": 18375000031166,
     "arma": null,
     "armadura": {
       "code": "F06",
@@ -4449,18 +4449,20 @@
         "precio": 600000
       }
     ],
-    "lastDaily": 1771720542583,
-    "lastWork": 1772387812807,
-    "lastHunt": 1772387777529,
+    "lastDaily": 1772497710349,
+    "lastWork": 1772497677247,
+    "lastHunt": 1772497667750,
     "lastMine": 1772387808292,
-    "lastFish": 1772387803965,
+    "lastFish": 1772497672127,
     "lastDungeon": 0,
     "lastGuildMission": 0,
     "nick": "B3NJ4GOOD",
     "gremio": "Aventureros",
     "misionesActivas": [
-      "flores",
-      "ruinas"
+      "lobos",
+      "ogro",
+      "ruinas",
+      "flores"
     ],
     "misionesCompletadas": [
       "lobos",
@@ -4555,11 +4557,13 @@
       "ruinas",
       "ogro",
       "ogro",
-      "lobos"
+      "lobos",
+      "ruinas",
+      "flores"
     ],
     "profecion": null,
     "lid": "88262081273896@lid",
-    "lastRegen": 4654800000,
+    "lastRegen": 4708800000,
     "inmunidadKO": true,
     "inmunidadKOStart": 1759093332659,
     "manaMax": 440,
@@ -4586,8 +4590,8 @@
     "totalHP": 100,
     "misionesCooldown": {
       "lobos": 1771949937393,
-      "flores": 1771619600098,
-      "ruinas": 1771619608724,
+      "flores": 1772497777216,
+      "ruinas": 1772497761675,
       "ogro": 1771949929354
     },
     "hasHouse": true,
