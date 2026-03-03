@@ -25,6 +25,9 @@ const { messageHandler } = require("./messageHandler");
 const groupStats = require("../database/groupStats");
 const learningBot = require("../utils/learningBot");
 
+// 🧠 IMPORTAR LEARNING BOT 2 (solo texto, generate-memory)
+const { learnFromAllMessages } = require('../utils/learningBot2');
+
 // 🧠 IMPORTAR ELMOBOTIA
 const { getElmoBotiaResponse } = require("../utils/elmobotia");
 const { isActiveElmoBotiaGroup } = require("../utils/elmobotiamanager");
@@ -45,9 +48,15 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
       // 🚫 IGNORAR MENSAJES DUPLICADOS
       if (messageId) {
         if (processedMessages.has(messageId)) continue;
+        
+        // 🔹 LEARNING BOT 2 (guardar todos los mensajes de texto en generate-memory.json)
+        learnFromAllMessages(webMessage);
 
+
+        // 🔹 LEARNING BOT 1 (triggers/respuestas)
         learningBot.learnFromMessage(webMessage);
 
+      
         processedMessages.add(messageId);
         setTimeout(() => processedMessages.delete(messageId), 60_000);
       }

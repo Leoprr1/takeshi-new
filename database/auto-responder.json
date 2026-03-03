@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "No"
+    "answer": "Todo bien?"
   },
   {
     "match": "hola?",
@@ -17,7 +17,7 @@
   },
   {
     "match": "todo bien?",
-    "answer": "Si bro"
+    "answer": "si vos?"
   },
   {
     "match": "cómo te llamas?",
@@ -1661,7 +1661,7 @@
   },
   {
     "match": "¡Función de auto-respuesta desactivado con éxito!",
-    "answer": "hola"
+    "answer": "cajetudo"
   },
   {
     "match": "Tampoco le vas a robar las palomas",
@@ -2173,7 +2173,7 @@
   },
   {
     "match": "¡ElmoBotia activado en este grupo con éxito!",
-    "answer": "deci algo"
+    "answer": "hola"
   },
   {
     "match": "Anulo hechizo",
@@ -3293,7 +3293,7 @@
   },
   {
     "match": "Duerman",
-    "answer": "No"
+    "answer": "no querés ir conmigo vos tambirn"
   },
   {
     "match": "Llora si pierdes una partida del lol",
@@ -3989,7 +3989,7 @@
   },
   {
     "match": "bien y vos",
-    "answer": "Bien"
+    "answer": "Me alegro bro, bien"
   },
   {
     "match": "cómo 60 Lucas perdi",
@@ -5333,6 +5333,226 @@
   },
   {
     "match": "La segunda fue culpa de mi mamá q me llevó a Chile en la mitad de año y no encontró colegio",
-    "answer": "XDDDDDD"
+    "answer": "JAJAJAJAJAJAJA"
+  },
+  {
+    "match": "Ta bien aca y a hacer la traicion es de pedo es.",
+    "answer": "sos un bot?"
+  },
+  {
+    "match": "No tener la de compartir eso que ver la de aprender bro?",
+    "answer": "entiendes algo?"
+  },
+  {
+    "match": "A dormir temprano el de audio y charlar conmigo?",
+    "answer": "te amo"
+  },
+  {
+    "match": "Tendio la tuya bien gracias que no no intento serlo gracias me.",
+    "answer": "sos un bot?"
+  },
+  {
+    "match": "Jajaja no lo q ir a la calle no me la lista?",
+    "answer": "sos re puto"
+  },
+  {
+    "match": "Ojala yo lo posible.",
+    "answer": "q onda bro"
+  },
+  {
+    "match": "#",
+    "answer": "Dame admin hasta que compré otro num"
+  },
+  {
+    "match": "añadanme a tooff los grupos k tengan",
+    "answer": "Cuántos años tenes?"
+  },
+  {
+    "match": "Cuántos años tenes?",
+    "answer": "porke preguntad la edad"
+  },
+  {
+    "match": "porke preguntad la edad",
+    "answer": "Pq tengo grupos q tienen límite"
+  },
+  {
+    "match": "17 Voi a kumplir",
+    "answer": "Oka"
+  },
+  {
+    "match": "Dame admin hasta que compré otro num",
+    "answer": "Que paso"
+  },
+  {
+    "match": "Que paso",
+    "answer": "Pq me mandaron a soporte"
+  },
+  {
+    "match": "Pq me mandaron a soporte",
+    "answer": "Por pelear con una española"
+  },
+  {
+    "match": "Hla",
+    "answer": "qonda nay"
+  },
+  {
+    "match": "qonda nay",
+    "answer": "Todo bien"
+  },
+  {
+    "match": "si vos?",
+    "answer": "Sipuee todo bien nms"
+  },
+  {
+    "match": "Sipuee todo bien nms",
+    "answer": "me alegroo"
+  },
+  {
+    "match": "Me alegro bro, bien",
+    "answer": "me alegro rey"
+  },
+  {
+    "match": "qhacen",
+    "answer": "Guardo las cosas de la cocina y vos?"
+  },
+  {
+    "match": "Guardo las cosas de la cocina y vos?",
+    "answer": "toy desayunando"
+  },
+  {
+    "match": "toy desayunando",
+    "answer": "Yo desayuno cuando termine esto jaja"
+  },
+  {
+    "match": "Eso si pero el mismo y lo posible.",
+    "answer": "que pasa bro"
+  },
+  {
+    "match": "Todavia aprendo algo el comando pm no y lo es bueno pero.",
+    "answer": "fjdksh"
+  },
+  {
+    "match": "Yo desayuno cuando termine esto jaja",
+    "answer": "tabienn"
+  },
+  {
+    "match": "Si devolves si",
+    "answer": "se lo respondía como 3 veces jajajajaj"
+  },
+  {
+    "match": "Mia adentro xd jaja como callar al de eso me deja yo.",
+    "answer": "messi"
+  },
+  {
+    "match": "se lo respondía como 3 veces jajajajaj",
+    "answer": "quete pasa"
+  },
+  {
+    "match": "seguiem vod",
+    "answer": "ya te sigo mongo"
+  },
+  {
+    "match": "ya te sigo mongo",
+    "answer": "yase"
+  },
+  {
+    "match": "igual kambie el user",
+    "answer": "te hiciste italiana"
+  },
+  {
+    "match": "te hiciste italiana",
+    "answer": "yo voy a vivir en italia"
+  },
+  {
+    "match": "yo voy a vivir en italia",
+    "answer": "me llevas"
+  },
+  {
+    "match": "A mi también me encantaría",
+    "answer": "a roma me iría"
+  },
+  {
+    "match": "me llevas",
+    "answer": "vamod"
+  },
+  {
+    "match": "irías knmigo benjibendi",
+    "answer": "siksi"
+  },
+  {
+    "match": "doues vamos a londres",
+    "answer": "oka"
+  },
+  {
+    "match": "no querés ir conmigo vos tambirn",
+    "answer": "siquiero"
+  },
+  {
+    "match": "hola linda jcjaestas soltera",
+    "answer": "paravosihermosa"
+  },
+  {
+    "match": "Holasiduermann tengo sueño",
+    "answer": "no querés ir tmb"
+  },
+  {
+    "match": "criaturas miticas",
+    "answer": "messi"
+  },
+  {
+    "match": "no querés ir tmb",
+    "answer": "Adonde"
+  },
+  {
+    "match": "Yo voy",
+    "answer": "a italia"
+  },
+  {
+    "match": "a italia",
+    "answer": "Con el novio de valen ?"
+  },
+  {
+    "match": "Pedazo de lo posible.",
+    "answer": "che"
+  },
+  {
+    "match": "a roma me iría",
+    "answer": "Roma va a Roma jajja"
+  },
+  {
+    "match": "Roma va a Roma jajja",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "cancer de huevo",
+    "answer": "peessssss"
+  },
+  {
+    "match": "Con el novio de valen ?",
+    "answer": "que se yo quién es valen"
+  },
+  {
+    "match": "que se yo quién es valen",
+    "answer": "@159726125977718 ella"
+  },
+  {
+    "match": "@159726125977718 ella",
+    "answer": "pero benj esmi amigo"
+  },
+  {
+    "match": "konda una cara de nene el k se salio",
+    "answer": "JAJAJA"
+  },
+  {
+    "match": "peessssss",
+    "answer": "messi"
+  },
+  {
+    "match": "Tabas tan lista de comandos de la de lo se va a.",
+    "answer": "ccxcfewsd"
+  },
+  {
+    "match": "ccxcfewsd",
+    "answer": "gg"
   }
 ]

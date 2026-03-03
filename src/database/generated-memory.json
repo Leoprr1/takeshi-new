@@ -1,0 +1,48 @@
+{
+  "topics": {
+    "general": {
+      "keywords": [
+        "messi",
+        "bordados",
+        "hola",
+        "tematica",
+        "ccxcfewsd",
+        "gg",
+        "hhjkkigg"
+      ],
+      "wordFrequency": {
+        "messi": 2,
+        "bordados": 1,
+        "hola": 1,
+        "tematica": 1,
+        "ccxcfewsd": 1,
+        "gg": 1,
+        "hhjkkigg": 1
+      },
+      "bigrams": {},
+      "sentences": [
+        "messi",
+        "bordados",
+        "Hola",
+        "messi",
+        "temática",
+        "ccxcfewsd",
+        "gg",
+        "hhjkkigg"
+      ],
+      "totalSentences": 8
+    }
+  },
+  "global": {
+    "wordFrequency": {
+      "messi": 2,
+      "bordados": 1,
+      "hola": 1,
+      "tematica": 1,
+      "ccxcfewsd": 1,
+      "gg": 1,
+      "hhjkkigg": 1
+    },
+    "totalSentences": 8
+  }
+}
