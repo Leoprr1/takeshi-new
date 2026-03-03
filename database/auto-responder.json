@@ -5554,5 +5554,17 @@
   {
     "match": "ccxcfewsd",
     "answer": "gg"
+  },
+  {
+    "match": "Grupo muerto",
+    "answer": "#tag"
+  },
+  {
+    "match": "yo soy turno tarde jslfkdjfkñelekf redeputo lcldg",
+    "answer": "Sos re infeliz jajaja"
+  },
+  {
+    "match": "bunkers",
+    "answer": "cr7 es puto"
   }
 ]
