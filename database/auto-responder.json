@@ -1,7 +1,7 @@
 [
   {
     "match": "hola",
-    "answer": "a vs ni 10 centavos t paso timbero"
+    "answer": "No"
   },
   {
     "match": "hola?",
@@ -29,7 +29,7 @@
   },
   {
     "match": "qué haces?",
-    "answer": "mejorandote bro"
+    "answer": "Pelo papas"
   },
   {
     "match": "quién sos?",
@@ -581,11 +581,11 @@
   },
   {
     "match": "Si",
-    "answer": "Shhh"
+    "answer": "Quieres drogas?"
   },
   {
     "match": "no",
-    "answer": "si"
+    "answer": "que pasoo??"
   },
   {
     "match": "verga",
@@ -797,7 +797,7 @@
   },
   {
     "match": "so",
-    "answer": "Na mentira te quiero"
+    "answer": "Xd jajaja"
   },
   {
     "match": "Quien está mandando fotopenw",
@@ -1605,7 +1605,7 @@
   },
   {
     "match": "Vo chupala",
-    "answer": "Maleducado"
+    "answer": "JAJAJAJAJAJ es muy atrevido, me encanta"
   },
   {
     "match": "Yo creo que puedo estar en el grupo",
@@ -1929,7 +1929,7 @@
   },
   {
     "match": "Trataré de mejorar, ¡dame otra oportunidad!",
-    "answer": "ni empedo"
+    "answer": "No"
   },
   {
     "match": "mismo para que la mama etc etc etc etc etc etc etc etc etc etc etc etc etc etc",
@@ -3181,7 +3181,7 @@
   },
   {
     "match": "@all",
-    "answer": ":o"
+    "answer": "Que pasho vv"
   },
   {
     "match": "Comiendo",
@@ -3541,7 +3541,7 @@
   },
   {
     "match": "a dormir",
-    "answer": "ush"
+    "answer": "XD"
   },
   {
     "match": "Raro que no fuiste al upd vs",
@@ -3813,7 +3813,7 @@
   },
   {
     "match": "Lo peor de la traición es que jamás viene de un enemigo",
-    "answer": "JAJAJA"
+    "answer": "Mi fraseeee uwuwuwuwu"
   },
   {
     "match": "con vida propia",
@@ -3837,7 +3837,7 @@
   },
   {
     "match": "xq m dijo q lo una en grupos",
-    "answer": "interesante"
+    "answer": "Xd"
   },
   {
     "match": "No escribí mal",
@@ -4357,7 +4357,7 @@
   },
   {
     "match": "Ya son la 7 de la tarde",
-    "answer": "son las 4 me mentiroso"
+    "answer": "Xd"
   },
   {
     "match": "Si pdo hblar jaja",
@@ -5017,7 +5017,7 @@
   },
   {
     "match": "Fuera de pedo es una ia o es real?",
-    "answer": "No rial es el bot que hizo @223256997032099"
+    "answer": "Real"
   },
   {
     "match": "wiill",
@@ -5033,11 +5033,11 @@
   },
   {
     "match": "si, es un bot que aprende en base de lo que ustedes escriben, entonces con el tiempo se vuelve mas inteligente, de hecho este que responde ahora es una versión basica, esta elmobotia que es muchísimo más complejo y esta aprendiendo, con el tiempo va a poder responder como si fuera una persona real, pero necesita aprender",
-    "answer": "Que mieo"
+    "answer": "Woaaaoo"
   },
   {
     "match": "​",
-    "answer": "Alm"
+    "answer": "Yo te conozco jajaj del grupo de joda creo que era"
   },
   {
     "match": "Que mieo",
@@ -5050,5 +5050,269 @@
   {
     "match": "Que es eso",
     "answer": "cada vez que tyc sports la pagina de noticias deportivas publique algo, el bot lo comparte por aca"
+  },
+  {
+    "match": "xmo estsn",
+    "answer": "Maso y vos?"
+  },
+  {
+    "match": "Yo te conozco jajaj del grupo de joda creo que era",
+    "answer": "ami?😂"
+  },
+  {
+    "match": "Hola people",
+    "answer": "Hi"
+  },
+  {
+    "match": "Hi",
+    "answer": "Holaa cómo estás"
+  },
+  {
+    "match": "Holaa cómo estás",
+    "answer": "Bien y tu"
+  },
+  {
+    "match": "Bien y tu",
+    "answer": "Bieen gracias"
+  },
+  {
+    "match": "Maso y vos?",
+    "answer": "por?, yibein"
+  },
+  {
+    "match": "por?, yibein",
+    "answer": "No quiero contar pero gracias\nQue bueno lu"
+  },
+  {
+    "match": "Los mencionan ?",
+    "answer": "pero hace asi crack, mira"
+  },
+  {
+    "match": "Madrear a un therian 🍷🧐",
+    "answer": "Es relajante"
+  },
+  {
+    "match": "Que pasho vv",
+    "answer": "Nada vv quería ver si funcionaba"
+  },
+  {
+    "match": "Quien mrd usa la palabra madrear",
+    "answer": "Yo cavernícola"
+  },
+  {
+    "match": "Nada vv quería ver si funcionaba",
+    "answer": "Aaa okis"
+  },
+  {
+    "match": "A ver",
+    "answer": "Dime los números de la lotería"
+  },
+  {
+    "match": ".tag hola",
+    "answer": "@62178895855731 hace asi"
+  },
+  {
+    "match": "No quiero contar pero gracias\nQue bueno lu",
+    "answer": "ou, bueno brou si necesitas algo yo t escucho🫰🏻"
+  },
+  {
+    "match": "tarde me paso mi me importa igual que me das ari xd jajaja es que no me meto donde",
+    "answer": "No te doy"
+  },
+  {
+    "match": "vos que el bot de tu color de tu culo y el entorno las que me ofendi y lo",
+    "answer": "JAJAJAJAJAJJA"
+  },
+  {
+    "match": "vos aprende a dar de que yo no me pase el tiempo se si que le puede dar de",
+    "answer": "No me deja cerrar el juego de 77.4 de la pantalla y por más que mueva la cámara el mouse siempre va a seguir dentro de su cuarto"
+  },
+  {
+    "match": "bien gracias me viste que a la de eso por si es la de bot de un bot que",
+    "answer": "Pasame coca"
+  },
+  {
+    "match": "ponen nepe dice comes el 1 1 de las de la tinta asi no no es mi no de",
+    "answer": "Ahhh buenoooo"
+  },
+  {
+    "match": "No entiendo lo k dice uwu",
+    "answer": "Básicamente de todo"
+  },
+  {
+    "match": "con vos que no bro tenes pero si es lo q te juro que el de que te ponen",
+    "answer": "Ajá ,no entendí pero gracias"
+  },
+  {
+    "match": "E xq a mi no",
+    "answer": "Que opinas de los therians?"
+  },
+  {
+    "match": "Dime los números de la lotería",
+    "answer": "sexo anal en tu casa, 4pm sin falta"
+  },
+  {
+    "match": "Re loco, respuestas randoms",
+    "answer": "en teoría con el tiempo tendra conciencia propia, pero tiene muy poca información"
+  },
+  {
+    "match": "en teoría con el tiempo tendra conciencia propia, pero tiene muy poca información",
+    "answer": "Y liego conquistará el mundo"
+  },
+  {
+    "match": "Y liego conquistará el mundo",
+    "answer": "se convertirá en chat gpt en poca palabras 😂"
+  },
+  {
+    "match": "vos aprendete los comandos asi ya lo manejas a tu gusto",
+    "answer": "Es una bandaaaa"
+  },
+  {
+    "match": "Es una bandaaaa",
+    "answer": "pero almenos los básicos como el .pm, .pv y asi"
+  },
+  {
+    "match": "pero almenos los básicos como el .pm, .pv y asi",
+    "answer": "Y para k son esos"
+  },
+  {
+    "match": "Y para k son esos",
+    "answer": "el .pm para descargar musica en formato de audio y el .pv es para lo mismo pero en video"
+  },
+  {
+    "match": "❌ ¡Error! ¡Por favor, elige un número entre 1 y 6!\nEjemplo: .dado 3",
+    "answer": "🙄🙄🙄"
+  },
+  {
+    "match": ".pm hola",
+    "answer": "sos re inteligente, el tag para etiquetar a todos es( .tag lo que quieras escribir)"
+  },
+  {
+    "match": "sos re inteligente, el tag para etiquetar a todos es( .tag lo que quieras escribir)",
+    "answer": "JAJAJAJAJA"
+  },
+  {
+    "match": "Real",
+    "answer": "😂"
+  },
+  {
+    "match": "💥 *Ari🦇💤 PERDIÓ...* Apostaste al *4* pero el dado cayó en *3*! Intenta de nuevo.",
+    "answer": ".dado 3"
+  },
+  {
+    "match": "💥 *Ari🦇💤 PERDIÓ...* Apostaste al *3* pero el dado cayó en *4*! Intenta de nuevo.",
+    "answer": "Este juego no me gusta"
+  },
+  {
+    "match": "Recién me despierto 😐",
+    "answer": "Dormiste?"
+  },
+  {
+    "match": "Y este grupo pa q o q?",
+    "answer": "Para ñose"
+  },
+  {
+    "match": "#daily",
+    "answer": "❖ Para utilizar comandos de *Economía* en este grupo, se requiere desactivar el modo *sólo administradores*.\n\n> Un *administrador* puede desactivarlo con el comando » *#onlyadmin off*"
+  },
+  {
+    "match": "Si, desde las 14:30😐",
+    "answer": "Ogt jaja"
+  },
+  {
+    "match": "Ogt jaja",
+    "answer": "Y bueno, no dormí a la noche"
+  },
+  {
+    "match": "Y bueno, no dormí a la noche",
+    "answer": "Ahh claro ta bien wacho"
+  },
+  {
+    "match": "@all hablen o me los cojo",
+    "answer": "calladito me quedo"
+  },
+  {
+    "match": "Y dormi un rato mas ya que estas",
+    "answer": "Ya me voy a dormir de nuevo"
+  },
+  {
+    "match": "Me fui a la peluquería shicoos",
+    "answer": "y adivinamos como te quedó?"
+  },
+  {
+    "match": "No es medio tarde?",
+    "answer": "Hoy yaa"
+  },
+  {
+    "match": "Hoy yaa",
+    "answer": "Ahh jaja"
+  },
+  {
+    "match": "y adivinamos como te quedó?",
+    "answer": "Si"
+  },
+  {
+    "match": "Como envidio ahora a buenos aires",
+    "answer": "x??"
+  },
+  {
+    "match": "x??",
+    "answer": "Llego hoy big time rush"
+  },
+  {
+    "match": "Re lacio el pelo",
+    "answer": "Obvio"
+  },
+  {
+    "match": "Querés ser mi amigo",
+    "answer": "A smn"
+  },
+  {
+    "match": "Tenés el pelo largaso pero mall",
+    "answer": "Siii"
+  },
+  {
+    "match": "cagarte a piñas",
+    "answer": "JAJAJAJA"
+  },
+  {
+    "match": "hola roma, td bien?",
+    "answer": "no"
+  },
+  {
+    "match": "Mañana school",
+    "answer": "Si alta paja"
+  },
+  {
+    "match": "Hoy no tuve clases",
+    "answer": "Yo tuve que ir y me dijeron que no tenía clases"
+  },
+  {
+    "match": "Yo tuve que ir y me dijeron que no tenía clases",
+    "answer": "Fuuu"
+  },
+  {
+    "match": "Tu zanja redonda",
+    "answer": "La tuya bien redonda"
+  },
+  {
+    "match": "La tuya bien redonda",
+    "answer": "Si si"
+  },
+  {
+    "match": "Si si",
+    "answer": "Nono"
+  },
+  {
+    "match": "Bien plaga el wacho",
+    "answer": "Ponía lo mismo en todos los grupos jajaja"
+  },
+  {
+    "match": "Ponía lo mismo en todos los grupos jajaja",
+    "answer": "Callate"
+  },
+  {
+    "match": "Que hacen los macanas",
+    "answer": "Aca re hecho bosta"
   }
 ]

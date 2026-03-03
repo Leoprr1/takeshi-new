@@ -145,7 +145,7 @@ async function executePlay({
     await new Promise((resolve, reject) => {
       ffmpeg(stream)
         .audioCodec("libmp3lame")
-        .audioBitrate(96)
+        .audioBitrate(128)
         .format("mp3")
         .outputOptions([
           "-vbr on",
@@ -163,7 +163,7 @@ async function executePlay({
     await new Promise((resolve, reject) => {
       ffmpeg(tempMp3)
         .audioCodec("libopus")
-        .audioBitrate(96)
+        .audioBitrate(128)
         .audioFrequency(48000)
         .audioChannels(2)
         .format("ogg")
