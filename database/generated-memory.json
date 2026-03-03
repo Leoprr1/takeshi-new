@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "createdAt": 1772528068762,
+    "createdAt": 1772531993024,
     "source": "auto-responder.json",
-    "totalEntriesScanned": 1329
+    "totalEntriesScanned": 1330
   },
   "topics": {
     "saludo": {
@@ -6630,7 +6630,17 @@
         "que",
         "hacen",
         "los",
-        "macanas"
+        "macanas",
+        "error",
+        "ocurrio",
+        "un",
+        "error",
+        "failed",
+        "to",
+        "find",
+        "any",
+        "playable",
+        "formats"
       ],
       "sentences": [
         "todo bien y vos",
@@ -7900,7 +7910,8 @@
         "nono",
         "ponia lo mismo en todos los grupos jajaja",
         "callate",
-        "aca re hecho bosta"
+        "aca re hecho bosta",
+        "ytdlcore y la concha de tu puta madre"
       ],
       "wordFrequency": {
         "0": 1,
@@ -7927,7 +7938,7 @@
         "2459": 1,
         "todo": 9,
         "bien": 23,
-        "y": 93,
+        "y": 94,
         "vos": 36,
         "pelo": 2,
         "papas": 1,
@@ -7944,7 +7955,7 @@
         "pero": 39,
         "puedo": 12,
         "decirte": 1,
-        "la": 85,
+        "la": 86,
         "hora": 1,
         "si": 80,
         "me": 97,
@@ -7983,7 +7994,7 @@
         "dias": 1,
         "se": 51,
         "revelo": 1,
-        "tu": 34,
+        "tu": 35,
         "papa": 2,
         "enseno": 1,
         "a": 67,
@@ -8008,7 +8019,7 @@
         "chupala": 2,
         "gord": 2,
         "genocida": 3,
-        "de": 125,
+        "de": 126,
         "hamburgesas": 2,
         "belleza": 1,
         "esta": 17,
@@ -8326,7 +8337,7 @@
         "teta": 1,
         "viejo": 3,
         "cajeta": 1,
-        "madre": 2,
+        "madre": 3,
         "puede": 3,
         "meter": 1,
         "sabiendo": 1,
@@ -9077,7 +9088,7 @@
         "mirada": 1,
         "cum": 1,
         "hijo": 1,
-        "puta": 1,
+        "puta": 2,
         "raro": 1,
         "jjajajaajja": 1,
         "nuuuu": 1,
@@ -9127,7 +9138,7 @@
         "puajajjaaa": 1,
         "diosssss": 1,
         "agustina": 1,
-        "concha": 1,
+        "concha": 2,
         "agus": 1,
         "volvio": 1,
         "estuvimos": 1,
@@ -9500,7 +9511,8 @@
         "fuuu": 1,
         "redonda": 1,
         "ponia": 1,
-        "bosta": 1
+        "bosta": 1,
+        "ytdlcore": 1
       },
       "bigrams": {
         "todo bien": 3,
@@ -10160,7 +10172,7 @@
         "foto teta": 1,
         "tu viejo": 2,
         "la de": 3,
-        "de tu": 3,
+        "de tu": 4,
         "tu culo": 1,
         "culo y": 1,
         "y mi": 2,
@@ -11374,7 +11386,7 @@
         "no hacen": 1,
         "hacen nada": 1,
         "nada ustedes": 1,
-        "y la": 2,
+        "y la": 3,
         "verdad que": 1,
         "que no": 4,
         "no jaja": 1,
@@ -11636,7 +11648,7 @@
         "es verdad": 1,
         "puajajjaaa diosssss": 1,
         "agustina la": 1,
-        "la concha": 1,
+        "la concha": 2,
         "concha e": 1,
         "e tu": 1,
         "hermana tuya": 1,
@@ -12518,9 +12530,13 @@
         "grupos jajaja": 1,
         "aca re": 1,
         "re hecho": 1,
-        "hecho bosta": 1
+        "hecho bosta": 1,
+        "ytdlcore y": 1,
+        "concha de": 1,
+        "tu puta": 1,
+        "puta madre": 1
       },
-      "totalSentences": 1268
+      "totalSentences": 1269
     },
     "estado": {
       "keywords": [
@@ -12885,14 +12901,14 @@
       "td": 2,
       "bien": 31,
       "todo": 10,
-      "y": 96,
+      "y": 97,
       "vos": 38,
       "si": 82,
       "bro": 14,
       "me": 101,
       "llamo": 1,
       "elmobot": 3,
-      "tu": 36,
+      "tu": 37,
       "asistente": 2,
       "fiel": 2,
       "para": 34,
@@ -12920,7 +12936,7 @@
       "pero": 39,
       "puedo": 12,
       "decirte": 1,
-      "la": 86,
+      "la": 87,
       "hora": 1,
       "das": 2,
       "permiso": 2,
@@ -12983,7 +12999,7 @@
       "chupala": 3,
       "gord": 2,
       "genocida": 3,
-      "de": 125,
+      "de": 126,
       "hamburgesas": 2,
       "belleza": 1,
       "esta": 17,
@@ -13293,7 +13309,7 @@
       "teta": 1,
       "viejo": 3,
       "cajeta": 1,
-      "madre": 2,
+      "madre": 3,
       "puede": 3,
       "meter": 1,
       "sabiendo": 1,
@@ -14053,7 +14069,7 @@
       "mirada": 1,
       "cum": 1,
       "hijo": 1,
-      "puta": 1,
+      "puta": 2,
       "raro": 1,
       "jjajajaajja": 1,
       "nuuuu": 1,
@@ -14104,7 +14120,7 @@
       "puajajjaaa": 1,
       "diosssss": 1,
       "agustina": 1,
-      "concha": 1,
+      "concha": 2,
       "agus": 1,
       "volvio": 1,
       "estuvimos": 1,
@@ -14482,8 +14498,9 @@
       "fuuu": 1,
       "redonda": 1,
       "ponia": 1,
-      "bosta": 1
+      "bosta": 1,
+      "ytdlcore": 1
     },
-    "totalSentences": 1322
+    "totalSentences": 1323
   }
 }
