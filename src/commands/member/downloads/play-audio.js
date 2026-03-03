@@ -8,7 +8,6 @@ const os = require("os");
 const ffmpeg = require("fluent-ffmpeg");
 const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 
-// 🔥 IMPORTAMOS LA COLA GLOBAL
 const queue = require(`${BASE_DIR}/utils/queue`);
 
 ffmpeg.setFfmpegPath(ffmpegPath);
@@ -25,11 +24,6 @@ module.exports = {
     });
   },
 };
-
-
-/* ===============================
-   🎵 LÓGICA REAL DEL PLAY
-================================ */
 
 async function executePlay({
   socket,
@@ -53,156 +47,166 @@ async function executePlay({
 
   await sendWaitReact();
 
-  let tempMp3;
-  let tempOgg;
+  const maxGlobalAttempts = 10;
+  let globalAttempt = 0;
 
-  try {
+  while (globalAttempt < maxGlobalAttempts) {
 
-    let videoUrl;
-    let title;
-    let lengthSeconds;
-    let thumb;
-    let channel;
+    globalAttempt++;
 
-    /* ===============================
-       🔎 BUSCAR VIDEO
-    ================================ */
+    let tempMp3;
+    let tempOgg;
 
-    if (ytdl.validateURL(query)) {
+    try {
 
-      videoUrl = query;
-      const basic = await yts({ videoId: ytdl.getURLVideoID(query) });
+      let videoUrl;
+      let title;
+      let lengthSeconds;
+      let thumb;
+      let channel;
 
-      title = basic.title;
-      lengthSeconds = basic.seconds;
-      thumb = basic.thumbnail;
-      channel = basic.author?.name || "Desconocido";
+      /* ===============================
+         🔎 BUSCAR VIDEO
+      ================================ */
 
-    } else {
+      if (ytdl.validateURL(query)) {
 
-      const res = await yts(query);
-      const vid = res?.videos?.[0];
+        videoUrl = query;
+        const basic = await yts({ videoId: ytdl.getURLVideoID(query) });
 
-      if (!vid) {
-        await sendErrorReply("❌ No encontré resultados en YouTube.");
+        title = basic.title;
+        lengthSeconds = basic.seconds;
+        thumb = basic.thumbnail;
+        channel = basic.author?.name || "Desconocido";
+
+      } else {
+
+        const res = await yts(query);
+        const vid = res?.videos?.[0];
+
+        if (!vid) {
+          await sendErrorReply("❌ No encontré resultados en YouTube.");
+          return;
+        }
+
+        videoUrl = vid.url;
+        title = vid.title;
+        lengthSeconds = vid.seconds;
+        thumb = vid.thumbnail;
+        channel = vid.author?.name || "Desconocido";
+      }
+
+      if (lengthSeconds > 30 * 60) {
+        throw new WarningError("El audio dura más de 30 minutos.");
+      }
+
+      /* ===============================
+         📁 TEMP FILES
+      ================================ */
+
+      const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
+      tempMp3 = path.join(os.tmpdir(), `${uniqueId}.mp3`);
+      tempOgg = path.join(os.tmpdir(), `${uniqueId}.ogg`);
+
+      /* ===============================
+         ⬇ DESCARGA CON REINTENTO AUTOMÁTICO
+      ================================ */
+
+      let info;
+      let formats;
+      let attempts = 0;
+      const maxAttempts = 15;
+
+      while (attempts < maxAttempts) {
+        attempts++;
+
+        info = await ytdl.getInfo(videoUrl);
+        formats = ytdl.filterFormats(info.formats, "audioandvideo");
+
+        if (formats.length) break;
+
+        console.log(`Reintentando obtener formatos (${attempts}/${maxAttempts})...`);
+        await new Promise(r => setTimeout(r, 700));
+      }
+
+      if (!formats || !formats.length) {
+        throw new Error("No hay formatos audio+video disponibles");
+      }
+
+      formats.sort((a, b) => (a.bitrate || 0) - (b.bitrate || 0));
+      const lowestFormat = formats[0];
+
+      const stream = ytdl.downloadFromInfo(info, {
+        format: lowestFormat,
+        highWaterMark: 1 << 25
+      });
+
+      await new Promise((resolve, reject) => {
+        ffmpeg(stream)
+          .audioCodec("libmp3lame")
+          .audioBitrate(128)
+          .format("mp3")
+          .outputOptions([
+            "-vbr on",
+            "-compression_level 10"
+          ])
+          .on("error", reject)
+          .on("end", resolve)
+          .save(tempMp3);
+      });
+
+      await new Promise((resolve, reject) => {
+        ffmpeg(tempMp3)
+          .audioCodec("libopus")
+          .audioBitrate(128)
+          .audioFrequency(48000)
+          .audioChannels(2)
+          .format("ogg")
+          .outputOptions([
+            "-vbr on",
+            "-compression_level 10"
+          ])
+          .on("error", reject)
+          .on("end", resolve)
+          .save(tempOgg);
+      });
+
+      const buffer = fs.readFileSync(tempOgg);
+
+      if (thumb) {
+        await sendImageFromURL(
+          thumb,
+          `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}`
+        ).catch(() => {});
+      }
+
+      await socket.sendMessage(remoteJid, {
+        audio: buffer,
+        mimetype: "audio/ogg; codecs=opus",
+        ptt: true
+      });
+
+      await sendSuccessReact();
+
+      return; // ✅ si llegó hasta acá, salió bien
+
+    } catch (err) {
+
+      console.error(`Error en play (intento ${globalAttempt}):`, err);
+
+      if (globalAttempt >= maxGlobalAttempts) {
+        const msg = err?.message || String(err);
+        await sendErrorReply(`❌ Ocurrió un error: ${msg}`);
         return;
       }
 
-      videoUrl = vid.url;
-      title = vid.title;
-      lengthSeconds = vid.seconds;
-      thumb = vid.thumbnail;
-      channel = vid.author?.name || "Desconocido";
+      console.log("Reintentando comando completo...");
+      await new Promise(r => setTimeout(r, 1500));
+
+    } finally {
+      if (tempMp3 && fs.existsSync(tempMp3)) fs.unlinkSync(tempMp3);
+      if (tempOgg && fs.existsSync(tempOgg)) fs.unlinkSync(tempOgg);
     }
 
-    if (lengthSeconds > 30 * 60) {
-      throw new WarningError("El audio dura más de 30 minutos.");
-    }
-
-    /* ===============================
-       📁 TEMP FILES
-    ================================ */
-
-    const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
-    tempMp3 = path.join(os.tmpdir(), `${uniqueId}.mp3`);
-    tempOgg = path.join(os.tmpdir(), `${uniqueId}.ogg`);
-
-    /* ===============================
-       ⬇ DESCARGA CON REINTENTO AUTOMÁTICO
-    ================================ */
-
-    let info;
-    let formats;
-    let attempts = 0;
-    const maxAttempts = 15;
-
-    while (attempts < maxAttempts) {
-      attempts++;
-
-      info = await ytdl.getInfo(videoUrl);
-      formats = ytdl.filterFormats(info.formats, "audioandvideo");
-
-      if (formats.length) break;
-
-      console.log(`Reintentando obtener formatos (${attempts}/${maxAttempts})...`);
-      await new Promise(r => setTimeout(r, 700));
-    }
-
-    if (!formats || !formats.length) {
-      throw new Error("No hay formatos audio+video disponibles");
-    }
-
-    // Ordenar por menor bitrate (más liviano real)
-    formats.sort((a, b) => (a.bitrate || 0) - (b.bitrate || 0));
-
-    const lowestFormat = formats[0];
-
-    const stream = ytdl.downloadFromInfo(info, {
-      format: lowestFormat,
-      highWaterMark: 1 << 25
-    });
-
-    await new Promise((resolve, reject) => {
-      ffmpeg(stream)
-        .audioCodec("libmp3lame")
-        .audioBitrate(128)
-        .format("mp3")
-        .outputOptions([
-          "-vbr on",
-          "-compression_level 10"
-        ])
-        .on("error", reject)
-        .on("end", resolve)
-        .save(tempMp3);
-    });
-
-    /* ===============================
-       🔥 CONVERTIR A OPUS
-    ================================ */
-
-    await new Promise((resolve, reject) => {
-      ffmpeg(tempMp3)
-        .audioCodec("libopus")
-        .audioBitrate(128)
-        .audioFrequency(48000)
-        .audioChannels(2)
-        .format("ogg")
-        .outputOptions([
-          "-vbr on",
-          "-compression_level 10"
-        ])
-        .on("error", reject)
-        .on("end", resolve)
-        .save(tempOgg);
-    });
-
-    /* ===============================
-       📤 ENVIAR AUDIO + IMAGEN
-    ================================ */
-
-    const buffer = fs.readFileSync(tempOgg);
-
-    if (thumb) {
-      await sendImageFromURL(
-        thumb,
-        `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}`
-      ).catch(() => {});
-    }
-
-    await socket.sendMessage(remoteJid, {
-      audio: buffer,
-      mimetype: "audio/ogg; codecs=opus",
-      ptt: true
-    });
-
-    await sendSuccessReact();
-
-  } catch (err) {
-    console.error("Error en play:", err);
-    const msg = err?.message || String(err);
-    await sendErrorReply(`❌ Ocurrió un error: ${msg}`);
-  } finally {
-    if (tempMp3 && fs.existsSync(tempMp3)) fs.unlinkSync(tempMp3);
-    if (tempOgg && fs.existsSync(tempOgg)) fs.unlinkSync(tempOgg);
   }
 }

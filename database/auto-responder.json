@@ -5318,5 +5318,21 @@
   {
     "match": "❌ ¡Error! ❌ Ocurrió un error: Failed to find any playable formats",
     "answer": "ytdl-core y la concha de tu puta madre"
+  },
+  {
+    "match": "#tag hoy se comienzan las clases",
+    "answer": "No anda el bot"
+  },
+  {
+    "match": "mogolico que sos",
+    "answer": "La primera vez q me quedé si fue mi culpa"
+  },
+  {
+    "match": "#tag buen diaaaaa",
+    "answer": "Ya vínculo acá"
+  },
+  {
+    "match": "La segunda fue culpa de mi mamá q me llevó a Chile en la mitad de año y no encontró colegio",
+    "answer": "XDDDDDD"
   }
 ]
