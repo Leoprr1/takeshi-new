@@ -10416,5 +10416,35 @@
     "answers": [
       "sos tremendo gey"
     ]
+  },
+  {
+    "match": "@all respondad",
+    "answers": [
+      "Ni"
+    ]
+  },
+  {
+    "match": "Y si me acaricias la mambreta?",
+    "answers": [
+      "1 no tenes 2 no"
+    ]
+  },
+  {
+    "match": "1 no tenes 2 no",
+    "answers": [
+      "E?"
+    ]
+  },
+  {
+    "match": "No*",
+    "answers": [
+      "Ta bien 👍"
+    ]
+  },
+  {
+    "match": "Ta bien 👍",
+    "answers": [
+      "Mentira mi amor 🥺"
+    ]
   }
 ]
