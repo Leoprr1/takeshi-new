@@ -4,7 +4,7 @@
     "age": 23,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/620485926_1206638688260707_2153868945442048660_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wFsx_qZjifc35bhJRLTlYkWmLvkIF33aUmV_A_uu5qH2A&oe=69B559BF&_nc_sid=5e03e0&_nc_cat=107",
     "registeredAt": 1772594534960,
-    "commandsUsed": 96
+    "commandsUsed": 105
   },
   "148137834471521@lid": {
     "name": "cande",
@@ -40,5 +40,12 @@
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/534428712_1561512261844274_5394192860823701440_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wHifOjey7evbbYslkMH6RSBpweLElmdYThOmD5B9LTOxQ&oe=69B5A33B&_nc_sid=5e03e0&_nc_cat=100",
     "registeredAt": 1772651677278,
     "commandsUsed": 1
+  },
+  "256538514092254@lid": {
+    "name": "Cristina",
+    "age": 45,
+    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/608411853_1371135693951770_3788628555843479123_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wGZppmlTloA8k5x9w7DOiPQCc9Nesxho-zHhmc1MEeJaA&oe=69B59DA8&_nc_sid=5e03e0&_nc_cat=105",
+    "registeredAt": 1772653152106,
+    "commandsUsed": 2
   }
 }

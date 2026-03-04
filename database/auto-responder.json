@@ -9047,7 +9047,8 @@
   {
     "match": "Hola y tú eres?",
     "answers": [
-      "Es una niña toda boba no le hagas caso"
+      "Es una niña toda boba no le hagas caso",
+      "como estas"
     ]
   },
   {
@@ -10408,6 +10409,12 @@
     "answers": [
       "X2",
       "Hablame jaja"
+    ]
+  },
+  {
+    "match": "Luquisss",
+    "answers": [
+      "sos tremendo gey"
     ]
   }
 ]

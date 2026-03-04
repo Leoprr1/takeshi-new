@@ -132,6 +132,7 @@ exports.menuMessage = (groupJid) => {
 ▢ • \`${prefix}sticker\` <-- *te crea un sticker si seleccionas una imagen o video*
 ▢ • \`${prefix}pm\` <-- *para descargar audios como musica*
 ▢ • \`${prefix}pv\` <-- *para descargar videos*
+▢ • \`${prefix}mp3\` <-- *para descargar audios como musica pero en mp3 guardable*
 ▢ • \`${prefix}abrazar\` <--|
 ▢ • \`${prefix}besar\`      |
 ▢ • \`${prefix}bofetada\`   |
