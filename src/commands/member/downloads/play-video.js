@@ -8,6 +8,11 @@ const { spawn } = require("child_process");
 
 const queue = require(`${BASE_DIR}/utils/queue`);
 
+const CACHE_DIR = path.join(__dirname, "../../cache/video");
+const MAX_CACHE_MB = 200;
+
+if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
+
 module.exports = {
   name: "pv",
   description: "Descarga y envía video desde YouTube optimizado",
@@ -15,7 +20,6 @@ module.exports = {
   usage: `${PREFIX}play-video duki goteo`,
 
   handle: async (ctx) => {
-
     await queue.add(async () => {
 
       const {
@@ -41,17 +45,15 @@ module.exports = {
       let globalAttempt = 0;
 
       while (globalAttempt < maxGlobalAttempts) {
-
         globalAttempt++;
+
         let tempFile;
+        let finalFile;
+        let cacheFile;
 
         try {
 
-          let videoUrl;
-          let title;
-          let lengthSeconds;
-          let thumb;
-          let channel;
+          let videoUrl, title, lengthSeconds, thumb, channel;
 
           /* ===============================
              🔎 BUSCAR VIDEO
@@ -60,14 +62,11 @@ module.exports = {
           if (/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)/.test(query)) {
             videoUrl = query;
             const basic = await yts({ videoId: query.split("v=")[1]?.split("&")[0] });
-
             title = basic?.title || "Desconocido";
             lengthSeconds = basic?.seconds || 0;
             thumb = basic?.thumbnail;
             channel = basic?.author?.name || "Desconocido";
-
           } else {
-
             const res = await yts(query);
             const vid = res?.videos?.[0];
 
@@ -83,54 +82,71 @@ module.exports = {
             channel = vid.author?.name || "Desconocido";
           }
 
-          if (lengthSeconds > 30 * 60) {
+          if (lengthSeconds > 30 * 60)
             throw new WarningError("El video dura más de 30 minutos.");
+
+          /* ===============================
+             🔑 CACHE
+          ================================ */
+
+          const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+          cacheFile = path.join(CACHE_DIR, `${safeTitle}.mp4`);
+
+          if (fs.existsSync(cacheFile)) {
+            console.log("⚡ Usando video cacheado");
+            finalFile = cacheFile;
+          } else {
+
+            /* ===============================
+               📁 TEMP FILE
+            ================================ */
+
+            const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
+            tempFile = path.join(os.tmpdir(), `${uniqueId}.mp4`);
+            finalFile = tempFile;
+
+            /* ===============================
+               ⬇ DESCARGAR CON YT-DLP
+            ================================ */
+
+            const ytDlpPath = path.join(process.cwd(), "yt-dlp.exe");
+
+            const args = [
+              "-f", "mp4[height<=480]/best[height<=480]",
+              "--no-playlist",
+              "--concurrent-fragments", "4",
+              "--retries", "5",
+              "--quiet",
+              "-o", tempFile.replace(/\\/g, "/"),
+              videoUrl
+            ];
+
+            await new Promise((resolve, reject) => {
+
+              const child = spawn(ytDlpPath, args, {
+                windowsHide: true,
+                stdio: "ignore",
+                creationFlags: 0x08000000
+              });
+
+              child.on("error", err =>
+                reject(new Error("Error al ejecutar yt-dlp: " + err.message))
+              );
+
+              child.on("close", code => {
+                if (code === 0 && fs.existsSync(tempFile)) resolve();
+                else reject(new Error("No se pudo descargar el video. Código: " + code));
+              });
+
+            });
+
+            /* ===============================
+               💾 GUARDAR EN CACHE
+            ================================ */
+
+            fs.copyFileSync(tempFile, cacheFile);
+            cleanCache();
           }
-
-          /* ===============================
-             📁 ARCHIVO TEMP
-          ================================ */
-
-          const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
-          tempFile = path.join(os.tmpdir(), `${uniqueId}.mp4`);
-
-          /* ===============================
-             ⬇ DESCARGAR CON YT-DLP
-          ================================ */
-
-          const ytDlpPath = path.join(process.cwd(), "yt-dlp.exe");
-
-          const args = [
-            "-f", "mp4[height<=480]",
-            "-o", tempFile.replace(/\\/g, "/"),
-            videoUrl
-          ];
-
-          await new Promise((resolve, reject) => {
-
-            const child = spawn(ytDlpPath, args, { windowsHide: true });
-
-            child.stdout.on("data", (data) => {
-              console.log("[yt-dlp-video]", data.toString());
-            });
-
-            child.stderr.on("data", (data) => {
-              console.error("[yt-dlp-video]", data.toString());
-            });
-
-            child.on("error", (err) => {
-              reject(new Error("Error al ejecutar yt-dlp: " + err.message));
-            });
-
-            child.on("close", (code) => {
-              if (code === 0 && fs.existsSync(tempFile)) {
-                resolve();
-              } else {
-                reject(new Error("No se pudo descargar el video. Código: " + code));
-              }
-            });
-
-          });
 
           /* ===============================
              📤 ENVIAR
@@ -143,27 +159,25 @@ module.exports = {
             ).catch(() => {});
           }
 
-          await sendVideoFromURL(tempFile);
+          await sendVideoFromURL(finalFile);
 
           await sendSuccessReact();
-
           return;
 
         } catch (err) {
 
           console.error(`Error en play-video (intento ${globalAttempt}):`, err);
 
-          if (globalAttempt >= 5) {
+          if (globalAttempt >= maxGlobalAttempts) {
             await sendErrorReply(`❌ Ocurrió un error: ${err.message}`);
             return;
           }
 
-          console.log("Reintentando comando completo play-video...");
           await new Promise(r => setTimeout(r, 1500));
 
         } finally {
 
-          if (tempFile && fs.existsSync(tempFile)) {
+          if (tempFile && fs.existsSync(tempFile) && tempFile !== cacheFile) {
             fs.unlinkSync(tempFile);
           }
 
@@ -172,6 +186,35 @@ module.exports = {
       }
 
     });
-
   },
 };
+
+/* ===============================
+   🧹 LIMPIEZA CACHE 200MB
+=============================== */
+
+function cleanCache() {
+
+  if (!fs.existsSync(CACHE_DIR)) return;
+
+  const files = fs.readdirSync(CACHE_DIR).map(file => {
+    const filePath = path.join(CACHE_DIR, file);
+    const stats = fs.statSync(filePath);
+    return { path: filePath, size: stats.size, mtime: stats.mtimeMs };
+  });
+
+  let totalSize = files.reduce((acc, f) => acc + f.size, 0);
+  const maxBytes = MAX_CACHE_MB * 1024 * 1024;
+
+  if (totalSize <= maxBytes) return;
+
+  files.sort((a, b) => a.mtime - b.mtime);
+
+  for (const file of files) {
+    if (totalSize <= maxBytes) break;
+    fs.unlinkSync(file.path);
+    totalSize -= file.size;
+  }
+
+  console.log("🧹 Cache de video limpiado automáticamente (200MB máximo).");
+}

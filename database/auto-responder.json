@@ -839,13 +839,15 @@
   {
     "match": "Si",
     "answers": [
-      "Q raro q no conozcas un cargador"
+      "Q raro q no conozcas un cargador",
+      "Okk"
     ]
   },
   {
     "match": "no",
     "answers": [
-      "Si"
+      "Si",
+      "JAJAJAJAJA"
     ]
   },
   {
@@ -1122,7 +1124,8 @@
   {
     "match": "so",
     "answers": [
-      "Okas"
+      "Okas",
+      ".cum"
     ]
   },
   {
@@ -6523,7 +6526,8 @@
     "match": "Me presento?",
     "answers": [
       "Si por vafor",
-      "Si por favor"
+      "Si por favor",
+      "Si"
     ]
   },
   {
@@ -7148,7 +7152,8 @@
     "match": "se me fue el teclado perdon aajajaja",
     "answers": [
       "Jajaja no pasa nd",
-      "Tranqui"
+      "Tranqui",
+      "Mano desactiven el puto bot, no es una persona pero ya me cae mal xd"
     ]
   },
   {
@@ -7370,7 +7375,8 @@
   {
     "match": "Fuera de pedo es una ia o es real?",
     "answers": [
-      "Rial"
+      "Rial",
+      "es rial"
     ]
   },
   {
@@ -10297,6 +10303,111 @@
     "match": "Ave si te gusta mi termo",
     "answers": [
       "A ver tu termo"
+    ]
+  },
+  {
+    "match": "Holiis",
+    "answers": [
+      "Holaa!!"
+    ]
+  },
+  {
+    "match": "Con?",
+    "answers": [
+      "noc"
+    ]
+  },
+  {
+    "match": "cuando está mi hermano y puede cocinar",
+    "answers": [
+      "Me reprecenta"
+    ]
+  },
+  {
+    "match": "La q se salió fue mi nva\nYo pregunto\nQuien la agrego",
+    "answers": [
+      "Siempre estuvo"
+    ]
+  },
+  {
+    "match": "Presentate plis @34497881997366",
+    "answers": [
+      "Me presento?",
+      "me llamo melissa, tengo 20 años y soy de quilmes"
+    ]
+  },
+  {
+    "match": "@62178895855731 tu canción 😂",
+    "answers": [
+      "NANANANANAJ"
+    ]
+  },
+  {
+    "match": "me llamo melissa, tengo 20 años y soy de quilmes",
+    "answers": [
+      "Esoo"
+    ]
+  },
+  {
+    "match": "como andan? todo bien?",
+    "answers": [
+      "Todo bien y vos?",
+      "Que honda??"
+    ]
+  },
+  {
+    "match": "todo bien, aburrida",
+    "answers": [
+      "Cómo que burrida"
+    ]
+  },
+  {
+    "match": "Y para colmo cuando vea eso me bloquea",
+    "answers": [
+      "Seguramente jaja"
+    ]
+  },
+  {
+    "match": "NANANANANAJ",
+    "answers": [
+      "sisisis"
+    ]
+  },
+  {
+    "match": "Me hablo",
+    "answers": [
+      "@62178895855731 ari atrevida"
+    ]
+  },
+  {
+    "match": "@193093643059248 estas para jugar un rato?",
+    "answers": [
+      "No che"
+    ]
+  },
+  {
+    "match": "@273121516994682 tienes facebook ?",
+    "answers": [
+      "La cuenta de mi papá"
+    ]
+  },
+  {
+    "match": "@62178895855731 ari atrevida",
+    "answers": [
+      "No rial jajajajaj"
+    ]
+  },
+  {
+    "match": "✅ Usuario registrado correctamente como Uchiha, 1000 años.",
+    "answers": [
+      ".cum"
+    ]
+  },
+  {
+    "match": "busco amigos estoy aburrida 😋",
+    "answers": [
+      "X2",
+      "Hablame jaja"
     ]
   }
 ]

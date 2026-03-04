@@ -4,7 +4,7 @@
     "age": 23,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/620485926_1206638688260707_2153868945442048660_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wFsx_qZjifc35bhJRLTlYkWmLvkIF33aUmV_A_uu5qH2A&oe=69B559BF&_nc_sid=5e03e0&_nc_cat=107",
     "registeredAt": 1772594534960,
-    "commandsUsed": 66
+    "commandsUsed": 96
   },
   "148137834471521@lid": {
     "name": "cande",
@@ -33,5 +33,12 @@
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/534426706_1211492844398255_5117639574441094741_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wGGIcQ2JHV2g2h1ApZ8QjVuRTE8eBB8x0bojBN32SopwA&oe=69B53B26&_nc_sid=5e03e0&_nc_cat=109",
     "registeredAt": 1772634944528,
     "commandsUsed": 2
+  },
+  "145617057787995@lid": {
+    "name": "Uchiha",
+    "age": 1000,
+    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/534428712_1561512261844274_5394192860823701440_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wHifOjey7evbbYslkMH6RSBpweLElmdYThOmD5B9LTOxQ&oe=69B5A33B&_nc_sid=5e03e0&_nc_cat=100",
+    "registeredAt": 1772651677278,
+    "commandsUsed": 1
   }
 }
