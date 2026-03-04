@@ -77,17 +77,15 @@ function normalizeText(text) {
   let normalized = text
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "") // quitar acentos
-    .replace(/(.)\1{2,}/g, "$1") // quita letras duplicadas más de 2
-    .replace(/[^\w\s]/g, ""); // quitar símbolos excepto espacios
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/(.)\1{2,}/g, "$1")
+    .replace(/[^\w\s]/g, "");
 
-  // aplicar abreviaturas
   for (const [key, value] of Object.entries(abbreviations)) {
     const regex = new RegExp(`\\b${key}\\b`, "gi");
     normalized = normalized.replace(regex, value);
   }
 
-  // eliminar stopwords cortas
   const stopwords = ["de", "la", "el", "y", "a", "en", "lo", "un", "una"];
   normalized = normalized
     .split(/\s+/)
@@ -110,32 +108,40 @@ exports.getAutoResponderResponse = (match) => {
     (a, b) => b.match.length - a.match.length
   );
 
-  // 1️⃣ Exacta
+  const getRandomAnswer = (response) => {
+    if (!Array.isArray(response.answers) || response.answers.length === 0)
+      return null;
+
+    return response.answers[
+      Math.floor(Math.random() * response.answers.length)
+    ];
+  };
+
   for (const response of sortedResponses) {
-    if (normalizeText(response.match) === normalizedMessage) return response.answer;
+    if (normalizeText(response.match) === normalizedMessage)
+      return getRandomAnswer(response);
   }
 
-  // 2️⃣ Coincidencia por palabra completa
   const messageWords = normalizedMessage.split(/\s+/);
   for (const response of sortedResponses) {
     const ruleWords = normalizeText(response.match).split(/\s+/);
     if (ruleWords.length <= 2) continue;
-    if (ruleWords.every((w) => messageWords.includes(w))) return response.answer;
+    if (ruleWords.every((w) => messageWords.includes(w)))
+      return getRandomAnswer(response);
   }
 
-  // 3️⃣ Includes parcial
   for (const response of sortedResponses) {
     const rule = normalizeText(response.match);
     if (rule.length <= 2) continue;
-    if (normalizedMessage.includes(rule)) return response.answer;
+    if (normalizedMessage.includes(rule))
+      return getRandomAnswer(response);
   }
 
-  // 4️⃣ Similitud fuzzy
   for (const response of sortedResponses) {
     const rule = normalizeText(response.match);
     if (rule.length <= 3) continue;
     if (stringSimilarity.compareTwoStrings(normalizedMessage, rule) >= 0.75)
-      return response.answer;
+      return getRandomAnswer(response);
   }
 
   return null;
@@ -299,13 +305,33 @@ exports.getPrefix = (groupJid) => readJSON(PREFIX_GROUPS_FILE, {})[groupJid] || 
 // =====================
 exports.listAutoResponderItems = () => {
   const responses = readJSON(AUTO_RESPONDER_FILE, []);
-  return responses.map((item, index) => ({ key: index + 1, match: item.match, answer: item.answer }));
+  return responses.map((item, index) => ({
+    key: index + 1,
+    match: item.match,
+    answers: item.answers || []
+  }));
 };
 
 exports.addAutoResponderItem = (match, answer) => {
   const responses = readJSON(AUTO_RESPONDER_FILE, []);
-  if (responses.find(r => r.match.toUpperCase() === match.toUpperCase())) return false;
-  responses.push({ match: match.trim(), answer: answer.trim() });
+
+  const existing = responses.find(
+    r => r.match.toUpperCase() === match.toUpperCase()
+  );
+
+  if (existing) {
+    if (!existing.answers.includes(answer.trim())) {
+      existing.answers.push(answer.trim());
+      writeJSON(AUTO_RESPONDER_FILE, responses, []);
+    }
+    return true;
+  }
+
+  responses.push({
+    match: match.trim(),
+    answers: [answer.trim()]
+  });
+
   writeJSON(AUTO_RESPONDER_FILE, responses, []);
   return true;
 };

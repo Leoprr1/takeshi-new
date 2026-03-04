@@ -1328,12 +1328,12 @@
   },
   "223256997032099@lid": {
     "nivel": 538,
-    "xp": 41698,
+    "xp": 42198,
     "hp": 12184,
     "hpMax": 10780,
     "mana": 5470,
     "manamax": 5470,
-    "monedas": 3561517075222426,
+    "monedas": 3561517075223437,
     "arma": {
       "code": "H05",
       "nombre": "🌑 Guante de zeno Sama 🌙⚔️",
@@ -1421,7 +1421,7 @@
       }
     ],
     "lastDaily": 1771714277757,
-    "lastWork": 1760474255123,
+    "lastWork": 1772573526198,
     "lastHunt": 1770966222294,
     "lastMine": 1770966224403,
     "lastFish": 1770966228170,
@@ -2197,7 +2197,7 @@
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1764135216153,
+    "lastRegen": 1764153216153,
     "homeChest": [
       {
         "code": "H01",

@@ -1,27 +1,23 @@
 // 🔥 learningBot.js
 require("./brainbuilder");
-const db = require("./database"); // Tu database.js
+const db = require("./database");
 const stringSimilarity = require("string-similarity");
 
-const LEARNING_FILE = "learning"; // archivo temporal
-const FREQUENCY_THRESHOLD = 1; // mínimo para pasar a auto-responder
+const LEARNING_FILE = "learning";
+const SIMILARITY_THRESHOLD = 0.85;
 
 /**
- * 🔹 Aprende un mensaje del grupo y su respuesta
- * Ignora cualquier mensaje enviado por el bot
- * @param {object} webMessage Mensaje recibido de WhatsApp
+ * ==============================
+ * 🔹 LEER MENSAJE Y APRENDER
+ * ==============================
  */
 function learnFromMessage(webMessage) {
   if (!webMessage?.message) return;
-
-  // 🔹 Ignorar mensajes enviados por el bot
   if (webMessage?.key?.fromMe) return;
 
-  // Extraer texto del mensaje actual
   const answerText = extractTextFromMessage(webMessage.message);
   if (!answerText || answerText.length < 2) return;
 
-  // 🔹 Ver si es respuesta a otro mensaje
   let triggerText = null;
   const quoted =
     webMessage.message.extendedTextMessage?.contextInfo?.quotedMessage;
@@ -29,58 +25,160 @@ function learnFromMessage(webMessage) {
   if (quoted) {
     triggerText = extractTextFromMessage(quoted);
 
-    // 🔹 Ignorar si el mensaje citado fue enviado por el bot
     const fromBotQuoted =
       webMessage.message.extendedTextMessage?.contextInfo?.participant ===
       webMessage.key?.fromMe;
+
     if (fromBotQuoted) return;
   }
 
-  // Si no hay trigger, no aprendemos (evitamos guardar mensaje→mensaje mismo)
   if (!triggerText) return;
 
   saveLearning(triggerText, answerText);
 }
 
 /**
- * 🔹 Guardar el par trigger -> answer en learning.json
+ * ==============================
+ * 🔹 Guardar en learning.json
+ * ==============================
  */
 function saveLearning(trigger, answer) {
   const learning = db.readJSON(LEARNING_FILE, []);
 
-  const normalizedTrigger = normalize(trigger);
-
-  // Verificar si ya existe el trigger
-  const existing = learning.find(
-    (item) => normalize(item.trigger) === normalizedTrigger
-  );
-
-  if (existing) {
-    existing.answer = answer.trim(); // reemplaza la respuesta con la más reciente
-    existing.frequency = (existing.frequency || 1) + 1;
-  } else {
-    learning.push({
-      trigger: trigger.trim(),
-      answer: answer.trim(),
-      frequency: 1,
-    });
-  }
+  learning.push({
+    trigger: trigger.trim(),
+    answer: answer.trim(),
+    frequency: 1,
+  });
 
   db.writeJSON(LEARNING_FILE, learning);
 
-  // Intentar pasar al auto-responder
   checkAndExportToAutoResponder();
 }
 
 /**
- * 🔹 Extraer texto de cualquier tipo de mensaje
+ * ==============================
+ * 🔥 REORGANIZAR AUTO-RESPONDER.JSON
+ * ==============================
+ * - Convierte formato viejo (answer → answers[])
+ * - Agrupa duplicados por match
+ * - Si respuesta es similar → reemplaza
+ * - Si diferente → agrega
+ */
+function reorganizeAutoResponder() {
+  const autoResponder = db.readJSON("auto-responder", []);
+  const grouped = {};
+
+  for (const item of autoResponder) {
+    if (!item.match) continue;
+
+    const normalizedMatch = normalize(item.match);
+
+    if (!grouped[normalizedMatch]) {
+      grouped[normalizedMatch] = {
+        match: item.match.trim(),
+        answers: [],
+      };
+    }
+
+    // 🔹 Unificar formato viejo
+    let answersToProcess = [];
+
+    if (Array.isArray(item.answers)) {
+      answersToProcess = item.answers;
+    } else if (item.answer) {
+      answersToProcess = [item.answer];
+    }
+
+    for (const ans of answersToProcess) {
+      const existingAnswers = grouped[normalizedMatch].answers;
+
+      const similarIndex = existingAnswers.findIndex(existing =>
+        stringSimilarity.compareTwoStrings(
+          normalize(existing),
+          normalize(ans)
+        ) >= SIMILARITY_THRESHOLD
+      );
+
+      if (similarIndex !== -1) {
+        // 🔥 Reemplazar similar
+        existingAnswers[similarIndex] = ans.trim();
+      } else {
+        // 🔥 Agregar diferente
+        existingAnswers.push(ans.trim());
+      }
+    }
+  }
+
+  // 🔥 Convertir objeto agrupado en array final
+  const reorganized = Object.values(grouped);
+
+  db.writeJSON("auto-responder", reorganized);
+}
+
+/**
+ * ==============================
+ * 🔹 EXPORTAR LEARNING A AUTO-RESPONDER
+ * ==============================
+ */
+function checkAndExportToAutoResponder() {
+  const learning = db.readJSON(LEARNING_FILE, []);
+  const autoResponder = db.readJSON("auto-responder", []);
+
+  for (const item of learning) {
+    const index = autoResponder.findIndex(
+      (r) => normalize(r.match) === normalize(item.trigger)
+    );
+
+    if (index !== -1) {
+
+      if (!Array.isArray(autoResponder[index].answers)) {
+        autoResponder[index].answers = autoResponder[index].answer
+          ? [autoResponder[index].answer]
+          : [];
+        delete autoResponder[index].answer;
+      }
+
+      const similarIndex = autoResponder[index].answers.findIndex(ans =>
+        stringSimilarity.compareTwoStrings(
+          normalize(ans),
+          normalize(item.answer)
+        ) >= SIMILARITY_THRESHOLD
+      );
+
+      if (similarIndex !== -1) {
+        autoResponder[index].answers[similarIndex] = item.answer;
+      } else {
+        autoResponder[index].answers.push(item.answer);
+      }
+
+    } else {
+      autoResponder.push({
+        match: item.trigger,
+        answers: [item.answer],
+      });
+    }
+  }
+
+  db.writeJSON("auto-responder", autoResponder);
+  db.writeJSON(LEARNING_FILE, []);
+
+  // 🔥 REORGANIZAR TODO EL ARCHIVO DESPUÉS
+  reorganizeAutoResponder();
+}
+
+/**
+ * ==============================
+ * 🔹 EXTRAER TEXTO
+ * ==============================
  */
 function extractTextFromMessage(message) {
   if (!message) return "";
 
   if (message.conversation) return message.conversation;
 
-  if (message.extendedTextMessage?.text) return message.extendedTextMessage.text;
+  if (message.extendedTextMessage?.text)
+    return message.extendedTextMessage.text;
 
   if (message.buttonsResponseMessage?.selectedDisplayText)
     return message.buttonsResponseMessage.selectedDisplayText;
@@ -92,7 +190,9 @@ function extractTextFromMessage(message) {
 }
 
 /**
- * 🔹 Normalizar texto para comparar
+ * ==============================
+ * 🔹 NORMALIZAR TEXTO
+ * ==============================
  */
 function normalize(text = "") {
   return text
@@ -101,37 +201,6 @@ function normalize(text = "") {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[.,!?¿¡;]/g, "")
     .trim();
-}
-
-/**
- * 🔹 Revisar aprendizaje frecuente y pasarlo a auto-responder
- */
-function checkAndExportToAutoResponder() {
-  const learning = db.readJSON(LEARNING_FILE, []);
-  const remainingLearning = [];
-
-  for (const item of learning) {
-    if ((item.frequency || 0) >= FREQUENCY_THRESHOLD) {
-      const added = db.addAutoResponderItem(item.trigger, item.answer);
-
-      if (!added) {
-        const allResponses = db.readJSON("auto-responder", []);
-        const index = allResponses.findIndex(
-          (r) => normalize(r.match) === normalize(item.trigger)
-        );
-        if (index !== -1) {
-          allResponses[index].answer = item.answer.trim();
-          db.writeJSON("auto-responder", allResponses);
-        } else {
-          remainingLearning.push(item);
-        }
-      }
-    } else {
-      remainingLearning.push(item);
-    }
-  }
-
-  db.writeJSON(LEARNING_FILE, remainingLearning);
 }
 
 module.exports = { learnFromMessage };
