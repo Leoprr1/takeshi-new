@@ -173,7 +173,7 @@ async function executePlay({
       if (thumb) {
         await sendImageFromURL(
           thumb,
-          `*Título*: ${title}\n*Duración*: ${minutes}m ${seconds}s\n*Canal*: ${channel}\n*Bitrate*: ${audioBitrate}\n*Peso*: ${fileSizeMB}MB`
+          `\`*Título*:\` ${title}\n\`*Duración*:\` ${minutes}m ${seconds}s\n\`*Canal*:\` ${channel}\n\`*Bitrate*:\` ${audioBitrate}\n\`*Peso*:\` ${fileSizeMB}MB`
         ).catch(() => {});
       }
 
