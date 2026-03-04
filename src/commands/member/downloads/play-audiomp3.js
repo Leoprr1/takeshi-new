@@ -4,7 +4,7 @@ const yts = require("yt-search");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
-const { spawn } = require("child_process");
+const { spawn, exec } = require("child_process");
 const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 
 const queue = require(`${BASE_DIR}/utils/queue`);
@@ -88,9 +88,15 @@ async function executeMP3({
       const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
       cacheFile = path.join(CACHE_DIR, `${safeTitle}.mp3`);
 
+      let fileSizeBytes;
+      let audioBitrate = "Desconocido";
+
       if (fs.existsSync(cacheFile)) {
         console.log("⚡ Usando MP3 cacheado");
         finalFile = cacheFile;
+        const stats = fs.statSync(finalFile);
+        fileSizeBytes = stats.size;
+        audioBitrate = await getAudioBitrate(finalFile);
       } else {
         const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
         tempFile = path.join(os.tmpdir(), `${uniqueId}.m4a`);
@@ -146,25 +152,33 @@ async function executeMP3({
           ff.on("close", code => code === 0 ? resolve() : reject(new Error("Error convirtiendo a MP3")));
         });
 
+        const stats = fs.statSync(finalFile);
+        fileSizeBytes = stats.size;
+        audioBitrate = await getAudioBitrate(finalFile);
+
         fs.copyFileSync(finalFile, cacheFile);
         cleanCache();
         fs.unlinkSync(tempFile);
       }
 
       /* ===============================
-         📤 ENVIAR IMAGEN + MP3 REPRODUCIBLE
+         📤 ENVIAR IMAGEN + MP3
       ================================ */
+      const minutes = Math.floor(lengthSeconds / 60);
+      const seconds = lengthSeconds % 60;
+      const fileSizeMB = (fileSizeBytes / (1024 * 1024)).toFixed(2);
+
       if (thumb) {
         await sendImageFromURL(
           thumb,
-          `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}\n*Formato*: MP3 320kbps`
+          `*Título*: ${title}\n*Duración*: ${minutes}m ${seconds}s\n*Canal*: ${channel}\n*Bitrate*: ${audioBitrate}\n*Peso*: ${fileSizeMB}MB`
         ).catch(() => {});
       }
 
       await socket.sendMessage(remoteJid, {
         audio: fs.readFileSync(finalFile),
         mimetype: "audio/mpeg",
-        ptt: false // ⬅ reproducible
+        ptt: false
       });
 
       await sendSuccessReact();
@@ -207,4 +221,18 @@ function cleanCache() {
   }
 
   console.log("🧹 Cache MP3 limpiado automáticamente (100MB máximo).");
+}
+
+/* ===============================
+   🔍 FUNCIONES AUXILIARES
+=============================== */
+function getAudioBitrate(filePath) {
+  return new Promise((resolve) => {
+    exec(`"${ffmpegPath}" -i "${filePath}" 2>&1`, (err, stdout, stderr) => {
+      const info = stderr || stdout;
+      const match = info.match(/bitrate:\s*(\d+ kb\/s)/i);
+      if (match) resolve(match[1]);
+      else resolve("Desconocido");
+    });
+  });
 }

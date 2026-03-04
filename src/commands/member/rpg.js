@@ -584,42 +584,39 @@ function getDefense(user,u = {}) {
 function helpText() {
   const p = PREFIX;
   return (
-`🎮 *RPG – Comandos*
-• ${p}rpg setname
-• ${p}rpg stats
-• ${p}rpg inventory
-• ${p}rpg daily
-• ${p}rpg work
-• ${p}rpg gremio
-• ${p}rpg academia
-• ${p}rpg casino
-• ${p}rpg dungeon D1/D2/D3
-• ${p}rpg mazmorra legendaria L1/L2/L3
-• ${p}rpg isla corrupta I1/I2/I3
-• ${p}rpg evento-mascota
-• ${p}rpg hunt | mine | fish
-• ${p}rpg home
-• ${p}rpg shop
-• ${p}rpg buy <código>
-• ${p}rpg equip <código>
-• ${p}rpg unequip arma/armadura/mascota
-• ${p}rpg use <código> (solo pociones)
-• ${p}rpg magia curar
-• ${p}rpg magia curar @otrouser
-• ${p}rpg duel @usuario
-• ${p}rpg asesinar @usuario
-• ${p}rpg ranking
-
-  ventas a otros players:
-• ${p}rpg list <código> <precio>
-• ${p}rpg dar dinero/item <cantidad/codigo> @usuario
-• ${p}rpg market
-• ${p}rpg buyplayer <código> <vendedor>
-
-💬 Ejemplos:
-• ${p}rpg buy A2
-• ${p}rpg equip R3
-• ${p}rpg use P1`
+`╭━━⪩ 🎮RPG ⪨━━
+▢
+▢ • \`${p}aventura\`<-- *da esta lista en un mensaje sin todo el menu*
+▢ • \`${p}rpg setname\` <-- *para ponerte nombre en el juego*
+▢ • \`${p}rpg stats\` <-- *para ver tus estadisticas*
+▢ • \`${p}rpg inventory\` <-- *para ver tu inventario*
+▢ • \`${p}rpg daily\` <-- *reclama la recompensa diaria*
+▢ • \`${p}rpg hunt | mine | fish | work\` <-- *trabajas te da xp y dinero*
+▢ • \`${p}rpg gremio\` <-- *para ver el gremio*
+▢ • \`${p}rpg academia\` <-- *para estudiar habilidades*
+▢ • \`${p}rpg casino\` <-- *la timba bro*
+▢ • \`${p}rpg dungeon D1/D2/D3\` <-- *da xp, dinero y objetos -- la D1 desde nivel 0, D2 desde nivel 20, D3 desde nivel 40*
+▢ • \`${p}rpg isla corrupta I1/I2/I3\` <-- *da xp, dinero y objetos -- la I1 desde nivel 60, I2 desde nivel 80, I3 desde nivel 100*
+▢ • \`${p}rpg mazmorra legendaria L1/L2/L3\` <-- *da xp, dinero y objetos -- la L1 desde nivel 150, L2 desde nivel 200, L3 desde nivel 250*
+▢ • \`${p}rpg evento-mascota\` <-- *se juega de a 3 usuarios y podes conseguir un pokemon*
+▢ • \`${p}rpg shop\` <-- *es una tienda basica de objetos*
+▢ • \`${p}rpg home\` <-- *para comprarte una casa y demas*
+▢ • \`${p}rpg buy <código>\` <-- *para comprar un item en la shop*
+▢ • \`${p}rpg equip <código>\` <-- *para equiparte items*
+▢ • \`${p}rpg equip mascota <código>\` <-- *para equipar la mascota*
+▢ • \`${p}rpg unequip arma/armadura/mascota\` <-- *para quitarte objetos equipados*
+▢ • \`${p}rpg use <código> (solo pociones)\` <-- *para tomar posiones*
+▢ • \`${p}rpg magia curar\` <-- *para curarte a vos mismo*
+▢ • \`${p}rpg magia curar @otrouser\` <-- *para curar a otro usuario*
+▢ • \`${p}rpg duel @usuario\` <-- *para un mano a mano con otro usuario*
+▢ • \`${p}rpg asesinar @usuario\` <-- *se la metes mientras duerme el otro usuario XD*
+▢ • \`${p}rpg ranking\` <-- *donde podes ver tu posicion y de los top globals*
+▢ • \`${p}rpg list <código> <precio>\` <-- *para vender items*
+▢ • \`${p}rpg dar <dinero/item> <cantidad/código> @usuario\` <-- *le das monedas a un pobre*
+▢ • \`${p}rpg market\` <-- *aca se listan los items que venden otros usuarios y los podes comprar vos*
+▢ • \`${p}rpg buyplayer <código> <vendedor>\` <-- *para comprar en el market*
+▢
+╰━━─「⭐」─━━`
   );
 }
 

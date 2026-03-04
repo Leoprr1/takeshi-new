@@ -519,7 +519,8 @@
   {
     "match": "amen",
     "answers": [
-      "amen!"
+      "amen!",
+      "JAJAJAJAJA"
     ]
   },
   {
@@ -1125,7 +1126,9 @@
     "match": "so",
     "answers": [
       "Okas",
-      ".cum"
+      ".cum",
+      "Rra",
+      "Rra sos maldito"
     ]
   },
   {
@@ -1739,7 +1742,8 @@
   {
     "match": "te gusta? 🫦😂",
     "answers": [
-      "Ay vale maldito marica"
+      "Ay vale maldito marica",
+      "La de tu tía"
     ]
   },
   {
@@ -1775,7 +1779,8 @@
   {
     "match": "Tu gueco",
     "answers": [
-      "De la pija"
+      "De la pija",
+      "El tuyo"
     ]
   },
   {
@@ -1986,7 +1991,8 @@
     "match": "que cosa",
     "answers": [
       "lo de la descarga de musica",
-      "gancia"
+      "gancia",
+      "Tu tía"
     ]
   },
   {
@@ -2723,7 +2729,8 @@
   {
     "match": "ahi estoy mejorandolo, pero ojala funcione perfecto",
     "answers": [
-      "sisis ojalá"
+      "sisis ojalá",
+      "Y si no que harás al respecto"
     ]
   },
   {
@@ -3351,7 +3358,8 @@
   {
     "match": "HOLAS",
     "answers": [
-      "Hola"
+      "Hola",
+      "Chau"
     ]
   },
   {
@@ -3899,7 +3907,8 @@
   {
     "match": "chupala gord@ genocida de hamburgesas",
     "answers": [
-      "Tu madre"
+      "Tu madre",
+      "Calla traga pitos"
     ]
   },
   {
@@ -4193,13 +4202,17 @@
   {
     "match": "Conclusion: se aproxima la tercera guerra mundial",
     "answers": [
-      "Real, yo soy de México cada vez mi nación se vuelve más peligrosa"
+      "Real, yo soy de México cada vez mi nación se vuelve más peligrosa",
+      "Al fin dices algo coherente",
+      "Lit"
     ]
   },
   {
     "match": "4£ o £a la 4, alchile no c",
     "answers": [
-      "Real"
+      "Real",
+      "Dann",
+      "Eres marico o que"
     ]
   },
   {
@@ -5094,7 +5107,8 @@
     "match": "Cum?",
     "answers": [
       ".cum",
-      "Hijo de puta"
+      "Hijo de puta",
+      ".puta"
     ]
   },
   {
@@ -5636,7 +5650,8 @@
     "answers": [
       "Podes interactuar con Meta?\nPara ver quién es más inservible",
       "La q se salió fue mi nva\nYo pregunto\nQuien la agrego",
-      "Jaja tranqui\nTe entiendo"
+      "Jaja tranqui\nTe entiendo",
+      "Que?"
     ]
   },
   {
@@ -6399,7 +6414,8 @@
   {
     "match": "Si pdo hblar jaja",
     "answers": [
-      "Wts jajau"
+      "Wts jajau",
+      "Tu tía"
     ]
   },
   {
@@ -7153,7 +7169,8 @@
     "answers": [
       "Jajaja no pasa nd",
       "Tranqui",
-      "Mano desactiven el puto bot, no es una persona pero ya me cae mal xd"
+      "Mano desactiven el puto bot, no es una persona pero ya me cae mal xd",
+      "A mí se me fue todo el cum hacia la garganta de tu hermana"
     ]
   },
   {
@@ -7376,7 +7393,9 @@
     "match": "Fuera de pedo es una ia o es real?",
     "answers": [
       "Rial",
-      "es rial"
+      "es rial",
+      "es real bro",
+      "Es una actriz nopor"
     ]
   },
   {
@@ -7492,7 +7511,8 @@
     "match": "Que pasho vv",
     "answers": [
       "Cerra el culo o te lo cierro yo",
-      "nada mi amor"
+      "nada mi amor",
+      "Tu tía"
     ]
   },
   {
@@ -7510,7 +7530,8 @@
   {
     "match": "A ver",
     "answers": [
-      "Que"
+      "Que",
+      "Tu hermana"
     ]
   },
   {
@@ -9902,7 +9923,9 @@
   {
     "match": "Si hasta somos mejores amigos",
     "answers": [
-      "Es verdad uwu"
+      "Es verdad uwu",
+      "Quien",
+      "exactamente"
     ]
   },
   {
@@ -10023,7 +10046,9 @@
     "match": "Che vo estas para un free?",
     "answers": [
       "Na ahora no",
-      "Al rato"
+      "Al rato",
+      "Ahora no puedo",
+      "deja de preguntarle a todo el mundo para jugar al fre 😂"
     ]
   },
   {
@@ -10445,6 +10470,172 @@
     "match": "Ta bien 👍",
     "answers": [
       "Mentira mi amor 🥺"
+    ]
+  },
+  {
+    "match": "Ese w",
+    "answers": [
+      "cosas que pasan 😂"
+    ]
+  },
+  {
+    "match": "te extraño bb",
+    "answers": [
+      "Emmmmm?"
+    ]
+  },
+  {
+    "match": "Hermano nmms hasta RPG tiene esta madre jaja",
+    "answers": [
+      "si, el bot lo hice yo"
+    ]
+  },
+  {
+    "match": "si, el bot lo hice yo",
+    "answers": [
+      "Er diablo"
+    ]
+  },
+  {
+    "match": "Eres programador?",
+    "answers": [
+      "no 😂 pero aprendi bastante"
+    ]
+  },
+  {
+    "match": "no 😂 pero aprendi bastante",
+    "answers": [
+      "Calajo el ajo"
+    ]
+  },
+  {
+    "match": "no dijiste q no",
+    "answers": [
+      "si dije que no😐"
+    ]
+  },
+  {
+    "match": "Al fin dices algo coherente",
+    "answers": [
+      "JAJAJAJAJ"
+    ]
+  },
+  {
+    "match": "si dije que no😐",
+    "answers": [
+      "Hermano tu bot no sirve"
+    ]
+  },
+  {
+    "match": "Hermano tu bot no sirve",
+    "answers": [
+      "JAJAJAJAJ esta ahi aprendiendo 😂"
+    ]
+  },
+  {
+    "match": "JAJAJAJAJ esta ahi aprendiendo 😂",
+    "answers": [
+      "Si me doy cuenta"
+    ]
+  },
+  {
+    "match": "Tu hermana",
+    "answers": [
+      "La tuya que se me entrega"
+    ]
+  },
+  {
+    "match": "Después creará su propio ejército",
+    "answers": [
+      "dominará el mundo"
+    ]
+  },
+  {
+    "match": "dominará el mundo",
+    "answers": [
+      "Zy"
+    ]
+  },
+  {
+    "match": "como skaynet",
+    "answers": [
+      "Terminator referencia"
+    ]
+  },
+  {
+    "match": "Terminator referencia",
+    "answers": [
+      "JAJAJAJAJ so"
+    ]
+  },
+  {
+    "match": "JAJAJAJAJ so",
+    "answers": [
+      "So"
+    ]
+  },
+  {
+    "match": "Rra",
+    "answers": [
+      "Eres tu"
+    ]
+  },
+  {
+    "match": "Tu",
+    "answers": [
+      "Tus nalgas"
+    ]
+  },
+  {
+    "match": "JAJAJAJAJAJ",
+    "answers": [
+      "Ahorita te ríes pero después dominaras el mundo"
+    ]
+  },
+  {
+    "match": "La tuya que se me entrega",
+    "answers": [
+      "Hijo de puta me acaba de copiar",
+      "JAJAJAJJAJAJAJAJA RE ATREVIDO 🤣",
+      "Aquí me copiaste puto bot"
+    ]
+  },
+  {
+    "match": "Mentira mi amor 🥺",
+    "answers": [
+      "No ya esta ahora"
+    ]
+  },
+  {
+    "match": "Ahorita te ríes pero después dominaras el mundo",
+    "answers": [
+      "😐",
+      "si 😏"
+    ]
+  },
+  {
+    "match": "Te chupo la oreja para q me perdones 😔",
+    "answers": [
+      "Lo voy a pensar",
+      "Fua cualquier otro caía con eso"
+    ]
+  },
+  {
+    "match": "X♾️♾️♾️♾️♾️♾️♾️♾️♾️♾️♾️♾️",
+    "answers": [
+      "X\nD"
+    ]
+  },
+  {
+    "match": "X\nD",
+    "answers": [
+      "Cabron ya no me copies"
+    ]
+  },
+  {
+    "match": "Fua cualquier otro caía con eso",
+    "answers": [
+      "JAJAJA"
     ]
   }
 ]

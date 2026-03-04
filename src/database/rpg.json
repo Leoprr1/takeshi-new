@@ -1327,13 +1327,13 @@
     "precisionBonus": 298.5
   },
   "223256997032099@lid": {
-    "nivel": 538,
-    "xp": 42198,
-    "hp": 12184,
-    "hpMax": 10780,
-    "mana": 5470,
+    "nivel": 539,
+    "xp": 9138,
+    "hp": 10800,
+    "hpMax": 10800,
+    "mana": 3370,
     "manamax": 5470,
-    "monedas": 3561517075223437,
+    "monedas": 3561517075373437,
     "arma": {
       "code": "H05",
       "nombre": "🌑 Guante de zeno Sama 🌙⚔️",
@@ -1425,7 +1425,7 @@
     "lastHunt": 1770966222294,
     "lastMine": 1770966224403,
     "lastFish": 1770966228170,
-    "lastDungeon": 1771714282620,
+    "lastDungeon": 1772662179705,
     "lastGuildMission": 0,
     "nick": "👑⛧ᏞᎬᎾᏢᎡᎡ⛧👑",
     "gremio": "Aventureros",
@@ -2197,7 +2197,7 @@
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1764156816153,
+    "lastRegen": 1764167616153,
     "homeChest": [
       {
         "code": "H01",
@@ -2275,7 +2275,7 @@
       "lobos": 1771714382539,
       "flores": 1771714378126
     },
-    "manaMax": 3360,
+    "manaMax": 3370,
     "lastManaRegen": 0,
     "inmunidadKO": true,
     "inmunidadKOStart": 1770867707440,

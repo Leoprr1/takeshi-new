@@ -4,7 +4,7 @@ const yts = require("yt-search");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
-const { spawn } = require("child_process");
+const { spawn, exec } = require("child_process");
 const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 
 const queue = require(`${BASE_DIR}/utils/queue`);
@@ -87,16 +87,24 @@ async function executePlay({
       const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
       cacheFile = path.join(CACHE_DIR, `${safeTitle}.opus`);
 
+      let fileSizeBytes;
+      let audioBitrate = "Desconocido";
+
       if (fs.existsSync(cacheFile)) {
         console.log("⚡ Usando audio cacheado");
         finalFile = cacheFile;
+        const stats = fs.statSync(finalFile);
+        fileSizeBytes = stats.size;
+
+        // Detectar bitrate automáticamente
+        audioBitrate = await getAudioBitrate(finalFile);
       } else {
         /* ===============================
            📁 TEMP FILE BASE
         ================================ */
         const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
-        tempFile = path.join(os.tmpdir(), `${uniqueId}.m4a`); 
-        finalFile = path.join(os.tmpdir(), `${uniqueId}.opus`); 
+        tempFile = path.join(os.tmpdir(), `${uniqueId}.m4a`);
+        finalFile = path.join(os.tmpdir(), `${uniqueId}.opus`);
 
         /* ===============================
            ⬇ DESCARGAR CON YT-DLP
@@ -116,7 +124,7 @@ async function executePlay({
           const child = spawn(ytDlpPath, args, {
             windowsHide: true,
             stdio: "ignore",
-            creationFlags: 0x08000000 // evita ventana en Windows
+            creationFlags: 0x08000000
           });
 
           child.on("error", (err) => reject(new Error("Error al ejecutar yt-dlp: " + err.message)));
@@ -138,12 +146,17 @@ async function executePlay({
           ], {
             windowsHide: true,
             stdio: "ignore",
-            creationFlags: 0x08000000 // evita ventana en Windows
+            creationFlags: 0x08000000
           });
 
           ff.on("error", reject);
           ff.on("close", code => code === 0 ? resolve() : reject(new Error("Error convirtiendo a opus")));
         });
+
+        const stats = fs.statSync(finalFile);
+        fileSizeBytes = stats.size;
+
+        audioBitrate = await getAudioBitrate(finalFile);
 
         fs.copyFileSync(finalFile, cacheFile);
         cleanCache();
@@ -153,10 +166,14 @@ async function executePlay({
       /* ===============================
          🔗 ENVIAR IMAGEN Y AUDIO
       ================================ */
+      const minutes = Math.floor(lengthSeconds / 60);
+      const seconds = lengthSeconds % 60;
+      const fileSizeMB = (fileSizeBytes / (1024 * 1024)).toFixed(2);
+
       if (thumb) {
         await sendImageFromURL(
           thumb,
-          `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}`
+          `*Título*: ${title}\n*Duración*: ${minutes}m ${seconds}s\n*Canal*: ${channel}\n*Bitrate*: ${audioBitrate}\n*Peso*: ${fileSizeMB}MB`
         ).catch(() => {});
       }
 
@@ -206,4 +223,19 @@ function cleanCache() {
   }
 
   console.log("🧹 Cache limpiado automáticamente para no superar 100MB.");
+}
+
+/* ===============================
+   🔍 FUNCIONES AUXILIARES
+=============================== */
+
+function getAudioBitrate(filePath) {
+  return new Promise((resolve) => {
+    exec(`"${ffmpegPath}" -i "${filePath}" 2>&1`, (err, stdout, stderr) => {
+      const info = stderr || stdout;
+      const match = info.match(/bitrate:\s*(\d+ kb\/s)/i);
+      if (match) resolve(match[1]);
+      else resolve("Desconocido");
+    });
+  });
 }
