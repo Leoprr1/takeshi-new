@@ -151,7 +151,7 @@ function buildBrain() {
     });
   }
 
-  /* ===== Procesar auto-responder.json ===== */
+  /* ===== Procesar auto-responder.json (match + answers) ===== */
   autoData.forEach(entry => {
     if (!entry.match) return;
 
@@ -161,17 +161,16 @@ function buildBrain() {
     answers.forEach(ans => processEntry(ans));
   });
 
-  /* ===== Procesar learningbot2.json ===== */
+  /* ===== Procesar learningbot2.json exactamente como antes ===== */
   lb2Data.forEach(msg => processEntry(msg));
 
-  /* ===== Limpiar generate-memory.json actual ===== */
+  /* ===== Combinar con generate-memory.json existente ===== */
   const existingBrain = readJSONSafe(GENERATED_FILE, null);
   if (existingBrain) {
     Object.entries(existingBrain.topics).forEach(([topic, data]) => {
       if (!brain.topics[topic]) {
         brain.topics[topic] = data;
       } else {
-        // Combinar y eliminar duplicados
         brain.topics[topic].sentences = uniqueArray([
           ...brain.topics[topic].sentences,
           ...data.sentences
@@ -180,7 +179,6 @@ function buildBrain() {
           ...brain.topics[topic].keywords,
           ...data.keywords
         ]);
-        // wordFrequency y bigrams se combinan sumando contadores
         for (const [w, count] of Object.entries(data.wordFrequency)) {
           brain.topics[topic].wordFrequency[w] =
             (brain.topics[topic].wordFrequency[w] || 0) + count;
@@ -203,17 +201,16 @@ function buildBrain() {
    WATCHER AUTOMÁTICO INTERNO
 =========================== */
 function initWatcher() {
-  if (!fs.existsSync(AUTO_FILE)) {
-    console.log("⚠ auto-responder.json no existe todavía.");
-    return;
-  }
-
   console.log("👁 BrainBuilder activo observando archivos...");
 
   // Vigilar auto-responder.json
-  fs.watch(AUTO_FILE, { persistent: true }, (eventType) => {
-    if (eventType === "change") setTimeout(buildBrain, 200);
-  });
+  if (fs.existsSync(AUTO_FILE)) {
+    fs.watch(AUTO_FILE, { persistent: true }, (eventType) => {
+      if (eventType === "change") setTimeout(buildBrain, 200);
+    });
+  } else {
+    console.log("⚠ auto-responder.json no existe todavía.");
+  }
 
   // Vigilar learningbot2.json
   if (fs.existsSync(LB2_FILE)) {

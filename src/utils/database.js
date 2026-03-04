@@ -108,18 +108,14 @@ exports.getAutoResponderResponse = (match) => {
     (a, b) => b.match.length - a.match.length
   );
 
-  const getRandomAnswer = (response) => {
-    if (!Array.isArray(response.answers) || response.answers.length === 0)
-      return null;
-
-    return response.answers[
-      Math.floor(Math.random() * response.answers.length)
-    ];
+  const getRandomAnswer = (answers) => {
+    if (!Array.isArray(answers) || !answers.length) return null;
+    return answers[Math.floor(Math.random() * answers.length)];
   };
 
   for (const response of sortedResponses) {
     if (normalizeText(response.match) === normalizedMessage)
-      return getRandomAnswer(response);
+      return getRandomAnswer(response.answers);
   }
 
   const messageWords = normalizedMessage.split(/\s+/);
@@ -127,21 +123,21 @@ exports.getAutoResponderResponse = (match) => {
     const ruleWords = normalizeText(response.match).split(/\s+/);
     if (ruleWords.length <= 2) continue;
     if (ruleWords.every((w) => messageWords.includes(w)))
-      return getRandomAnswer(response);
+      return getRandomAnswer(response.answers);
   }
 
   for (const response of sortedResponses) {
     const rule = normalizeText(response.match);
     if (rule.length <= 2) continue;
     if (normalizedMessage.includes(rule))
-      return getRandomAnswer(response);
+      return getRandomAnswer(response.answers);
   }
 
   for (const response of sortedResponses) {
     const rule = normalizeText(response.match);
     if (rule.length <= 3) continue;
     if (stringSimilarity.compareTwoStrings(normalizedMessage, rule) >= 0.75)
-      return getRandomAnswer(response);
+      return getRandomAnswer(response.answers);
   }
 
   return null;

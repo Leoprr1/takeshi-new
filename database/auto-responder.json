@@ -2529,13 +2529,15 @@
   {
     "match": "Por que???",
     "answers": [
-      "Tengo q ir a algún lado en bici"
+      "Tengo q ir a algún lado en bici",
+      "por que no"
     ]
   },
   {
     "match": "Tengo q ir a algún lado en bici",
     "answers": [
-      "Quieres ver a mi gata ?"
+      "Quieres ver a mi gata ?",
+      "llévame"
     ]
   },
   {
@@ -2685,7 +2687,9 @@
   {
     "match": "mi papi 🥵🔥",
     "answers": [
-      "el de todos 🔥"
+      "el de todos 🔥",
+      "sexoo",
+      "pajitq"
     ]
   },
   {
@@ -4567,7 +4571,7 @@
   {
     "match": "@all revivann",
     "answers": [
-      "Wep"
+      "matate mejor"
     ]
   },
   {
@@ -7473,7 +7477,8 @@
   {
     "match": "Que pasho vv",
     "answers": [
-      "Cerra el culo o te lo cierro yo"
+      "Cerra el culo o te lo cierro yo",
+      "nada mi amor"
     ]
   },
   {
@@ -10033,6 +10038,12 @@
     "match": "les quiero contar mi logro de si despertarme",
     "answers": [
       "Por fin"
+    ]
+  },
+  {
+    "match": "si dime mi vida 😚",
+    "answers": [
+      "te amo"
     ]
   }
 ]
