@@ -3268,7 +3268,8 @@
   {
     "match": "¡Función de auto-respuesta activado con éxito!",
     "answers": [
-      ".besar"
+      ".besar",
+      "hola"
     ]
   },
   {
@@ -9279,7 +9280,8 @@
   {
     "match": "✅ Usuario registrado correctamente como Leo, 23 años.",
     "answers": [
-      "apa"
+      "apa",
+      "messi"
     ]
   },
   {

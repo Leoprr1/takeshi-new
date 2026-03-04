@@ -101,13 +101,21 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
     webMessage,
   } = paramsHandler;
 
-  // 🔹 Solo procesar si el mensaje empieza con prefijo
-  if (!fullMessage.startsWith(prefix)) return;
+  // 🔹 Verificar si es un mensaje que inicia con prefijo
+  const isCommandMessage = fullMessage.trim().startsWith(prefix);
 
-  // Extraer comando y argumentos
-  const parts = fullMessage.trim().split(/\s+/);
-  const cmd = parts[0].replace(prefix, "").toLowerCase();
-  const args = parts.slice(1);
+  // 🔹 Si no es comando, solo permitir auto-responder en grupos activos
+  if (!isCommandMessage) {
+    if (isActiveAutoResponderGroup(remoteJid)) {
+      const response = getAutoResponderResponse(fullMessage);
+      if (response) await sendReply(response);
+    }
+    return;
+  }
+
+  // 🔹 Extraer comando y argumentos solo para registro de usuarios
+  const withoutPrefix = fullMessage.trim().slice(prefix.length).trim();
+  const [cmd, ...args] = withoutPrefix.split(/\s+/);
 
   // 🔹 Registrar usuario si es reg/reg2
   if (cmd === "reg" || cmd === "reg2") {
@@ -135,8 +143,8 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
     return;
   }
 
-  // 🔹 Importar comando
-  const { type, command } = findCommandImport(cmd);
+  // 🔹 Importar comando usando commandName directamente
+  const { type, command } = findCommandImport(commandName);
 
   // 🔹 Si el comando no existe, salir sin disparar registro
   if (!hasTypeAndCommand({ type, command })) {
@@ -266,6 +274,7 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
     }
   }
 
+  // 🔹 Ejecutar comando
   try {
     await command.handle({
       ...paramsHandler,
@@ -314,4 +323,3 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
     }
   }
 };
-
