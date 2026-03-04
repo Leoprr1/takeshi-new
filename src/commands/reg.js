@@ -1,4 +1,4 @@
-// 🔥 reg.js - Versión global con migración automática
+// 🔥 reg.js - Versión global con soporte privado y grupos
 const fs = require("fs");
 const path = require("path");
 const databasePath = path.resolve(__dirname, "../../database");
@@ -25,13 +25,24 @@ function saveUserProfiles(profiles) {
   }
 }
 
-function getProfilePic(userJid, socket) {
+async function getProfilePic(jid, socket) {
   try {
-    return socket.profilePictureUrl(userJid).catch(() => null);
+    // ⚡ usar JID real completo para WhatsApp
+    if (!jid) return null;
+    return await socket.profilePictureUrl(jid).catch(() => null);
   } catch {
     return null;
   }
 }
+
+// =====================
+// Función para normalizar userJid para DB
+// =====================
+const normalizeJid = (jid) => {
+  if (!jid) return "";
+  const number = jid.split("@")[0];
+  return `${number}@`;
+};
 
 // =====================
 // MIGRACIÓN DE PERFILES
@@ -41,20 +52,15 @@ function migrateProfiles(users) {
   const newUsers = {};
 
   for (const key in users) {
-    // Si la clave es un userJid (termina con @s.whatsapp.net) o cualquier otro
     const user = users[key];
-    if (key.includes("@")) {
-      if (!newUsers[key]) {
-        newUsers[key] = { ...user };
-        migrated = true;
-      }
+    const normalizedJid = normalizeJid(key);
+    if (!newUsers[normalizedJid]) {
+      newUsers[normalizedJid] = { ...user };
+      migrated = true;
     }
   }
 
-  if (migrated) {
-    saveUserProfiles(newUsers);
-    console.log("✅ Migración de perfiles completada. Ahora todos son globales por userJid");
-  }
+  if (migrated) saveUserProfiles(newUsers);
 
   return newUsers;
 }
@@ -69,21 +75,35 @@ module.exports = {
   async handle({ fullMessage, userJid, socket, sendReply }) {
     const args = fullMessage.trim().split(/\s+/);
     let users = readUserProfiles();
-
-    // Migrar automáticamente si hay perfiles antiguos
     users = migrateProfiles(users);
+
+    const saveJid = normalizeJid(userJid); // clave en la DB
 
     // =====================
     // Mostrar perfil
     // =====================
     if (args[0].toLowerCase() === ".profile") {
-      const user = users[userJid];
+      const user = users[saveJid];
       if (!user) return sendReply("❌ No estás registrado. Usa `.reg nombre edad` primero.");
-      const profileText = `👤 Perfil de ${user.name}
-🗓 Edad: ${user.age}
-📅 Registrado: ${new Date(user.registeredAt).toLocaleString()}
+
+      // ⚡ Si no tiene profilePic guardada, intenta obtenerla con JID real
+      if (!user.profilePic) {
+        user.profilePic = await getProfilePic(userJid, socket); // ⚠️ usar JID real
+        users[saveJid] = user;
+        saveUserProfiles(users);
+      }
+
+      // Mostrar nombre real, no numero@
+      const profileText = `👤 *Nombre:* ${user.name}
+🎖️ *Cargo:* Miembro
+
+🌚 *Programa:* ${user.program || "No registrado"}
+🐮 *Ganado:* ${user.ganado || "0%"}
+🎱 *Pasiva:* ${user.pasiva || "0%"}
+✨ *Belleza:* ${user.belleza || "0%"}
 🖼 Foto: ${user.profilePic || "No disponible"}
 ⚡ Comandos usados: ${user.commandsUsed || 0}`;
+
       return sendReply(profileText);
     }
 
@@ -95,36 +115,38 @@ module.exports = {
       return sendReply("❌ Comando inválido. Usa `.reg` o `.reg2` o `.profile`");
     }
 
-    // Validar parámetros
     if (args.length < 3) return sendReply("❌ Uso: .reg nombre edad");
     const name = args[1];
     const age = parseInt(args[2]);
     if (!name || isNaN(age)) return sendReply("❌ Nombre o edad inválidos");
 
-    // Obtener foto de perfil
-    let profilePic = null;
-    try {
-      profilePic = await socket.profilePictureUrl(userJid).catch(() => null);
-    } catch {}
+    // Foto de perfil usando JID real
+    const profilePic = await getProfilePic(userJid, socket);
 
     if (command === ".reg") {
-      if (users[userJid]) return sendReply("❌ Ya estás registrado. Usa `.reg2 nombre edad` para actualizar.");
-      users[userJid] = {
+      if (users[saveJid]) return sendReply("❌ Ya estás registrado. Usa `.reg2 nombre edad` para actualizar.");
+
+      users[saveJid] = {
         name,
         age,
         profilePic,
         registeredAt: Date.now(),
-        commandsUsed: 0
+        commandsUsed: 0,
+        groups: userJid.includes("@g.us") ? [userJid] : []
       };
       saveUserProfiles(users);
       return sendReply(`✅ Registro completo: ${name}, ${age} años`);
     }
 
     if (command === ".reg2") {
-      if (!users[userJid]) return sendReply("❌ No estás registrado. Usa `.reg nombre edad` primero.");
-      users[userJid].name = name;
-      users[userJid].age = age;
-      users[userJid].profilePic = profilePic;
+      if (!users[saveJid]) return sendReply("❌ No estás registrado. Usa `.reg nombre edad` primero.");
+
+      users[saveJid].name = name;
+      users[saveJid].age = age;
+      users[saveJid].profilePic = profilePic || users[saveJid].profilePic;
+      if (userJid.includes("@g.us") && !users[saveJid].groups.includes(userJid)) {
+        users[saveJid].groups.push(userJid);
+      }
       saveUserProfiles(users);
       return sendReply(`✅ Registro actualizado: ${name}, ${age} años`);
     }

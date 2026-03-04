@@ -27,8 +27,8 @@ exports.loadCommonFunctions = ({ socket, webMessage }) => {
     prefix,
     remoteJid,
     replyJid,
-    userJid,
   } = extractDataFromMessage(webMessage);
+  
 
   if (!remoteJid) {
     return null;
@@ -638,9 +638,30 @@ exports.loadCommonFunctions = ({ socket, webMessage }) => {
       },
     });
   };
+// ⚡ Obtener siempre un JID consistente
+let userJid;
 
-  const isGroup = !!remoteJid?.endsWith("@g.us");
-  const isGroupWithLid = !!userJid?.endsWith("@lid");
+// En grupos, el participante es quien envía
+if (webMessage.key?.participant) {
+  userJid = webMessage.key.participant;
+} else {
+  // En privado, remoteJid es quien envía
+  userJid = webMessage.key.remoteJid;
+}
+
+// ⚡ Normalizamos privados a @lid
+const normalizedJid = userJid.endsWith("@s.whatsapp.net")
+  ? userJid.replace("@s.whatsapp.net", "@lid")
+  : userJid;
+
+// ⚡ Detectamos grupo (original)
+const isGroup = !!remoteJid?.endsWith("@g.us");
+
+// ⚡ Detectamos lid unificado
+const isGroupWithLid = !!normalizedJid?.endsWith("@lid");
+
+
+
 
   const deleteMessage = async (key) => {
     const { id, remoteJid, participant } = key;

@@ -1,44 +1,23 @@
 {
-  "79156918399062@lid": {
-    "name": "Milton",
-    "age": 22,
-    "profilePic": null,
-    "registeredAt": 1772569998168,
-    "commandsUsed": 5
-  },
-  "175312310640653@lid": {
-    "name": "FollaBurras",
-    "age": 69,
-    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/598168811_945585797923855_3253502587564154980_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wHfsCaQaHE4Iz19IRZ7XFqcDxlRTWVlkLfrrLfNdvsmlw&oe=69B44414&_nc_sid=5e03e0&_nc_cat=100",
-    "registeredAt": 1772570117331,
-    "commandsUsed": 3
-  },
-  "66409522569248@lid": {
-    "name": "agustina",
-    "age": 6782,
-    "profilePic": null,
-    "registeredAt": 1772571756899,
-    "commandsUsed": 3
-  },
-  "202044321316883@lid": {
-    "name": "Carolina",
-    "age": 19,
-    "profilePic": null,
-    "registeredAt": 1772572515067,
-    "commandsUsed": 1
-  },
   "223256997032099@lid": {
     "name": "Leo",
     "age": 23,
-    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/620485926_1206638688260707_2153868945442048660_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wFEuJqUXS9fEC3ZosAda9o3G6OVRyeZlgnPI84gQHgKsw&oe=69B478BF&_nc_sid=5e03e0&_nc_cat=107",
-    "registeredAt": 1772572650652,
-    "commandsUsed": 11
+    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/620485926_1206638688260707_2153868945442048660_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wGEq1ch6PNFIjsyr1ifSXtBuWsS3_Iou4a2TAzYHnbl-g&oe=69B4B0FF&_nc_sid=5e03e0&_nc_cat=107",
+    "registeredAt": 1772594534960,
+    "commandsUsed": 21
   },
-  "19310810534110@lid": {
-    "name": "martin",
-    "age": 18,
-    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/642638082_1231935059127464_601565391961792541_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wG-E3240hEUBhjNb7hN9J1TViiz0JYfREuCvbFuRw7UBw&oe=69B46872&_nc_sid=5e03e0&_nc_cat=108",
-    "registeredAt": 1772578626124,
-    "commandsUsed": 0
+  "148137834471521@lid": {
+    "name": "cande",
+    "age": 9,
+    "profilePic": null,
+    "registeredAt": 1772594536498,
+    "commandsUsed": 1
+  },
+  "37302495653948@lid": {
+    "name": "agus",
+    "age": 1,
+    "profilePic": null,
+    "registeredAt": 1772598405915,
+    "commandsUsed": 1
   }
 }
