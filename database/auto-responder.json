@@ -634,7 +634,8 @@
     "match": "qué onda",
     "answers": [
       "tu zanja",
-      "ng vos?"
+      "ng vos?",
+      "Que honda??"
     ]
   },
   {
@@ -2809,7 +2810,8 @@
   {
     "match": "Trataré de mejorar, ¡dame otra oportunidad!",
     "answers": [
-      "No"
+      "No",
+      "JAJAJAJJA"
     ]
   },
   {
@@ -3104,7 +3106,8 @@
   {
     "match": "Bld no lo se usar jajaja",
     "answers": [
-      "na, yo menos"
+      "na, yo menos",
+      "que cosa?"
     ]
   },
   {
@@ -5628,7 +5631,9 @@
   {
     "match": "No escribí mal",
     "answers": [
-      "Podes interactuar con Meta?\nPara ver quién es más inservible"
+      "Podes interactuar con Meta?\nPara ver quién es más inservible",
+      "La q se salió fue mi nva\nYo pregunto\nQuien la agrego",
+      "Jaja tranqui\nTe entiendo"
     ]
   },
   {
@@ -6384,7 +6389,8 @@
   {
     "match": "Ya son la 7 de la tarde",
     "answers": [
-      "no"
+      "no",
+      "Tu celular no anda? Pregunto x preguntar"
     ]
   },
   {
@@ -6516,7 +6522,8 @@
   {
     "match": "Me presento?",
     "answers": [
-      "Si por vafor"
+      "Si por vafor",
+      "Si por favor"
     ]
   },
   {
@@ -7140,7 +7147,8 @@
   {
     "match": "se me fue el teclado perdon aajajaja",
     "answers": [
-      "Jajaja no pasa nd"
+      "Jajaja no pasa nd",
+      "Tranqui"
     ]
   },
   {
@@ -9051,7 +9059,8 @@
   {
     "match": "Dinero",
     "answers": [
-      "En una tarjeta"
+      "En una tarjeta",
+      "Tremendo"
     ]
   },
   {
@@ -10006,7 +10015,8 @@
   {
     "match": "Che vo estas para un free?",
     "answers": [
-      "Na ahora no"
+      "Na ahora no",
+      "Al rato"
     ]
   },
   {
@@ -10044,6 +10054,249 @@
     "match": "si dime mi vida 😚",
     "answers": [
       "te amo"
+    ]
+  },
+  {
+    "match": "No aprobé choques",
+    "answers": [
+      "terrible f",
+      "Sepa la bola que es eso"
+    ]
+  },
+  {
+    "match": "lo de la descarga de musica",
+    "answers": [
+      "tenes que usar .pm duki goteo por ejemplo"
+    ]
+  },
+  {
+    "match": "Esa es mi pregunta",
+    "answers": [
+      "Yo la agregué"
+    ]
+  },
+  {
+    "match": "Yo la agregué",
+    "answers": [
+      "Estefa?"
+    ]
+  },
+  {
+    "match": "Jajaj cambia mas de número q yo",
+    "answers": [
+      "KAJSJJAJS no cambio de número, sumo, los anteriores aún los tengo"
+    ]
+  },
+  {
+    "match": "Tengo como 4 agendados de estefa",
+    "answers": [
+      "JAJAJJA"
+    ]
+  },
+  {
+    "match": "KAJSJJAJS no cambio de número, sumo, los anteriores aún los tengo",
+    "answers": [
+      "Haaa con razón jajaja"
+    ]
+  },
+  {
+    "match": "Quien la agrego",
+    "answers": [
+      "Por qué la pregunta eh? Tiene algo de malo que ella haya estado en el grupo?"
+    ]
+  },
+  {
+    "match": "Por qué la pregunta eh? Tiene algo de malo que ella haya estado en el grupo?",
+    "answers": [
+      "Depende del Grupo \nAl igual q ella no me gusta q la agreguen a cualquier grupo"
+    ]
+  },
+  {
+    "match": "Depende del Grupo \nAl igual q ella no me gusta q la agreguen a cualquier grupo",
+    "answers": [
+      "Ahhh, buenop"
+    ]
+  },
+  {
+    "match": "Ahhh, buenop",
+    "answers": [
+      "Y como vas con tu mexicano"
+    ]
+  },
+  {
+    "match": "hola gt",
+    "answers": [
+      "Hola\nComo vas"
+    ]
+  },
+  {
+    "match": "Y como vas con tu mexicano",
+    "answers": [
+      "Terminamos :/"
+    ]
+  },
+  {
+    "match": "Terminamos :/",
+    "answers": [
+      "Uy como asi"
+    ]
+  },
+  {
+    "match": "Q paso luego",
+    "answers": [
+      "Ehh demasiadas cosas kajsjanjs"
+    ]
+  },
+  {
+    "match": "A quien matamos",
+    "answers": [
+      "A mi"
+    ]
+  },
+  {
+    "match": "A mi",
+    "answers": [
+      "Ushh jajaja",
+      "Cuentame q paso \nSi quieres por priv"
+    ]
+  },
+  {
+    "match": "Cuentame q paso \nSi quieres por priv",
+    "answers": [
+      "Bno, luego pq ahora ando sin ganas de escribir"
+    ]
+  },
+  {
+    "match": "Bno, luego pq ahora ando sin ganas de escribir",
+    "answers": [
+      "Esta bien"
+    ]
+  },
+  {
+    "match": "Bienvenidos los nuevos!!\n\nPresentense porfa, (fotos para 1 sola vez)",
+    "answers": [
+      "Me presento?"
+    ]
+  },
+  {
+    "match": "Salió Gustavoportillo, terror de que les coma las familiares",
+    "answers": [
+      "JAJAJAJA TJR"
+    ]
+  },
+  {
+    "match": "Si por favor",
+    "answers": [
+      "Me llamo pedro jose alfonso de la veracruz y monte cruzado de santos amores, tengo 18 añitos al p2 y soy de peru"
+    ]
+  },
+  {
+    "match": "mami no estoy en 4to xq repeti",
+    "answers": [
+      "Que burra"
+    ]
+  },
+  {
+    "match": "ahora no las voy a nombrar",
+    "answers": [
+      "X lastima o que? Jajaja"
+    ]
+  },
+  {
+    "match": "me reta la de matemáticas",
+    "answers": [
+      "Æ bno pue"
+    ]
+  },
+  {
+    "match": "Me llamo pedro jose alfonso de la veracruz y monte cruzado de santos amores, tengo 18 añitos al p2 y soy de peru",
+    "answers": [
+      "Un gusto aquí \n\nWilson Gustavo Ramiro Roberto Carlos de la pradera castillo Aguirre"
+    ]
+  },
+  {
+    "match": "Un gusto aquí \n\nWilson Gustavo Ramiro Roberto Carlos de la pradera castillo Aguirre",
+    "answers": [
+      "Un gusto mi buen caballero"
+    ]
+  },
+  {
+    "match": "Soy de bolivia",
+    "answers": [
+      "Color carton mojado seguramente"
+    ]
+  },
+  {
+    "match": "Pero no porque sea boliviano",
+    "answers": [
+      "Y tncs xq?"
+    ]
+  },
+  {
+    "match": "Color carton mojado seguramente",
+    "answers": [
+      "Humedecido*"
+    ]
+  },
+  {
+    "match": "Humedecido*",
+    "answers": [
+      "Ahh claro claro mala mia"
+    ]
+  },
+  {
+    "match": "Y tncs xq?",
+    "answers": [
+      "Porque me enseñaron desde chiquito a vender verdura"
+    ]
+  },
+  {
+    "match": "Porque me enseñaron desde chiquito a vender verdura",
+    "answers": [
+      "Y las medias?"
+    ]
+  },
+  {
+    "match": "Y las medias?",
+    "answers": [
+      "Eso es para los bonaerenses"
+    ]
+  },
+  {
+    "match": "Por eso no compro con las frutillitas",
+    "answers": [
+      "No compro con los tomates xq se persiben frutas"
+    ]
+  },
+  {
+    "match": "Pregunta random",
+    "answers": [
+      "Bancan termo con stikers??"
+    ]
+  },
+  {
+    "match": "Bancan termo con stikers??",
+    "answers": [
+      "@all respondad",
+      "🏦"
+    ]
+  },
+  {
+    "match": "Que honda??",
+    "answers": [
+      "Tdo Bien?"
+    ]
+  },
+  {
+    "match": "🏦",
+    "answers": [
+      "Ave si te gusta mi termo"
+    ]
+  },
+  {
+    "match": "Ave si te gusta mi termo",
+    "answers": [
+      "A ver tu termo"
     ]
   }
 ]

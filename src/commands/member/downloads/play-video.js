@@ -1,10 +1,10 @@
 const { PREFIX } = require(`${BASE_DIR}/config`);
 const { InvalidParameterError, WarningError } = require(`${BASE_DIR}/errors`);
-const ytdl = require("@distube/ytdl-core");
 const yts = require("yt-search");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
+const { spawn } = require("child_process");
 
 const queue = require(`${BASE_DIR}/utils/queue`);
 
@@ -37,13 +37,12 @@ module.exports = {
 
       await sendWaitReact();
 
-      const maxGlobalAttempts = 10;
+      const maxGlobalAttempts = 5;
       let globalAttempt = 0;
 
       while (globalAttempt < maxGlobalAttempts) {
 
         globalAttempt++;
-
         let tempFile;
 
         try {
@@ -54,15 +53,18 @@ module.exports = {
           let thumb;
           let channel;
 
-          if (ytdl.validateURL(query)) {
+          /* ===============================
+             🔎 BUSCAR VIDEO
+          ================================ */
 
+          if (/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)/.test(query)) {
             videoUrl = query;
-            const basic = await yts({ videoId: ytdl.getURLVideoID(query) });
+            const basic = await yts({ videoId: query.split("v=")[1]?.split("&")[0] });
 
-            title = basic.title;
-            lengthSeconds = basic.seconds;
-            thumb = basic.thumbnail;
-            channel = basic.author?.name || "Desconocido";
+            title = basic?.title || "Desconocido";
+            lengthSeconds = basic?.seconds || 0;
+            thumb = basic?.thumbnail;
+            channel = basic?.author?.name || "Desconocido";
 
           } else {
 
@@ -82,76 +84,62 @@ module.exports = {
           }
 
           if (lengthSeconds > 30 * 60) {
-            throw new WarningError("El video dura más de 30 minutos. Prueba con uno más corto.");
+            throw new WarningError("El video dura más de 30 minutos.");
           }
-
-          const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
-          tempFile = path.join(os.tmpdir(), `${Date.now()}-${safeTitle}.mp4`);
 
           /* ===============================
-             🔥 DESCARGA ESTABLE CON REINTENTO
+             📁 ARCHIVO TEMP
           ================================ */
 
-          let info;
-          let formats;
-          let attempts = 0;
-          const maxAttempts = 15;
+          const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
+          tempFile = path.join(os.tmpdir(), `${uniqueId}.mp4`);
 
-          while (attempts < maxAttempts) {
-            attempts++;
+          /* ===============================
+             ⬇ DESCARGAR CON YT-DLP
+          ================================ */
 
-            info = await ytdl.getInfo(videoUrl);
-            formats = ytdl.filterFormats(info.formats, "audioandvideo");
+          const ytDlpPath = path.join(process.cwd(), "yt-dlp.exe");
 
-            if (formats.length) break;
-
-            console.log(`Reintentando formatos video (${attempts}/${maxAttempts})`);
-            await new Promise(r => setTimeout(r, 700));
-          }
-
-          if (!formats || !formats.length) {
-            throw new Error("No hay formatos de video disponibles");
-          }
-
-          formats = formats.filter(f => {
-            if (!f.qualityLabel) return false;
-            const height = parseInt(f.qualityLabel);
-            return height <= 480;
-          });
-
-          if (!formats.length) {
-            throw new Error("No hay formatos 360p/480p disponibles");
-          }
-
-          formats.sort((a, b) => {
-            const hA = parseInt(a.qualityLabel) || 9999;
-            const hB = parseInt(b.qualityLabel) || 9999;
-            return hA - hB;
-          });
-
-          const selectedFormat = formats[0];
-
-          const stream = ytdl.downloadFromInfo(info, {
-            format: selectedFormat,
-            highWaterMark: 1 << 24
-          });
-
-          const writeStream = fs.createWriteStream(tempFile);
+          const args = [
+            "-f", "mp4[height<=480]",
+            "-o", tempFile.replace(/\\/g, "/"),
+            videoUrl
+          ];
 
           await new Promise((resolve, reject) => {
 
-            stream.pipe(writeStream);
+            const child = spawn(ytDlpPath, args, { windowsHide: true });
 
-            writeStream.on("finish", resolve);
-            writeStream.on("error", reject);
-            stream.on("error", reject);
+            child.stdout.on("data", (data) => {
+              console.log("[yt-dlp-video]", data.toString());
+            });
+
+            child.stderr.on("data", (data) => {
+              console.error("[yt-dlp-video]", data.toString());
+            });
+
+            child.on("error", (err) => {
+              reject(new Error("Error al ejecutar yt-dlp: " + err.message));
+            });
+
+            child.on("close", (code) => {
+              if (code === 0 && fs.existsSync(tempFile)) {
+                resolve();
+              } else {
+                reject(new Error("No se pudo descargar el video. Código: " + code));
+              }
+            });
 
           });
+
+          /* ===============================
+             📤 ENVIAR
+          ================================ */
 
           if (thumb) {
             await sendImageFromURL(
               thumb,
-              `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}\n*Calidad*: ${selectedFormat.qualityLabel}`
+              `*Título*: ${title}\n*Duración*: ${lengthSeconds}s\n*Canal*: ${channel}\n*Calidad*: 480p`
             ).catch(() => {});
           }
 
@@ -159,25 +147,26 @@ module.exports = {
 
           await sendSuccessReact();
 
-          if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-
-          return; // ✅ éxito → salir del loop
+          return;
 
         } catch (err) {
 
           console.error(`Error en play-video (intento ${globalAttempt}):`, err);
 
-          if (tempFile && fs.existsSync(tempFile)) {
-            fs.unlinkSync(tempFile);
-          }
-
-          if (globalAttempt >= maxGlobalAttempts) {
+          if (globalAttempt >= 5) {
             await sendErrorReply(`❌ Ocurrió un error: ${err.message}`);
             return;
           }
 
           console.log("Reintentando comando completo play-video...");
           await new Promise(r => setTimeout(r, 1500));
+
+        } finally {
+
+          if (tempFile && fs.existsSync(tempFile)) {
+            fs.unlinkSync(tempFile);
+          }
+
         }
 
       }

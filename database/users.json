@@ -4,7 +4,7 @@
     "age": 23,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/620485926_1206638688260707_2153868945442048660_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wFsx_qZjifc35bhJRLTlYkWmLvkIF33aUmV_A_uu5qH2A&oe=69B559BF&_nc_sid=5e03e0&_nc_cat=107",
     "registeredAt": 1772594534960,
-    "commandsUsed": 43
+    "commandsUsed": 66
   },
   "148137834471521@lid": {
     "name": "cande",
@@ -25,6 +25,13 @@
     "age": 17,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/604365480_2182377932591113_8102560283903575560_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wGX9m19KUv3w7_4zjxONKDtSICuBtTwQ6z2ehytjSIdHw&oe=69B4FB40&_nc_sid=5e03e0&_nc_cat=107",
     "registeredAt": 1772615304030,
+    "commandsUsed": 2
+  },
+  "227595232755756@lid": {
+    "name": "Good",
+    "age": 16,
+    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/534426706_1211492844398255_5117639574441094741_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wGGIcQ2JHV2g2h1ApZ8QjVuRTE8eBB8x0bojBN32SopwA&oe=69B53B26&_nc_sid=5e03e0&_nc_cat=109",
+    "registeredAt": 1772634944528,
     "commandsUsed": 2
   }
 }
