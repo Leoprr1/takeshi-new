@@ -179,7 +179,6 @@ async function fetchNewsDetails(items) {
     if (browser) await browser.close();
   }
 
-  // Ordenar del más viejo al más nuevo
   return articles.sort((a, b) => new Date(a.time) - new Date(b.time));
 }
 
@@ -209,8 +208,16 @@ async function sendNewsToGroups(sock, newsItem, db) {
 async function checkNews(sock) {
   let db = readJSON("news-tyc");
   if (!db || typeof db !== "object") db = {};
+
+  if (db.enabled === undefined) db.enabled = true;
   if (!Array.isArray(db.lastPosts)) db.lastPosts = [];
   if (!Array.isArray(db.groupsEnabled)) db.groupsEnabled = [];
+
+  // INTERRUPTOR GLOBAL
+  if (!db.enabled) {
+    console.log("⏸ Sistema TyC desactivado.");
+    return;
+  }
 
   if (!db.groupsEnabled.length) {
     console.log("⚠ No hay grupos habilitados en news-tyc.json");
@@ -223,7 +230,6 @@ async function checkNews(sock) {
   const articles = await fetchNewsDetails(scraped);
   if (!articles.length) return;
 
-  // Filtrar solo los posts que no están en DB (por URL)
   const newPosts = articles.filter(article => !db.lastPosts.includes(article.url));
 
   if (!newPosts.length) {
@@ -231,13 +237,11 @@ async function checkNews(sock) {
     return;
   }
 
-  // Enviar del más viejo al más nuevo
   for (const post of newPosts) {
     await sendNewsToGroups(sock, post, db);
     db.lastPosts.push(post.url);
   }
 
-  // Mantener solo los últimos MAX_ARTICLES posts en DB
   db.lastPosts = db.lastPosts.slice(-MAX_ARTICLES);
 
   writeJSON("news-tyc", db);

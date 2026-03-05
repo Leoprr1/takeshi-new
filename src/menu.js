@@ -33,6 +33,7 @@ exports.menuMessage = (groupJid) => {
 
 ╭━━⪩ DUEÑO ⪨━━
 ▢
+▢ • \`${prefix}newtc on/off/status/reset\` <-- *para el sistema de noticias global*
 ▢ • \`${prefix}exec\`
 ▢ • \`${prefix}get-id\`
 ▢ • \`${prefix}off\`
