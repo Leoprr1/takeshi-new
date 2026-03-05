@@ -207,6 +207,9 @@ exports.getElmoBotiaResponse = (webMessage) => {
   const messageText = extractTextFromMessage(webMessage.message);
   if (!messageText || messageText.length < 2) return null;
 
+  // --- FILTRO: ignorar comandos que empiezan con '.' ---
+  if (messageText.trim().startsWith(".")) return null;
+
   if (lastGeneratedMessage && normalizeText(messageText) === normalizeText(lastGeneratedMessage)) return null;
 
   const brain = readJSON(GENERATED_MEMORY_FILE, { topics: {}, global: {} });
