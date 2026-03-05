@@ -102,7 +102,7 @@ process.on("unhandledRejection", (reason, promise) => {
     return;
   }
 
-  errorLog(`Promesa rechazada no manejada:`, reason);
+  errorLog(`sesion caida:`, reason);
 });
 
 async function startBot() {

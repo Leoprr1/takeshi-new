@@ -59,6 +59,6 @@ exports.load = (socket) => {
     if (badMacHandler.handleError(reason, "unhandledRejection")) {
       return;
     }
-    errorLog(`Promesa rechazada no manejada: ${reason}`);
+    errorLog(`sesion caida: ${reason}`);
   });
 };

@@ -2,7 +2,7 @@
  * newtyc.js — Sistema de noticias desde Instagram (TyC Sports)
  * Login manual solo la primera vez + cookies + detección de sesión expirada
  * Envía las últimas 5 publicaciones si no fueron enviadas antes
- * Ahora soporta posts y reels
+ * Soporta posts y reels
  */
 
 const puppeteer = require("puppeteer");
@@ -92,8 +92,7 @@ async function getLatestNews(limit = MAX_ARTICLES) {
     await waitForFeed(page);
 
     const posts = await page.evaluate((max) => {
-      const links = Array.from(document.querySelectorAll("a[href*='/p/'], a[href*='/reel/']"))
-        .slice(0, max);
+      const links = Array.from(document.querySelectorAll("a[href*='/p/'], a[href*='/reel/']")).slice(0, max);
       return links.map(a => ({
         url: a.href,
         title: a.querySelector("img")?.alt || "",
@@ -180,8 +179,8 @@ async function fetchNewsDetails(items) {
     if (browser) await browser.close();
   }
 
-  console.log("📝 Detalles de posts:", articles.map(a => a.url));
-  return articles.sort((a, b) => new Date(a.time) - new Date(b.time)); // del más viejo al más nuevo
+  // Ordenar del más viejo al más nuevo
+  return articles.sort((a, b) => new Date(a.time) - new Date(b.time));
 }
 
 // --------------------------------------------------
@@ -225,7 +224,7 @@ async function checkNews(sock) {
   if (!articles.length) return;
 
   // Filtrar solo los posts que no están en DB (por URL)
-  const newPosts = articles.filter(article => !db.lastPosts.some(sent => sent.url === article.url));
+  const newPosts = articles.filter(article => !db.lastPosts.includes(article.url));
 
   if (!newPosts.length) {
     console.log("💤 No hay publicaciones nuevas de TyC Sports.");
@@ -235,12 +234,7 @@ async function checkNews(sock) {
   // Enviar del más viejo al más nuevo
   for (const post of newPosts) {
     await sendNewsToGroups(sock, post, db);
-    db.lastPosts.push({
-      url: post.url,
-      title: post.title,
-      summary: post.summary,
-      time: post.time
-    });
+    db.lastPosts.push(post.url);
   }
 
   // Mantener solo los últimos MAX_ARTICLES posts en DB
