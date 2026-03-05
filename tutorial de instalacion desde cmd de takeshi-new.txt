@@ -3,7 +3,6 @@
 para la instalacion del bot copia y pega esto en el cmd
 cd C:\ruta donde quieras que se instale
 git clone https://github.com/Leoprr1/takeshi-new.git
-npm install
 
 una vez completado arranca el bot con esto para enlazar el bot al whatsapp con el QR cuando ya alla enlazado el bot al whatsapp, cerra el cmd
 npm start

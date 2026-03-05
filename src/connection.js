@@ -50,7 +50,6 @@ async function connect() {
     logger,
     auth: state,
     printQRInTerminal: false, // 🔥 QR EN CONSOLA
-    markOnlineOnConnect: true,
     msgRetryCounterCache,
     defaultQueryTimeoutMs: undefined,
     shouldIgnoreJid: (jid) =>
@@ -67,21 +66,31 @@ async function connect() {
     if (msg.key.fromMe) continue;
 
     const jid = msg.key.remoteJid;
+    const participant = msg.key.participant ?? null; // ✅ clave para privados
 
     try {
-      
       // FORZAR DOBLE TILDE + VISTO
       await socket.sendReceipt(
         jid,
-        msg.key.participant || null,
+        participant,
         [msg.key.id],
         "read"
       );
 
+      // Obtener mensaje de texto
+      const text =
+  msg.message?.conversation ||
+  msg.message?.extendedTextMessage?.text ||
+  "";
+
+      // 🔹 Filtrar solo comandos que empiezan con "."
+      if (!text.startsWith(".")) return;
+
       // mostrar que el bot está escribiendo
       await socket.sendPresenceUpdate("composing", jid);
 
-       await new Promise(r => setTimeout(r, 20000));
+      await new Promise((r) => setTimeout(r, 2000)); // 2s de "escribiendo"
+
       // detener presencia
       await socket.sendPresenceUpdate("paused", jid);
 
@@ -90,6 +99,8 @@ async function connect() {
     }
   }
 });
+
+
 
 
   socket.ev.on("connection.update", (update) => {
