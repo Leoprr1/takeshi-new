@@ -1,6 +1,7 @@
 const { PREFIX } = require(`${BASE_DIR}/config`);
-const { InvalidParameterError, WarningError } = require(`${BASE_DIR}/errors`);
+const { InvalidParameterError, WarningError, DangerError } = require(`${BASE_DIR}/errors`);
 const { readJSON, writeJSON } = require(`${BASE_DIR}/utils/database`);
+const { isBotOwner } = require(`${BASE_DIR}/middlewares`);
 
 module.exports = {
   name: "newtyc",
@@ -11,7 +12,12 @@ module.exports = {
   /**
    * @param {CommandHandleProps} props
    */
-  handle: async ({ args, sendReply, sendSuccessReact }) => {
+  handle: async ({ args, sendReply, sendSuccessReact, userJid, isLid }) => {
+
+    // 🔐 SOLO OWNER
+    if (!isBotOwner({ userJid, isLid })) {
+      throw new DangerError("¡Solo el dueño del bot puede usar este comando!");
+    }
 
     if (!args.length) {
       throw new InvalidParameterError(

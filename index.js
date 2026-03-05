@@ -224,12 +224,13 @@ async function startBot() {
     // Keep-alive: enviar presencia cada 25s
     // ----------------------------
     setInterval(() => {
-      if (socketGlobal?.sendPresenceUpdate) {
-        try {
-          socketGlobal.sendPresenceUpdate("available");
-        } catch {}
-      }
-    }, 25_000);
+  try {
+    if (!socketGlobal?.user?.id) return;
+    socketGlobal.sendPresenceUpdate("available", socketGlobal.user.id);
+  } catch (err) {
+    warningLog("Presence keep-alive error:", err.message);
+  }
+}, 25_000);
 
     // ----------------------------
     // Logs BadMacHandler cada 5 minutos

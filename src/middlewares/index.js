@@ -81,16 +81,38 @@ exports.isAdmin = async ({ remoteJid, userJid, socket }) => {
   return isOwner || isAdmin;
 };
 
-exports.isBotOwner = ({ userJid, isLid }) => {
-  if (isLid) {
-    return userJid === OWNER_LID;
+exports.isBotOwner = ({ userJid, webMessage }) => {
+
+  let jid = userJid;
+
+  // ⚡ Si viene webMessage lo usamos
+  if (!jid && webMessage?.key) {
+    if (webMessage.key.participant) {
+      jid = webMessage.key.participant;
+    } else {
+      jid = webMessage.key.remoteJid;
+    }
   }
 
+  if (!jid) return false;
+
+  // ⚡ Normalizamos a @lid
+  const normalizedJid = jid.endsWith("@s.whatsapp.net")
+    ? jid.replace("@s.whatsapp.net", "@lid")
+    : jid;
+
+  // ⚡ Verificar por LID
+  if (normalizedJid === OWNER_LID) {
+    return true;
+  }
+
+  // ⚡ Verificar por número
   return compareUserJidWithOtherNumber({
-    userJid: userJid,
+    userJid: jid,
     otherNumber: OWNER_NUMBER,
   });
 };
+
 
 exports.checkPermission = async ({ type, socket, userJid, remoteJid }) => {
   if (type === "member") {

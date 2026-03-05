@@ -10957,5 +10957,17 @@
     "answers": [
       "ush"
     ]
+  },
+  {
+    "match": "✅ ¡Miembro eliminado con éxito!",
+    "answers": [
+      "ahora"
+    ]
+  },
+  {
+    "match": "Q mando C K [shadow] ?",
+    "answers": [
+      "Link de pornhub"
+    ]
   }
 ]
