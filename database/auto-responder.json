@@ -11265,5 +11265,23 @@
     "answers": [
       ".accept"
     ]
+  },
+  {
+    "match": "Xq sino me descontrolo",
+    "answers": [
+      "Q me importa"
+    ]
+  },
+  {
+    "match": "Q me importa",
+    "answers": [
+      "So asi"
+    ]
+  },
+  {
+    "match": "So asi",
+    "answers": [
+      "Ajá"
+    ]
   }
 ]

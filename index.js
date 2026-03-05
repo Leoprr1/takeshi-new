@@ -154,6 +154,28 @@ async function startBot() {
           socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
         }
 
+        // ----------------------------
+        // 🔹 Optimización connection.update 🔹
+        // ----------------------------
+        socketGlobal.ev.removeAllListeners("connection.update"); // Limpiamos listeners antiguos
+
+        socketGlobal.ev.on("connection.update", (update) => {
+          try {
+            // Aquí manejamos los updates sin tocar tildes ni strings sensibles
+            if (update.connection) {
+              infoLog("Estado de conexión:", update.connection);
+            }
+
+            if (update.lastDisconnect) {
+              infoLog("Última desconexión:", update.lastDisconnect.error);
+            }
+
+            // Podés agregar más lógica de reconexión sin afectar textos
+          } catch (err) {
+            errorLog("Error en connection.update:", err);
+          }
+        });
+
         successLog("✅ Bot conectado y listo.");
         setTimeout(() => { startTyCSystem(socketGlobal); }, 10_000);
 
