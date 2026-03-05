@@ -81,7 +81,7 @@ async function connect() {
       // mostrar que el bot está escribiendo
       await socket.sendPresenceUpdate("composing", jid);
 
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise(r => setTimeout(r, 800 + Math.random()*700));
       // detener presencia
       await socket.sendPresenceUpdate("paused", jid);
 

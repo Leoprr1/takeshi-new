@@ -1777,7 +1777,7 @@ if (cmd === "gremio") {
         { name: "Bola de fuego", dmg: 300, type: "fuego", mana: 10 },
         { name: "Curación", heal: 200, mana: 15 }
     ] } },
-    { comando: "dragón", rango: "S", nivelMin: 131, descripcion: "Invadir la Fortaleza del Dragón", recompensa: { monedas: 20000, xp: 10000 }, boss: { nombre: "Dragón", hp: 12000, atk: 500, skills: [
+    { comando: "dragon", rango: "S", nivelMin: 131, descripcion: "Invadir la Fortaleza del Dragón", recompensa: { monedas: 20000, xp: 10000 }, boss: { nombre: "Dragón", hp: 12000, atk: 500, skills: [
         { name: "Llamarada", dmg: 400, type: "fuego" },
         { name: "Aliento de hielo", dmg: 250, type: "hielo", effect: { type: "slow", dur: 2 } }
     ] } },
