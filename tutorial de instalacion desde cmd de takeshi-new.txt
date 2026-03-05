@@ -1,0 +1,72 @@
+
+
+para la instalacion del bot copia y pega esto en el cmd
+cd C:\ruta donde quieras que se instale
+git clone https://github.com/Leoprr1/takeshi-new.git
+npm install
+
+una vez completado arranca el bot con esto para enlazar el bot al whatsapp con el QR cuando ya alla enlazado el bot al whatsapp, cerra el cmd
+npm start
+
+para actualizar el bot con las nuevas modificaciones del github pone esto
+cd C:\ruta donde instalaste el bot
+git pull
+
+para arrancar el bot luego de hacer npm start y cerrar el cmd
+copia y pega en el cmd todo esto(la primera vez.hasta pm2 save)
+
+pm2 install pm2-logrotate
+
+cd C:\ruta donde instalaste el bot
+
+pm2 start cleaner.js --name "c" --node-args="--expose-gc"
+
+pm2 start backup-rpg.js --name "b"
+
+pm2 start index.js --name "a"
+
+pm2 save
+
+pm2 save --force
+
+si se te borran los procesos menos el pm2 logrotate en el pm2 monit
+copia y pega en el cmd solo desde el cd:\ruta donde instalaste el bot----, hasta el pm2 save
+(y bueno si se te borraron todos los procesos incluso el pm2 logrotate copia todo)
+
+para ver todos los procesos solo pone 
+pm2 monit
+(no hace falta poner el cd:\ruta donde instalaste el bot---)
+
+
+esto es para actualizar todas las librerias
+cd C:\ruta donde instalaste el bot
+npm install -g npm-check-updates 
+
+
+una vez instalado solo pone esto cuando quieras actulizar las librerias
+cd C:\ruta donde instalaste el bot
+npx npm-check-updates -u
+npm install
+
+
+para reiniciar el proceso del bot del pm2
+pm2 restart a
+
+para pararlo
+pm2 stop a
+
+para parar todos los procesos
+pm2 stop all
+
+
+por si solo vas a actualizar el baileys
+cd C:\ruta donde instalaste el bot
+npm install @whiskeysockets/baileys@latest 
+
+
+
+
+
+
+
+

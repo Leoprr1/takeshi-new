@@ -2938,7 +2938,8 @@
   {
     "match": "Bienvenida",
     "answers": [
-      "Gracias"
+      "Gracias",
+      "No acepten gente de Virgo porfavor, que asco"
     ]
   },
   {
@@ -10949,6 +10950,12 @@
     "match": "Guadaaaa😀",
     "answers": [
       "Y quién sos vos?"
+    ]
+  },
+  {
+    "match": "No acepten gente de Virgo porfavor, que asco",
+    "answers": [
+      "ush"
     ]
   }
 ]
