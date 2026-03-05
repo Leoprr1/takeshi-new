@@ -9116,7 +9116,8 @@
   {
     "match": "⚠️ ¡Atención! ⚠️ Necesitas registrarte primero usando:\n.reg TuNombre Edad",
     "answers": [
-      "Naaaaaaa"
+      "Naaaaaaa",
+      "Jajajajajaja"
     ]
   },
   {
@@ -11244,6 +11245,24 @@
     "match": "Me hiciste presentarme casi 3 veces😔💔",
     "answers": [
       "Sorry"
+    ]
+  },
+  {
+    "match": "Gustavo portillo ayer saliste porque te pedí foto de la hermana a los nuevos",
+    "answers": [
+      "Para q mrda queres foto de su hermana"
+    ]
+  },
+  {
+    "match": "Para q mrda queres foto de su hermana",
+    "answers": [
+      "Jajajajajajajaj"
+    ]
+  },
+  {
+    "match": "💍 *PROPUESTA DE MATRIMONIO* 💍\n\n@96250619801819 quiere casarse contigo @65489778770156 😳✨\n\nResponde con:\n👉 *.accept*\n\npara aceptar esta unión 💒",
+    "answers": [
+      ".accept"
     ]
   }
 ]
