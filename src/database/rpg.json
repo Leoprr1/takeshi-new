@@ -1329,10 +1329,10 @@
   "223256997032099@lid": {
     "nivel": 539,
     "xp": 9138,
-    "hp": 10800,
+    "hp": 12204,
     "hpMax": 10800,
-    "mana": 3370,
-    "manamax": 5470,
+    "mana": 5480,
+    "manamax": 5480,
     "monedas": 3561517075373437,
     "arma": {
       "code": "H05",
@@ -2197,7 +2197,7 @@
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1764167616153,
+    "lastRegen": 1764171216153,
     "homeChest": [
       {
         "code": "H01",

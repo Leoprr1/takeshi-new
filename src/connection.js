@@ -69,12 +69,7 @@ async function connect() {
     const jid = msg.key.remoteJid;
 
     try {
-
-      // mostrar que el bot está escribiendo
-      await socket.sendPresenceUpdate("composing", jid);
-
       
-
       // FORZAR DOBLE TILDE + VISTO
       await socket.sendReceipt(
         jid,
@@ -83,6 +78,10 @@ async function connect() {
         "read"
       );
 
+      // mostrar que el bot está escribiendo
+      await socket.sendPresenceUpdate("composing", jid);
+
+      await new Promise(r => setTimeout(r, 1000));
       // detener presencia
       await socket.sendPresenceUpdate("paused", jid);
 
