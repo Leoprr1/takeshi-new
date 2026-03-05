@@ -149,7 +149,6 @@ async function startBot() {
         const socket = await connect();
         socketGlobal = socket;
         load(socketGlobal);
-        
 
         if (socketGlobal?.ws) {
           socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
