@@ -9,7 +9,8 @@
   {
     "match": "buenas",
     "answers": [
-      "Que honda man?"
+      "Que honda man?",
+      "Buenass"
     ]
   },
   {
@@ -1106,7 +1107,8 @@
   {
     "match": "JAJAJAJA",
     "answers": [
-      "JAJAJAJA"
+      "JAJAJAJA",
+      "Era para vs, me confundi"
     ]
   },
   {
@@ -2034,7 +2036,8 @@
   {
     "match": "Holaa",
     "answers": [
-      "Wenas"
+      "Wenas",
+      "Chau"
     ]
   },
   {
@@ -2935,7 +2938,7 @@
   {
     "match": "Bienvenida",
     "answers": [
-      "graciaaas"
+      "Gracias"
     ]
   },
   {
@@ -3908,7 +3911,8 @@
     "match": "chupala gord@ genocida de hamburgesas",
     "answers": [
       "Tu madre",
-      "Calla traga pitos"
+      "Calla traga pitos",
+      "Tu maldito padre hijo de la grandísima puta"
     ]
   },
   {
@@ -10048,7 +10052,9 @@
       "Na ahora no",
       "Al rato",
       "Ahora no puedo",
-      "deja de preguntarle a todo el mundo para jugar al fre 😂"
+      "deja de preguntarle a todo el mundo para jugar al fre 😂",
+      "D1",
+      "yo no juego a eso dea"
     ]
   },
   {
@@ -10629,13 +10635,296 @@
   {
     "match": "X\nD",
     "answers": [
-      "Cabron ya no me copies"
+      "Cabron ya no me copies",
+      "Hijo puta"
     ]
   },
   {
     "match": "Fua cualquier otro caía con eso",
     "answers": [
       "JAJAJA"
+    ]
+  },
+  {
+    "match": "es maradona pero sin exitos futbolísticos",
+    "answers": [
+      "Xd jajaja",
+      "JSJAJJA"
+    ]
+  },
+  {
+    "match": "Con mi abuelo",
+    "answers": [
+      "jajajajajaj y siempre hay uno"
+    ]
+  },
+  {
+    "match": "Bienvenidos a los nuevos, \n\nPara presentarse, y como prueba de que son reales y no fake,  pueden dejar una foto de sus hermanas, primas o tías a elección, para el analisis del comité de admins...",
+    "answers": [
+      "no me la contes",
+      "JAJAJAJA"
+    ]
+  },
+  {
+    "match": "no me la contes",
+    "answers": [
+      "Claro"
+    ]
+  },
+  {
+    "match": "Soy una ia?",
+    "answers": [
+      "Tías debes tener lokito"
+    ]
+  },
+  {
+    "match": "Tías debes tener lokito",
+    "answers": [
+      "Amigo ni mi viejo ni mi vieja tienen hermanas jaja"
+    ]
+  },
+  {
+    "match": "no perdonaba nada",
+    "answers": [
+      "Tjr jaja"
+    ]
+  },
+  {
+    "match": "Amigo ni mi viejo ni mi vieja tienen hermanas jaja",
+    "answers": [
+      "Y una abuela por ahí?"
+    ]
+  },
+  {
+    "match": "Y una abuela por ahí?",
+    "answers": [
+      "Te acompaño al cenenterio si queres"
+    ]
+  },
+  {
+    "match": "Te acompaño al cenenterio si queres",
+    "answers": [
+      "Pero la cajeta y que tenes"
+    ]
+  },
+  {
+    "match": "Pero la cajeta y que tenes",
+    "answers": [
+      "Un  hermano"
+    ]
+  },
+  {
+    "match": "La sirvienta",
+    "answers": [
+      "Ahí vaaa"
+    ]
+  },
+  {
+    "match": "2,3,5,7,11 normas que incumplo",
+    "answers": [
+      "XDD",
+      "JAJAJAJAJAJAJJAAA"
+    ]
+  },
+  {
+    "match": "JAJAJAJAJAJAJJAAA",
+    "answers": [
+      "No dire nombres"
+    ]
+  },
+  {
+    "match": "No dire nombres",
+    "answers": [
+      "JAJJAJAJJAAJAJJAJAJAJAJAJAJAJA"
+    ]
+  },
+  {
+    "match": "JAJJAJAJJAAJAJJAJAJAJAJAJAJAJA",
+    "answers": [
+      "JAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJA"
+    ]
+  },
+  {
+    "match": "JAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJA",
+    "answers": [
+      "JAKAJAJJAJAJAJAJAJJAJAJAJAJAJAJJAJJAJAJKAKAJKAAJAJAJJAJAJAJAJJAJAJAJAJAJAJAJAJJAKAKKKAKKAKAAKKAKAKAKAKKAAKKAKAKAKAJAA"
+    ]
+  },
+  {
+    "match": "JAKAJAJJAJAJAJAJAJJAJAJAJAJAJAJJAJJAJAJKAKAJKAAJAJAJJAJAJAJAJJAJAJAJAJAJAJAJAJJAKAKKKAKKAKAAKKAKAKAKAKKAAKKAKAKAKAJAA",
+    "answers": [
+      "JAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJA"
+    ]
+  },
+  {
+    "match": "Viate que me peleas nms vo",
+    "answers": [
+      "KKAAJJAJAJAJJAJJJ JAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAKAJAJJAJAJAJAJAJJAJAJAJAJAJAJJAJJAJAJKAKAJKAAJAJAJJAJAJAJAJJAJAJAJAJAJAJAJAJJAKAKKKAKKAKAAKKAKAKAKAKKAAKKAKAKAKAJAA"
+    ]
+  },
+  {
+    "match": "KKAAJJAJAJAJJAJJJ JAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAKAJAJJAJAJAJAJAJJAJAJAJAJAJAJJAJJAJAJKAKAJKAAJAJAJJAJAJAJAJJAJAJAJAJAJAJAJAJJAKAKKKAKKAKAAKKAKAKAKAKKAAKKAKAKAKAJAA",
+    "answers": [
+      "KKAAJJAJAJAJJAJJJ JAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAKAJAJJAJAJAJAJAJJAJAJAJAJAJAJJAJJAJAJKAKAJKAAJAJAJJAJAJAJAJJAJAJAJAJAJAJAJAJJAKAKKKAKKAKAAKKAKAKAKAKKAAKKAKAKAKAJAAKKAAJJAJAJAJJAJJJ JAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAJJAJAJJAAJAJJAJAJAJAJAJAJAJAJAKAJAJJAJAJAJAJAJJAJAJAJAJAJAJJAJJAJAJKAKAJKAAJAJAJJAJAJAJAJJAJAJAJAJAJAJAJAJJAKAKKKAKKAKAAKKAKAKAKAKKAAKKAKAKAKAJAA"
+    ]
+  },
+  {
+    "match": "estábamos a un jaja del chaleco de fuerza",
+    "answers": [
+      "Tjr bld jajaja"
+    ]
+  },
+  {
+    "match": "Dónde estará mi amiga cande",
+    "answers": [
+      "Llorando por alguno seguramente",
+      "entrenando"
+    ]
+  },
+  {
+    "match": "Debe estar destripando la empanada seguro",
+    "answers": [
+      "Tambien puede ser"
+    ]
+  },
+  {
+    "match": "Lo que yo me pregunto es donde andara mailob @82643928498250",
+    "answers": [
+      "Reventándose a martillazos",
+      "aca"
+    ]
+  },
+  {
+    "match": "Reventándose a martillazos",
+    "answers": [
+      "Re turbio era jaja"
+    ]
+  },
+  {
+    "match": "Era para vs, me confundi",
+    "answers": [
+      "ok"
+    ]
+  },
+  {
+    "match": "❌ ¡Error! ¡No tienes permiso para ejecutar este comando!",
+    "answers": [
+      "Si dejame"
+    ]
+  },
+  {
+    "match": "Desactivarlo",
+    "answers": [
+      "?😂"
+    ]
+  },
+  {
+    "match": "?😂",
+    "answers": [
+      "JAJAJA"
+    ]
+  },
+  {
+    "match": "Andaba al0edo",
+    "answers": [
+      "dio mio 😂"
+    ]
+  },
+  {
+    "match": "dio mio 😂",
+    "answers": [
+      "JAJAJ"
+    ]
+  },
+  {
+    "match": "no soy tuyo, que decis 🤨",
+    "answers": [
+      "Wepaaaa"
+    ]
+  },
+  {
+    "match": "Cabron ya no me copies",
+    "answers": [
+      "JAJAJAJ se enamoró de vos"
+    ]
+  },
+  {
+    "match": "JAJAJAJ se enamoró de vos",
+    "answers": [
+      "Por lo que veo si, tu maldito bot de mrd está enamorado mío"
+    ]
+  },
+  {
+    "match": "anda a mostrar tus mierdas de culiadas a otro lado",
+    "answers": [
+      "Bueno no mando más fue"
+    ]
+  },
+  {
+    "match": "Ese soy yo",
+    "answers": [
+      "Tengo 18 años"
+    ]
+  },
+  {
+    "match": "fue mi primera clase de kung fu",
+    "answers": [
+      "Ta bueno pue"
+    ]
+  },
+  {
+    "match": "Ta bueno pue",
+    "answers": [
+      "bno"
+    ]
+  },
+  {
+    "match": "Si te presentaste ya jaja",
+    "answers": [
+      "Soy fachero?"
+    ]
+  },
+  {
+    "match": "Soy fachero?",
+    "answers": [
+      "Si wacho"
+    ]
+  },
+  {
+    "match": "Quien me tiene 1000 pesos",
+    "answers": [
+      "Amigo ya te dije que no tengo"
+    ]
+  },
+  {
+    "match": "Si wacho",
+    "answers": [
+      "Bien ahi compa"
+    ]
+  },
+  {
+    "match": "Amigo ya te dije que no tengo",
+    "answers": [
+      "U bueno alguien debe tener"
+    ]
+  },
+  {
+    "match": "Si queres vamos a pedir juntos",
+    "answers": [
+      "Jaja"
+    ]
+  },
+  {
+    "match": "@17201797030138",
+    "answers": [
+      "Hoka"
+    ]
+  },
+  {
+    "match": "perdón guada",
+    "answers": [
+      "Morite",
+      "Estúpido"
     ]
   }
 ]

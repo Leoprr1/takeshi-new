@@ -1,7 +1,7 @@
 /**
  * newtyc.js — Sistema de noticias desde Instagram (TyC Sports)
  * Login manual solo la primera vez + cookies + detección de sesión expirada
- * Siempre envía al menos la última publicación
+ * Envía las últimas 5 publicaciones si no fueron enviadas antes
  * Ahora soporta posts y reels
  */
 
@@ -57,7 +57,7 @@ async function instagramLogin(page) {
 // ESPERA ROBUSTA DEL FEED
 // --------------------------------------------------
 async function waitForFeed(page) {
-  const timeout = 20000; // 20 segundos máximo
+  const timeout = 20000;
   const startTime = Date.now();
   let feedDetected = false;
 
@@ -89,23 +89,16 @@ async function getLatestNews(limit = MAX_ARTICLES) {
     const page = await browser.newPage();
     await instagramLogin(page);
     await page.goto(`https://www.instagram.com/${INSTAGRAM_USER}/`, { waitUntil: "networkidle2" });
-
     await waitForFeed(page);
 
     const posts = await page.evaluate((max) => {
-      // Captura tanto posts normales como reels
-      const links = Array.from(
-        document.querySelectorAll("a[href*='/p/'], a[href*='/reel/']")
-      ).slice(0, max);
-
-      return links.map(a => {
-        const img = a.querySelector("img");
-        return {
-          url: a.href,
-          title: img ? img.alt || "" : "",
-          imageUrl: img ? img.src : "",
-        };
-      });
+      const links = Array.from(document.querySelectorAll("a[href*='/p/'], a[href*='/reel/']"))
+        .slice(0, max);
+      return links.map(a => ({
+        url: a.href,
+        title: a.querySelector("img")?.alt || "",
+        imageUrl: a.querySelector("img")?.src || "",
+      }));
     }, limit);
 
     console.log("📝 Posts detectados:", posts.map(p => p.url));
@@ -142,7 +135,6 @@ async function fetchNewsDetails(items) {
           const timeEl = document.querySelector("time");
           const imgEl = document.querySelector("article img");
 
-          // Concatenar solo el texto real de todos los spans para la descripción
           const summaryText = spanEls
             .map(span => span.innerText.trim())
             .filter(t => t && t.length > 0)
@@ -189,7 +181,7 @@ async function fetchNewsDetails(items) {
   }
 
   console.log("📝 Detalles de posts:", articles.map(a => a.url));
-  return articles.sort((a, b) => new Date(b.time) - new Date(a.time));
+  return articles.sort((a, b) => new Date(a.time) - new Date(b.time)); // del más viejo al más nuevo
 }
 
 // --------------------------------------------------
@@ -213,32 +205,48 @@ async function sendNewsToGroups(sock, newsItem, db) {
 }
 
 // --------------------------------------------------
-// CHEQUEAR NUEVAS PUBLICACIONES (SOLO LA ÚLTIMA)
+// CHEQUEAR NUEVAS PUBLICACIONES (ÚLTIMOS 5)
 // --------------------------------------------------
 async function checkNews(sock) {
-  const db = readJSON("news-tyc", { lastUrl: "", groupsEnabled: [] });
-  if (!db.groupsEnabled?.length) {
+  let db = readJSON("news-tyc");
+  if (!db || typeof db !== "object") db = {};
+  if (!Array.isArray(db.lastPosts)) db.lastPosts = [];
+  if (!Array.isArray(db.groupsEnabled)) db.groupsEnabled = [];
+
+  if (!db.groupsEnabled.length) {
     console.log("⚠ No hay grupos habilitados en news-tyc.json");
     return;
   }
 
-  const scraped = await getLatestNews(1); // solo obtenemos la última publicación
+  const scraped = await getLatestNews(MAX_ARTICLES);
   if (!scraped.length) return;
 
   const articles = await fetchNewsDetails(scraped);
   if (!articles.length) return;
 
-  const latest = articles[0];
+  // Filtrar solo los posts que no están en DB (por URL)
+  const newPosts = articles.filter(article => !db.lastPosts.some(sent => sent.url === article.url));
 
-  // Si ya se envió, no hacemos nada
-  if (latest.url === db.lastUrl) return;
+  if (!newPosts.length) {
+    console.log("💤 No hay publicaciones nuevas de TyC Sports.");
+    return;
+  }
 
-  // Guardamos la última URL enviada
-  db.lastUrl = latest.url;
+  // Enviar del más viejo al más nuevo
+  for (const post of newPosts) {
+    await sendNewsToGroups(sock, post, db);
+    db.lastPosts.push({
+      url: post.url,
+      title: post.title,
+      summary: post.summary,
+      time: post.time
+    });
+  }
+
+  // Mantener solo los últimos MAX_ARTICLES posts en DB
+  db.lastPosts = db.lastPosts.slice(-MAX_ARTICLES);
+
   writeJSON("news-tyc", db);
-
-  // Enviar la última publicación a los grupos habilitados
-  await sendNewsToGroups(sock, latest, db);
 }
 
 // --------------------------------------------------
