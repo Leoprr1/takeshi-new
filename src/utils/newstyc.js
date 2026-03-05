@@ -13,7 +13,7 @@ const ffmpegService = require("../services/ffmpeg");
 let intervalStarted = false;
 const MAX_ARTICLES = 5;
 const INSTAGRAM_USER = "tycsports";
-const COOKIES_PATH = "./cookies.json";
+const COOKIES_PATH = "./src/commands/cache/cookies.json";
 
 // --------------------------------------------------
 // FUNCIÓN PARA ESPERAR TIEMPO
