@@ -39,8 +39,21 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
   if (!messages || !messages.length) return;
 
   for (const webMessage of messages) {
-    try {
-      const messageId = webMessage?.key?.id;
+    try { 
+      
+      const jid = webMessage?.key?.remoteJid
+
+    if (!jid) return
+
+    // marcar como disponible
+    await socket.sendPresenceUpdate('available', jid)
+
+    // marcar como leído
+    await socket.readMessages([webMessage])
+
+    const messageId = webMessage?.key?.id;
+
+      
 
       // 🚫 IGNORAR MENSAJES DEL PROPIO BOT (ANTI-LOOP)
       if (webMessage?.key?.fromMe) continue;

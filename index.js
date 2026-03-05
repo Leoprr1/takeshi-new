@@ -81,7 +81,6 @@ const {
 } = require("./src/utils/logger");
 const { startTyCSystem } = require("./src/utils/newstyc");
 
-
 let socketGlobal;
 let reconnecting = false;
 
@@ -110,25 +109,15 @@ async function handleReconnect(reason) {
   infoLog(`⚠️ Reconexión iniciada por: ${reason}`);
 
   try {
-    await new Promise((r) => setTimeout(r, 30_000)); // espera 30s antes de reconectar
+    await new Promise((r) => setTimeout(r, 30_000));
 
     const newSocket = await connect();
     socketGlobal = newSocket;
     load(socketGlobal);
 
-    // Capturamos cualquier promesa rechazada interna del socket
     if (socketGlobal?.ws) {
       socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
     }
-
-    // Listener de reconexión
-    socketGlobal.ev.removeAllListeners("connection.update");
-    socketGlobal.ev.on("connection.update", (update) => {
-      const { connection, lastDisconnect } = update;
-      if (connection === "close" || connection === "error" || lastDisconnect?.error) {
-        handleReconnect(lastDisconnect?.error?.output?.statusCode || connection);
-      }
-    });
 
     successLog("✅ Reconexión exitosa");
   } catch (err) {
@@ -160,37 +149,17 @@ async function startBot() {
         const socket = await connect();
         socketGlobal = socket;
         load(socketGlobal);
+        
 
-        // Capturamos promesas rechazadas internas
         if (socketGlobal?.ws) {
           socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
         }
 
-        // Listener de reconexión
-        socketGlobal.ev.removeAllListeners("connection.update");
-        socketGlobal.ev.on("connection.update", (update) => {
-          const { connection, lastDisconnect } = update;
-          if (connection === "close" || connection === "error" || lastDisconnect?.error) {
-            handleReconnect(lastDisconnect?.error?.output?.statusCode || connection);
-          }
-        });
-
-        // --- Lógica de checks de WhatsApp para dos tildes ---
-        socketGlobal.ev.on("messages.upsert", ({ messages }) => {
-          messages.forEach((msg) => {
-            if (msg.key && msg.key.fromMe) {
-              if (msg.status === 0) infoLog("✓"); // enviado
-              if (msg.status === 1) infoLog("✓✓"); // recibido
-              if (msg.status === 2) infoLog("✓✓ (azul)"); // leído
-            }
-          });
-        });
-        // ---------------------------------------------------
-
         successLog("✅ Bot conectado y listo.");
-        setTimeout(() => {startTyCSystem(socketGlobal);}, 10_000);
+        setTimeout(() => { startTyCSystem(socketGlobal); }, 10_000);
+
       } catch {
-        setTimeout(initSocket, 5000); // reintento simple sin spam
+        setTimeout(initSocket, 5000);
       }
     }
 
@@ -224,13 +193,13 @@ async function startBot() {
     // Keep-alive: enviar presencia cada 25s
     // ----------------------------
     setInterval(() => {
-  try {
-    if (!socketGlobal?.user?.id) return;
-    socketGlobal.sendPresenceUpdate("available", socketGlobal.user.id);
-  } catch (err) {
-    warningLog("Presence keep-alive error:", err.message);
-  }
-}, 25_000);
+      try {
+        if (!socketGlobal?.user?.id) return;
+        socketGlobal.sendPresenceUpdate("available", socketGlobal.user.id);
+      } catch (err) {
+        warningLog("Presence keep-alive error:", err.message);
+      }
+    }, 25_000);
 
     // ----------------------------
     // Logs BadMacHandler cada 5 minutos

@@ -50,6 +50,7 @@ async function connect() {
     logger,
     auth: state,
     printQRInTerminal: false, // 🔥 QR EN CONSOLA
+    markOnlineOnConnect: true,
     msgRetryCounterCache,
     defaultQueryTimeoutMs: undefined,
     shouldIgnoreJid: (jid) =>
@@ -57,6 +58,40 @@ async function connect() {
       isJidStatusBroadcast(jid) ||
       isJidNewsletter(jid),
   });
+
+  socket.ev.on("messages.upsert", async ({ messages, type }) => {
+  if (type !== "notify") return;
+
+  for (const msg of messages) {
+    if (!msg.key) continue;
+    if (msg.key.fromMe) continue;
+
+    const jid = msg.key.remoteJid;
+
+    try {
+
+      // mostrar que el bot está escribiendo
+      await socket.sendPresenceUpdate("composing", jid);
+
+      
+
+      // FORZAR DOBLE TILDE + VISTO
+      await socket.sendReceipt(
+        jid,
+        msg.key.participant || null,
+        [msg.key.id],
+        "read"
+      );
+
+      // detener presencia
+      await socket.sendPresenceUpdate("paused", jid);
+
+    } catch (err) {
+      warningLog("Error enviando visto:", err.message);
+    }
+  }
+});
+
 
   socket.ev.on("connection.update", (update) => {
     const { connection, lastDisconnect, qr } = update;
@@ -87,6 +122,7 @@ async function connect() {
   });
 
   socket.ev.on("creds.update", saveCreds);
+  
 
   return socket;
 }
