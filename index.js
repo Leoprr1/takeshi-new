@@ -161,16 +161,8 @@ async function startBot() {
 
         socketGlobal.ev.on("connection.update", (update) => {
           try {
-            // Aquí manejamos los updates sin tocar tildes ni strings sensibles
-            if (update.connection) {
-              infoLog("Estado de conexión:", update.connection);
-            }
-
-            if (update.lastDisconnect) {
-              infoLog("Última desconexión:", update.lastDisconnect.error);
-            }
-
-            // Podés agregar más lógica de reconexión sin afectar textos
+            if (update.connection) infoLog("Estado de conexión:", update.connection);
+            if (update.lastDisconnect) infoLog("Última desconexión:", update.lastDisconnect.error);
           } catch (err) {
             errorLog("Error en connection.update:", err);
           }
@@ -236,6 +228,33 @@ async function startBot() {
     // Log manual para PM2 cada 1 min
     // ----------------------------
     setInterval(() => infoLog("🔄 Actualizando sesión (manteniendo bot vivo)"), 60_000);
+
+    // ----------------------------
+    // 🔹 Watchdog inteligente 🔹
+    // ----------------------------
+    const WATCHDOG_INTERVAL = 10_000; // cada 10s chequea
+    let disconnectedSince = null;
+
+    setInterval(async () => {
+      try {
+        if (!socketGlobal || !socketGlobal.user || !socketGlobal.user.id) {
+          if (!disconnectedSince) disconnectedSince = Date.now();
+          const elapsed = Date.now() - disconnectedSince;
+
+          if (elapsed > 120_000) { // 2 minutos desconectado
+            warningLog("⚠️ Bot no se reconectó en 2 minutos. Reiniciando...");
+            process.exit(1); // PM2 reinicia automáticamente
+          } else {
+            warningLog("⚠️ Bot desconectado, intentando reconectar...");
+            await handleReconnect("Watchdog triggered reconnection");
+          }
+        } else {
+          disconnectedSince = null; // reset si se conecta
+        }
+      } catch (err) {
+        errorLog("Error en watchdog:", err.message);
+      }
+    }, WATCHDOG_INTERVAL);
 
   } catch (error) {
     if (badMacHandler.handleError(error, "bot-startup")) {
