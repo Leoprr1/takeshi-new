@@ -5,8 +5,13 @@
  * Soporta posts y reels
  */
 
+/**
+ * newtyc.js — Sistema de noticias desde Instagram (TyC Sports) optimizado con hash de contenido
+ */
+
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const crypto = require("crypto");
 const { readJSON, writeJSON } = require("./database");
 const ffmpegService = require("../services/ffmpeg");
 
@@ -23,12 +28,17 @@ function wait(ms) {
 }
 
 // --------------------------------------------------
+// HASH SHA1 DE TEXTO
+// --------------------------------------------------
+function generateHash(text) {
+  return crypto.createHash("sha1").update(text).digest("hex");
+}
+
+// --------------------------------------------------
 // LOGIN INSTAGRAM CON DETECCIÓN DE SESIÓN EXPIRADA
 // --------------------------------------------------
 async function instagramLogin(page) {
-  const cookiesExist = fs.existsSync(COOKIES_PATH);
-
-  if (cookiesExist) {
+  if (fs.existsSync(COOKIES_PATH)) {
     console.log("🍪 Cargando cookies guardadas...");
     const cookies = JSON.parse(fs.readFileSync(COOKIES_PATH, "utf8"));
     await page.setCookie(...cookies);
@@ -116,12 +126,8 @@ async function getLatestNews(limit = MAX_ARTICLES) {
 async function fetchNewsDetails(items) {
   const articles = [];
   let browser;
-
   try {
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] });
 
     for (const item of items) {
       try {
@@ -162,12 +168,16 @@ async function fetchNewsDetails(items) {
           }
         }
 
+        // Generamos hash único basado en url + summary
+        const contentHash = generateHash(item.url + detail.summary);
+
         articles.push({
           title: item.title,
           url: item.url,
           summary: detail.summary,
           time: detail.time,
           imageBuffer,
+          hash: contentHash,
         });
       } catch (err) {
         console.error("Error procesando publicación:", err.message);
@@ -203,48 +213,62 @@ async function sendNewsToGroups(sock, newsItem, db) {
 }
 
 // --------------------------------------------------
-// CHEQUEAR NUEVAS PUBLICACIONES (ÚLTIMOS 5)
+// CHEQUEAR NUEVAS PUBLICACIONES (Últimos 5) - con hash
 // --------------------------------------------------
+let newsLock = false;
+
 async function checkNews(sock) {
-  let db = readJSON("news-tyc");
-  if (!db || typeof db !== "object") db = {};
+  if (newsLock) return;
+  newsLock = true;
 
-  if (db.enabled === undefined) db.enabled = true;
-  if (!Array.isArray(db.lastPosts)) db.lastPosts = [];
-  if (!Array.isArray(db.groupsEnabled)) db.groupsEnabled = [];
+  try {
+    let db = readJSON("news-tyc");
+    if (!db || typeof db !== "object") db = {};
 
-  // INTERRUPTOR GLOBAL
-  if (!db.enabled) {
-    console.log("⏸ Sistema TyC desactivado.");
-    return;
+    if (db.enabled === undefined) db.enabled = true;
+    if (!Array.isArray(db.lastPosts)) db.lastPosts = [];
+    if (!Array.isArray(db.groupsEnabled)) db.groupsEnabled = [];
+
+    if (!db.enabled) {
+      console.log("⏸ Sistema TyC desactivado.");
+      return;
+    }
+
+    if (!db.groupsEnabled.length) {
+      console.log("⚠ No hay grupos habilitados en news-tyc.json");
+      return;
+    }
+
+    const scraped = await getLatestNews(MAX_ARTICLES);
+    if (!scraped.length) return;
+
+    const articles = await fetchNewsDetails(scraped);
+    if (!articles.length) return;
+
+    // Set de hashes para filtrar duplicados
+    const sentHashes = new Set(db.lastPosts.map(post => post.hash || post)); // soporta antiguas versiones
+    const newPosts = articles.filter(article => !sentHashes.has(article.hash));
+
+    if (!newPosts.length) {
+      console.log("💤 No hay publicaciones nuevas de TyC Sports.");
+      return;
+    }
+
+    for (const post of newPosts) {
+      await sendNewsToGroups(sock, post, db);
+      db.lastPosts.push({ url: post.url, hash: post.hash });
+      sentHashes.add(post.hash);
+    }
+
+    // Mantener solo los últimos MAX_ARTICLES
+    db.lastPosts = db.lastPosts.slice(-MAX_ARTICLES);
+
+    writeJSON("news-tyc", db);
+  } catch (err) {
+    console.error("Error checkNews:", err.message);
+  } finally {
+    newsLock = false;
   }
-
-  if (!db.groupsEnabled.length) {
-    console.log("⚠ No hay grupos habilitados en news-tyc.json");
-    return;
-  }
-
-  const scraped = await getLatestNews(MAX_ARTICLES);
-  if (!scraped.length) return;
-
-  const articles = await fetchNewsDetails(scraped);
-  if (!articles.length) return;
-
-  const newPosts = articles.filter(article => !db.lastPosts.includes(article.url));
-
-  if (!newPosts.length) {
-    console.log("💤 No hay publicaciones nuevas de TyC Sports.");
-    return;
-  }
-
-  for (const post of newPosts) {
-    await sendNewsToGroups(sock, post, db);
-    db.lastPosts.push(post.url);
-  }
-
-  db.lastPosts = db.lastPosts.slice(-MAX_ARTICLES);
-
-  writeJSON("news-tyc", db);
 }
 
 // --------------------------------------------------

@@ -584,7 +584,7 @@
     ],
     "profecion": null,
     "lid": "65489778770156@lid",
-    "lastRegen": 1759900579411,
+    "lastRegen": 1759911379411,
     "homeChest": [
       {
         "tipo": "mascota",
@@ -771,13 +771,13 @@
     "totalHP": 100
   },
   "96250619801819@lid": {
-    "nivel": 502,
-    "xp": 38943,
-    "hp": 11118,
-    "hpMax": 10060,
-    "mana": 5110,
-    "manamax": 5110,
-    "monedas": 23000540917874,
+    "nivel": 504,
+    "xp": 19303,
+    "hp": 11158,
+    "hpMax": 10100,
+    "mana": 5130,
+    "manamax": 5130,
+    "monedas": 23000543169998,
     "arma": {
       "code": "H03",
       "nombre": "🐉 Lanza de Agujero Negro 🔥🔥",
@@ -871,14 +871,14 @@
         "uid": "mgra4g3q78"
       }
     ],
-    "lastDaily": 1772311127134,
+    "lastDaily": 1772726218890,
     "lastWork": 1771726015396,
     "lastHunt": 1771726031657,
     "lastMine": 1771726020834,
     "lastFish": 1771726027795,
-    "lastDungeon": 1772311117766,
+    "lastDungeon": 1772760640777,
     "lastGuildMission": 0,
-    "nick": "𒄆𒄆𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱⃢𒀱𒀱𒀱⃢کسی تو کتابِ زندگیش، یه فصلی داره که وقتی بهش فکر میکنه تا𒂝𒄆𒈞𒋨𒆙𒁂𒆙𒈞𖣘𒐫𒈒𒄆𒄆𒄆𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱𒀱⃢𒀱𒀱𒀱⃢کسی تو کتابِ زندگیش، یه فصلی داره که وقتی بهش فکر میکنه تا𒂝𒄆𒈞𒋨𒆙𒁂𒆙𒈞𖣘𒐫𒈒𒄆",
+    "nick": "742617000027",
     "gremio": "Aventureros",
     "misionesActivas": [],
     "misionesCompletadas": [
@@ -1239,7 +1239,7 @@
     ],
     "profecion": null,
     "lid": "96250619801819@lid",
-    "lastRegen": 1762695751621,
+    "lastRegen": 1762746151621,
     "homeChest": [],
     "hasHouse": true,
     "enCasa": true,
@@ -1260,7 +1260,7 @@
       "flores": 1758993472261,
       "lobos": 1758993472468
     },
-    "manaMax": 5110,
+    "manaMax": 5130,
     "inmunidadKO": false,
     "inmunidadKOStart": 0,
     "lastManaRegen": 0,
@@ -1327,13 +1327,13 @@
     "precisionBonus": 298.5
   },
   "223256997032099@lid": {
-    "nivel": 539,
-    "xp": 9138,
-    "hp": 10800,
-    "hpMax": 10800,
-    "mana": 3370,
-    "manamax": 5470,
-    "monedas": 3561517075373437,
+    "nivel": 541,
+    "xp": 25688,
+    "hp": 12244,
+    "hpMax": 10840,
+    "mana": 5500,
+    "manamax": 5500,
+    "monedas": 3561517075724081,
     "arma": {
       "code": "H05",
       "nombre": "🌑 Guante de zeno Sama 🌙⚔️",
@@ -1420,16 +1420,18 @@
         "uid": "mlh7iptu946"
       }
     ],
-    "lastDaily": 1771714277757,
+    "lastDaily": 1772726726295,
     "lastWork": 1772573526198,
     "lastHunt": 1770966222294,
-    "lastMine": 1770966224403,
-    "lastFish": 1770966228170,
-    "lastDungeon": 1772662179705,
+    "lastMine": 1772726341285,
+    "lastFish": 1772726347339,
+    "lastDungeon": 1772726359056,
     "lastGuildMission": 0,
     "nick": "👑⛧ᏞᎬᎾᏢᎡᎡ⛧👑",
     "gremio": "Aventureros",
-    "misionesActivas": [],
+    "misionesActivas": [
+      "ogro"
+    ],
     "misionesCompletadas": [
       "flores",
       "flores",
@@ -2193,11 +2195,20 @@
       "mago",
       "dragón",
       "rey-demonio",
+      "salvar-mundo",
+      "flores",
+      "lobos",
+      "ruinas",
+      "ogro",
+      "principe",
+      "mago",
+      "dragón",
+      "rey-demonio",
       "salvar-mundo"
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1764167616153,
+    "lastRegen": 1764293616153,
     "homeChest": [
       {
         "code": "H01",
@@ -2265,20 +2276,20 @@
       "lastKO": 0
     },
     "misionesCooldown": {
-      "salvar-mundo": 1771714427592,
-      "rey-demonio": 1771714423211,
-      "dragón": 1771714420222,
-      "mago": 1771714403866,
-      "principe": 1771714395330,
-      "ogro": 1771714391324,
-      "ruinas": 1771714386639,
-      "lobos": 1771714382539,
-      "flores": 1771714378126
+      "salvar-mundo": 1772726708528,
+      "rey-demonio": 1772726699512,
+      "dragón": 1772726694792,
+      "mago": 1772726689465,
+      "principe": 1772726647308,
+      "ogro": 1772726640733,
+      "ruinas": 1772726635655,
+      "lobos": 1772726632195,
+      "flores": 1772726624909
     },
-    "manaMax": 3370,
+    "manaMax": 3390,
     "lastManaRegen": 0,
-    "inmunidadKO": true,
-    "inmunidadKOStart": 1770867707440,
+    "inmunidadKO": false,
+    "inmunidadKOStart": 0,
     "academia": {
       "especialidades": {
         "fuerza": 102,
@@ -2850,7 +2861,7 @@
     ],
     "profecion": null,
     "lid": "65919745306692@lid",
-    "lastRegen": 1763147498850,
+    "lastRegen": 1763158298850,
     "homeChest": [],
     "hasHouse": true,
     "enCasa": true,
@@ -3152,7 +3163,7 @@
     ],
     "profecion": null,
     "lid": "148137834471521@lid",
-    "lastRegen": 1762878998851,
+    "lastRegen": 1762889798851,
     "homeChest": [
       {
         "uid": "mg34oue6d38o2s",
@@ -3548,7 +3559,7 @@
     ],
     "profecion": null,
     "lid": "276051070587130@lid",
-    "lastRegen": 1758202236846,
+    "lastRegen": 1758213036846,
     "homeChest": [
       {
         "code": "P1",
@@ -5263,7 +5274,7 @@
     "misionesCompletadas": [],
     "profecion": null,
     "lid": "19310810534110@lid",
-    "lastRegen": 1758499298850,
+    "lastRegen": 1758510098850,
     "homeChest": [],
     "hasHouse": true,
     "enCasa": true,
@@ -5838,7 +5849,7 @@
     ],
     "profecion": null,
     "lid": "98629712916662@lid",
-    "lastRegen": 15894000000,
+    "lastRegen": 15904800000,
     "inmunidadKO": false,
     "inmunidadKOStart": 0,
     "manaMax": 3820,
@@ -6765,7 +6776,7 @@
     ],
     "profecion": null,
     "lid": "5373641670712@lid",
-    "lastRegen": 24926400000,
+    "lastRegen": 24937200000,
     "manaMax": 3680,
     "totalHP": 100,
     "inmunidadKO": false,
@@ -7701,7 +7712,7 @@
     ],
     "profecion": null,
     "lid": "144886577786983@lid",
-    "lastRegen": 6192000000,
+    "lastRegen": 6202800000,
     "manaMax": 550,
     "totalHP": 100,
     "misionesCooldown": {
@@ -9179,7 +9190,7 @@
   },
   "3974382763@lid": {
     "nivel": 34,
-    "xp": 260,
+    "xp": 360,
     "hp": 0,
     "hpMax": 760,
     "mana": 430,
@@ -9225,7 +9236,7 @@
     "misionesCompletadas": [],
     "profecion": null,
     "lid": "3974382763@lid",
-    "lastRegen": 1648800000,
+    "lastRegen": 1652400000,
     "inmunidadKO": true,
     "inmunidadKOStart": 1759365158587,
     "manaMax": 180

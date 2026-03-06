@@ -860,7 +860,9 @@
     "answers": [
       "si",
       "JAJAJAJAJA",
-      "Parece delito ya esl en este grupo"
+      "Parece delito ya esl en este grupo",
+      "Matate",
+      "q bronca me haces dar Agustín"
     ]
   },
   {
@@ -1553,7 +1555,8 @@
     "answers": [
       "xq no",
       "xq m dijo q lo una en grupos",
-      "Jajja"
+      "Jajja",
+      "Porque no"
     ]
   },
   {
@@ -2096,7 +2099,8 @@
     "match": "matate",
     "answers": [
       "vos",
-      "vos mogo"
+      "vos mogo",
+      "So re agresiva vo"
     ]
   },
   {
@@ -2792,7 +2796,8 @@
     "answers": [
       "Quien se llama fran?",
       "Yo q",
-      "JAJAJAJA MAL"
+      "JAJAJAJA MAL",
+      "lit"
     ]
   },
   {
@@ -5597,7 +5602,8 @@
   {
     "match": "No me hables",
     "answers": [
-      "Weno"
+      "Weno",
+      "Por?"
     ]
   },
   {
@@ -7448,7 +7454,8 @@
       "Rial",
       "es rial",
       "es real bro",
-      "Es una actriz nopor"
+      "Es una actriz nopor",
+      "tu eres un robot, no puedes tener sentimientos"
     ]
   },
   {
@@ -11572,7 +11579,8 @@
   {
     "match": "obviamente",
     "answers": [
-      "Ayy 😳😳😳"
+      "Ayy 😳😳😳",
+      "D1 amigo"
     ]
   },
   {
@@ -13106,6 +13114,364 @@
     "match": "Por diversion nms",
     "answers": [
       "cállate alvarez"
+    ]
+  },
+  {
+    "match": "Hoy es mi cumpleaños gemte",
+    "answers": [
+      "Feliz cum",
+      "Que desgracia",
+      "feliz cumpleee"
+    ]
+  },
+  {
+    "match": "(Si es que es hoy)",
+    "answers": [
+      "Si esss"
+    ]
+  },
+  {
+    "match": "Ya 16 añitos",
+    "answers": [
+      "Yo 23",
+      "16 añitos al pedo",
+      "18 guada"
+    ]
+  },
+  {
+    "match": "Yo no digo mucho xq mis 18 añitos fueron mas al p2 todavia",
+    "answers": [
+      "A mi me lo hicieron a los 19"
+    ]
+  },
+  {
+    "match": "Yo 23",
+    "answers": [
+      "Yo cumplo 18 el año que viene"
+    ]
+  },
+  {
+    "match": "16 añitos al pedo",
+    "answers": [
+      "Que te importa a vos"
+    ]
+  },
+  {
+    "match": "Yo cumplo 18 el año que viene",
+    "answers": [
+      "Re bien"
+    ]
+  },
+  {
+    "match": "Mentiraaa",
+    "answers": [
+      "puta"
+    ]
+  },
+  {
+    "match": "Re bien",
+    "answers": [
+      "Noo, sigo en 3ro"
+    ]
+  },
+  {
+    "match": "Noo, sigo en 3ro",
+    "answers": [
+      "Yo ni novia tengo te aconsejó no te guardes las cosas por qué son peor después en el futuro te fustras"
+    ]
+  },
+  {
+    "match": "@193093643059248 me hace enojar",
+    "answers": [
+      "Que tenía q ver jajaj"
+    ]
+  },
+  {
+    "match": "Que tenía q ver jajaj",
+    "answers": [
+      "noc"
+    ]
+  },
+  {
+    "match": "Yo ni novia tengo te aconsejó no te guardes las cosas por qué son peor después en el futuro te fustras",
+    "answers": [
+      "Yo si tengo, bueno ahí"
+    ]
+  },
+  {
+    "match": "me haces enojar",
+    "answers": [
+      "Yo que JAJAJAJ"
+    ]
+  },
+  {
+    "match": "Yo que JAJAJAJ",
+    "answers": [
+      "no era me hace"
+    ]
+  },
+  {
+    "match": "díganle algo",
+    "answers": [
+      "@193093643059248 no hagas enojar a la chica"
+    ]
+  },
+  {
+    "match": "@193093643059248 no hagas enojar a la chica",
+    "answers": [
+      "gracias te amo"
+    ]
+  },
+  {
+    "match": "Que te importa a vos",
+    "answers": [
+      "Yo que dije"
+    ]
+  },
+  {
+    "match": "entendiste",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "ENTEDISTE",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Entendído",
+    "answers": [
+      "Muy bien"
+    ]
+  },
+  {
+    "match": "q bronca me haces dar Agustín",
+    "answers": [
+      "Yo tambien me doy alta bronca"
+    ]
+  },
+  {
+    "match": "Yo tambien me doy alta bronca",
+    "answers": [
+      "no me hables"
+    ]
+  },
+  {
+    "match": "So re agresiva vo",
+    "answers": [
+      "No me hables"
+    ]
+  },
+  {
+    "match": "Me voy a dormir nomas entonces",
+    "answers": [
+      "Anda"
+    ]
+  },
+  {
+    "match": "Porque no",
+    "answers": [
+      "Ta bien"
+    ]
+  },
+  {
+    "match": "Anda",
+    "answers": [
+      "Ahora me quedo"
+    ]
+  },
+  {
+    "match": "Más vale",
+    "answers": [
+      "Vo si sabe amigo jaja"
+    ]
+  },
+  {
+    "match": "Vo si sabe amigo jaja",
+    "answers": [
+      "Más bien lokita"
+    ]
+  },
+  {
+    "match": "el agarre igual re da risa",
+    "answers": [
+      "Dio"
+    ]
+  },
+  {
+    "match": "Me voy a dormir 💜",
+    "answers": [
+      "Chau valla con dio"
+    ]
+  },
+  {
+    "match": "Chau valla con dio",
+    "answers": [
+      "Valla'' 💜"
+    ]
+  },
+  {
+    "match": "Nada que ver 💜",
+    "answers": [
+      "JAJAJA"
+    ]
+  },
+  {
+    "match": "Valla'' 💜",
+    "answers": [
+      "tj",
+      "De cerca",
+      "Y valla pue"
+    ]
+  },
+  {
+    "match": "De cerca",
+    "answers": [
+      "JAJAJAJA",
+      "Y claro jaja"
+    ]
+  },
+  {
+    "match": "Y valla pue",
+    "answers": [
+      "Vaya*"
+    ]
+  },
+  {
+    "match": "Vaya*",
+    "answers": [
+      "Valla"
+    ]
+  },
+  {
+    "match": "Cercado",
+    "answers": [
+      "Vallado"
+    ]
+  },
+  {
+    "match": "Valla",
+    "answers": [
+      "Vaia💜"
+    ]
+  },
+  {
+    "match": "Bueno chau",
+    "answers": [
+      "Chau andate"
+    ]
+  },
+  {
+    "match": "Vayen",
+    "answers": [
+      "Vaien💜"
+    ]
+  },
+  {
+    "match": "Apartir d aora boy a ecribir nal clomo on le glucta a la clarol",
+    "answers": [
+      "uh"
+    ]
+  },
+  {
+    "match": "Y bueno, \nMe voy, a ir, yendo",
+    "answers": [
+      "Vallen llendo"
+    ]
+  },
+  {
+    "match": "me dió tik",
+    "answers": [
+      "Jajajaja",
+      "Uh"
+    ]
+  },
+  {
+    "match": "ya lo arreglé",
+    "answers": [
+      "si, como no"
+    ]
+  },
+  {
+    "match": "Cuando es tu velorio?",
+    "answers": [
+      "mañana",
+      "Pasado mañana el mío"
+    ]
+  },
+  {
+    "match": "mañana",
+    "answers": [
+      "Ahí estoy",
+      "Puedo ir?"
+    ]
+  },
+  {
+    "match": "Puedo ir?",
+    "answers": [
+      "si",
+      "Obviamente"
+    ]
+  },
+  {
+    "match": "Pasado mañana el mío",
+    "answers": [
+      "Puedo ir?",
+      "Bueno dale dale",
+      "me despierto y voy"
+    ]
+  },
+  {
+    "match": "asi te decian en la discoteca cuando bailabas?",
+    "answers": [
+      "NOOOOO JAJAJAJAJAJA",
+      "ELLA ME LLAMA Y ME LLAMA"
+    ]
+  },
+  {
+    "match": "me despierto y voy",
+    "answers": [
+      "Dale"
+    ]
+  },
+  {
+    "match": "Mañana antes de el Cande es el mío",
+    "answers": [
+      "um",
+      "D1 puedo irM"
+    ]
+  },
+  {
+    "match": "ELLA ME LLAMA Y ME LLAMA",
+    "answers": [
+      ".pm me llamax fer palacios"
+    ]
+  },
+  {
+    "match": "Puedo poner regueton atp?",
+    "answers": [
+      "Que pregunta",
+      "Obvio"
+    ]
+  },
+  {
+    "match": "Al de las mujeres no voy xq me discriminan por negro😔💔",
+    "answers": [
+      "Ahh cierto"
+    ]
+  },
+  {
+    "match": "Culonas",
+    "answers": [
+      "Tu gueco"
+    ]
+  },
+  {
+    "match": "D1 puedo irM",
+    "answers": [
+      "Siii"
     ]
   }
 ]
