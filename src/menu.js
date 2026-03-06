@@ -129,6 +129,8 @@ exports.menuMessage = (groupJid) => {
 
 ╭━━⪩ PRINCIPAL ⪨━━
 ▢
+▢ • \`${prefix}formar-pareja\` <-- *forma un top 5 parejas del grupo*
+▢ • \`${prefix}top infieles/fieles/putos/geys/travas/regalados/pijudos/romanticos/pelotudos/machos\` <-- *da un top 10*
 ▢ • \`${prefix}casarse\` <-- *para eso obvio*
 ▢ • \`${prefix}divorce\` <-- *por si todo terminó*
 ▢ • \`${prefix}infomatrimonio\` <-- *para ver como vas con tu amorcito*

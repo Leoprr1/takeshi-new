@@ -13576,5 +13576,23 @@
     "answers": [
       "Pudiste?"
     ]
+  },
+  {
+    "match": "Locu le tira el centro a locu y gol de locu",
+    "answers": [
+      "Jajajjjqq"
+    ]
+  },
+  {
+    "match": "Pudiste?",
+    "answers": [
+      "Se"
+    ]
+  },
+  {
+    "match": "Tengo una bronca encima",
+    "answers": [
+      "xq"
+    ]
   }
 ]

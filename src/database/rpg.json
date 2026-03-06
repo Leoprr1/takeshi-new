@@ -584,7 +584,7 @@
     ],
     "profecion": null,
     "lid": "65489778770156@lid",
-    "lastRegen": 1759914979411,
+    "lastRegen": 1759918579411,
     "homeChest": [
       {
         "tipo": "mascota",
@@ -1239,7 +1239,7 @@
     ],
     "profecion": null,
     "lid": "96250619801819@lid",
-    "lastRegen": 1762760551621,
+    "lastRegen": 1762774951621,
     "homeChest": [],
     "hasHouse": true,
     "enCasa": true,
@@ -2215,7 +2215,7 @@
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1764498816153,
+    "lastRegen": 1764502416153,
     "homeChest": [
       {
         "code": "H01",
@@ -2869,7 +2869,7 @@
     ],
     "profecion": null,
     "lid": "65919745306692@lid",
-    "lastRegen": 1763161898850,
+    "lastRegen": 1763165498850,
     "homeChest": [],
     "hasHouse": true,
     "enCasa": true,
@@ -3171,7 +3171,7 @@
     ],
     "profecion": null,
     "lid": "148137834471521@lid",
-    "lastRegen": 1762893398851,
+    "lastRegen": 1762896998851,
     "homeChest": [
       {
         "uid": "mg34oue6d38o2s",
@@ -3567,7 +3567,7 @@
     ],
     "profecion": null,
     "lid": "276051070587130@lid",
-    "lastRegen": 1758216636846,
+    "lastRegen": 1758220236846,
     "homeChest": [
       {
         "code": "P1",
@@ -5282,7 +5282,7 @@
     "misionesCompletadas": [],
     "profecion": null,
     "lid": "19310810534110@lid",
-    "lastRegen": 1758513698850,
+    "lastRegen": 1758517298850,
     "homeChest": [],
     "hasHouse": true,
     "enCasa": true,
@@ -5857,7 +5857,7 @@
     ],
     "profecion": null,
     "lid": "98629712916662@lid",
-    "lastRegen": 15908400000,
+    "lastRegen": 15912000000,
     "inmunidadKO": false,
     "inmunidadKOStart": 0,
     "manaMax": 3820,
@@ -6784,7 +6784,7 @@
     ],
     "profecion": null,
     "lid": "5373641670712@lid",
-    "lastRegen": 24940800000,
+    "lastRegen": 24944400000,
     "manaMax": 3680,
     "totalHP": 100,
     "inmunidadKO": false,
@@ -7720,7 +7720,7 @@
     ],
     "profecion": null,
     "lid": "144886577786983@lid",
-    "lastRegen": 6206400000,
+    "lastRegen": 6210000000,
     "manaMax": 550,
     "totalHP": 100,
     "misionesCooldown": {
