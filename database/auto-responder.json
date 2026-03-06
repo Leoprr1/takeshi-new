@@ -165,7 +165,8 @@
   {
     "match": "hdp",
     "answers": [
-      "chupala gord@ genocida de hamburgesas"
+      "chupala gord@ genocida de hamburgesas",
+      "dah"
     ]
   },
   {
@@ -1150,7 +1151,8 @@
       "rra",
       "Rra sos maldito",
       "chupala gil",
-      "Mas dura que ladrillo la wea esta"
+      "Mas dura que ladrillo la wea esta",
+      "DALE HDP"
     ]
   },
   {
@@ -1809,7 +1811,8 @@
     "answers": [
       "De la pija",
       "El tuyo",
-      "tu hermana"
+      "tu hermana",
+      "tu mami"
     ]
   },
   {
@@ -2166,7 +2169,8 @@
   {
     "match": "Siii",
     "answers": [
-      "que haces"
+      "que haces",
+      "D1 entonces"
     ]
   },
   {
@@ -2770,7 +2774,8 @@
       "sisis ojalá",
       "Y si no que harás al respecto",
       "cállate cara de verga",
-      "12 + 1?"
+      "12 + 1?",
+      "ala"
     ]
   },
   {
@@ -2797,7 +2802,8 @@
       "Quien se llama fran?",
       "Yo q",
       "JAJAJAJA MAL",
-      "lit"
+      "lit",
+      "JAJAJAJA HASTA EL BOT LO DESCANSABA"
     ]
   },
   {
@@ -6461,7 +6467,8 @@
     "match": "Ya son la 7 de la tarde",
     "answers": [
       "no",
-      "Tu celular no anda? Pregunto x preguntar"
+      "Tu celular no anda? Pregunto x preguntar",
+      "mentiroso, son las 12"
     ]
   },
   {
@@ -7268,7 +7275,9 @@
   {
     "match": "de las que te gustan trolazo",
     "answers": [
-      "A vos"
+      "A vos",
+      "chupala gil",
+      "apa"
     ]
   },
   {
@@ -7455,7 +7464,9 @@
       "es rial",
       "es real bro",
       "Es una actriz nopor",
-      "tu eres un robot, no puedes tener sentimientos"
+      "tu eres un robot, no puedes tener sentimientos",
+      "JAJAJAJAJAJA",
+      "Pedo? El que tenes en la cabeza neni"
     ]
   },
   {
@@ -10121,7 +10132,10 @@
       "Weon yo no juego esa madre",
       "Que no weon yo no juego esa monda",
       "Ya maldito yo no juego esa mrd cabron",
-      "AMIGO ES FRAN"
+      "AMIGO ES FRAN",
+      "que, me viste pinta de llamarme camilo?",
+      "No juego pelotudeces",
+      "nu"
     ]
   },
   {
@@ -10158,7 +10172,9 @@
   {
     "match": "si dime mi vida 😚",
     "answers": [
-      "te amo"
+      "te amo",
+      "JAJAJAJA",
+      "E JAJAAJJAJA"
     ]
   },
   {
@@ -10664,7 +10680,8 @@
   {
     "match": "JAJAJAJAJAJ",
     "answers": [
-      "Ahorita te ríes pero después dominaras el mundo"
+      "Ahorita te ríes pero después dominaras el mundo",
+      "SE REBELA"
     ]
   },
   {
@@ -10707,7 +10724,8 @@
     "match": "X\nD",
     "answers": [
       "Cabron ya no me copies",
-      "Hijo puta"
+      "Hijo puta",
+      "D X"
     ]
   },
   {
@@ -10876,7 +10894,9 @@
     "match": "Era para vs, me confundi",
     "answers": [
       "ok",
-      "chupala"
+      "chupala",
+      "apa",
+      "ala"
     ]
   },
   {
@@ -11546,24 +11566,8 @@
       "Uyy"
     ]
   },
-  {
-    "match": "Uyy",
-    "answers": [
-      "y sin protección asi si me mojo también se pone mas suavecito"
-    ]
-  },
-  {
-    "match": "y sin protección asi si me mojo también se pone mas suavecito",
-    "answers": [
-      "Pero todo afuera"
-    ]
-  },
-  {
-    "match": "Pero todo afuera",
-    "answers": [
-      "dales"
-    ]
-  },
+  
+
   {
     "match": "dales",
     "answers": [
@@ -11583,72 +11587,26 @@
       "D1 amigo"
     ]
   },
-  {
-    "match": "Ayy 😳😳😳",
-    "answers": [
-      "cogemos lo que gustes"
-    ]
-  },
-  {
-    "match": "cogemos lo que gustes",
-    "answers": [
-      "Todas las veces que yo quiera"
-    ]
-  },
-  {
-    "match": "Todas las veces que yo quiera",
-    "answers": [
-      "exactamente"
-    ]
-  },
+  
+  
+  
   {
     "match": "Me vas a cansar",
     "answers": [
       "JAJAJAJ vos decis?"
     ]
   },
-  {
-    "match": "Después me quedaré dormida",
-    "answers": [
-      "y seguramente te despetaras con algo adentro"
-    ]
-  },
-  {
-    "match": "JAJAJAJ vos decis?",
-    "answers": [
-      "Claro imagina 4 o 5 ya terminaré rendida"
-    ]
-  },
-  {
-    "match": "Claro imagina 4 o 5 ya terminaré rendida",
-    "answers": [
-      "JAJAJAJ es muy probable que pase"
-    ]
-  },
-  {
-    "match": "y seguramente te despetaras con algo adentro",
-    "answers": [
-      "😳😳😳 osea tendré una linda mañana"
-    ]
-  },
-  {
-    "match": "😳😳😳 osea tendré una linda mañana",
-    "answers": [
-      "todos los dias"
-    ]
-  },
+  
+  
+  
+  
   {
     "match": "JAJAJAJ es muy probable que pase",
     "answers": [
       "Es lo más seguro"
     ]
   },
-  {
-    "match": "Es lo más seguro",
-    "answers": [
-      "estas en tu cama ahorita?"
-    ]
-  },
+  
   {
     "match": "todos los dias",
     "answers": [
@@ -11673,272 +11631,17 @@
       "y no hay baño por ahí?"
     ]
   },
-  {
-    "match": "y no hay baño por ahí?",
-    "answers": [
-      "Pero leo 😳",
-      "Del otro lado del edificio"
-    ]
-  },
-  {
-    "match": "Pero leo 😳",
-    "answers": [
-      "y si, 15 minutos no molestan a nadie 🫦"
-    ]
-  },
-  {
-    "match": "y si, 15 minutos no molestan a nadie 🫦",
-    "answers": [
-      "😳😳 estás muy caliente"
-    ]
-  },
-  {
-    "match": "Del otro lado del edificio",
-    "answers": [
-      "JSKEJS lpm, no te podes manosear ni empedo"
-    ]
-  },
-  {
-    "match": "😳😳 estás muy caliente",
-    "answers": [
-      "sinceramente si"
-    ]
-  },
-  {
-    "match": "JSKEJS lpm, no te podes manosear ni empedo",
-    "answers": [
-      "No\nAlmenos que todos me vean"
-    ]
-  },
-  {
-    "match": "No\nAlmenos que todos me vean",
-    "answers": [
-      "JSKEJS cierto"
-    ]
-  },
-  {
-    "match": "sinceramente si",
-    "answers": [
-      "Uyy 😳😳"
-    ]
-  },
-  {
-    "match": "Mal momento",
-    "answers": [
-      "na dejalo es un sistema de noticias que agregué"
-    ]
-  },
-  {
-    "match": "Le puedo dar un besito",
-    "answers": [
-      "lo que gustes"
-    ]
-  },
-  {
-    "match": "si pudiera ahora te llevaria al baño y te daria como cajón que no cierra",
-    "answers": [
-      "Pero  escucharán"
-    ]
-  },
-  {
-    "match": "Pero  escucharán",
-    "answers": [
-      "te tapo la boca"
-    ]
-  },
-  {
-    "match": "Mejor en casa",
-    "answers": [
-      "Así puedes hacer lo que tú quieras"
-    ]
-  },
-  {
-    "match": "Así puedes hacer lo que tú quieras",
-    "answers": [
-      "pero mientras no te vean no pasará nads"
-    ]
-  },
-  {
-    "match": "te tapo la boca",
-    "answers": [
-      "Con esas manotas como no podrías"
-    ]
-  },
-  {
-    "match": "Con esas manotas como no podrías",
-    "answers": [
-      "JSKWJ y bueno"
-    ]
-  },
-  {
-    "match": "pero mientras no te vean no pasará nads",
-    "answers": [
-      "Me gusta la idea"
-    ]
-  },
-  {
-    "match": "te lo empiezo a rozar mientras te besuqueo",
-    "answers": [
-      "Primero romántico y después duro"
-    ]
-  },
-  {
-    "match": "Me gusta la idea",
-    "answers": [
-      ".follar"
-    ]
-  },
-  {
-    "match": "Primero romántico y después duro",
-    "answers": [
-      "exactamente",
-      "después me gano atras tuyo y mientras te tapo la boca te hago mia"
-    ]
-  },
-  {
-    "match": "después me gano atras tuyo y mientras te tapo la boca te hago mia",
-    "answers": [
-      "Calmate por qué ya me estoy exitando"
-    ]
-  },
-  {
-    "match": "Calmate por qué ya me estoy exitando",
-    "answers": [
-      "HSKSJ me vas a tener que calmar a sentones"
-    ]
-  },
-  {
-    "match": "vos tenés falds ahora?",
-    "answers": [
-      "No pantalón"
-    ]
-  },
-  {
-    "match": "Hace un frío",
-    "answers": [
-      "JSKSJ te imaginas que tengas faldita"
-    ]
-  },
-  {
-    "match": "HSKSJ me vas a tener que calmar a sentones",
-    "answers": [
-      "Me ofrezco como tributo"
-    ]
-  },
-  {
-    "match": "Me ofrezco como tributo",
-    "answers": [
-      "JSKWJ d1 venite"
-    ]
-  },
-  {
-    "match": "y te sientes encima de mis piernas",
-    "answers": [
-      "sin nada puesto abajo"
-    ]
-  },
-  {
-    "match": "sin nada puesto abajo",
-    "answers": [
-      "Debo de traer aún que sea panti"
-    ]
-  },
-  {
-    "match": "Debo de traer aún que sea panti",
-    "answers": [
-      "sin nada"
-    ]
-  },
-  {
-    "match": "Uy suena rico",
-    "answers": [
-      "y que justo venga alguien y yo este dentro tuyo"
-    ]
-  },
-  {
-    "match": "Ayy 😳😳",
-    "answers": [
-      "luego cuando se va la sacas y sale un montón de relleno de dentro tuyo JSKJSS"
-    ]
-  },
-  {
-    "match": "Y como me limpiare",
-    "answers": [
-      "quien dijo que no seguiríamos cogiendo?"
-    ]
-  },
-  {
-    "match": "quien dijo que no seguiríamos cogiendo?",
-    "answers": [
-      "Necesito trabajar"
-    ]
-  },
-  {
-    "match": "Necesito trabajar",
-    "answers": [
-      "yy pero te ayudo mientras trabajas"
-    ]
-  },
-  {
-    "match": "Y con tus fluidos adentro",
-    "answers": [
-      "exactamente y con todo adentro"
-    ]
-  },
-  {
-    "match": "soy como Ratatouille pero te controlo con la verg adentro",
-    "answers": [
-      "Eso me dio risa"
-    ]
-  },
+  
+  
+  
+  
   {
     "match": "Eso me dio risa",
     "answers": [
       "JAJAJAJ"
     ]
   },
-  {
-    "match": "o voy a tu trabajo y te agarro delante de todos 🫦",
-    "answers": [
-      "No no"
-    ]
-  },
-  {
-    "match": "Cómo delante de todos",
-    "answers": [
-      "te agarro disimuladamente y te lo meto sin que se den cuenta"
-    ]
-  },
-  {
-    "match": "Alrato seguimos conversando",
-    "answers": [
-      "JSKWJ te me escapas"
-    ]
-  },
-  {
-    "match": "JSKWJ te me escapas",
-    "answers": [
-      "No"
-    ]
-  },
-  {
-    "match": "Seguir trabajando",
-    "answers": [
-      "de última escápate unos 10 minutos al baño"
-    ]
-  },
-  {
-    "match": "y mete dedo 🫦",
-    "answers": [
-      "Hey"
-    ]
-  },
-  {
-    "match": "Mejor metemelo tu",
-    "answers": [
-      "ojalá pudiera"
-    ]
-  },
+  
   {
     "match": "Cerra el orto",
     "answers": [
@@ -12747,7 +12450,8 @@
   {
     "match": "Quien era??",
     "answers": [
-      "El Andres™"
+      "El Andres™",
+      "Me das miedo bro"
     ]
   },
   {
@@ -13412,7 +13116,8 @@
     "match": "Puedo ir?",
     "answers": [
       "si",
-      "Obviamente"
+      "Obviamente",
+      "podes caer asi a la fiesta, momo"
     ]
   },
   {
@@ -13472,6 +13177,169 @@
     "match": "D1 puedo irM",
     "answers": [
       "Siii"
+    ]
+  },
+  {
+    "match": "tu mami",
+    "answers": [
+      "Jajajaja se peleaba con el bot"
+    ]
+  },
+  {
+    "match": "lo dome🥀",
+    "answers": [
+      "Mal"
+    ]
+  },
+  {
+    "match": "@all no sueñen conmigo porfa que me molesta",
+    "answers": [
+      "A nadie le gustan las pesadillas bro",
+      "Ohhh😔💔"
+    ]
+  },
+  {
+    "match": "Primero que nada dobla ese dedito y metetelo x donde te complasca mas",
+    "answers": [
+      "Por la nariz para limpiarme ✋🤚"
+    ]
+  },
+  {
+    "match": "Helou amor",
+    "answers": [
+      "ciao amore mio"
+    ]
+  },
+  {
+    "match": "Procedo a retirarme",
+    "answers": [
+      "Ya esta mae, te la lavas con agua y con jabón"
+    ]
+  },
+  {
+    "match": "Por la nariz para limpiarme ✋🤚",
+    "answers": [
+      "Hacelo entonces"
+    ]
+  },
+  {
+    "match": "Em",
+    "answers": [
+      "es el bot"
+    ]
+  },
+  {
+    "match": "Chi",
+    "answers": [
+      "ah, bueno"
+    ]
+  },
+  {
+    "match": "Es una ilusion nomas lo que estas viendo",
+    "answers": [
+      "(Ando depositandl el submarino en las aguas)"
+    ]
+  },
+  {
+    "match": "Eres como la puta que le robe su silla de ruedas, llegas arrastrandote",
+    "answers": [
+      "Chale"
+    ]
+  },
+  {
+    "match": "cagaste",
+    "answers": [
+      "JAJAJAJA"
+    ]
+  },
+  {
+    "match": "Patie una caja y sin querer desperté a mi perra",
+    "answers": [
+      "2aow"
+    ]
+  },
+  {
+    "match": "viejo meado",
+    "answers": [
+      "Ke pasa conmigo"
+    ]
+  },
+  {
+    "match": "Ke pasa conmigo",
+    "answers": [
+      "uf"
+    ]
+  },
+  {
+    "match": "Ahí estoy",
+    "answers": [
+      "JAJAJA DEJAMEE"
+    ]
+  },
+  {
+    "match": "Tiamu",
+    "answers": [
+      "yumais"
+    ]
+  },
+  {
+    "match": "No juego pelotudeces",
+    "answers": [
+      "foa"
+    ]
+  },
+  {
+    "match": "foa",
+    "answers": [
+      "Yshi"
+    ]
+  },
+  {
+    "match": "wauos",
+    "answers": [
+      "K t sorprendes si m case con vos"
+    ]
+  },
+  {
+    "match": "K t sorprendes si m case con vos",
+    "answers": [
+      "por eso"
+    ]
+  },
+  {
+    "match": "por eso",
+    "answers": [
+      "JSNDJNJD"
+    ]
+  },
+  {
+    "match": "JAJAJAJA HASTA EL BOT LO DESCANSABA",
+    "answers": [
+      "JAJAJAJA LPTM MALL, JAJAJAJAJA"
+    ]
+  },
+  {
+    "match": "me pongo a llorai",
+    "answers": [
+      "Pobreee"
+    ]
+  },
+  {
+    "match": "@66306225217757",
+    "answers": [
+      "AYY TIAMU"
+    ]
+  },
+  {
+    "match": "Se zarpó",
+    "answers": [
+      "JAJAJA"
+    ]
+  },
+  {
+    "match": "Chikos, creo k mi novio es gay",
+    "answers": [
+      "pero que"
     ]
   }
 ]
