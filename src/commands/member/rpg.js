@@ -2996,6 +2996,146 @@ if (cmd === "asesinar") {
       A.hp < B.hp ? `Victima: +$${fmt(coins)}, +${xpB} XP | Vos: +${xpA} XP` :
       `Ambos: +$${fmt(coins)}, +${xpA} XP`}`
   );
+  
+}
+
+// --- ASSESINAR ---
+if (cmd === "farm") {
+  const raw = rest.join(" ").trim() || "";
+  const number = raw.replace(/\D/g, "");
+  if (!number) return sendErrorReply(`❌ ¡Error! Usá: *${PREFIX}rpg asesinar <número>*`);
+
+  const targetJidRaw = number + "@s.whatsapp.net";
+  const normalizedTargetId = normalizeId(targetJidRaw);
+  if (!normalizedTargetId) return sendErrorReply("No se pudo identificar a la victima.");
+  if (normalizedTargetId === normalizedUserId) return sendErrorReply("No podés asesinarte a vos mismo.");
+  const opp = getUser(normalizedTargetId);
+  if (!opp) return sendErrorReply("la victima no tiene perfil RPG todavía.");
+
+  if (you.hp <= 0) return sendErrorReply("Estás K.O. Usá pociones o esperá a subir de nivel.");
+  if (opp.hp <= 0) return sendErrorReply("La victima está muerta No hace falta rematarlo.");
+
+  const ahora = Date.now();
+  const golemKOtime = 5 * 60 * 1000; // 5 minutos de gólem noqueado
+
+  const log = [];
+
+  // --- Preparar defensor ---
+  let defensor = { ...opp };
+  let defensorTipo = "jugador"; // puede ser "jugador" o "golem"
+
+  // --- Verificamos si defensor está en casa y tiene gólem ---
+  if (opp.enCasa && opp.golem) {
+    if (opp.golem.lastKO && ahora - opp.golem.lastKO < golemKOtime) {
+      log.push(`⚔️ El gólem de ${opp.nick || "victima"}esta noqueado, podés atacar directamente al jugador.`);
+      defensor.hp = opp.hp;
+    } else {
+      defensorTipo = "golem";
+      defensor.hp = opp.golem.hp;
+      defensor.atk = opp.golem.atk;
+      log.push(`🛡️ ${opp.nick || "victima"} tiene un gólem nivel ${opp.golem.nivel}. Primero debes derrotarlo.`);
+    }
+  }
+
+  // --- Si atacante tenía inmunidad, se la quitamos ---
+  if (you.inmunidadKO) {
+    you.inmunidadKO = false;
+    you.inmunidadKOStart = 0;
+    log.push(`⚔️ ${you.nick || "Tú"} pierde su inmunidad por atacar.`);
+  }
+
+  // --- Preparamos estadísticas del atacante ---
+  const A = { id: you.nick || normalizedUserId.split("@")[0], atk: getAttack(you), def: getDefense(you), hp: you.hp };
+  const B = { id: defensor.id || defensor.nick || normalizedTargetId.split("@")[0], atk: defensor.atk || getAttack(defensor), def: getDefense(defensor), hp: defensor.hp };
+
+  for (let ronda = 1; ronda <= 6; ronda++) {
+    // --- ATAQUE DE A ---
+    const aRoll = Math.max(0, A.atk - Math.floor(B.def * 0.6)) + Math.floor(Math.random() * 6);
+    if (aRoll > 0) B.hp = Math.max(0, B.hp - aRoll);
+    log.push(`Ronda ${ronda}: *${A.id}* golpea por ${aRoll}. ${B.id} queda en ${B.hp} HP.`);
+
+    if (B.hp <= 0) {
+      B.hp = 0;
+
+      if (defensorTipo === "golem") {
+        opp.golem.lastKO = ahora;
+        log.push(`💥 ¡Derrotaste al gólem! Queda noqueado por 5 minutos.`);
+      } else {
+        if (!opp.inmunidadKO) {
+          opp.inmunidadKO = true;
+          opp.inmunidadKOStart = ahora;
+          log.push(`💥 ${B.id} esta muerto y gana inmunidad por 1 hora.`);
+        }
+      }
+      break;
+    }
+
+    // --- ATAQUE DE DEFENSOR ---
+    const bRoll = Math.max(0, B.atk - Math.floor(A.def * 0.6)) + Math.floor(Math.random() * 6);
+    if (bRoll > 0) A.hp = Math.max(0, A.hp - bRoll);
+    log.push(`Ronda ${ronda}: *${B.id}* responde con ${bRoll}. ${A.id} queda en ${A.hp} HP.`);
+
+    if (A.hp <= 0) {
+      A.hp = 0;
+      if (!you.inmunidadKO) {
+        you.inmunidadKO = true;
+        you.inmunidadKOStart = ahora;
+        log.push(`💥 ${A.id} esta muerto y gana inmunidad por 1 hora.`);
+      }
+      break;
+    }
+  }
+
+  // --- Guardamos HP finales ---
+  you.hp = A.hp;
+  if (defensorTipo === "golem") {
+    // Gólem no pierde HP, solo queda KO temporal
+  } else {
+    opp.hp = B.hp;
+  }
+
+  // --- Recompensas ---
+  let result, coins, xpA, xpB;
+  if (A.hp === B.hp) {
+    result = "🤝 ¡Empate!";
+    coins = 5000;
+    xpA = xpB = 200;
+    you.monedas += coins;
+    opp.monedas += coins;
+    addXP(you, xpA);
+    addXP(opp, xpB);
+  } else if (A.hp > B.hp) {
+    result = "asesinaste al rival";
+    coins = 10000;
+    xpA = 100000;
+    xpB = 100;
+    you.monedas += coins;
+    addXP(you, xpA);
+    addXP(opp, xpB);
+  } else {
+    result = "te asesinaron";
+    coins = 1000;
+    xpA = 100;
+    xpB = 800;
+    opp.monedas += coins;
+    addXP(you, xpA);
+    addXP(opp, xpB);
+  }
+
+  you.hp = Math.max(0, Math.min(you.hp, you.hpMax));
+  opp.hp = Math.max(0, Math.min(opp.hp, opp.hpMax));
+
+  saveDB();
+
+  await sendSuccessReact();
+  return sendReply(
+    `⚔️ *ASESINATO*\n` +
+    log.join("\n") +
+    `\n\n${result}\n` +
+    `Recompensas: ${A.hp > B.hp ? `Vos: +$${fmt(coins)}, +${xpA} XP | Victima: +${xpB} XP` :
+      A.hp < B.hp ? `Victima: +$${fmt(coins)}, +${xpB} XP | Vos: +${xpA} XP` :
+      `Ambos: +$${fmt(coins)}, +${xpA} XP`}`
+  );
 }
 
 

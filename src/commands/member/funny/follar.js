@@ -20,6 +20,7 @@ module.exports = {
     replyJid,
     args,
     isReply,
+    mentionedJid,
   }) => {
     if (!args.length && !isReply) {
       throw new InvalidParameterError(
@@ -27,8 +28,8 @@ module.exports = {
       );
     }
 
-    const targetJid = isReply ? replyJid : toUserJid(args[0]);
-
+     const targetJid = mentionedJid?.[0] || replyJid || toUserJid(args[0]);
+    
     if (!targetJid) {
       await sendErrorReply(
         "Debes mencionar a un usuario o responder a un mensaje para follar."

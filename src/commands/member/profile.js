@@ -22,6 +22,7 @@ module.exports = {
     sendErrorReply,
     sendWaitReply,
     sendSuccessReact,
+    mentionedJid,
   }) => {
     if (!isGroup(remoteJid)) {
       throw new InvalidParameterError(
@@ -29,9 +30,8 @@ module.exports = {
       );
     }
 
-    const targetJid = args[0]
-      ? args[0].replace(/[@ ]/g, "") + "@s.whatsapp.net"
-      : userJid;
+    const targetJid = mentionedJid?.[0] || replyJid || toUserJid(args[0]);
+    
 
     await sendWaitReply("Cargando perfil...");
 

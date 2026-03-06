@@ -1,5 +1,6 @@
 // 🔥 learningBot2.js
 require("./brainbuilder");
+require("../commands/admin/afk");
 const db = require("./database"); // Tu database.js
 const path = require("path");
 

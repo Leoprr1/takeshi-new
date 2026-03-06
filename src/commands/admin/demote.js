@@ -1,5 +1,5 @@
 const { PREFIX } = require(`${BASE_DIR}/config`);
-const { isGroup } = require(`${BASE_DIR}/utils`);
+const { isGroup, toUserJid } = require(`${BASE_DIR}/utils`);
 const { errorLog } = require(`${BASE_DIR}/utils/logger`);
 
 module.exports = {
@@ -13,6 +13,8 @@ module.exports = {
    */
   handle: async ({
     args,
+    mentionedJid,
+    replyJid,
     remoteJid,
     socket,
     sendWarningReply,
@@ -25,19 +27,24 @@ module.exports = {
       );
     }
 
-    if (!args.length || !args[0]) {
+    const target =
+      mentionedJid?.[0] ||
+      replyJid ||
+      toUserJid(args[0]);
+
+    
+    if (!target) {
       return sendWarningReply(
-        "Por favor, etiqueta a un administrador para degradarlo."
+        "👤 Por favor etiqueta o responde al admin que deseas degradas ."
       );
     }
 
-    const userId = args[0].replace("@", "") + "@s.whatsapp.net";
 
     try {
-      await socket.groupParticipantsUpdate(remoteJid, [userId], "demote");
+      await socket.groupParticipantsUpdate(remoteJid, [target], "demote");
       await sendSuccessReply("¡Usuario degradado con éxito!");
-    } catch (error) {
-      errorLog(`Error al degradar administrador: ${error.message}`);
+    } catch (err) {
+      errorLog(`Error al degradar administrador: ${err.message}`);
       await sendErrorReply(
         "Ocurrió un error al intentar degradar al usuario. ¡Necesito ser administrador del grupo para degradar a otros administradores!"
       );

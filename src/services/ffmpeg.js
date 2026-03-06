@@ -94,9 +94,45 @@ class FfmpegService {
     const outputPath = await this._createTempFilePath();
     return this._runFfmpeg(inputPath, outputPath, [
       "-vf scale=iw/6:ih/6,scale=iw*6:ih*6:flags=neighbor",
+      
     ]);
   }
 
+  async isWebpAnimated(inputPath) {
+  return new Promise((resolve) => {
+    ffmpeg(inputPath)
+      .ffprobe((err, data) => {
+        if (err) return resolve(false);
+        const streams = data.streams || [];
+        const videoStream = streams.find(s => s.codec_type === "video");
+        if (!videoStream) return resolve(false);
+        // Si tiene más de un frame, es animado
+        resolve(videoStream.nb_frames && parseInt(videoStream.nb_frames) > 1);
+      });
+  });
+}
+  // -------------------
+// CONVERTIR WEBP ANIMADO A GIF
+// -------------------
+async convertWebpToGif(inputPath, outputPath = null) {
+  if (!outputPath) outputPath = await this._createTempFilePath("gif");
+
+  const options = [
+    "-vf fps=15,scale=512:-1:flags=lanczos", // frames por segundo + redimension
+    "-loop 0" // loop infinito
+  ];
+
+  return this._runFfmpeg(inputPath, outputPath, options);
+}
+
+  // -------------------
+// CONVERTIR WEBP A PNG
+// -------------------
+async convertWebpToPng(inputPath, outputPath = null) {
+  if (!outputPath) outputPath = await this._createTempFilePath("png");
+  const options = ["-vcodec png"];
+  return this._runFfmpeg(inputPath, outputPath, options);
+}
   // -------------------
   // CONVERTIR A STICKER (PRO ESTABLE)
   // -------------------

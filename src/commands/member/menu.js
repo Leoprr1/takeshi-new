@@ -15,7 +15,7 @@ module.exports = {
     await sendSuccessReact();
 
     await sendImageFromFile(
-      path.join(ASSETS_DIR, "images", "takeshi-bot.jpg"),
+      path.join(ASSETS_DIR, "images", "takeshi-bot.png"),
       `\n\n${menuMessage(remoteJid)}`
     );
   },

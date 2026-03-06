@@ -31,15 +31,16 @@ exports.menuMessage = (groupJid) => {
 ▢
 ╰━━─「🌌」─━━
 
-╭━━⪩ DUEÑO ⪨━━
+╭━━⪩ OWNER ⪨━━
 ▢
 ▢ • \`${prefix}newtc on/off/status/reset\` <-- *para el sistema de noticias global*
-▢ • \`${prefix}exec\`
-▢ • \`${prefix}get-id\`
-▢ • \`${prefix}off\`
-▢ • \`${prefix}on\`
-▢ • \`${prefix}set-menu-image\`
+▢ • \`${prefix}exec\` <-- *ejecuta comandos en el cmd*
+▢ • \`${prefix}get-id\` <-- *Devuelve el LID del contacto mencionado*
+▢ • \`${prefix}off\` <-- *desactiva el bot en un grupo*
+▢ • \`${prefix}on\` <-- *activa el bot en el grupo*
+▢ • \`${prefix}set-menu-image\` <-- *cambia la imagen del grupo*
 ▢ • \`${prefix}set-prefix\` <-- *este es para cambiar el prifix del comando ejemplo: .menu a #menu*
+▢ • \`${prefix}ping\` <-- *Verifica si el bot está en línea, el tiempo de respuesta y el tiempo de actividad*
 ▢
 ╰━━─「🌌」─━━
 
@@ -48,6 +49,7 @@ exports.menuMessage = (groupJid) => {
 ▢ • \`${prefix}reg\` <-- *para registrar tu pefil*
 ▢ • \`${prefix}reg2\` <-- *para restablecer tu pefil*
 ▢ • \`${prefix}profile\` <-- *para ver tu perfil*
+▢ • \`${prefix}profile @mencion\` <-- *para ver el perfil de otra persona*
 ▢
 ╰━━─「🌌」─━━
 
@@ -70,6 +72,7 @@ exports.menuMessage = (groupJid) => {
 ▢ • \`${prefix}agregar\` <-- *para agregar a alguien al grupo*
 ▢ • \`${prefix}ban\` <-- *para eliminar gente del grupo*
 ▢ • \`${prefix}afk\` <-- *da informacion de los inactivos del grupo*
+▢ • \`${prefix}afkban\` <-- *elimina a todos los que estan afk mas de 7 dias*
 ▢ • \`${prefix}clear\` <-- *limpia el chat con un largo msj sin texto*
 ▢ • \`${prefix}delete\` <-- *borra un mensaje seleccionado*
 ▢ • \`${prefix}promote\` <-- *le da admin a alguien*
@@ -131,6 +134,7 @@ exports.menuMessage = (groupJid) => {
 ▢ • \`${prefix}infomatrimonio\` <-- *para ver como vas con tu amorcito*
 ▢ • \`${prefix}fake-chat\` <-- *manda un mensaje respondiendo un mensaje que nunca envio la otra persona XD*
 ▢ • \`${prefix}sticker\` <-- *te crea un sticker si seleccionas una imagen o video*
+▢ • \`${prefix}toimage\` <-- *te crea una imagen si seleccionas un sticker*
 ▢ • \`${prefix}pm\` <-- *para descargar audios como musica*
 ▢ • \`${prefix}pv\` <-- *para descargar videos*
 ▢ • \`${prefix}mp3\` <-- *para descargar audios como musica pero en mp3 guardable*

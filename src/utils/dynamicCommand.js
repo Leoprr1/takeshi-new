@@ -273,7 +273,12 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
       return;
     }
   }
-
+const mentionedJid =
+  webMessage?.message?.extendedTextMessage?.contextInfo?.mentionedJid ||
+  webMessage?.message?.imageMessage?.contextInfo?.mentionedJid ||
+  webMessage?.message?.videoMessage?.contextInfo?.mentionedJid ||
+  webMessage?.message?.conversation?.contextInfo?.mentionedJid ||
+  [];
   // 🔹 Ejecutar comando
   try {
     await command.handle({
@@ -281,6 +286,7 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
       type,
       startProcess,
       m: webMessage,
+      mentionedJid,
     });
   } catch (error) {
     if (badMacHandler.handleError(error, `command:${command?.name}`)) {

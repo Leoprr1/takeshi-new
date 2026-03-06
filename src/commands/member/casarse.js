@@ -16,14 +16,15 @@ module.exports = {
     replyJid,
     args,
     isReply,
+    mentionedJid,
   }) => {
 
     if (!args.length && !isReply) {
       throw new InvalidParameterError("Debes mencionar a alguien 💍");
     }
 
-    const targetJid = isReply ? replyJid : toUserJid(args[0]);
-
+     const targetJid = mentionedJid?.[0] || replyJid || toUserJid(args[0]);
+    
     if (!targetJid || targetJid === userJid) {
       await sendErrorReply("No puedes casarte contigo mismo 😭");
       return;

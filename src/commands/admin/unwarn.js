@@ -1,7 +1,9 @@
 const path = require("path");
 const BASE_DIR = path.resolve(__dirname, "../../../");
+
 const { toUserJid, onlyNumbers } = require(`${BASE_DIR}/src/utils`);
 const { PREFIX } = require(`${BASE_DIR}/src/config`);
+
 const {
   unmuteMember,
   checkIfMemberIsMuted,
@@ -9,53 +11,61 @@ const {
 
 module.exports = {
   name: "unwarn",
-  description: "Limpia todas las advertencias de un usuario y lo desmutea si estaba muteado",
+  description: "Limpia todas las advertencias de un usuario",
   commands: ["unwarn", "clear"],
-  usage: `${PREFIX}unwarn @usuario o respondiendo a su mensaje`,
+  usage: `${PREFIX}unwarn @usuario o respondiendo`,
 
   handle: async ({
     args,
     replyJid,
+    mentionedJid,
     remoteJid,
     sendSuccessReply,
     sendErrorReply,
   }) => {
-    if (!replyJid && !args.length)
-      return sendErrorReply("❌ Debes mencionar a un usuario o responder su mensaje.");
 
-    const targetJid = replyJid ? replyJid : toUserJid(args[0]);
-    if (!targetJid) return sendErrorReply("❌ No se pudo determinar al usuario.");
+    const target =
+      mentionedJid?.[0] ||
+      replyJid ||
+      toUserJid(args[0]);
 
-    // Inicializar estructura de warns dentro de la DB de mute
+    if (!target)
+      return sendErrorReply(
+        "❌ Debes mencionar a un usuario o responder su mensaje."
+      );
+
     global.mutedDB = global.mutedDB || {};
     if (!global.mutedDB[remoteJid]) global.mutedDB[remoteJid] = {};
-    if (!global.mutedDB[remoteJid][targetJid])
-      global.mutedDB[remoteJid][targetJid] = { mutedUntil: 0, warnings: 0, timeoutId: null };
+    if (!global.mutedDB[remoteJid][target])
+      global.mutedDB[remoteJid][target] = {
+        mutedUntil: 0,
+        warnings: 0,
+        timeoutId: null,
+      };
 
-    const userData = global.mutedDB[remoteJid][targetJid];
+    const userData = global.mutedDB[remoteJid][target];
 
-    // Cancelar cualquier timeout de notificación pendiente
     if (userData.timeoutId) {
       clearTimeout(userData.timeoutId);
       userData.timeoutId = null;
     }
 
-    // Reset warnings
     userData.warnings = 0;
 
-    // Desmutea si estaba muteado
-    if (checkIfMemberIsMuted(remoteJid, targetJid)) {
-      unmuteMember(remoteJid, targetJid);
+    if (checkIfMemberIsMuted(remoteJid, target)) {
+      unmuteMember(remoteJid, target);
       userData.mutedUntil = 0;
+
       return sendSuccessReply(
-        `✅ @${onlyNumbers(targetJid)} ahora tiene 0 advertencias y fue desmuteado.`,
-        [targetJid]
+        `✅ @${onlyNumbers(target)} ahora tiene 0 advertencias y fue desmuteado.`,
+        [target]
       );
     }
 
     return sendSuccessReply(
-      `✅ @${onlyNumbers(targetJid)} ahora tiene 0 advertencias.`,
-      [targetJid]
+      `✅ @${onlyNumbers(target)} ahora tiene 0 advertencias.`,
+      [target]
     );
   },
 };
+

@@ -4,7 +4,7 @@ module.exports = {
   name: "tag",
   description: "Este comando marcará todos do grupo",
   commands: ["tag", "to-tag"],
-  usage: `${PREFIX}hidetag motivo`,
+  usage: `${PREFIX}tag lo que quieras escribir`,
   /**
    * @param {CommandHandleProps} props
    * @returns {Promise<void>}
