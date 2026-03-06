@@ -61,11 +61,11 @@ module.exports = {
       const nivel = Math.floor(Math.random() * 100);
       switch (type) {
         case "infieles": text += ` 💔 Nivel de infiel: ${nivel}%\n`; break;
-        case "putos": text += ` 🌈 Nivel de putazos: ${nivel}%\n`; break;
-        case "geys": text += ` 🏳️‍🌈 Nivel de pluma: ${nivel}%\n`; break;
+        case "putos": text += ` 🌈 Nivel de putazo: ${nivel}%\n`; break;
+        case "geys": text += ` 🏳️‍🌈 Nivel de pluma pluma gey: ${nivel}%\n`; break;
         case "travas": text += ` 💃 Nivel de coquetanómetro: ${nivel}%\n`; break;
         case "regalados": text += ` 🎁 Nivel de regalado: ${nivel}%\n`; break;
-        case "pijudos": text += ` 🍆 Nivel de vergudos: ${nivel}%\n`; break;
+        case "pijudos": text += ` 🍆 Nivel de vergudo: ${nivel}%\n`; break;
         case "fieles": text += ` 💖 Nivel de lealtad: ${nivel}%\n`; break;
         case "romanticos": text += ` 💘 Nivel romántico: ${nivel}%\n`; break;
         case "pelotudos": text += ` 😇 Nivel de pelotudo: ${nivel}%\n`; break;
