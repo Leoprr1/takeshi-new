@@ -3100,5 +3100,9 @@
   "no",
   "si",
   "no",
+  "newtyc off",
+  "newtyc on",
+  "newtyc off",
+  "si",
   "newtyc off"
 ]
