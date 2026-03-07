@@ -4,7 +4,7 @@
     "age": 23,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/620485926_1206638688260707_2153868945442048660_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wFsx_qZjifc35bhJRLTlYkWmLvkIF33aUmV_A_uu5qH2A&oe=69B559BF&_nc_sid=5e03e0&_nc_cat=107",
     "registeredAt": 1772594534960,
-    "commandsUsed": 586
+    "commandsUsed": 642
   },
   "148137834471521@lid": {
     "name": "cande",
@@ -18,7 +18,7 @@
     "age": 1,
     "profilePic": null,
     "registeredAt": 1772598405915,
-    "commandsUsed": 5
+    "commandsUsed": 7
   },
   "62178895855731@lid": {
     "name": "Ari",
@@ -53,14 +53,14 @@
     "age": 15,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/565895657_2292236851262052_306879940084903366_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wFQ4e4kPZA984aUv4Yrt3RkHaAqYa0fCCR1bngm29aTSQ&oe=69B5E970&_nc_sid=5e03e0&_nc_cat=106",
     "registeredAt": 1772674108799,
-    "commandsUsed": 1
+    "commandsUsed": 6
   },
   "19310810534110@lid": {
     "name": "martin",
     "age": 18,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/642638082_1231935059127464_601565391961792541_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wEK-eUaxVCsvED7jSHK6zPsqvBNCP4S6HVASC73IMvMOQ&oe=69B69AF2&_nc_sid=5e03e0&_nc_cat=108",
     "registeredAt": 1772711789704,
-    "commandsUsed": 9
+    "commandsUsed": 10
   },
   "96250619801819@lid": {
     "name": "xxx",
@@ -82,5 +82,12 @@
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/637632122_2095476551230196_8483665161940010355_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wEf_qGBoXGVyyn2t1OHFGUH42J34waHHDOxglTlO_WdyA&oe=69B70578&_nc_sid=5e03e0&_nc_cat=105",
     "registeredAt": 1772745443760,
     "commandsUsed": 5
+  },
+  "65489778770156@lid": {
+    "name": "Astaroth",
+    "age": 99,
+    "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/439312917_3248453625457590_4555352635126687390_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa4AEuknT545tnMdmol-6vAQQdTFPVAbLeGOqJx5IZsGlYxA&oe=69B86550&_nc_sid=5e03e0&_nc_cat=110",
+    "registeredAt": 1772836273121,
+    "commandsUsed": 4
   }
 }
