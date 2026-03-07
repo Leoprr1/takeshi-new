@@ -4,11 +4,9 @@
  * + Adaptación básica por tipo de mensaje
  */
 
-const path = require("node:path");
-const fs = require("node:fs");
 
-const databasePath = path.resolve(__dirname, "../../database");
-const GENERATED_MEMORY_FILE = "generated-memory";
+const {getDB} = require("./jsoncache")
+
 
 const MIN_CONFIDENCE = 0.8;
 
@@ -33,11 +31,6 @@ function createIfNotExists(fullPath, formatIfNotExists = {}) {
   }
 }
 
-function readJSON(jsonFile, formatIfNotExists = {}) {
-  const fullPath = path.resolve(databasePath, `${jsonFile}.json`);
-  createIfNotExists(fullPath, formatIfNotExists);
-  return JSON.parse(fs.readFileSync(fullPath, "utf8"));
-}
 
 function capitalize(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -212,7 +205,7 @@ exports.getElmoBotiaResponse = (webMessage) => {
 
   if (lastGeneratedMessage && normalizeText(messageText) === normalizeText(lastGeneratedMessage)) return null;
 
-  const brain = readJSON(GENERATED_MEMORY_FILE, { topics: {}, global: {} });
+  const brain = getDB("generated-memory")
   if (!brain.topics || Object.keys(brain.topics).length === 0) return null;
 
   const { topic, relevance } = detectTopicWithScore(messageText, brain);

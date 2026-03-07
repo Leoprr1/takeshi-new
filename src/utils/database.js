@@ -7,7 +7,7 @@ const path = require("node:path");
 const fs = require("node:fs");
 const { PREFIX } = require("../config");
 const stringSimilarity = require("string-similarity");
-
+const {getDB, saveJSON} = require("./jsoncache")
 const databasePath = path.resolve(__dirname, "..", "..", "database");
 
 // Archivos base
@@ -34,15 +34,15 @@ function createIfNotExists(fullPath, formatIfNotExists = []) {
 }
 
 function readJSON(jsonFile, formatIfNotExists = []) {
-  const fullPath = path.resolve(databasePath, `${jsonFile}.json`);
-  createIfNotExists(fullPath, formatIfNotExists);
-  return JSON.parse(fs.readFileSync(fullPath, "utf8"));
+  const db = getDB(jsonFile)
+  return db || formatIfNotExists
 }
 
-function writeJSON(jsonFile, data, formatIfNotExists = []) {
-  const fullPath = path.resolve(databasePath, `${jsonFile}.json`);
-  createIfNotExists(fullPath, formatIfNotExists);
-  fs.writeFileSync(fullPath, JSON.stringify(data, null, 2), "utf8");
+function writeJSON(jsonFile, data,) {
+  const db = global.JSON_DB[jsonFile]
+  if (!db) return
+  db.data = data
+  saveJSON(jsonFile)
 }
 
 // =====================

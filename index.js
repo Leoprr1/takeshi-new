@@ -69,6 +69,7 @@
  *
  * ¡No modifiques nada a continuación, a menos que sepas lo que estás haciendo!
  */
+const path = require("path");
 const { connect } = require("./src/connection");
 const { load } = require("./src/loader");
 const { badMacHandler } = require("./src/utils/badMacHandler");
@@ -80,6 +81,16 @@ const {
   warningLog,
 } = require("./src/utils/logger");
 const { startTyCSystem } = require("./src/utils/newstyc");
+const {
+  loadJSONFolder,
+  startAutoSave
+} = require("./src/utils/jsoncache")
+
+loadJSONFolder(path.join(__dirname, "database"))
+loadJSONFolder(path.join(__dirname, "src/database"))
+
+startAutoSave(60000);
+
 
 let socketGlobal;
 let reconnecting = false;

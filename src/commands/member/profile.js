@@ -4,21 +4,9 @@ const { errorLog } = require(`${BASE_DIR}/utils/logger`);
 const { PREFIX, ASSETS_DIR } = require(`${BASE_DIR}/config`);
 const { InvalidParameterError } = require(`${BASE_DIR}/errors`);
 const { getProfileImageData } = require(`${BASE_DIR}/services/baileys`);
+const {getDB} = require("../../utils/jsoncache")
 
-const fs = require("fs");
-const path = require("path");
 
-const USERS_FILE = path.resolve(__dirname, "../../../database/users.json");
-const RPG_FILE = path.resolve(__dirname, "../../database/rpg.json");
-
-function readJSON(file) {
-  try {
-    if (!fs.existsSync(file)) return {};
-    return JSON.parse(fs.readFileSync(file, "utf8"));
-  } catch {
-    return {};
-  }
-}
 
 function normalizeJid(jid) {
   const number = jid.split("@")[0];
@@ -70,6 +58,7 @@ module.exports = {
     mentionedJid,
     replyJid,
     toUserJid,
+    DB,
   }) => {
 
     if (!isGroup(remoteJid)) {
@@ -110,8 +99,8 @@ module.exports = {
       // LEER DATABASE
       // ====================
 
-      const users = readJSON(USERS_FILE);
-      const rpg = readJSON(RPG_FILE);
+      const users = getDB("users");
+      const rpg = getDB("rpg");
 
       const dbUser = users[targetJid] || {};
       const rpgUser = rpg[targetJid] || {};

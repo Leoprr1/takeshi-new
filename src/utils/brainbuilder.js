@@ -222,6 +222,21 @@ function initWatcher() {
   // Primera construcción
   buildBrain();
 }
+/* ===========================
+   WATCHER SIMPLIFICADO CON INTERVALO DE 30 SEGUNDOS
+=========================== */
+function initWatcher() {
+  console.log("👁 BrainBuilder activo observando archivos...");
+
+  // Primera construcción
+  buildBrain();
+
+  // Intervalo de 30 segundos para reconstruir el cerebro
+  setInterval(() => {
+    buildBrain();
+  }, 30 * 1000);
+  buildBrain();
+}
 
 /* ===========================
    AUTO-INICIO
