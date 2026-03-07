@@ -1,19 +1,64 @@
 const { isGroup } = require(`${BASE_DIR}/utils`);
+const { toUserJid } = require(`${BASE_DIR}/utils`);
 const { errorLog } = require(`${BASE_DIR}/utils/logger`);
-
 const { PREFIX, ASSETS_DIR } = require(`${BASE_DIR}/config`);
 const { InvalidParameterError } = require(`${BASE_DIR}/errors`);
 const { getProfileImageData } = require(`${BASE_DIR}/services/baileys`);
+
+const fs = require("fs");
+const path = require("path");
+
+const USERS_FILE = path.resolve(__dirname, "../../../database/users.json");
+const RPG_FILE = path.resolve(__dirname, "../../database/rpg.json");
+
+function readJSON(file) {
+  try {
+    if (!fs.existsSync(file)) return {};
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch {
+    return {};
+  }
+}
+
+function normalizeJid(jid) {
+  const number = jid.split("@")[0];
+  return `${number}@`;
+}
+
+// rango aventurero (igual que tu rpg.js)
+function getRangoAventurero(nivel) {
+  if (nivel >= 176) return { rango: "SSS", emoji: "🟣" };
+  if (nivel >= 151) return { rango: "SS", emoji: "🔴" };
+  if (nivel >= 131) return { rango: "S", emoji: "🟠" };
+  if (nivel >= 101) return { rango: "A", emoji: "🟡" };
+  if (nivel >= 71) return { rango: "B", emoji: "🟢" };
+  if (nivel >= 41) return { rango: "C", emoji: "🔵" };
+  if (nivel >= 21) return { rango: "D", emoji: "🟣" };
+  if (nivel >= 11) return { rango: "E", emoji: "⚪" };
+  return { rango: "F", emoji: "⚫" };
+}
+
+// tiempo desde registro
+function tiempoRegistro(timestamp) {
+  if (!timestamp) return "Desconocido";
+
+  const diff = Date.now() - timestamp;
+
+  const dias = Math.floor(diff / 86400000);
+  const horas = Math.floor(diff / 3600000);
+  const minutos = Math.floor(diff / 60000);
+
+  if (dias > 0) return `${dias} día(s)`;
+  if (horas > 0) return `${horas} hora(s)`;
+  return `${minutos} minuto(s)`;
+}
 
 module.exports = {
   name: "profile",
   description: "Muestra información de un usuario",
   commands: ["profile"],
   usage: `${PREFIX}profile o profile @usuario`,
-  /**
-   * @param {CommandHandleProps} props
-   * @returns {Promise<void>}
-   */
+
   handle: async ({
     args,
     socket,
@@ -23,72 +68,90 @@ module.exports = {
     sendWaitReply,
     sendSuccessReact,
     mentionedJid,
+    replyJid,
+    toUserJid,
   }) => {
+
     if (!isGroup(remoteJid)) {
       throw new InvalidParameterError(
         "Este comando solo puede ser usado en un grupo."
       );
     }
 
-    const targetJid = mentionedJid?.[0] || replyJid || toUserJid(args[0]);
-    
+    const targetJid =
+      mentionedJid?.[0] ||
+      replyJid ||
+      (args[0] ? toUserJid(args[0]) : userJid);
 
     await sendWaitReply("Cargando perfil...");
 
     try {
+
       let profilePicUrl;
-      let userName;
       let userRole = "Miembro";
 
       try {
         const { profileImage } = await getProfileImageData(socket, targetJid);
         profilePicUrl = profileImage || `${ASSETS_DIR}/images/default-user.png`;
-
-        const contactInfo = await socket.onWhatsApp(targetJid);
-        userName = contactInfo[0]?.name || "Usuario Desconocido";
       } catch (error) {
-        errorLog(
-          `Error al intentar obtener datos del usuario ${targetJid}: ${JSON.stringify(
-            error,
-            null,
-            2
-          )}`
-        );
+        errorLog(`Error obteniendo foto de ${targetJid}`);
         profilePicUrl = `${ASSETS_DIR}/images/default-user.png`;
       }
 
       const groupMetadata = await socket.groupMetadata(remoteJid);
 
       const participant = groupMetadata.participants.find(
-        (participant) => participant.id === targetJid
+        (p) => p.id === targetJid
       );
 
-      if (participant?.admin) {
-        userRole = "Administrador";
-      }
+      if (participant?.admin) userRole = "Administrador";
 
-      const randomPercent = Math.floor(Math.random() * 100);
-      const programPrice = (Math.random() * 5000 + 1000).toFixed(2);
-      const beautyLevel = Math.floor(Math.random() * 100) + 1;
+      // ====================
+      // LEER DATABASE
+      // ====================
+
+      const users = readJSON(USERS_FILE);
+      const rpg = readJSON(RPG_FILE);
+
+      const dbUser = users[targetJid] || {};
+      const rpgUser = rpg[targetJid] || {};
+
+      const age = dbUser.age || "No registrada";
+      const commandsUsed = dbUser.commandsUsed || 0;
+      const name = dbUser.name || `@${targetJid.split("@")[0]}`;
+
+      const tiempo = tiempoRegistro(dbUser.registeredAt);
+
+      const nivel = rpgUser.nivel || 0;
+      const monedas = rpgUser.monedas || 0;
+
+      const rango = getRangoAventurero(nivel);
+
+      // ====================
+      // MENSAJE
+      // ====================
 
       const mensagem = `
-👤 *Nombre:* @${targetJid.split("@")[0]}
+👤 *Nombre:* ${name}
 🎖️ *Cargo:* ${userRole}
+🎂 *Edad:* ${age}
 
-🌚 *Programa:* R$ ${programPrice}
-🐮 *Ganado:* ${randomPercent + 7 || 5}%
-🎱 *Pasiva:* ${randomPercent + 5 || 10}%
-✨ *Belleza:* ${beautyLevel}%`;
+📅 *Registrado hace:* ${tiempo}
+⚡ *Comandos usados:* ${commandsUsed}
 
-      const mentions = [targetJid];
+⚔️ *Nivel RPG:* ${nivel}
+🏅 *Rango Aventurero:* ${rango.emoji} ${rango.rango}
+💰 *Monedas:* ${monedas.toLocaleString("es-AR")}
+`;
 
       await sendSuccessReact();
 
       await socket.sendMessage(remoteJid, {
         image: { url: profilePicUrl },
         caption: mensagem,
-        mentions: mentions,
+        mentions: [targetJid],
       });
+
     } catch (error) {
       console.error(error);
       sendErrorReply("Ocurrió un error al intentar verificar el perfil.");

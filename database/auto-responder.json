@@ -1,11 +1,25 @@
 [
   {
+    "match": "27",
+    "answers": [
+      "E?"
+    ]
+  },
+  {
+    "match": "6282632",
+    "answers": [
+      "@161787676729345 PVP con @223256997032099"
+    ]
+  },
+  {
     "match": "hola",
     "answers": [
       "Hola renzo",
       "¡Hola! ¿Cómo andás?",
       "q onda bro",
-      ".cum"
+      ".cum",
+      "Hola",
+      "Chau"
     ]
   },
   {
@@ -72,7 +86,10 @@
     "match": "chau",
     "answers": [
       "ok",
-      "Aah"
+      "Aah",
+      "okei",
+      "Chau andate",
+      "Chau doña"
     ]
   },
   {
@@ -186,14 +203,20 @@
   {
     "match": "te amo",
     "answers": [
-      "yo tambien c:"
+      "yo tambien c:",
+      "JAJAJA de nada"
     ]
   },
   {
     "match": "xd",
     "answers": [
       "XD",
-      "te aviso de ante man9 que no uses el comando afkban todavía hasta que yo te diga"
+      "te aviso de ante man9 que no uses el comando afkban todavía hasta que yo te diga",
+      "sos un culiado",
+      "tremendo XD",
+      "XDXDXDXD",
+      "🤣",
+      "mira esto"
     ]
   },
   {
@@ -528,7 +551,7 @@
   {
     "match": "amen",
     "answers": [
-      "amen!",
+      "amen",
       "JAJAJAJAJA"
     ]
   },
@@ -690,7 +713,10 @@
   {
     "match": "tengo hambre",
     "answers": [
-      "entones comete esta XD"
+      "entones comete esta XD",
+      "Toma",
+      "Comete el dedo grande",
+      "X2 yo tome 1 plato de sopa no mas"
     ]
   },
   {
@@ -858,7 +884,10 @@
       "Jaja XD",
       "Ahh con razón",
       "No",
-      "si"
+      "si",
+      "Piola como es",
+      "Nooooo",
+      "Cajeta"
     ]
   },
   {
@@ -869,7 +898,16 @@
       "Parece delito ya esl en este grupo",
       "Matate",
       "q bronca me haces dar Agustín",
-      "T amo"
+      "T amo",
+      "No te perdono",
+      "So gila",
+      "Meoa que si",
+      "Uh",
+      "Chi",
+      "Ta bueno",
+      "Y almohada",
+      "El negrito es jn carbon encendido",
+      "Mirala"
     ]
   },
   {
@@ -930,7 +968,10 @@
   {
     "match": "q",
     "answers": [
-      "so"
+      "so",
+      "Podes medicarte porfa?",
+      "Nd",
+      "Hablame bien"
     ]
   },
   {
@@ -973,7 +1014,8 @@
   {
     "match": "messi",
     "answers": [
-      "mi papi 🥵🔥"
+      "mi papi 🥵🔥",
+      "Yuju"
     ]
   },
   {
@@ -1133,7 +1175,9 @@
     "answers": [
       "JAJAJAJA",
       "Era para vs, me confundi",
-      "yo igual pensaba eso"
+      "yo igual pensaba eso",
+      "Si jaja",
+      "PvP? O miedo 😏"
     ]
   },
   {
@@ -1141,13 +1185,15 @@
     "answers": [
       "Que mandan",
       "Parce pase el perico",
-      "Ns que paso pero seguramente cagaste"
+      "Ns que paso pero seguramente cagaste",
+      "Divergente"
     ]
   },
   {
     "match": "wtf",
     "answers": [
-      "lo puse para que aprenda de una"
+      "lo puse para que aprenda de una",
+      "Grupo que grupo esta a responder mas inservible."
     ]
   },
   {
@@ -1155,12 +1201,13 @@
     "answers": [
       "Okas",
       ".cum",
-      "rra",
+      "Rra",
       "Rra sos maldito",
       "chupala gil",
       "Mas dura que ladrillo la wea esta",
       "DALE HDP",
-      "Y si"
+      "Y si",
+      "6282632"
     ]
   },
   {
@@ -1508,7 +1555,11 @@
   {
     "match": "gay",
     "answers": [
-      "Tu gueco"
+      "Tu gueco",
+      "Si venis t demuestro q no",
+      "Y q tiene?",
+      "Vos ss un terian",
+      "Ee xq tan asi con el chico?"
     ]
   },
   {
@@ -1768,7 +1819,10 @@
       ".pv pero me duele ma sun mexico corrupto",
       ".cum",
       "esta desubicado el gordo hdp",
-      "gane"
+      "gane",
+      "La q la va la primero pero xq a estar viendo lo.",
+      "pedile permiso a @259635453935764",
+      "Mucha onda aca y yo no jaja si no ser mucho si."
     ]
   },
   {
@@ -1788,7 +1842,9 @@
   {
     "match": "¡Genial! ¿Qué es lo que más te gusta?",
     "answers": [
-      "cállate"
+      "cállate",
+      "Jugar y hablar con mi nva",
+      "JAJAJJAJA hasta curioso salió! ☆"
     ]
   },
   {
@@ -1852,7 +1908,9 @@
     "match": "nada",
     "answers": [
       "Æ bno jaja",
-      "Ok?"
+      "Ok?",
+      "Pero igual",
+      "Pasa alías"
     ]
   },
   {
@@ -2042,7 +2100,8 @@
     "match": "tos",
     "answers": [
       "Puedo poner que vendo hack para el free????",
-      "hacete el boludo vos"
+      "hacete el boludo vos",
+      "Banco"
     ]
   },
   {
@@ -2113,7 +2172,9 @@
       "vos",
       "vos mogo",
       "So re agresiva vo",
-      "JAJAJAJA"
+      "JAJAJAJA",
+      "Mentira amiga",
+      "Se pasho se pasho"
     ]
   },
   {
@@ -2180,7 +2241,8 @@
     "match": "Siii",
     "answers": [
       "que haces",
-      "D1 entonces"
+      "D1 entonces",
+      "D1"
     ]
   },
   {
@@ -2332,7 +2394,8 @@
   {
     "match": "Porque",
     "answers": [
-      "Ni idea temas de ellos o por qué se ponen de novio con alguien o cosas asi"
+      "Ni idea temas de ellos o por qué se ponen de novio con alguien o cosas asi",
+      "Xq lo digo yo"
     ]
   },
   {
@@ -2776,7 +2839,9 @@
     "answers": [
       "pala",
       "Me pasas",
-      "milton.slayer.2026"
+      "milton.slayer.2026",
+      "Chu quem?",
+      "Re"
     ]
   },
   {
@@ -2816,7 +2881,8 @@
       "Yo q",
       "JAJAJAJA MAL",
       "lit",
-      "JAJAJAJA HASTA EL BOT LO DESCANSABA"
+      "JAJAJAJA HASTA EL BOT LO DESCANSABA",
+      "Quien putas es Fran"
     ]
   },
   {
@@ -3248,7 +3314,8 @@
   {
     "match": "¡ElmoBotia activado en este grupo con éxito!",
     "answers": [
-      "hola"
+      "hola",
+      "No"
     ]
   },
   {
@@ -3266,7 +3333,9 @@
   {
     "match": "Que cuentan?",
     "answers": [
-      "Nada recién salgo del frii"
+      "Nada recién salgo del frii",
+      "Números",
+      "Aca dialogando"
     ]
   },
   {
@@ -3424,7 +3493,8 @@
     "match": "HOLAS",
     "answers": [
       "Hola",
-      "Chau"
+      "Chau",
+      "Hola angel"
     ]
   },
   {
@@ -3821,7 +3891,8 @@
   {
     "match": "cande lo unió a su grupo y ahi ha estado aprendíendo 😂",
     "answers": [
-      "Cande?"
+      "Cande?",
+      "claro también"
     ]
   },
   {
@@ -4132,7 +4203,9 @@
   {
     "match": "Nono",
     "answers": [
-      "ptm"
+      "ptm",
+      "Siisi",
+      "Si"
     ]
   },
   {
@@ -4273,7 +4346,9 @@
     "answers": [
       "Real, yo soy de México cada vez mi nación se vuelve más peligrosa",
       "Al fin dices algo coherente",
-      "Lit"
+      "Lit",
+      "Cierto",
+      "Mal"
     ]
   },
   {
@@ -4821,7 +4896,8 @@
   {
     "match": "bueno",
     "answers": [
-      "Muy bien"
+      "Muy bien",
+      "No juegas?"
     ]
   },
   {
@@ -5724,14 +5800,16 @@
       "La q se salió fue mi nva\nYo pregunto\nQuien la agrego",
       "Jaja tranqui\nTe entiendo",
       "Que?",
-      "Xd"
+      "Xd",
+      "Ahh wueño"
     ]
   },
   {
     "match": "quien?",
     "answers": [
       "el bot bld",
-      "El hno mayor"
+      "El hno mayor",
+      "Unos pibitos jugando al fútbol"
     ]
   },
   {
@@ -6194,7 +6272,8 @@
     "match": "Me quiero ir",
     "answers": [
       "andate",
-      "Vete me harías un gran favor"
+      "Vete me harías un gran favor",
+      "Lárgate me haces un favor 🙏"
     ]
   },
   {
@@ -6485,7 +6564,8 @@
     "answers": [
       "no",
       "Tu celular no anda? Pregunto x preguntar",
-      "mentiroso, son las 12"
+      "mentiroso, son las 12",
+      "12:29"
     ]
   },
   {
@@ -6493,7 +6573,9 @@
     "answers": [
       "Wts jajau",
       "Tu tía",
-      "con el .casarse"
+      "con el .casarse",
+      "Calla pelotudo",
+      "JSJSHHSHS"
     ]
   },
   {
@@ -7443,7 +7525,8 @@
   {
     "match": "Wenas",
     "answers": [
-      "No"
+      "No",
+      "Qlq bro"
     ]
   },
   {
@@ -7607,7 +7690,10 @@
       "Tu tía",
       "Decile a alguna minita que entregue el papoi",
       "No me digas vv",
-      "Todo bien"
+      "Todo bien",
+      "XD nmms",
+      "XD este cabron",
+      "Nada precioso \nYo molestando"
     ]
   },
   {
@@ -8023,7 +8109,8 @@
   {
     "match": "Cuántos años tenes?",
     "answers": [
-      "porke preguntad la edad"
+      "porke preguntad la edad",
+      "15"
     ]
   },
   {
@@ -8047,7 +8134,8 @@
   {
     "match": "Que paso",
     "answers": [
-      "Pq me mandaron a soporte"
+      "Pq me mandaron a soporte",
+      "nda"
     ]
   },
   {
@@ -8414,7 +8502,8 @@
   {
     "match": "Weno",
     "answers": [
-      "Cállate vos"
+      "Cállate vos",
+      "Dueno"
     ]
   },
   {
@@ -8715,7 +8804,8 @@
   {
     "match": "mira quien lo dice xD",
     "answers": [
-      "Culoroto"
+      "Culoroto",
+      "Hdp nmms XD"
     ]
   },
   {
@@ -9090,7 +9180,8 @@
     "match": "Puedo poner que vendo hack para el free????",
     "answers": [
       "Si",
-      "Vende tu cola"
+      "Vende tu cola",
+      "No son vaniables?"
     ]
   },
   {
@@ -9197,7 +9288,9 @@
     "answers": [
       "Naaaaaaa",
       "Jajajajajaja",
-      ".reg Astaroth 99"
+      ".reg Astaroth 99",
+      ".reg Guada 15",
+      "Calajo"
     ]
   },
   {
@@ -9401,7 +9494,10 @@
   {
     "match": "No quiero",
     "answers": [
-      "igual dormí"
+      "igual dormí",
+      "We",
+      "Compartime x lo menos",
+      "Yo si"
     ]
   },
   {
@@ -9728,7 +9824,8 @@
   {
     "match": "Que pasu",
     "answers": [
-      "Priv"
+      "Priv",
+      "Toy Tite"
     ]
   },
   {
@@ -10040,7 +10137,9 @@
       "Jajajajaja",
       "no",
       "Cheto",
-      "Mal"
+      "Mal",
+      "Calla",
+      "OMG"
     ]
   },
   {
@@ -10178,7 +10277,18 @@
       "No juego free, solo Blood Strike",
       "Poronga",
       "no",
-      "Nel"
+      "Nel",
+      "Que no puto",
+      "Que no maldito ya deja de preguntar esa mrd",
+      "Ya me tienes harto de preguntarme si juego free",
+      "Que no mal nacido",
+      "Juegas free?",
+      "Y síguele",
+      "Yo si\nAver manda id",
+      "Vamos",
+      "Que no malparido",
+      "Si pero a ti te da miedo 😞",
+      "XD"
     ]
   },
   {
@@ -10676,7 +10786,8 @@
   {
     "match": "Tu hermana",
     "answers": [
-      "La tuya que se me entrega"
+      "La tuya que se me entrega",
+      "XD"
     ]
   },
   {
@@ -10735,7 +10846,8 @@
       "JAJAJAJJAJAJAJAJA RE ATREVIDO 🤣",
       "Aquí me copiaste puto bot",
       "NAH",
-      "A la mrda"
+      "A la mrda",
+      "Hdp me copia hasta las frases el muy cabron"
     ]
   },
   {
@@ -10983,7 +11095,8 @@
   {
     "match": "Cabron ya no me copies",
     "answers": [
-      "JAJAJAJ se enamoró de vos"
+      "JAJAJAJ se enamoró de vos",
+      "Cómo que te estoy copiando mldt"
     ]
   },
   {
@@ -11098,7 +11211,8 @@
   {
     "match": "✅ ¡Miembro eliminado con éxito!",
     "answers": [
-      "ahora"
+      "ahora",
+      "Jajaj re pija"
     ]
   },
   {
@@ -11277,7 +11391,9 @@
   {
     "match": "eso",
     "answers": [
-      "Jajajajaja"
+      "Jajajajaja",
+      "queres saber tu @jid para la config?",
+      "Ay somos tan buenas"
     ]
   },
   {
@@ -11399,7 +11515,9 @@
   {
     "match": "So asi",
     "answers": [
-      "Ajá"
+      "Ajá",
+      "si y q",
+      "Pensé q eras una mina y te borré 😐"
     ]
   },
   {
@@ -11511,14 +11629,16 @@
   {
     "match": "mira ésto",
     "answers": [
-      "Cerra el orto"
+      "Cerra el orto",
+      "Aver"
     ]
   },
   {
     "match": "Eres tu",
     "answers": [
       "Tu mldt pt",
-      "yo que"
+      "yo que",
+      "Tu hermana"
     ]
   },
   {
@@ -11700,7 +11820,8 @@
   {
     "match": "bots árabes?",
     "answers": [
-      "Al parecer"
+      "Al parecer",
+      "Si pero más efectivos que tú"
     ]
   },
   {
@@ -11805,7 +11926,8 @@
   {
     "match": "tmb",
     "answers": [
-      "tmb que"
+      "tmb que",
+      "XD"
     ]
   },
   {
@@ -11929,7 +12051,8 @@
   {
     "match": "Yo que?",
     "answers": [
-      "No nada amigo"
+      "No nada amigo",
+      "Jugas plato?"
     ]
   },
   {
@@ -12025,7 +12148,8 @@
   {
     "match": "@202044321316883",
     "answers": [
-      "RACIAA"
+      "RACIAA",
+      "Yo que"
     ]
   },
   {
@@ -12165,7 +12289,8 @@
   {
     "match": "viste",
     "answers": [
-      "Chi"
+      "Chi",
+      "Pero si me compras la carol te va a amar"
     ]
   },
   {
@@ -12500,7 +12625,9 @@
   {
     "match": "Nooo",
     "answers": [
-      "Siii"
+      "Siii",
+      "bueno",
+      "Que chi"
     ]
   },
   {
@@ -12608,7 +12735,9 @@
   {
     "match": "Puta",
     "answers": [
-      "puto"
+      "puto",
+      "Se pasho se pasho",
+      "Tu creador"
     ]
   },
   {
@@ -13140,7 +13269,9 @@
     "match": "mañana",
     "answers": [
       "Ahí estoy",
-      "Puedo ir?"
+      "Puedo ir?",
+      "Gueno",
+      "D1"
     ]
   },
   {
@@ -13262,7 +13393,9 @@
   {
     "match": "Chi",
     "answers": [
-      "ah, bueno"
+      "ah, bueno",
+      "Ño",
+      "Eso no es de rokstar"
     ]
   },
   {
@@ -13494,7 +13627,8 @@
   {
     "match": "Y mi explicación?",
     "answers": [
-      "Cuál we?"
+      "Cuál we?",
+      "Cuál pendejo"
     ]
   },
   {
@@ -13512,7 +13646,9 @@
   {
     "match": "Siiii",
     "answers": [
-      "JAJAJAJAJAJ"
+      "JAJAJAJAJAJ",
+      "Noooooo",
+      "No"
     ]
   },
   {
@@ -13573,7 +13709,11 @@
     "match": "estoy probando cosas para el afk",
     "answers": [
       "Afk quiero que te quedes por el resto de tu existencia",
-      "Piola"
+      "Piola",
+      "XD no sé que tenía que ver",
+      "Pero que chotas tiene que ver el afk con tus mmds",
+      "X\nD",
+      "Q es eso?"
     ]
   },
   {
@@ -13748,7 +13888,8 @@
   {
     "match": ".top infieles",
     "answers": [
-      "yo diría top gorreadas"
+      "yo diría top gorreadas",
+      "XD"
     ]
   },
   {
@@ -13766,7 +13907,8 @@
   {
     "match": "🔥 *TOP 10 MÁS INFIELES DEL GRUPO* 🔥\n\n#1 👤 @153373315743771\n 💔 Nivel de infiel: 73%\n\n#2 👤 @209633494999104\n 💔 Nivel de infiel: 37%\n\n#3 👤 @65489778770156\n 💔 Nivel de infiel: 71%\n\n#4 👤 @49705807536244\n 💔 Nivel de infiel: 5%\n\n#5 👤 @110986719670373\n 💔 Nivel de infiel: 27%\n\n#6 👤 @217257162600661\n 💔 Nivel de infiel: 93%\n\n#7 👤 @116750448365745\n 💔 Nivel de infiel: 29%\n\n#8 👤 @259635453935764\n 💔 Nivel de infiel: 64%\n\n#9 👤 @148137834471521\n 💔 Nivel de infiel: 71%\n\n#10 👤 @130825307832455\n 💔 Nivel de infiel: 72%",
     "answers": [
-      "Yo no estoy"
+      "Yo no estoy",
+      "ush"
     ]
   },
   {
@@ -13778,7 +13920,9 @@
   {
     "match": "🔥 *TOP 10 MÁS REGALADOS DEL GRUPO* 🔥\n\n#1 👤 @217257162600661\n 🎁 Nivel de regalado: 45%\n\n#2 👤 @109204375371916\n 🎁 Nivel de regalado: 5%\n\n#3 👤 @49705807536244\n 🎁 Nivel de regalado: 78%\n\n#4 👤 @209633494999104\n 🎁 Nivel de regalado: 37%\n\n#5 👤 @88262081273896\n 🎁 Nivel de regalado: 1%\n\n#6 👤 @202946516107436\n 🎁 Nivel de regalado: 0%\n\n#7 👤 @168903900680310\n 🎁 Nivel de regalado: 64%\n\n#8 👤 @221693930950900\n 🎁 Nivel de regalado: 91%\n\n#9 👤 @19310810534110\n 🎁 Nivel de regalado: 74%\n\n#10 👤 @148137834471521\n 🎁 Nivel de regalado: 76%",
     "answers": [
-      "1%"
+      "1%",
+      "me tiene bronca",
+      "VAMOS"
     ]
   },
   {
@@ -13862,13 +14006,15 @@
     "match": "🔥 *TOP 10 MÁS TRAVAS DEL GRUPO* 🔥\n\n#1 👤 @235407610486832\n 💃 Nivel de coquetanómetro: 18%\n\n#2 👤 @65489778770156\n 💃 Nivel de coquetanómetro: 42%\n\n#3 👤 @15492618166445\n 💃 Nivel de coquetanómetro: 78%\n\n#4 👤 @110986719670373\n 💃 Nivel de coquetanómetro: 43%\n\n#5 👤 @109204375371916\n 💃 Nivel de coquetanómetro: 68%\n\n#6 👤 @65919745306692\n 💃 Nivel de coquetanómetro: 54%\n\n#7 👤 @153373315743771\n 💃 Nivel de coquetanómetro: 65%\n\n#8 👤 @86196336197832\n 💃 Nivel de coquetanómetro: 23%\n\n#9 👤 @259635453935764\n 💃 Nivel de coquetanómetro: 32%\n\n#10 👤 @168903900680310\n 💃 Nivel de coquetanómetro: 96%",
     "answers": [
       "78 fua",
-      "@223256997032099 43%"
+      "@223256997032099 43%",
+      "Oa"
     ]
   },
   {
     "match": "@148137834471521",
     "answers": [
-      "Pasaselo noma jaja"
+      "Pasaselo noma jaja",
+      "que queres"
     ]
   },
   {
@@ -13922,7 +14068,8 @@
   {
     "match": "O vos decile lo mucho que te gusta o aue la queres qli4r",
     "answers": [
-      "JAJAJAJAJA"
+      "JAJAJAJAJA",
+      "XDDDDDD JAJAJAJAJAJAJ SPTM"
     ]
   },
   {
@@ -13954,7 +14101,8 @@
     "answers": [
       "wtf",
       "so",
-      "y si"
+      "y si",
+      "Y si que puto"
     ]
   },
   {
@@ -13967,6 +14115,3482 @@
     "match": "registrate",
     "answers": [
       "chupala"
+    ]
+  },
+  {
+    "match": "Bienvenidoo",
+    "answers": [
+      "will"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS INFIELES DEL GRUPO* 🔥\n\n#1 👤 @81819680636966\n 💔 Nivel de infiel: 94%\n\n#2 👤 @190529782423571\n 💔 Nivel de infiel: 25%\n\n#3 👤 @226542915473631\n 💔 Nivel de infiel: 89%\n\n#4 👤 @257062802079856\n 💔 Nivel de infiel: 68%\n\n#5 👤 @23747612418212\n 💔 Nivel de infiel: 50%\n\n#6 👤 @36833773797476\n 💔 Nivel de infiel: 23%\n\n#7 👤 @166636275396803\n 💔 Nivel de infiel: 78%\n\n#8 👤 @257393682346086\n 💔 Nivel de infiel: 25%\n\n#9 👤 @2315608142045\n 💔 Nivel de infiel: 21%\n\n#10 👤 @4957096902909\n 💔 Nivel de infiel: 69%",
+    "answers": [
+      "uuhh",
+      "Gg ni figuro en la lista",
+      "Ehhhh"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS FIELES DEL GRUPO* 🔥\n\n#1 👤 @8925344739524\n 💖 Nivel de lealtad: 48%\n\n#2 👤 @36833773797476\n 💖 Nivel de lealtad: 46%\n\n#3 👤 @148137834471521\n 💖 Nivel de lealtad: 91%\n\n#4 👤 @110986719670373\n 💖 Nivel de lealtad: 19%\n\n#5 👤 @193093643059248\n 💖 Nivel de lealtad: 24%\n\n#6 👤 @109028516602088\n 💖 Nivel de lealtad: 18%\n\n#7 👤 @4957096902909\n 💖 Nivel de lealtad: 24%\n\n#8 👤 @11025902506105\n 💖 Nivel de lealtad: 31%\n\n#9 👤 @236429594636543\n 💖 Nivel de lealtad: 11%\n\n#10 👤 @132259407523859\n 💖 Nivel de lealtad: 70%",
+    "answers": [
+      "Ahí vaaaa"
+    ]
+  },
+  {
+    "match": "Ese bot no sabe nada demivida",
+    "answers": [
+      "x agarrarla"
+    ]
+  },
+  {
+    "match": "x agarrarla",
+    "answers": [
+      "Eso me da un plus de infidelidad? Jajajajaah"
+    ]
+  },
+  {
+    "match": ".newtyc off",
+    "answers": [
+      "⚠️ ¡Atención! ¡El sistema TyC ya está desactivado!"
+    ]
+  },
+  {
+    "match": "llama gordo hdp",
+    "answers": [
+      "Las de joda amiga la bot ahora que yo que no hable."
+    ]
+  },
+  {
+    "match": "⚠️ ¡Atención! ¡El sistema TyC ya está desactivado!",
+    "answers": [
+      "Las de puta de todo es cuando se va tener la q."
+    ]
+  },
+  {
+    "match": "Las de joda amiga la bot ahora que yo que no hable.",
+    "answers": [
+      "wtf"
+    ]
+  },
+  {
+    "match": "Para trabajar para de a callar al que los que no hable.",
+    "answers": [
+      "Todo que la t juro me la queres vamos a una verdad."
+    ]
+  },
+  {
+    "match": "pero el chavon le trajo ala nenita esa",
+    "answers": [
+      "Ke"
+    ]
+  },
+  {
+    "match": "Yo de todos aca no jugar pero me deja cerrar el doble.",
+    "answers": [
+      "se peleaban",
+      "Estas viendo jaja no no tener la voy a ver como si."
+    ]
+  },
+  {
+    "match": "Anita hermosa la tenes la de no hable y aprender bro bien.",
+    "answers": [
+      "La hago la q no ser mas inservible."
+    ]
+  },
+  {
+    "match": "Atrevido me lo posible q ir los colores pero el no hable.",
+    "answers": [
+      "Mejorandolo pero no hable es sacar el doble hora es la belleza."
+    ]
+  },
+  {
+    "match": "Palabra madrear a el maldito bot no hable y aprender a comprar.",
+    "answers": [
+      "Los que esta a esta mas bueno no como callar al que."
+    ]
+  },
+  {
+    "match": "Manana a los tengo la lista para la antinegros no los mensajes.",
+    "answers": [
+      "Jajajaja mal lo posible q hacer eso de no poder responder como."
+    ]
+  },
+  {
+    "match": "Esta mas ya en no poder responder bien redonda ni aca hay.",
+    "answers": [
+      "Como callar al de lo de a una ia o lo posible."
+    ]
+  },
+  {
+    "match": "Banda de lo posible q hacer la 7 anos y no hable.",
+    "answers": [
+      "Huevo no yo a esta re callado el punto jajaja no hable."
+    ]
+  },
+  {
+    "match": "pedile permiso a @259635453935764",
+    "answers": [
+      "Algo le llama el juego no vas a como callar al que."
+    ]
+  },
+  {
+    "match": "Yo 1 o estas para ser mucho de dinero cocina de nicolas.",
+    "answers": [
+      "Onda tu la nacion se escribir para q ya que mas inservible."
+    ]
+  },
+  {
+    "match": "Manana de a eso no ser mas inservible.",
+    "answers": [
+      "Sera que jajaja re da spider x en vos que vos que."
+    ]
+  },
+  {
+    "match": "como era?",
+    "answers": [
+      "Acumulado 0h 3m afk acumulado 5h 10m afk quiero de dormir yo?"
+    ]
+  },
+  {
+    "match": "Llamo elmobot para eso pero puedo compraria mi no ser va jaja.",
+    "answers": [
+      "Alegro pa yo no lo esta a si no tener otra version."
+    ]
+  },
+  {
+    "match": "Ahora si la mas los 70k o que ojala ya jaja no.",
+    "answers": [
+      "Los tengo como bot no jugar pero es o sortear lineas de."
+    ]
+  },
+  {
+    "match": ".elmobotia 0",
+    "answers": [
+      "❌ ¡Error! ¡No tienes permiso para ejecutar este comando!",
+      "¡ElmoBotia desactivado en este grupo con éxito!"
+    ]
+  },
+  {
+    "match": "Loco re puto de esos en no hable y charlar conmigo no.",
+    "answers": [
+      "Gusta hacer lo posible q hacer unos y la q a doxear."
+    ]
+  },
+  {
+    "match": "Ahorita te la discoteca cuando ayer mepa q a ver a carol.",
+    "answers": [
+      "La voy a no lo que la bot a estar solo y."
+    ]
+  },
+  {
+    "match": "Eso me da un plus de infidelidad? Jajajajaah",
+    "answers": [
+      "so"
+    ]
+  },
+  {
+    "match": "Podes medicarte porfa?",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "QUE PEDAZO DE PUTO",
+    "answers": [
+      "tenes que ajustar los parámetros de config"
+    ]
+  },
+  {
+    "match": "pone el numero de tu bot, el tuyo y tu  @lid",
+    "answers": [
+      "eso estaba intentando"
+    ]
+  },
+  {
+    "match": "Chupo la cola primero pero que a si a hacer la leo.",
+    "answers": [
+      "QUE"
+    ]
+  },
+  {
+    "match": "Si rompió",
+    "answers": [
+      "cállate"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS PELOTUDOS DEL GRUPO* 🔥\n\n#1 👤 @36833773797476\n 😇 Nivel de pelotudo: 91%\n\n#2 👤 @172950430953687\n 😇 Nivel de pelotudo: 58%\n\n#3 👤 @226542915473631\n 😇 Nivel de pelotudo: 47%\n\n#4 👤 @148137834471521\n 😇 Nivel de pelotudo: 79%\n\n#5 👤 @262792288407645\n 😇 Nivel de pelotudo: 46%\n\n#6 👤 @179972685697033\n 😇 Nivel de pelotudo: 80%\n\n#7 👤 @53992721768674\n 😇 Nivel de pelotudo: 51%\n\n#8 👤 @77898610376877\n 😇 Nivel de pelotudo: 8%\n\n#9 👤 @193093643059248\n 😇 Nivel de pelotudo: 52%\n\n#10 👤 @1452370034875\n 😇 Nivel de pelotudo: 69%",
+    "answers": [
+      "79%"
+    ]
+  },
+  {
+    "match": "💖 *TOP 5 PAREJAS DEL GRUPO* 💖\n\n#1 👩‍❤️‍👨 @109028516602088 + @219443535822900\n 💞 Compatibilidad: 6% 💘\n\n#2 👩‍❤️‍👨 @175312310640653 + @148137834471521\n 💞 Compatibilidad: 49% 💘💘💘💘💘\n\n#3 👩‍❤️‍👨 @17201797030138 + @8925344739524\n 💞 Compatibilidad: 68% 💘💘💘💘💘💘💘\n\n#4 👩‍❤️‍👨 @25615856050286 + @37302495653948\n 💞 Compatibilidad: 98% 💘💘💘💘💘💘💘💘💘💘\n\n#5 👩‍❤️‍👨 @162097082200188 + @98943765602376\n 💞 Compatibilidad: 29% 💘💘💘",
+    "answers": [
+      "no con Aron yo no"
+    ]
+  },
+  {
+    "match": ".formapareja",
+    "answers": [
+      "formar"
+    ]
+  },
+  {
+    "match": "💖 *TOP 5 PAREJAS DEL GRUPO* 💖\n\n#1 👩‍❤️‍👨 @63836786835484 + @2315608142045\n 💞 Compatibilidad: 62% 💘💘💘💘💘💘💘\n\n#2 👩‍❤️‍👨 @257062802079856 + @81819680636966\n 💞 Compatibilidad: 29% 💘💘💘\n\n#3 👩‍❤️‍👨 @148137834471521 + @132259407523859\n 💞 Compatibilidad: 15% 💘💘\n\n#4 👩‍❤️‍👨 @196649406185665 + @25615856050286\n 💞 Compatibilidad: 49% 💘💘💘💘💘\n\n#5 👩‍❤️‍👨 @231254544887819 + @98016153309436\n 💞 Compatibilidad: 51% 💘💘💘💘💘💘",
+    "answers": [
+      "no soy lesbiana",
+      "JAJAJJAJA",
+      "Q era eso Jajaj"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS FIELES DEL GRUPO* 🔥\n\n#1 👤 @79156918399062\n 💖 Nivel de lealtad: 79%\n\n#2 👤 @236429594636543\n 💖 Nivel de lealtad: 36%\n\n#3 👤 @85251527278717\n 💖 Nivel de lealtad: 57%\n\n#4 👤 @253124635816169\n 💖 Nivel de lealtad: 4%\n\n#5 👤 @218279431950387\n 💖 Nivel de lealtad: 20%\n\n#6 👤 @257062802079856\n 💖 Nivel de lealtad: 55%\n\n#7 👤 @190529664999621\n 💖 Nivel de lealtad: 40%\n\n#8 👤 @202044321316883\n 💖 Nivel de lealtad: 80%\n\n#9 👤 @17201797030138\n 💖 Nivel de lealtad: 97%\n\n#10 👤 @2315608142045\n 💖 Nivel de lealtad: 29%",
+    "answers": [
+      "55%",
+      "Esoo"
+    ]
+  },
+  {
+    "match": "No que hjce",
+    "answers": [
+      "q mandaste"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS GEYS DEL GRUPO* 🔥\n\n#1 👤 @232650459635775\n 🏳️‍🌈 Nivel de pluma pluma gey: 62%\n\n#2 👤 @219116799574237\n 🏳️‍🌈 Nivel de pluma pluma gey: 66%\n\n#3 👤 @236429594636543\n 🏳️‍🌈 Nivel de pluma pluma gey: 68%\n\n#4 👤 @188850064388349\n 🏳️‍🌈 Nivel de pluma pluma gey: 54%\n\n#5 👤 @85251527278717\n 🏳️‍🌈 Nivel de pluma pluma gey: 83%\n\n#6 👤 @206901476364539\n 🏳️‍🌈 Nivel de pluma pluma gey: 27%\n\n#7 👤 @53992721768674\n 🏳️‍🌈 Nivel de pluma pluma gey: 57%\n\n#8 👤 @158648072409252\n 🏳️‍🌈 Nivel de pluma pluma gey: 44%\n\n#9 👤 @262792288407645\n 🏳️‍🌈 Nivel de pluma pluma gey: 73%\n\n#10 👤 @160331145982163\n 🏳️‍🌈 Nivel de pluma pluma gey: 10%",
+    "answers": [
+      "Pense q iba a ser el primero 🥲💔",
+      "No estoy en la lista"
+    ]
+  },
+  {
+    "match": "No estoy en la lista",
+    "answers": [
+      "chu"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS PIJUDOS DEL GRUPO* 🔥\n\n#1 👤 @243645408104632\n 🍆 Nivel de vergudo: 70%\n\n#2 👤 @81819680636966\n 🍆 Nivel de vergudo: 65%\n\n#3 👤 @175312310640653\n 🍆 Nivel de vergudo: 3%\n\n#4 👤 @219443535822900\n 🍆 Nivel de vergudo: 95%\n\n#5 👤 @179972685697033\n 🍆 Nivel de vergudo: 71%\n\n#6 👤 @202044321316883\n 🍆 Nivel de vergudo: 53%\n\n#7 👤 @253124635816169\n 🍆 Nivel de vergudo: 54%\n\n#8 👤 @219116799574237\n 🍆 Nivel de vergudo: 9%\n\n#9 👤 @188850064388349\n 🍆 Nivel de vergudo: 22%\n\n#10 👤 @98943765602376\n 🍆 Nivel de vergudo: 57%",
+    "answers": [
+      "La concha puta"
+    ]
+  },
+  {
+    "match": ".Tag hablen che sino con el afk voy a sacarlos.",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "💤 *RANKING AFK DEL GRUPO*\n\n👤 @193093643059248\n 💤 AFK acumulado: 8d 14h 18m\n ⏳ AFK actual: 45s\n 📩 Mensajes: 886\n\n👤 @148137834471521\n 💤 AFK acumulado: 8d 10h 18m\n ⏳ AFK actual: 8s\n 📩 Mensajes: 2328\n\n👤 @37302495653948\n 💤 AFK acumulado: 8d 10h 6m\n ⏳ AFK actual: 2h 52m\n 📩 Mensajes: 2480\n\n👤 @17201797030138\n 💤 AFK acumulado: 8d 9h 28m\n ⏳ AFK actual: 3m 26s\n 📩 Mensajes: 705\n\n👤 @132259407523859\n 💤 AFK acumulado: 8d 7h 29m\n ⏳ AFK actual: 4m 34s\n 📩 Mensajes: 61\n\n👤 @202044321316883\n 💤 AFK acumulado: 8d 3h 2m\n ⏳ AFK actual: 7h 31m\n 📩 Mensajes: 543\n\n👤 @79156918399062\n 💤 AFK acumulado: 8d 2h 37m\n ⏳ AFK actual: 4h 9m\n 📩 Mensajes: 377\n\n👤 @98016153309436\n 💤 AFK acumulado: 8d 1h 35m\n ⏳ AFK actual: 3h 2m\n 📩 Mensajes: 244\n\n👤 @257062802079856\n 💤 AFK acumulado: 7d 20h 16m\n ⏳ AFK actual: 1m 7s\n 📩 Mensajes: 746\n\n👤 @175312310640653\n 💤 AFK acumulado: 7d 18h 37m\n ⏳ AFK actual: 6h 28m\n 📩 Mensajes: 190\n\n👤 @218279431950387\n 💤 AFK acumulado: 7d 1h 24m\n ⏳ AFK actual: 1m 36s\n 📩 Mensajes: 196\n\n👤 @81819680636966\n 💤 AFK acumulado: 5d 4h 56m\n ⏳ AFK actual: 2d 4m\n 📩 Mensajes: 68\n\n👤 @50917206433919\n 💤 AFK acumulado: 4d 1h 12m\n ⏳ AFK actual: 3d 5h 14m\n 📩 Mensajes: 3\n\n👤 @232650459635775\n 💤 AFK acumulado: 3d 9h 50m\n ⏳ AFK actual: 5d 2h 59m\n 📩 Mensajes: 153\n\n👤 @1452370034875\n 💤 AFK acumulado: 3d 4h 39m\n ⏳ AFK actual: 3d 23h 33m\n 📩 Mensajes: 3\n\n👤 @190529664999621\n 💤 AFK acumulado: 3d 2h\n ⏳ AFK actual: 5d 2m\n 📩 Mensajes: 265\n\n👤 @71283958128685\n 💤 AFK acumulado: 2d 19h 56m\n ⏳ AFK actual: 4d 4h 1m\n 📩 Mensajes: 15\n\n👤 @262792288407645\n 💤 AFK acumulado: 2d 18h 45m\n ⏳ AFK actual: 4d 6h 7m\n 📩 Mensajes: 8\n\n👤 @11025902506105\n 💤 AFK acumulado: 2d 8h 25m\n ⏳ AFK actual: 5d 4h 15m\n 📩 Mensajes: 72\n\n👤 @162097082200188\n 💤 AFK acumulado: 2d 6h 21m\n ⏳ AFK actual: 4d 4h 4m\n 📩 Mensajes: 3\n\n👤 @243645408104632\n 💤 AFK acumulado: 1d 21h 18m\n ⏳ AFK actual: 5d 38m\n 📩 Mensajes: 11\n\n👤 @166636275396803\n 💤 AFK acumulado: 1d 14h 10m\n ⏳ AFK actual: 6d 11h 42m\n 📩 Mensajes: 113\n\n👤 @25615856050286\n 💤 AFK acumulado: 19h 1m\n ⏳ AFK actual: 5d 3h 11m\n 📩 Mensajes: 3\n\n👤 @53992721768674\n 💤 AFK acumulado: 13h 17m\n ⏳ AFK actual: 6d 9h 27m\n 📩 Mensajes: 9\n\n👤 @188850064388349\n 💤 AFK acumulado: 10h 5m\n ⏳ AFK actual: 1m 29s\n 📩 Mensajes: 1\n\n👤 @34497881997366\n 💤 AFK acumulado: 5h 27m\n ⏳ AFK actual: 2d 2h 30m\n 📩 Mensajes: 5\n\n👤 @192634383536132\n 💤 AFK acumulado: 35m 28s\n ⏳ AFK actual: 1d 1h 56m\n 📩 Mensajes: 6\n\n👤 @206901476364539\n 💤 AFK acumulado: 17m 56s\n ⏳ AFK actual: 7d 21h 8m\n 📩 Mensajes: 21\n\n👤 @160331145982163\n 💤 AFK acumulado: 5m 36s\n ⏳ AFK actual: 7d 3h 48m\n 📩 Mensajes: 16\n\n👤 @115380756447403\n 💤 AFK acumulado: 4m 25s\n ⏳ AFK actual: 7d 7h 6m\n 📩 Mensajes: 11\n\n👤 @233084234539085\n 💤 AFK acumulado: 4m 15s\n ⏳ AFK actual: 7d 7h 29m\n 📩 Mensajes: 3\n\n👤 @98943765602376\n 💤 AFK acumulado: 7s\n ⏳ AFK actual: 6d 20h 36m\n 📩 Mensajes: 2\n\n👤 @228187921469584\n 💤 AFK acumulado: 2s\n ⏳ AFK actual: 7d 7h 46m\n 📩 Mensajes: 2\n\n👤 @39269624201461\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 7d 10h 4m\n 📩 Mensajes: 1\n\n👤 @109028516602088\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 5d 19h 5m\n 📩 Mensajes: 1\n\n👤 @131220478402763\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 5d 4h 8m\n 📩 Mensajes: 1\n\n👤 @152733885677605\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 1d 23h 33m\n 📩 Mensajes: 1\n\n👤 @2315608142045\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @257393682346086\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @190529782423571\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @236429594636543\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @219116799574237\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @253124635816169\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @191809632383139\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @219443535822900\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @85251527278717\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @4957096902909\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @231254544887819\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @158342659965168\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @63836786835484\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @158648072409252\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @110986719670373\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @179972685697033\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @34870956933361\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @226542915473631\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @196649406185665\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @8925344739524\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 10h 6m\n 📩 Mensajes: 0\n\n👤 @172950430953687\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 3h 31s\n 📩 Mensajes: 1\n\n👤 @36833773797476\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @23747612418212\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @77898610376877\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0",
+    "answers": [
+      "Ando ocupado yo"
+    ]
+  },
+  {
+    "match": "pero si vos queres si",
+    "answers": [
+      "Dale de una jajaja"
+    ]
+  },
+  {
+    "match": "Pero esos son bots",
+    "answers": [
+      "ya se"
+    ]
+  },
+  {
+    "match": "vos sos nuevo no?",
+    "answers": [
+      "No solo q no hablo"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS ROMANTICOS DEL GRUPO* 🔥\n\n#1 👤 @166636275396803\n 💘 Nivel romántico: 12%\n\n#2 👤 @257393682346086\n 💘 Nivel romántico: 3%\n\n#3 👤 @98016153309436\n 💘 Nivel romántico: 79%\n\n#4 👤 @81819680636966\n 💘 Nivel romántico: 72%\n\n#5 👤 @228187921469584\n 💘 Nivel romántico: 26%\n\n#6 👤 @162097082200188\n 💘 Nivel romántico: 42%\n\n#7 👤 @39269624201461\n 💘 Nivel romántico: 47%\n\n#8 👤 @192634383536132\n 💘 Nivel romántico: 68%\n\n#9 👤 @50917206433919\n 💘 Nivel romántico: 34%\n\n#10 👤 @37302495653948\n 💘 Nivel romántico: 24%",
+    "answers": [
+      "Si soy bien piola"
+    ]
+  },
+  {
+    "match": "💖 *TOP 5 PAREJAS DEL GRUPO* 💖\n\n#1 👩‍❤️‍👨 @11025902506105 + @79156918399062\n 💞 Compatibilidad: 63% 💘💘💘💘💘💘💘\n\n#2 👩‍❤️‍👨 @172950430953687 + @196649406185665\n 💞 Compatibilidad: 33% 💘💘💘💘\n\n#3 👩‍❤️‍👨 @202044321316883 + @25615856050286\n 💞 Compatibilidad: 59% 💘💘💘💘💘💘\n\n#4 👩‍❤️‍👨 @160331145982163 + @243645408104632\n 💞 Compatibilidad: 11% 💘💘\n\n#5 👩‍❤️‍👨 @132259407523859 + @192634383536132\n 💞 Compatibilidad: 96% 💘💘💘💘💘💘💘💘💘💘",
+    "answers": [
+      "No me gustan los hombres"
+    ]
+  },
+  {
+    "match": "💖 *TOP 5 PAREJAS DEL GRUPO* 💖\n\n#1 👩‍❤️‍👨 @228187921469584 + @63836786835484\n 💞 Compatibilidad: 58% 💘💘💘💘💘💘\n\n#2 👩‍❤️‍👨 @231254544887819 + @34870956933361\n 💞 Compatibilidad: 21% 💘💘💘\n\n#3 👩‍❤️‍👨 @17201797030138 + @206901476364539\n 💞 Compatibilidad: 44% 💘💘💘💘💘\n\n#4 👩‍❤️‍👨 @188850064388349 + @79156918399062\n 💞 Compatibilidad: 59% 💘💘💘💘💘💘\n\n#5 👩‍❤️‍👨 @98016153309436 + @218279431950387\n 💞 Compatibilidad: 80% 💘💘💘💘💘💘💘💘",
+    "answers": [
+      "NAAAA COMO QUE 80% JAAJAJNA"
+    ]
+  },
+  {
+    "match": "Q era eso Jajaj",
+    "answers": [
+      "noc"
+    ]
+  },
+  {
+    "match": "te pego",
+    "answers": [
+      "Un beso"
+    ]
+  },
+  {
+    "match": "Un beso",
+    "answers": [
+      "emm no"
+    ]
+  },
+  {
+    "match": "Y a vos ?",
+    "answers": [
+      "tmb"
+    ]
+  },
+  {
+    "match": "Csm",
+    "answers": [
+      "nono"
+    ]
+  },
+  {
+    "match": "Si elmo lo dice",
+    "answers": [
+      "JAJAJJS"
+    ]
+  },
+  {
+    "match": "@257062802079856  BRO CONTESTA YA ME DIO MIEDO",
+    "answers": [
+      "no habla?"
+    ]
+  },
+  {
+    "match": "no habla?",
+    "answers": [
+      "No hace rato"
+    ]
+  },
+  {
+    "match": "No me gustan los hombres",
+    "answers": [
+      "Mi tribu"
+    ]
+  },
+  {
+    "match": "@257062802079856",
+    "answers": [
+      "Que paso"
+    ]
+  },
+  {
+    "match": "💖 *TOP 5 PAREJAS DEL GRUPO* 💖\n\n#1 👩‍❤️‍👨 @98016153309436 + @36833773797476\n 💞 Compatibilidad: 29% 💘💘💘\n\n#2 👩‍❤️‍👨 @148137834471521 + @4957096902909\n 💞 Compatibilidad: 70% 💘💘💘💘💘💘💘\n\n#3 👩‍❤️‍👨 @231254544887819 + @8925344739524\n 💞 Compatibilidad: 20% 💘💘\n\n#4 👩‍❤️‍👨 @158342659965168 + @25615856050286\n 💞 Compatibilidad: 7% 💘\n\n#5 👩‍❤️‍👨 @162097082200188 + @257393682346086\n 💞 Compatibilidad: 33% 💘💘💘💘",
+    "answers": [
+      "con quieen",
+      "NA GETO TODOS CON HOMBRES ELMOBOT ME VIO LA CARA"
+    ]
+  },
+  {
+    "match": "@17201797030138 ahí está mor",
+    "answers": [
+      "Tenkiuuuu"
+    ]
+  },
+  {
+    "match": "Me pasan stiker",
+    "answers": [
+      "no quiero"
+    ]
+  },
+  {
+    "match": ".playaudio safar",
+    "answers": [
+      "pm"
+    ]
+  },
+  {
+    "match": "pm",
+    "answers": [
+      "Aghh claro me olvidó"
+    ]
+  },
+  {
+    "match": "o MP3 y la podes guardar",
+    "answers": [
+      "Uhh cheto"
+    ]
+  },
+  {
+    "match": "Pero escucho tangos de julio sosa",
+    "answers": [
+      "Alguien puede darle el premio de Basado al muchacho por favor?"
+    ]
+  },
+  {
+    "match": "Alguien puede darle el premio de Basado al muchacho por favor?",
+    "answers": [
+      "Jajaj"
+    ]
+  },
+  {
+    "match": "Jajaj",
+    "answers": [
+      "Estos pendejitoz no tienen cultura"
+    ]
+  },
+  {
+    "match": "Estos pendejitoz no tienen cultura",
+    "answers": [
+      "Sin insultar pero bueno",
+      "q mierda me decis will"
+    ]
+  },
+  {
+    "match": "Sin insultar pero bueno",
+    "answers": [
+      "Jajajajaj"
+    ]
+  },
+  {
+    "match": "andate ala mierda",
+    "answers": [
+      "Te quiero candeciña"
+    ]
+  },
+  {
+    "match": "Te quiero candeciña",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": ".rag Bruno 16",
+    "answers": [
+      "reg"
+    ]
+  },
+  {
+    "match": "vos eras el q me peleaba con Agustín hoy no?",
+    "answers": [
+      "Yo no hablé en casi todo el día"
+    ]
+  },
+  {
+    "match": "Quien tiene en mp",
+    "answers": [
+      "otra vez la timba?"
+    ]
+  },
+  {
+    "match": "otra vez la timba?",
+    "answers": [
+      "Quiero ganar alguna vez"
+    ]
+  },
+  {
+    "match": "Pero al menos quiero sacar algo",
+    "answers": [
+      "si podes"
+    ]
+  },
+  {
+    "match": "si podes",
+    "answers": [
+      "Tenes bro en mp jaja"
+    ]
+  },
+  {
+    "match": "@all volvió la chispa del grupo",
+    "answers": [
+      "Nooo"
+    ]
+  },
+  {
+    "match": "tengo menos q la otra vez",
+    "answers": [
+      "Jajajajja"
+    ]
+  },
+  {
+    "match": "Q ondaaasa",
+    "answers": [
+      "Hola Cami",
+      "Todo bien vs"
+    ]
+  },
+  {
+    "match": "me voy sino",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Todo bienn, chismecito",
+    "answers": [
+      "Tenés?",
+      "Acá vos ya por ver tik toks y me duermo"
+    ]
+  },
+  {
+    "match": "Tenés?",
+    "answers": [
+      "Yo si"
+    ]
+  },
+  {
+    "match": "Yo si",
+    "answers": [
+      "@132259407523859  tenes ig",
+      "Cuente"
+    ]
+  },
+  {
+    "match": "Te gusta agarrar cosas con la boca?",
+    "answers": [
+      "así sos"
+    ]
+  },
+  {
+    "match": "Comete el dedo grande",
+    "answers": [
+      "Me va a doler"
+    ]
+  },
+  {
+    "match": "Cómprame pa comer",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "Me va a doler",
+    "answers": [
+      "E velda"
+    ]
+  },
+  {
+    "match": "Spaghetti",
+    "answers": [
+      "Yes"
+    ]
+  },
+  {
+    "match": "YO QUIERO",
+    "answers": [
+      "Veni jaja"
+    ]
+  },
+  {
+    "match": "x lo menos no vio",
+    "answers": [
+      "Tiene marido igual bobi"
+    ]
+  },
+  {
+    "match": "Pero si me compras la carol te va a amar",
+    "answers": [
+      "Skiusmi?"
+    ]
+  },
+  {
+    "match": "Skiusmi?",
+    "answers": [
+      "Jajajaja"
+    ]
+  },
+  {
+    "match": "Tiene marido igual bobi",
+    "answers": [
+      "Que no ví"
+    ]
+  },
+  {
+    "match": "Que no ví",
+    "answers": [
+      "Dijo q te ama"
+    ]
+  },
+  {
+    "match": "estoy jodiendo mogo",
+    "answers": [
+      "Quién dice q yo no?"
+    ]
+  },
+  {
+    "match": "Quién dice q yo no?",
+    "answers": [
+      "oka"
+    ]
+  },
+  {
+    "match": "Vamos a plato",
+    "answers": [
+      "D1"
+    ]
+  },
+  {
+    "match": "D1",
+    "answers": [
+      "Después"
+    ]
+  },
+  {
+    "match": "Lo dejamos al alan con la carol",
+    "answers": [
+      "Ujum ujum",
+      "No"
+    ]
+  },
+  {
+    "match": "No sabes si el benja quiere jugar",
+    "answers": [
+      "Le pregunto"
+    ]
+  },
+  {
+    "match": "yo voy a dormir",
+    "answers": [
+      "Andate nadie te iba a invitar igual"
+    ]
+  },
+  {
+    "match": "Y la Cande",
+    "answers": [
+      "@148137834471521 va a jugar?"
+    ]
+  },
+  {
+    "match": "Carol y vos?",
+    "answers": [
+      "@202044321316883"
+    ]
+  },
+  {
+    "match": "Bye maifriends me voy a dormir",
+    "answers": [
+      "Awww"
+    ]
+  },
+  {
+    "match": "chau gentusa",
+    "answers": [
+      "Chuu"
+    ]
+  },
+  {
+    "match": "Jugas plato?",
+    "answers": [
+      "Ni crédito tengo"
+    ]
+  },
+  {
+    "match": "Ni crédito tengo",
+    "answers": [
+      "Uhh claro"
+    ]
+  },
+  {
+    "match": "Dicen que me aman y no me cargan crédito",
+    "answers": [
+      "@82643928498250",
+      "Quien te mintio asi?"
+    ]
+  },
+  {
+    "match": "No saben hacer nada mas que dormir en este grupo?",
+    "answers": [
+      "Sho estuve estudiando"
+    ]
+  },
+  {
+    "match": "Sho estuve estudiando",
+    "answers": [
+      "Yo llegue hace un rato de la uni jaja"
+    ]
+  },
+  {
+    "match": "Quien te mintio asi?",
+    "answers": [
+      "Matate"
+    ]
+  },
+  {
+    "match": "Las plantas consumen dioxido de carbono",
+    "answers": [
+      "Yo aprendí te dije"
+    ]
+  },
+  {
+    "match": "Yo aprendí te dije",
+    "answers": [
+      "Bueno ta bien jaja"
+    ]
+  },
+  {
+    "match": "Y devuelven oxigeno",
+    "answers": [
+      "Algunas no"
+    ]
+  },
+  {
+    "match": "Algunas no",
+    "answers": [
+      "Como cual aver?"
+    ]
+  },
+  {
+    "match": "Como soy egresado de ciencias naturales puedo contestarte que algunas consumen el oxigeno porque no tiene suficiente luz solar, osea que si esta encerrada en una caja en la que solo hay oxigeno y no luz solar solo puede consumir el oxigeno",
+    "answers": [
+      "Y yo por mi cara que consumo?"
+    ]
+  },
+  {
+    "match": "@17201797030138 dice benja que tiene cosas mas importantes que hacer",
+    "answers": [
+      "Ahh re hdp"
+    ]
+  },
+  {
+    "match": "Ahh re hdp",
+    "answers": [
+      "Tenes que entenderlo, hoy es la clasificacion de f1"
+    ]
+  },
+  {
+    "match": "Vamos nosotros 2 nms",
+    "answers": [
+      "Y el wiliam"
+    ]
+  },
+  {
+    "match": "Y el wiliam",
+    "answers": [
+      "Sisis"
+    ]
+  },
+  {
+    "match": "Donde",
+    "answers": [
+      "Vamos",
+      "Plato",
+      "Al bar"
+    ]
+  },
+  {
+    "match": "Plato",
+    "answers": [
+      "El esta en el grupo"
+    ]
+  },
+  {
+    "match": "El esta en el grupo",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "Que jugamos",
+    "answers": [
+      "Lo que venga noma"
+    ]
+  },
+  {
+    "match": "Al bar",
+    "answers": [
+      "Mande"
+    ]
+  },
+  {
+    "match": "A comer y a tomar agua iba jajaja",
+    "answers": [
+      "YEEESSSS"
+    ]
+  },
+  {
+    "match": "YEEESSSS",
+    "answers": [
+      "Jajaja"
+    ]
+  },
+  {
+    "match": "Anda a dormir nomas",
+    "answers": [
+      "Porque"
+    ]
+  },
+  {
+    "match": "Me voy a morir",
+    "answers": [
+      "Xq tan asi?"
+    ]
+  },
+  {
+    "match": "Xq lo digo yo",
+    "answers": [
+      "Mátate"
+    ]
+  },
+  {
+    "match": "Se murieron",
+    "answers": [
+      "Vo dijiste que me mate"
+    ]
+  },
+  {
+    "match": "Seguimee en mi canal",
+    "answers": [
+      "No querias que me mate?"
+    ]
+  },
+  {
+    "match": "No querias que me mate?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "@223256997032099 rompimos el bot",
+    "answers": [
+      "na es el internet que anda medio mal por eso funciona asi"
+    ]
+  },
+  {
+    "match": ".get-id @19310810534110",
+    "answers": [
+      "✅ *ID del grupo*: 120363404732699145@g.us"
+    ]
+  },
+  {
+    "match": "queres saber tu @jid para la config?",
+    "answers": [
+      "sis"
+    ]
+  },
+  {
+    "match": "sis",
+    "answers": [
+      "entra en la carpeta database y buscs users.json"
+    ]
+  },
+  {
+    "match": "No jugas entonces",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "y Will me bardeo",
+    "answers": [
+      "Son todos malos acá"
+    ]
+  },
+  {
+    "match": ".get-id +54 9 11 6887-5212",
+    "answers": [
+      "✅ *ID del grupo*: 120363404732699145@g.us"
+    ]
+  },
+  {
+    "match": "Son todos malos acá",
+    "answers": [
+      "si",
+      "Mentira"
+    ]
+  },
+  {
+    "match": "Yo soy un angelito caido en la tierra",
+    "answers": [
+      "🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻",
+      "Y cuando cai me hice mierda la rodilla"
+    ]
+  },
+  {
+    "match": "🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻",
+    "answers": [
+      "Envidia"
+    ]
+  },
+  {
+    "match": "Pasame el canal vo",
+    "answers": [
+      "Ya te pase"
+    ]
+  },
+  {
+    "match": "Ya te pase",
+    "answers": [
+      "Al privado y sin mi consentimiento"
+    ]
+  },
+  {
+    "match": "Si paso acá el bot me saca",
+    "answers": [
+      "Si sos admin no jaja"
+    ]
+  },
+  {
+    "match": "Encontre a loan",
+    "answers": [
+      "Pobrecito",
+      "XDD"
+    ]
+  },
+  {
+    "match": "Q raro q no desapareció cuando te vio",
+    "answers": [
+      "No se amigo"
+    ]
+  },
+  {
+    "match": "No es gracioso",
+    "answers": [
+      "Por?"
+    ]
+  },
+  {
+    "match": "Tiene menos humor",
+    "answers": [
+      "Tjr bld"
+    ]
+  },
+  {
+    "match": "Q hacia ajajaj",
+    "answers": [
+      "Nd vos ?"
+    ]
+  },
+  {
+    "match": "Sigue el canal de Crlinaa🔝 en WhatsApp: https://whatsapp.com/channel/0029VbCMH9wJUM2YNvrXZM1a",
+    "answers": [
+      "No se puede mandar enlaces al grupo"
+    ]
+  },
+  {
+    "match": "No se puede mandar enlaces al grupo",
+    "answers": [
+      "Ush",
+      "Te odio"
+    ]
+  },
+  {
+    "match": "A vos",
+    "answers": [
+      "A vo"
+    ]
+  },
+  {
+    "match": "Sabes lo que es x lo menos?",
+    "answers": [
+      "Obvio bobis"
+    ]
+  },
+  {
+    "match": "Solo para entendidos",
+    "answers": [
+      "Claaa"
+    ]
+  },
+  {
+    "match": "Despues de tatuarte tirate de cabeza x la ventana",
+    "answers": [
+      "De una amigo"
+    ]
+  },
+  {
+    "match": "Eso pensaba hacer",
+    "answers": [
+      "D1d1"
+    ]
+  },
+  {
+    "match": "Ustedes tienen tatuajes ?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Vos ss un terian",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "te lo tatuas en el ano?",
+    "answers": [
+      "Si amiga como adivinaste ?"
+    ]
+  },
+  {
+    "match": "Si amiga como adivinaste ?",
+    "answers": [
+      "es obvio soy re crack yo"
+    ]
+  },
+  {
+    "match": "es obvio soy re crack yo",
+    "answers": [
+      "En el brazo"
+    ]
+  },
+  {
+    "match": "Como brazalete",
+    "answers": [
+      "chu"
+    ]
+  },
+  {
+    "match": "le dije q no me joda",
+    "answers": [
+      "Vos ss admi?"
+    ]
+  },
+  {
+    "match": "Vos ss admi?",
+    "answers": [
+      "no manzana"
+    ]
+  },
+  {
+    "match": "Dame un beso entonces",
+    "answers": [
+      ".besar"
+    ]
+  },
+  {
+    "match": "⚠️ ¡Atención! ⏳ Espera 2s antes de usar otro comando.\nAdvertencias restantes: 2",
+    "answers": [
+      "T manda a guardar"
+    ]
+  },
+  {
+    "match": "T manda a guardar",
+    "answers": [
+      "cállate jeronimo"
+    ]
+  },
+  {
+    "match": "cállate jeronimo",
+    "answers": [
+      "No me digas de esa forma mi amor"
+    ]
+  },
+  {
+    "match": "No me digas de esa forma mi amor",
+    "answers": [
+      "ah te llamas asi?",
+      "Apa"
+    ]
+  },
+  {
+    "match": "devolveme mi admin plis",
+    "answers": [
+      ".promote"
+    ]
+  },
+  {
+    "match": "ah te llamas asi?",
+    "answers": [
+      "Si blda"
+    ]
+  },
+  {
+    "match": ".promote",
+    "answers": [
+      "Gracia"
+    ]
+  },
+  {
+    "match": "Si blda",
+    "answers": [
+      "ah"
+    ]
+  },
+  {
+    "match": "Parece q me están retando",
+    "answers": [
+      "jeronimo"
+    ]
+  },
+  {
+    "match": "Apa",
+    "answers": [
+      "No tranqui si es tuya mándale"
+    ]
+  },
+  {
+    "match": "✅ ✅ ¡Usuario promovido con éxito!",
+    "answers": [
+      "Ya sabia igual"
+    ]
+  },
+  {
+    "match": "Ya sabia igual",
+    "answers": [
+      "cállate xq te lo saco"
+    ]
+  },
+  {
+    "match": "No tranqui si es tuya mándale",
+    "answers": [
+      "E tuya perro"
+    ]
+  },
+  {
+    "match": "E tuya perro",
+    "answers": [
+      "No perro"
+    ]
+  },
+  {
+    "match": "No tengo ni un peso",
+    "answers": [
+      "Que tenia que ver jajaja"
+    ]
+  },
+  {
+    "match": "nadie me ama tanto para merecer mi amor.",
+    "answers": [
+      "Y bueno q queres q haga yo ?"
+    ]
+  },
+  {
+    "match": "Una mina hoy en día sale caro",
+    "answers": [
+      "yo no necesito gita"
+    ]
+  },
+  {
+    "match": "Veni t adopto",
+    "answers": [
+      "JAJAJAJ"
+    ]
+  },
+  {
+    "match": "Pasame plata ahora",
+    "answers": [
+      "Es una captura Jaja tengo 10 pesos en mercado"
+    ]
+  },
+  {
+    "match": "Es una captura Jaja tengo 10 pesos en mercado",
+    "answers": [
+      "So verga"
+    ]
+  },
+  {
+    "match": "Nd vos ?",
+    "answers": [
+      "Yo duermo"
+    ]
+  },
+  {
+    "match": "So verga",
+    "answers": [
+      "igual la carga es un 1000"
+    ]
+  },
+  {
+    "match": "Yo duermo",
+    "answers": [
+      "Segui durmiendo noma",
+      "Llévame con vos"
+    ]
+  },
+  {
+    "match": "La timba me hace mal",
+    "answers": [
+      "Ta pa un truco jajaja",
+      "Y ganas bro"
+    ]
+  },
+  {
+    "match": "Encima tengo plata",
+    "answers": [
+      "Me prestas el 1000 bro"
+    ]
+  },
+  {
+    "match": "Me prestas el 1000 bro",
+    "answers": [
+      "Nooooooo",
+      "Si me pasas el número de tu hermana si"
+    ]
+  },
+  {
+    "match": "Nooooooo",
+    "answers": [
+      "Por última vez juego"
+    ]
+  },
+  {
+    "match": "Y ganas bro",
+    "answers": [
+      "No amigo para q t voy a mentir"
+    ]
+  },
+  {
+    "match": "Por última vez juego",
+    "answers": [
+      "Mentiras",
+      "Cómo dije me desaparezco"
+    ]
+  },
+  {
+    "match": "gano o pierdo",
+    "answers": [
+      "En la misma"
+    ]
+  },
+  {
+    "match": "Mentiras",
+    "answers": [
+      "Sie.pre deci lo mismo"
+    ]
+  },
+  {
+    "match": "🎉 Salió *rojo*! Ganaste 1499999 monedas 💰 Total: 483.756.744.012.947",
+    "answers": [
+      "oa",
+      "De pedo"
+    ]
+  },
+  {
+    "match": "Segui durmiendo noma",
+    "answers": [
+      "Cerra el culito"
+    ]
+  },
+  {
+    "match": "Cerra el culito",
+    "answers": [
+      "Nunca estubo abierto"
+    ]
+  },
+  {
+    "match": "Ta pa un truco jajaja",
+    "answers": [
+      "Man"
+    ]
+  },
+  {
+    "match": "Nunca estubo abierto",
+    "answers": [
+      "Te pregunté?"
+    ]
+  },
+  {
+    "match": "Te pregunté?",
+    "answers": [
+      "Chi"
+    ]
+  },
+  {
+    "match": "💥 *Agustin Alvz PERDIÓ...* Apostaste al *5* pero el dado cayó en *6*! Intenta de nuevo.",
+    "answers": [
+      "Lpm"
+    ]
+  },
+  {
+    "match": "No amigo para q t voy a mentir",
+    "answers": [
+      "Jajsjsjs no un bajón yo saco no se como hize saque 70k dos veces los volví a jugar después hasta hacia carga de 20k y ahí me puse mal jaja"
+    ]
+  },
+  {
+    "match": "Eso no es de rokstar",
+    "answers": [
+      "Ese e de gantel"
+    ]
+  },
+  {
+    "match": "Jajsjsjs no un bajón yo saco no se como hize saque 70k dos veces los volví a jugar después hasta hacia carga de 20k y ahí me puse mal jaja",
+    "answers": [
+      "Perro"
+    ]
+  },
+  {
+    "match": "Llévame con vos",
+    "answers": [
+      "Siii te lleveo a dormir con mi perro"
+    ]
+  },
+  {
+    "match": "Ese e de gantel",
+    "answers": [
+      "Nooo"
+    ]
+  },
+  {
+    "match": "💥 *.♡. PERDIÓ...* Apostaste al *5* pero el dado cayó en *6*! Intenta de nuevo.",
+    "answers": [
+      "Esta trucado esto"
+    ]
+  },
+  {
+    "match": "Aposté en ruleta",
+    "answers": [
+      "Jajajaja"
+    ]
+  },
+  {
+    "match": "Yo perdí 100 lukas",
+    "answers": [
+      "Noooooo la peor"
+    ]
+  },
+  {
+    "match": "Dame plata",
+    "answers": [
+      "Y vos q me das ?"
+    ]
+  },
+  {
+    "match": "La última vez q jodi con eso",
+    "answers": [
+      "jeronimooo"
+    ]
+  },
+  {
+    "match": "Y vos q me das ?",
+    "answers": [
+      "Necesitas pagar el ospedaje"
+    ]
+  },
+  {
+    "match": "Necesitas pagar el ospedaje",
+    "answers": [
+      "Para q si vivo solo ?"
+    ]
+  },
+  {
+    "match": "cántame la canción para dormir",
+    "answers": [
+      ".pm voy a olvidarme de mi"
+    ]
+  },
+  {
+    "match": "Para q si vivo solo ?",
+    "answers": [
+      "Te hago la comida"
+    ]
+  },
+  {
+    "match": "Te hago la comida",
+    "answers": [
+      "Messi"
+    ]
+  },
+  {
+    "match": "Sabes",
+    "answers": [
+      "Igual"
+    ]
+  },
+  {
+    "match": "Yo cocino más rico seguro",
+    "answers": [
+      "Mejor q yo cocina cualquiera"
+    ]
+  },
+  {
+    "match": "Y q onda sacas algo?",
+    "answers": [
+      "Juga en 1xbet mqs vale",
+      "Si saque la última vez pero volví a jugar"
+    ]
+  },
+  {
+    "match": "Siii te lleveo a dormir con mi perro",
+    "answers": [
+      "We yo quiero dormir con tu perro y vos"
+    ]
+  },
+  {
+    "match": "We yo quiero dormir con tu perro y vos",
+    "answers": [
+      "Con el nms"
+    ]
+  },
+  {
+    "match": "Aguante los perritos 🫶🏼",
+    "answers": [
+      "Siiiii"
+    ]
+  },
+  {
+    "match": "Juga en 1xbet mqs vale",
+    "answers": [
+      "Juego si"
+    ]
+  },
+  {
+    "match": "Con el nms",
+    "answers": [
+      "A la chcha",
+      "Na entonces ni pega"
+    ]
+  },
+  {
+    "match": "Juego si",
+    "answers": [
+      "Clw gane 10000 y perdi hasta 80 jajaja"
+    ]
+  },
+  {
+    "match": "Yo quiero dormir con una perrita tmb 😔",
+    "answers": [
+      "Gueno esta mi perrita también"
+    ]
+  },
+  {
+    "match": "La uma",
+    "answers": [
+      "Te cago @158342659965168"
+    ]
+  },
+  {
+    "match": "Te cago @158342659965168",
+    "answers": [
+      "Mal"
+    ]
+  },
+  {
+    "match": "Me gustan los animales",
+    "answers": [
+      "Yo tengo una marmlta"
+    ]
+  },
+  {
+    "match": "@158342659965168  me prestas 1000 esta vez voy a ganar",
+    "answers": [
+      "Ya tenes loco"
+    ]
+  },
+  {
+    "match": "Marmota*",
+    "answers": [
+      "Me la cuidas?",
+      "Como me decís?",
+      "Jajaja"
+    ]
+  },
+  {
+    "match": "Como se llama ese tipo de música?",
+    "answers": [
+      "Cumbia creo que sigue siendo"
+    ]
+  },
+  {
+    "match": "Cumbia creo que sigue siendo",
+    "answers": [
+      "Siii"
+    ]
+  },
+  {
+    "match": "Como me decís?",
+    "answers": [
+      "Y quien hablo de vo? Jaja"
+    ]
+  },
+  {
+    "match": ".pm cumbia villera Marilyn",
+    "answers": [
+      "Sos admin?"
+    ]
+  },
+  {
+    "match": "Sos admin?",
+    "answers": [
+      "no",
+      "Estaba desactivado el modo admin"
+    ]
+  },
+  {
+    "match": "Gueno esta mi perrita también",
+    "answers": [
+      "We 😔"
+    ]
+  },
+  {
+    "match": "Estaba desactivado el modo admin",
+    "answers": [
+      "Ahhhh"
+    ]
+  },
+  {
+    "match": "Ni unos mimos entonces ?",
+    "answers": [
+      "Hacele mimos si querés"
+    ]
+  },
+  {
+    "match": "Ahhhh",
+    "answers": [
+      "Yets"
+    ]
+  },
+  {
+    "match": "Hacele mimos si querés",
+    "answers": [
+      "We re mala"
+    ]
+  },
+  {
+    "match": "Me la cuidas?",
+    "answers": [
+      "No me contestaste @158342659965168"
+    ]
+  },
+  {
+    "match": "Todas iguales",
+    "answers": [
+      "decilo cuando no lo seas💜"
+    ]
+  },
+  {
+    "match": "Si no veo no creo",
+    "answers": [
+      "Jajaja"
+    ]
+  },
+  {
+    "match": "decilo cuando no lo seas💜",
+    "answers": [
+      "No quiero hablar con vos"
+    ]
+  },
+  {
+    "match": "❌ ¡Error! ❌ Ocurrió un error: El audio dura más de 30 minutos.",
+    "answers": [
+      "El bot me odia"
+    ]
+  },
+  {
+    "match": "Esta durmiendo",
+    "answers": [
+      "Casi se comio al loro jajaja"
+    ]
+  },
+  {
+    "match": "No quiero hablar con vos",
+    "answers": [
+      "bno dale nos vemos",
+      ".ban"
+    ]
+  },
+  {
+    "match": "me voy a jugar a los jueguitos",
+    "answers": [
+      "Y no querias jugar con @17201797030138 @193093643059248 y yo"
+    ]
+  },
+  {
+    "match": "Ya va a quere plata",
+    "answers": [
+      "Yo quiero también"
+    ]
+  },
+  {
+    "match": "Gueno",
+    "answers": [
+      "Weno"
+    ]
+  },
+  {
+    "match": "Dame money y te perdóno",
+    "answers": [
+      "Y yo que hice?"
+    ]
+  },
+  {
+    "match": "Dueno",
+    "answers": [
+      "Pueno"
+    ]
+  },
+  {
+    "match": "Y yo que hice?",
+    "answers": [
+      "Me trataste malcito"
+    ]
+  },
+  {
+    "match": "Pueno",
+    "answers": [
+      "Glueno",
+      "Yueno"
+    ]
+  },
+  {
+    "match": "Me trataste malcito",
+    "answers": [
+      "Cuando"
+    ]
+  },
+  {
+    "match": "Cuando",
+    "answers": [
+      "Hou"
+    ]
+  },
+  {
+    "match": "Hou",
+    "answers": [
+      "Vo me tratas peor a mi"
+    ]
+  },
+  {
+    "match": "Vo me tratas peor a mi",
+    "answers": [
+      "Pero yo tengo corazón de pio pio"
+    ]
+  },
+  {
+    "match": "Pero yo tengo corazón de pio pio",
+    "answers": [
+      "Y yo no?"
+    ]
+  },
+  {
+    "match": "Y yo no?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Vos también pedime perdón",
+    "answers": [
+      "Yo que hice?😐",
+      "Xq el te pode perdon y no le pedis plata como a mi?"
+    ]
+  },
+  {
+    "match": "Ta bueno",
+    "answers": [
+      "Ujum"
+    ]
+  },
+  {
+    "match": "Yo que hice?😐",
+    "answers": [
+      "Nada"
+    ]
+  },
+  {
+    "match": "Xq el te pode perdon y no le pedis plata como a mi?",
+    "answers": [
+      "Yets"
+    ]
+  },
+  {
+    "match": "Yets",
+    "answers": [
+      "Not"
+    ]
+  },
+  {
+    "match": "Pasa alías",
+    "answers": [
+      "Quiero q me pidas perdón",
+      "No me ilusiones"
+    ]
+  },
+  {
+    "match": "Pensé q tmb querías plata",
+    "answers": [
+      "Ya tengo"
+    ]
+  },
+  {
+    "match": "Te doy una limozna",
+    "answers": [
+      "Yuju"
+    ]
+  },
+  {
+    "match": "Shi",
+    "answers": [
+      "Ahora no"
+    ]
+  },
+  {
+    "match": "Se cancela todo",
+    "answers": [
+      "Xq?"
+    ]
+  },
+  {
+    "match": "Xq?",
+    "answers": [
+      "Xq un pebete en la cantina de la uni me salio 8 lucas"
+    ]
+  },
+  {
+    "match": "Ni se q significa",
+    "answers": [
+      "Un pan minion con 2 fetas de paleta y 2 de queso a 8000 pesos"
+    ]
+  },
+  {
+    "match": "Mande",
+    "answers": [
+      "Quiero plata"
+    ]
+  },
+  {
+    "match": "Quiero plata",
+    "answers": [
+      "Sho también",
+      "Pasa alias"
+    ]
+  },
+  {
+    "match": "Yo comi pizzeta en la terminal a 2 mil pesos",
+    "answers": [
+      "Yo perdi el cole"
+    ]
+  },
+  {
+    "match": "Yo perdi el cole",
+    "answers": [
+      "Tube que esperar 3 horas en la terminal"
+    ]
+  },
+  {
+    "match": "Tube que esperar 3 horas en la terminal",
+    "answers": [
+      "Uhh mal"
+    ]
+  },
+  {
+    "match": "No me ilusiones",
+    "answers": [
+      "No pases nd entonces"
+    ]
+  },
+  {
+    "match": "Uhh mal",
+    "answers": [
+      "Una cagada"
+    ]
+  },
+  {
+    "match": "Todo culpa del viejo de fisica",
+    "answers": [
+      "Ayyy"
+    ]
+  },
+  {
+    "match": "No pases nd entonces",
+    "answers": [
+      "Nunca nadie se preocupo tanto por mi"
+    ]
+  },
+  {
+    "match": "Nunca nadie se preocupo tanto por mi",
+    "answers": [
+      "Jajajaja"
+    ]
+  },
+  {
+    "match": "Mira Agus pasa 2 mil pa q yo y Carol comemos chipa el lunes",
+    "answers": [
+      "Y yo no como?"
+    ]
+  },
+  {
+    "match": "Y yo no como?",
+    "answers": [
+      "Te mandamos x correo"
+    ]
+  },
+  {
+    "match": "Re poeta",
+    "answers": [
+      "Jajajaa"
+    ]
+  },
+  {
+    "match": "Jajajaa",
+    "answers": [
+      "Y le vas a pasar"
+    ]
+  },
+  {
+    "match": "Te amamos",
+    "answers": [
+      "Ahora dicen eso"
+    ]
+  },
+  {
+    "match": "El lunes comemos chipa en el recreo",
+    "answers": [
+      "Jajaja"
+    ]
+  },
+  {
+    "match": "Ahora dicen eso",
+    "answers": [
+      "Encerio te digooo"
+    ]
+  },
+  {
+    "match": "Y te vamos a dedicar muchos videos",
+    "answers": [
+      "Eso",
+      "Un video presumiendl el chipa jajaj"
+    ]
+  },
+  {
+    "match": "Un video presumiendl el chipa jajaj",
+    "answers": [
+      "Dale ponemos en el.estado",
+      "Con una super música y te mencionamos"
+    ]
+  },
+  {
+    "match": "Con una super música y te mencionamos",
+    "answers": [
+      "Re crack",
+      "D1d1"
+    ]
+  },
+  {
+    "match": "Re crack",
+    "answers": [
+      "Idolo maestro pro max inalcanzable , inigualable"
+    ]
+  },
+  {
+    "match": "Y en la notita de ig",
+    "answers": [
+      "Etiquetaban en todos lados jaja"
+    ]
+  },
+  {
+    "match": "Etiquetaban en todos lados jaja",
+    "answers": [
+      "jajajaja"
+    ]
+  },
+  {
+    "match": "Ponemos  gracias Agustín",
+    "answers": [
+      "Dale jajaja"
+    ]
+  },
+  {
+    "match": "Agustín",
+    "answers": [
+      "Q?"
+    ]
+  },
+  {
+    "match": "Bueno chau me voy a dormir los amo",
+    "answers": [
+      "X2",
+      "Valla con papidio"
+    ]
+  },
+  {
+    "match": "Hablame bien",
+    "answers": [
+      "Que"
+    ]
+  },
+  {
+    "match": "En especial a Agustín",
+    "answers": [
+      "Asi sos"
+    ]
+  },
+  {
+    "match": "Mas vale que me respondan el ngl",
+    "answers": [
+      "Quien?"
+    ]
+  },
+  {
+    "match": "@132259407523859  tenes ig",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "Todos",
+    "answers": [
+      "Yyo ni tengo"
+    ]
+  },
+  {
+    "match": "Yyo ni tengo",
+    "answers": [
+      "No necesitas tenerlo"
+    ]
+  },
+  {
+    "match": "No necesitas tenerlo",
+    "answers": [
+      "Osea no tengo tu link"
+    ]
+  },
+  {
+    "match": "Piola como es",
+    "answers": [
+      "myyluvwv"
+    ]
+  },
+  {
+    "match": "myyluvwv",
+    "answers": [
+      "Listo soy kdash_007"
+    ]
+  },
+  {
+    "match": "05.brunoo__",
+    "answers": [
+      "Mm"
+    ]
+  },
+  {
+    "match": "@132259407523859  devolveme soy kdash_007",
+    "answers": [
+      "Ño"
+    ]
+  },
+  {
+    "match": "Seguime gil",
+    "answers": [
+      "Cual sos"
+    ]
+  },
+  {
+    "match": "Cual sos",
+    "answers": [
+      "Banca"
+    ]
+  },
+  {
+    "match": "https://www.instagram.com/stories/aguss_ok434/3847336541139651562?utm_source=ig_story_item_share&igsh=MWx5Z25nY29kaDYxbg==",
+    "answers": [
+      "No se permiten enlaces 🤷"
+    ]
+  },
+  {
+    "match": "No se permiten enlaces 🤷",
+    "answers": [
+      "Yo hago lo que quiero"
+    ]
+  },
+  {
+    "match": "Por un beso lo hago",
+    "answers": [
+      ".besar"
+    ]
+  },
+  {
+    "match": "Aguss_ok434",
+    "answers": [
+      "Listo kdash_007"
+    ]
+  },
+  {
+    "match": "Listo kdash_007",
+    "answers": [
+      "D1 ahi te sigo"
+    ]
+  },
+  {
+    "match": "A eso",
+    "answers": [
+      "Ahh jajaja",
+      "Seguime vo"
+    ]
+  },
+  {
+    "match": "Q ganas de tener novia pero aveces son manipuladoras y se te pasa",
+    "answers": [
+      "Buen punto"
+    ]
+  },
+  {
+    "match": "Q ganas de tener novia pero aveces te acordas que son manipuladoras y se te pasa",
+    "answers": [
+      "Te acordás que son mujeres y mienten",
+      "Lo mismo los hombres son todos infieles"
+    ]
+  },
+  {
+    "match": "Seguime vo",
+    "answers": [
+      "Listo, 05.brunoo__"
+    ]
+  },
+  {
+    "match": "No me seguiste🤷",
+    "answers": [
+      "Pasaron cositas"
+    ]
+  },
+  {
+    "match": "Lo mismo los hombres son todos infieles",
+    "answers": [
+      "Nono"
+    ]
+  },
+  {
+    "match": "Siisi",
+    "answers": [
+      "Nono"
+    ]
+  },
+  {
+    "match": "Xq ustedes pueden decir todas igual",
+    "answers": [
+      "Un caballero nunca diria eso"
+    ]
+  },
+  {
+    "match": "Un caballero nunca diria eso",
+    "answers": [
+      "De esos ya no existe"
+    ]
+  },
+  {
+    "match": "De esos ya no existe",
+    "answers": [
+      "Que vo no sepa buscar no es problema nuestro"
+    ]
+  },
+  {
+    "match": "Y q significa eso",
+    "answers": [
+      "Que cat²+cat²=hip²"
+    ]
+  },
+  {
+    "match": "No clasifiquen a las personas x su género sino x su comportamiento",
+    "answers": [
+      "Eso hacemos"
+    ]
+  },
+  {
+    "match": "Eso hacemos",
+    "answers": [
+      "Callate"
+    ]
+  },
+  {
+    "match": "Números",
+    "answers": [
+      "Barbaro"
+    ]
+  },
+  {
+    "match": "Barbaro",
+    "answers": [
+      "Ujum"
+    ]
+  },
+  {
+    "match": "Loamo",
+    "answers": [
+      "@37302495653948"
+    ]
+  },
+  {
+    "match": "Te gustan los hombres",
+    "answers": [
+      "No amigo"
+    ]
+  },
+  {
+    "match": "Raios",
+    "answers": [
+      "Centellas"
+    ]
+  },
+  {
+    "match": "Caracoles",
+    "answers": [
+      "Recorcholis"
+    ]
+  },
+  {
+    "match": "Centellas",
+    "answers": [
+      "Recorcholis"
+    ]
+  },
+  {
+    "match": "Recorcholis",
+    "answers": [
+      "Me copiaste"
+    ]
+  },
+  {
+    "match": "Cierren el culito",
+    "answers": [
+      "Ta cerrao",
+      "Siempre estubo cerrado"
+    ]
+  },
+  {
+    "match": "Ejen de hablar como pelotudos",
+    "answers": [
+      "Ahora voy a cruzar la carretera para comprar unas palomitas de mais"
+    ]
+  },
+  {
+    "match": "Me duele la cabeza q me recomiendan",
+    "answers": [
+      "Adermicina",
+      "Dejar la droga"
+    ]
+  },
+  {
+    "match": "Ahora voy a cruzar la carretera para comprar unas palomitas de mais",
+    "answers": [
+      "Y para mi?"
+    ]
+  },
+  {
+    "match": "O aloe vevera",
+    "answers": [
+      "Eso"
+    ]
+  },
+  {
+    "match": "Y para mi?",
+    "answers": [
+      "Tambien"
+    ]
+  },
+  {
+    "match": "Dejar la droga",
+    "answers": [
+      "No quiero"
+    ]
+  },
+  {
+    "match": "Compartime x lo menos",
+    "answers": [
+      "Menos"
+    ]
+  },
+  {
+    "match": "Menos",
+    "answers": [
+      "Tamo con vos",
+      "So asi"
+    ]
+  },
+  {
+    "match": "Tamo con vos",
+    "answers": [
+      "No ,no están"
+    ]
+  },
+  {
+    "match": "Abraham",
+    "answers": [
+      "Es tarde para abrir"
+    ]
+  },
+  {
+    "match": "A q hora mimen?",
+    "answers": [
+      "Que es dormir?"
+    ]
+  },
+  {
+    "match": "Que es dormir?",
+    "answers": [
+      "E un acto q se cace en la cama con el ojo cerrado"
+    ]
+  },
+  {
+    "match": "Y solito",
+    "answers": [
+      "X2"
+    ]
+  },
+  {
+    "match": "Ya q no invitas 🥲💔",
+    "answers": [
+      "Veni",
+      "Vamo a dormir juntos amigo"
+    ]
+  },
+  {
+    "match": "Te dejo en el piso",
+    "answers": [
+      "Me sirve",
+      "Xd"
+    ]
+  },
+  {
+    "match": "Vamo a dormir juntos amigo",
+    "answers": [
+      "Va a dormir en mi piso el",
+      "Cucharita🫦"
+    ]
+  },
+  {
+    "match": "El que se duerme es gay",
+    "answers": [
+      "Me jui"
+    ]
+  },
+  {
+    "match": "Me sirve",
+    "answers": [
+      "Sisus"
+    ]
+  },
+  {
+    "match": "Cucharita🫦",
+    "answers": [
+      "Noooooo"
+    ]
+  },
+  {
+    "match": "Va a dormir en mi piso el",
+    "answers": [
+      "Voy tambien y duermo en el piso con el"
+    ]
+  },
+  {
+    "match": "Voy tambien y duermo en el piso con el",
+    "answers": [
+      "Siii"
+    ]
+  },
+  {
+    "match": "Nooooo",
+    "answers": [
+      "Siiii"
+    ]
+  },
+  {
+    "match": "Quieren cosito?",
+    "answers": [
+      "Cosito?"
+    ]
+  },
+  {
+    "match": "Cosito?",
+    "answers": [
+      "Manta"
+    ]
+  },
+  {
+    "match": "Manta",
+    "answers": [
+      "No",
+      "Con un cartón estoy bien"
+    ]
+  },
+  {
+    "match": "Y almohada",
+    "answers": [
+      "El bracito de agus🫦",
+      "Usamos los perros"
+    ]
+  },
+  {
+    "match": "El bracito de agus🫦",
+    "answers": [
+      "Ajjajajaj",
+      "No"
+    ]
+  },
+  {
+    "match": "Usamos los perros",
+    "answers": [
+      "Gueno"
+    ]
+  },
+  {
+    "match": "Ajjajajaj",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "Re putaso lo vago ultimamente",
+    "answers": [
+      "Seeee"
+    ]
+  },
+  {
+    "match": "Es una pijamada real",
+    "answers": [
+      "D1d1",
+      "La pijamada real"
+    ]
+  },
+  {
+    "match": "D1d1",
+    "answers": [
+      "Cómprame gomitas"
+    ]
+  },
+  {
+    "match": "Y frutilla",
+    "answers": [
+      "Y crema"
+    ]
+  },
+  {
+    "match": "Yo duermo en la cama con bruno y vo en el piso entonces",
+    "answers": [
+      "Claro pe",
+      "Noooooo"
+    ]
+  },
+  {
+    "match": "Noooooo",
+    "answers": [
+      "Siiii"
+    ]
+  },
+  {
+    "match": "Boe para jajaja",
+    "answers": [
+      "Y también chocolate"
+    ]
+  },
+  {
+    "match": "Tiene hambre 🥲",
+    "answers": [
+      "Sip"
+    ]
+  },
+  {
+    "match": "Sip",
+    "answers": [
+      "Cuando no?"
+    ]
+  },
+  {
+    "match": "Cuando no?",
+    "answers": [
+      "NUNCA"
+    ]
+  },
+  {
+    "match": "De distopia",
+    "answers": [
+      "Miramo cuandl el mal acecha"
+    ]
+  },
+  {
+    "match": "Miramo cuandl el mal acecha",
+    "answers": [
+      "No",
+      "Seeee"
+    ]
+  },
+  {
+    "match": "Seeee",
+    "answers": [
+      "Eso e malo",
+      "La viste vos?"
+    ]
+  },
+  {
+    "match": "La viste vos?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Me da miedo",
+    "answers": [
+      "Con más razón"
+    ]
+  },
+  {
+    "match": "Trata de un envichado",
+    "answers": [
+      "Hijo de satanas"
+    ]
+  },
+  {
+    "match": "Miramos películas de distopia y punto",
+    "answers": [
+      "Y eso q es?"
+    ]
+  },
+  {
+    "match": "Y eso q es?",
+    "answers": [
+      "Te odio"
+    ]
+  },
+  {
+    "match": "Maze runner",
+    "answers": [
+      "Ya la ví 1000 veces"
+    ]
+  },
+  {
+    "match": "Ya la ví 1000 veces",
+    "answers": [
+      "Es lo mejor"
+    ]
+  },
+  {
+    "match": "The walkin dead",
+    "answers": [
+      "Me quede en la temporada 7"
+    ]
+  },
+  {
+    "match": "Me quede en la temporada 7",
+    "answers": [
+      "La 9",
+      "Miraste los 100?"
+    ]
+  },
+  {
+    "match": "Miraste los 100?",
+    "answers": [
+      "Mepa q si"
+    ]
+  },
+  {
+    "match": "Está lloviendo acá",
+    "answers": [
+      "Aca parece que se le esta prendiendo fuego la casa al vecino jaja"
+    ]
+  },
+  {
+    "match": "Aca parece que se le esta prendiendo fuego la casa al vecino jaja",
+    "answers": [
+      "Jajajaja",
+      "Manda videos"
+    ]
+  },
+  {
+    "match": "Está especial para acostarme con tres gordas",
+    "answers": [
+      "Te van a romper la cama"
+    ]
+  },
+  {
+    "match": "Te van a romper la cama",
+    "answers": [
+      "Entonces con el Agus 🫦"
+    ]
+  },
+  {
+    "match": "Manda videos",
+    "answers": [
+      "Ptm me vas a hacer levantarme"
+    ]
+  },
+  {
+    "match": "Entonces con el Agus 🫦",
+    "answers": [
+      "Ño",
+      "Noooooooooooo"
+    ]
+  },
+  {
+    "match": "Ptm me vas a hacer levantarme",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "Yo me voy a ver las pelis con guada noma",
+    "answers": [
+      "😔💔"
+    ]
+  },
+  {
+    "match": "Solo para mi",
+    "answers": [
+      "Deja noma, tengo nerflix en mi casa jajaja"
+    ]
+  },
+  {
+    "match": "Me dejan re solito😔💔",
+    "answers": [
+      "Con tus 3 gordas y la cama rota amigo"
+    ]
+  },
+  {
+    "match": "Deja noma, tengo nerflix en mi casa jajaja",
+    "answers": [
+      "Matate entonces"
+    ]
+  },
+  {
+    "match": "Matate entonces",
+    "answers": [
+      "Veni vo"
+    ]
+  },
+  {
+    "match": "Veni vo",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Con tus 3 gordas y la cama rota amigo",
+    "answers": [
+      "No aguanto tanto"
+    ]
+  },
+  {
+    "match": "A mi me gusta prime video no Netflix",
+    "answers": [
+      "Tengo tmb",
+      "Aguante magis😛"
+    ]
+  },
+  {
+    "match": "Y disney+",
+    "answers": [
+      "Voy"
+    ]
+  },
+  {
+    "match": "Aguante magis😛",
+    "answers": [
+      "Esooo jajaja"
+    ]
+  },
+  {
+    "match": "Milei puto",
+    "answers": [
+      "Ehh con el presi no eh"
+    ]
+  },
+  {
+    "match": "Cómo me lo vas a sacar😔💔",
+    "answers": [
+      "No lo solucionaste?"
+    ]
+  },
+  {
+    "match": "No lo solucionaste?",
+    "answers": [
+      "Me da paja usar vpn"
+    ]
+  },
+  {
+    "match": "Miramos once upon a time",
+    "answers": [
+      "Ns que es eso pero lo que venga noma"
+    ]
+  },
+  {
+    "match": "Me.voy a dormir",
+    "answers": [
+      "D1 ahi voy"
+    ]
+  },
+  {
+    "match": "Q mañana tenes q darnos el 2 mil para la chipa",
+    "answers": [
+      "Chi pa",
+      "Si ya se jaja"
+    ]
+  },
+  {
+    "match": "D1 ahi voy",
+    "answers": [
+      "Noooo",
+      "Veni toy solita"
+    ]
+  },
+  {
+    "match": "Veni toy solita",
+    "answers": [
+      "Yen2 jajaja"
+    ]
+  },
+  {
+    "match": "Si ya se jaja",
+    "answers": [
+      "Gueno"
+    ]
+  },
+  {
+    "match": "Conmigo vení 🫦",
+    "answers": [
+      "Mañana paso con vo amigo"
+    ]
+  },
+  {
+    "match": "Chi pa",
+    "answers": [
+      "Chi, pa",
+      "Vo so de las que le dice chipa a la torta frita y torta frita a la chipa?"
+    ]
+  },
+  {
+    "match": "Ustedes hacen lo q quieran y yo como lo q tenga en la heladera",
+    "answers": [
+      "Y yo le como a el"
+    ]
+  },
+  {
+    "match": "Y yo le como a el",
+    "answers": [
+      "Epa jajajaja"
+    ]
+  },
+  {
+    "match": "Vo so de las que le dice chipa a la torta frita y torta frita a la chipa?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Se va a operar mi marido",
+    "answers": [
+      "Yo no me voy a operar"
+    ]
+  },
+  {
+    "match": "Yo no me voy a operar",
+    "answers": [
+      "Dybala",
+      "Yo si😬"
+    ]
+  },
+  {
+    "match": "Dybala",
+    "answers": [
+      "Y ese es?",
+      "Va a ser papá 😱"
+    ]
+  },
+  {
+    "match": "Y no querias jugar con @17201797030138 @193093643059248 y yo",
+    "answers": [
+      "chu"
+    ]
+  },
+  {
+    "match": "Y ese es?",
+    "answers": [
+      "Mi marido  desde 1956"
+    ]
+  },
+  {
+    "match": "Va a ser papá 😱",
+    "answers": [
+      "Zi voy a tener un baby"
+    ]
+  },
+  {
+    "match": "okei",
+    "answers": [
+      "Mentira amiga"
+    ]
+  },
+  {
+    "match": "todos giles",
+    "answers": [
+      "Te la aguantai?"
+    ]
+  },
+  {
+    "match": "me re dormí en el sillón",
+    "answers": [
+      "Jejejee"
+    ]
+  },
+  {
+    "match": "Vs tenés 18 verdad?",
+    "answers": [
+      "27",
+      "Si perro"
+    ]
+  },
+  {
+    "match": "Bien pedofilo",
+    "answers": [
+      "viste"
+    ]
+  },
+  {
+    "match": "me anda como el culo el tactil",
+    "answers": [
+      "Mi batata anda mejor"
+    ]
+  },
+  {
+    "match": "Mi batata anda mejor",
+    "answers": [
+      "E jajajajaja"
+    ]
+  },
+  {
+    "match": "Si perro",
+    "answers": [
+      "Lo mismo bien pedófilo"
+    ]
+  },
+  {
+    "match": "Lo mismo bien pedófilo",
+    "answers": [
+      "No amigo",
+      "Pero"
+    ]
+  },
+  {
+    "match": "Mientras no denuncie",
+    "answers": [
+      "JAJAJA",
+      "JAJAJJAJ"
+    ]
+  },
+  {
+    "match": "bno nos re vimos",
+    "answers": [
+      "Chau andate"
+    ]
+  },
+  {
+    "match": "La chispa nunca se apaga",
+    "answers": [
+      "no jodas mucho xq la apagó devuelta"
+    ]
+  },
+  {
+    "match": "no jodas mucho xq la apagó devuelta",
+    "answers": [
+      "Ta bueno jaja"
+    ]
+  },
+  {
+    "match": "Devolveme mi admin",
+    "answers": [
+      "no quiero"
+    ]
+  },
+  {
+    "match": "ni la mano",
+    "answers": [
+      "Para que quiero una mano mas si ya tengo 2"
+    ]
+  },
+  {
+    "match": "no te doy nada ahora",
+    "answers": [
+      "So asi"
+    ]
+  },
+  {
+    "match": "Ya va a pedir plata",
+    "answers": [
+      "a quien le pido plata",
+      "Y no te voy a dar cq no tengo"
+    ]
+  },
+  {
+    "match": "@257062802079856 volvi BB",
+    "answers": [
+      "See 😭😭"
+    ]
+  },
+  {
+    "match": "See 😭😭",
+    "answers": [
+      "deja de llorar"
+    ]
+  },
+  {
+    "match": "deja de llorar",
+    "answers": [
+      "Déjame 😔"
+    ]
+  },
+  {
+    "match": "Ee xq tan asi con el chico?",
+    "answers": [
+      "cállate agustin"
+    ]
+  },
+  {
+    "match": "se me apaga el celu",
+    "answers": [
+      "Ponelo a cargar"
+    ]
+  },
+  {
+    "match": "Ponelo a cargar",
+    "answers": [
+      "sh"
+    ]
+  },
+  {
+    "match": "Pasa id, mepa q te borré xq pensé q eras otra persona 😐",
+    "answers": [
+      "So asi"
+    ]
+  },
+  {
+    "match": "Hola angel",
+    "answers": [
+      "Qondera"
+    ]
+  },
+  {
+    "match": "Me gane una cuenta de free jejejejej",
+    "answers": [
+      "A ver jajaja"
+    ]
+  },
+  {
+    "match": "Pensé q eras una mina y te borré 😐",
+    "answers": [
+      "Me estas diciendo que tengo nombre de mina?",
+      "Bien fiel🗿"
+    ]
+  },
+  {
+    "match": "Me estas diciendo que tengo nombre de mina?",
+    "answers": [
+      "Noooo"
+    ]
+  },
+  {
+    "match": "Noooo",
+    "answers": [
+      "Ya me ofendi ahora"
+    ]
+  },
+  {
+    "match": "Amigo pasa para una sola vez",
+    "answers": [
+      "Perdon bro"
+    ]
+  },
+  {
+    "match": "No me di cuenta xddd",
+    "answers": [
+      "Tranqui no pasa nd"
+    ]
+  },
+  {
+    "match": "💤 *RANKING AFK DEL GRUPO*\n\n👤 @223256997032099\n 💤 AFK acumulado: 5d 9h 28m\n ⏳ AFK actual: 7s\n 📩 Mensajes: 224\n\n👤 @62178895855731\n 💤 AFK acumulado: 4d 11h 39m\n ⏳ AFK actual: 21h 48m\n 📩 Mensajes: 280\n\n👤 @149834698879187\n 💤 AFK acumulado: 4d 11h 36m\n ⏳ AFK actual: 21h 46m\n 📩 Mensajes: 209\n\n👤 @145617057787995\n 💤 AFK acumulado: 3d 15h 48m\n ⏳ AFK actual: 22h 13m\n 📩 Mensajes: 56\n\n👤 @179049200644194\n 💤 AFK acumulado: 3d 11h 24m\n ⏳ AFK actual: 1d 13h 34m\n 📩 Mensajes: 79\n\n👤 @142275170545667\n 💤 AFK acumulado: 2d 16h 1m\n ⏳ AFK actual: 2d 15h 43m\n 📩 Mensajes: 2\n\n👤 @38053578064008\n 💤 AFK acumulado: 2d 14m\n ⏳ AFK actual: 2d 22h 25m\n 📩 Mensajes: 25\n\n👤 @227543592472802\n 💤 AFK acumulado: 1d 21h 53m\n ⏳ AFK actual: 2d 15h 46m\n 📩 Mensajes: 9\n\n👤 @262697480372439\n 💤 AFK acumulado: 1d 47m\n ⏳ AFK actual: 3d 13h 56m\n 📩 Mensajes: 15\n\n👤 @161787676729345\n 💤 AFK acumulado: 23h 20m\n ⏳ AFK actual: 2d 22h 23m\n 📩 Mensajes: 26\n\n👤 @79092040892514\n 💤 AFK acumulado: 19h 37m\n ⏳ AFK actual: 3d 17h 26m\n 📩 Mensajes: 6\n\n👤 @172331267805199\n 💤 AFK acumulado: 13h 15m\n ⏳ AFK actual: 4d 52m\n 📩 Mensajes: 2\n\n👤 @241355804655651\n 💤 AFK acumulado: 1m 4s\n ⏳ AFK actual: 5d 8h 36m\n 📩 Mensajes: 9\n\n👤 @54941439803441\n 💤 AFK acumulado: 45s\n ⏳ AFK actual: 1d 15h 19m\n 📩 Mensajes: 4\n\n👤 @121719993970715\n 💤 AFK acumulado: 18s\n ⏳ AFK actual: 5d 1h 7m\n 📩 Mensajes: 4\n\n👤 @199170770108585\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @110986719670373\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @158051055185970\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @273856275165243\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @82961739284568\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @239135591809091\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @226860743016557\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0\n\n👤 @245290615443629\n 💤 AFK acumulado: 0s\n ⏳ AFK actual: 0s\n 📩 Mensajes: 0",
+    "answers": [
+      "Ehhh?",
+      "Tremendo"
+    ]
+  },
+  {
+    "match": "Sí, pero con mucha onda.",
+    "answers": [
+      "Tremendo"
+    ]
+  },
+  {
+    "match": "✅ Usuario registrado correctamente como José, 17 años.",
+    "answers": [
+      "Gracias pinche bot de mrd"
+    ]
+  },
+  {
+    "match": "Es un bot",
+    "answers": [
+      "Jajsjaj posta?"
+    ]
+  },
+  {
+    "match": "Jajsjaj posta?",
+    "answers": [
+      "Si",
+      "Ya cállate malditooooooooll"
+    ]
+  },
+  {
+    "match": "Que no puto",
+    "answers": [
+      "JAJAJJAJS"
+    ]
+  },
+  {
+    "match": "JAJAJJAJS",
+    "answers": [
+      "Es que el cabron siempre pregunta si juego free"
+    ]
+  },
+  {
+    "match": "free fire",
+    "answers": [
+      "Bodrio fire"
+    ]
+  },
+  {
+    "match": "De pedo tomé mate cocido 🥲",
+    "answers": [
+      "Tamo mal amigo"
+    ]
+  },
+  {
+    "match": "Por eso responde puras mmdas",
+    "answers": [
+      "Ouuuhh, y cómo lo callamos?"
+    ]
+  },
+  {
+    "match": "Ouuuhh, y cómo lo callamos?",
+    "answers": [
+      "Estoy intentando callarle desde que entré"
+    ]
+  },
+  {
+    "match": "No ves como me responde toda mrd",
+    "answers": [
+      "JAJSJAJS"
+    ]
+  },
+  {
+    "match": "Nah mentira",
+    "answers": [
+      "Yo no lo digo en juego pinche bot me tiene hasta la vrg"
+    ]
+  },
+  {
+    "match": "Nisiquiera juego esa madre",
+    "answers": [
+      "Cuáles si jugas?"
+    ]
+  },
+  {
+    "match": "Yo soy el tio",
+    "answers": [
+      "Khe"
+    ]
+  },
+  {
+    "match": "Cuáles si jugas?",
+    "answers": [
+      "Yo juego na más Clash Royale y muy rara vez entro al Roblox"
+    ]
+  },
+  {
+    "match": "Yo juego na más Clash Royale y muy rara vez entro al Roblox",
+    "answers": [
+      "Antes jugaba blood strike y Call Of Duty pero mi cell no aguanta"
+    ]
+  },
+  {
+    "match": "Q es eso?",
+    "answers": [
+      "Es una cosa ahí sobre vídeo juegos"
+    ]
+  },
+  {
+    "match": "Ahora me quedo",
+    "answers": [
+      "XD",
+      "Tranqui\nMandame foto de como apareces en free\nO manda el id para agregar te"
+    ]
+  },
+  {
+    "match": "Manda id",
+    "answers": [
+      "Bro es un bot jaja",
+      "6282632 pvp o que manco"
+    ]
+  },
+  {
+    "match": "Bro es un bot jaja",
+    "answers": [
+      "Jajak ya se\nTenía q intentarlo",
+      "Ya se\nAsh\nNo lo dejan divertirse a uno 😔"
+    ]
+  },
+  {
+    "match": "Jajak ya se\nTenía q intentarlo",
+    "answers": [
+      "JAJAJAJAJAJAJAJA"
+    ]
+  },
+  {
+    "match": "Yo si\nAver manda id",
+    "answers": [
+      "XD"
+    ]
+  },
+  {
+    "match": "Tu si juegas free?",
+    "answers": [
+      "Ni ahí, lo intenté una vez y luego ya nunca más, no me gustó"
+    ]
+  },
+  {
+    "match": "Ni ahí, lo intenté una vez y luego ya nunca más, no me gustó",
+    "answers": [
+      "Novatos 😌",
+      "Jaja a mí tampoco XD",
+      "En serio? \nYo me obsesione en un punto y cada reinicio si o si debia esta en maestro en decla"
+    ]
+  },
+  {
+    "match": "Soy de juegos con más realismo la vrd",
+    "answers": [
+      "Cómo el arena breakout",
+      "Yo soy de todo jjs"
+    ]
+  },
+  {
+    "match": "Cómo el arena breakout",
+    "answers": [
+      "Pero mi celular no lo corre estable"
+    ]
+  },
+  {
+    "match": "Yo soy de todo jjs",
+    "answers": [
+      "Es que yo soy muy exigente la vrd"
+    ]
+  },
+  {
+    "match": "Novatos 😌",
+    "answers": [
+      "Sii, re, me enojo rápido, mis hermanos me quisieron enseñar y terminaron jugando ellos, EN MI CELULAR y yo tenia que quedarme viendo, nah"
+    ]
+  },
+  {
+    "match": "@223256997032099 el bot me puede hacer la tarea?",
+    "answers": [
+      "con el tiempo"
+    ]
+  },
+  {
+    "match": "con el tiempo",
+    "answers": [
+      "Ojalá"
+    ]
+  },
+  {
+    "match": "Sii, re, me enojo rápido, mis hermanos me quisieron enseñar y terminaron jugando ellos, EN MI CELULAR y yo tenia que quedarme viendo, nah",
+    "answers": [
+      "Jaja XD",
+      "Jajaja uy no\n\nPero si, tu juegas y puede que te guste\nFree tiene muchos modos de juegos no sólo uno\nPero es más divertido jugar con amigos"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS INFIELES DEL GRUPO* 🔥\n\n#1 👤 @82961739284568\n 💔 Nivel de infiel: 66%\n\n#2 👤 @38053578064008\n 💔 Nivel de infiel: 75%\n\n#3 👤 @145617057787995\n 💔 Nivel de infiel: 36%\n\n#4 👤 @223256997032099\n 💔 Nivel de infiel: 25%\n\n#5 👤 @121719993970715\n 💔 Nivel de infiel: 92%\n\n#6 👤 @161787676729345\n 💔 Nivel de infiel: 51%\n\n#7 👤 @239135591809091\n 💔 Nivel de infiel: 27%\n\n#8 👤 @110986719670373\n 💔 Nivel de infiel: 94%\n\n#9 👤 @226860743016557\n 💔 Nivel de infiel: 37%\n\n#10 👤 @241355804655651\n 💔 Nivel de infiel: 23%",
+    "answers": [
+      "Diablo",
+      "Cómo que en el top cinco"
+    ]
+  },
+  {
+    "match": "Jajaja uy no\n\nPero si, tu juegas y puede que te guste\nFree tiene muchos modos de juegos no sólo uno\nPero es más divertido jugar con amigos",
+    "answers": [
+      "Siii capaz pero no se, como que no llama la atención, hasta minecraft tiene mi atención pero free no"
+    ]
+  },
+  {
+    "match": "❌ ¡Error! Ocurrió un error al ejecutar el comando profile!\n📄 *Detalles*: replyJid is not defined",
+    "answers": [
+      "@223256997032099 porque pasa eso"
+    ]
+  },
+  {
+    "match": "Siii capaz pero no se, como que no llama la atención, hasta minecraft tiene mi atención pero free no",
+    "answers": [
+      "Minecraft God",
+      "Jajaj \nA mi me gustan ambos \nIntentalo\nSi quieres cuando lo tengas me mandas id y jugamos"
+    ]
+  },
+  {
+    "match": "@223256997032099 porque pasa eso",
+    "answers": [
+      "ahi me fijo, capaz toque algo 😂"
+    ]
+  },
+  {
+    "match": "ahi me fijo, capaz toque algo 😂",
+    "answers": [
+      "Calajo el ajo"
+    ]
+  },
+  {
+    "match": "Cómo que en el top cinco",
+    "answers": [
+      "JAJJAJAJAKA"
+    ]
+  },
+  {
+    "match": "En serio? \nYo me obsesione en un punto y cada reinicio si o si debia esta en maestro en decla",
+    "answers": [
+      "Q bobo q sos capo, el acaba de decir lo mismo que yo nomas JAJAJAJ"
+    ]
+  },
+  {
+    "match": "JAJJAJAJAKA",
+    "answers": [
+      "Yo no soy infiel, me fueron infiel a mí"
+    ]
+  },
+  {
+    "match": "Lo tienes comprado?",
+    "answers": [
+      "Nah JAJAJAJ"
+    ]
+  },
+  {
+    "match": "Yo no soy infiel, me fueron infiel a mí",
+    "answers": [
+      "Increíble"
+    ]
+  },
+  {
+    "match": "Nah JAJAJAJ",
+    "answers": [
+      "Calajo, tienes la última versión y cuenta de Microsoft?"
+    ]
+  },
+  {
+    "match": "Calajo, tienes la última versión y cuenta de Microsoft?",
+    "answers": [
+      "Yeaah"
+    ]
+  },
+  {
+    "match": "Calajo el ajo",
+    "answers": [
+      "si, ayer lo modifiqué por completo, arreglé un error que tenia ya de base que no te enviaba bien el @mencion cuando hacias por ejemplo .cum @messi, te mandaba bien el comando pero lo decia asi @cristobalcolon se vino dentro de @+1 72826382732"
+    ]
+  },
+  {
+    "match": "Yeaah",
+    "answers": [
+      "Algún día un mundo?"
+    ]
+  },
+  {
+    "match": "Algún día un mundo?",
+    "answers": [
+      "Va va"
+    ]
+  },
+  {
+    "match": "si, ayer lo modifiqué por completo, arreglé un error que tenia ya de base que no te enviaba bien el @mencion cuando hacias por ejemplo .cum @messi, te mandaba bien el comando pero lo decia asi @cristobalcolon se vino dentro de @+1 72826382732",
+    "answers": [
+      "Tenías que usar el comando cum como ejemplo?",
+      "@149834698879187"
+    ]
+  },
+  {
+    "match": "Tenías que usar el comando cum como ejemplo?",
+    "answers": [
+      "se, por el bot aprende las respuestas 😂"
+    ]
+  },
+  {
+    "match": "Va va",
+    "answers": [
+      "Pasa gamertag"
+    ]
+  },
+  {
+    "match": "se, por el bot aprende las respuestas 😂",
+    "answers": [
+      "XD",
+      "QUE"
+    ]
+  },
+  {
+    "match": "Q bobo q sos capo, el acaba de decir lo mismo que yo nomas JAJAJAJ",
+    "answers": [
+      "Jajaja ni cuenta me di"
+    ]
+  },
+  {
+    "match": "me llamabas?😏",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "JAJAJJAJA hasta curioso salió! ☆",
+    "answers": [
+      "Jajaja sii"
+    ]
+  },
+  {
+    "match": "Pasa gamertag",
+    "answers": [
+      "Al pv o acá nomas?"
+    ]
+  },
+  {
+    "match": "Cagamo",
+    "answers": [
+      "Anoche no decías lo mismo hdp"
+    ]
+  },
+  {
+    "match": "Holii",
+    "answers": [
+      "Holaa Guada 😀"
+    ]
+  },
+  {
+    "match": "Anoche no decías lo mismo hdp",
+    "answers": [
+      "Que clw jajajaj"
+    ]
+  },
+  {
+    "match": "Holaa Guada 😀",
+    "answers": [
+      "Q onda"
+    ]
+  },
+  {
+    "match": "Q onda",
+    "answers": [
+      "Eu vo vas a querer la plata?"
+    ]
+  },
+  {
+    "match": "con el tiempo se va a volver una ia",
+    "answers": [
+      "Alamadree, quién hizo a ese bot? Está re copado eso"
+    ]
+  },
+  {
+    "match": "Eu vo vas a querer la plata?",
+    "answers": [
+      "Q plata?🤨",
+      "Cuanto?"
+    ]
+  },
+  {
+    "match": "@257062802079856 me re dormi anoche jajaja",
+    "answers": [
+      "No me digas"
+    ]
+  },
+  {
+    "match": "Q plata?🤨",
+    "answers": [
+      "Del narcotrafico amigo"
+    ]
+  },
+  {
+    "match": "No me dí cuenta",
+    "answers": [
+      "Enserio?"
+    ]
+  },
+  {
+    "match": "Gente\nMe aceptaron en el programa y ahora soy mini influencer de free fire",
+    "answers": [
+      "Aura"
+    ]
+  },
+  {
+    "match": "Bodrio fire",
+    "answers": [
+      "Cállese\nUd no le sabe"
+    ]
+  },
+  {
+    "match": "Pero igual",
+    "answers": [
+      "Ash\nMe dañan mi modo cariñoso"
+    ]
+  },
+  {
+    "match": "Osea que si le insulto ni le afecta, no? Pq solo es un bot",
+    "answers": [
+      "exactamente"
+    ]
+  },
+  {
+    "match": "Enserio?",
+    "answers": [
+      "Si clw, me dí cuenta xq no respondiste más"
+    ]
+  },
+  {
+    "match": "Si clw, me dí cuenta xq no respondiste más",
+    "answers": [
+      "Jajajaj"
+    ]
+  },
+  {
+    "match": "Ash\nMe dañan mi modo cariñoso",
+    "answers": [
+      "JAJAJAJJAJA"
+    ]
+  },
+  {
+    "match": "Fua, q genio",
+    "answers": [
+      "JSKSJ llevo mucho esfuerzo eso si"
+    ]
+  },
+  {
+    "match": "Me cagaron a patadas ayer 😔💔",
+    "answers": [
+      "Quien???"
+    ]
+  },
+  {
+    "match": "Quien tiene 1000 en mp",
+    "answers": [
+      "Amigo deja la timba"
+    ]
+  },
+  {
+    "match": "Amigo deja la timba",
+    "answers": [
+      "Cuando gane no juego mas"
+    ]
+  },
+  {
+    "match": "Al pv o acá nomas?",
+    "answers": [
+      "Si quieres lo pasas al priv"
+    ]
+  },
+  {
+    "match": "@149834698879187",
+    "answers": [
+      "El señor reprenda al diablo"
+    ]
+  },
+  {
+    "match": "@257062802079856 entra",
+    "answers": [
+      "No puedo ahora, toy ocupao"
+    ]
+  },
+  {
+    "match": "El señor reprenda al diablo",
+    "answers": [
+      "JAJAJAJJA"
+    ]
+  },
+  {
+    "match": "Unos pibitos jugando al fútbol",
+    "answers": [
+      "Y xq no se la devolve"
+    ]
+  },
+  {
+    "match": "Y xq no se la devolve",
+    "answers": [
+      "Tenían 13 años cómo mucho y mi pierna es todo su cuerpo"
+    ]
+  },
+  {
+    "match": "@98016153309436 jugas un free?",
+    "answers": [
+      "Na bld dsps"
+    ]
+  },
+  {
+    "match": "Cuanto?",
+    "answers": [
+      "Nada"
+    ]
+  },
+  {
+    "match": "@37302495653948  tenes?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "No xq no tengo mp",
+    "answers": [
+      "Oka"
+    ]
+  },
+  {
+    "match": "💖 *TOP 5 PAREJAS DEL GRUPO* 💖\n\n#1 👩‍❤️‍👨 @62178895855731 + @262697480372439\n 💞 Compatibilidad: 11% 💘💘\n\n#2 👩‍❤️‍👨 @142275170545667 + @227543592472802\n 💞 Compatibilidad: 2% 💘\n\n#3 👩‍❤️‍👨 @79092040892514 + @121719993970715\n 💞 Compatibilidad: 39% 💘💘💘💘\n\n#4 👩‍❤️‍👨 @273856275165243 + @199170770108585\n 💞 Compatibilidad: 99% 💘💘💘💘💘💘💘💘💘💘\n\n#5 👩‍❤️‍👨 @223256997032099 + @226860743016557\n 💞 Compatibilidad: 23% 💘💘💘",
+    "answers": [
+      "A chis q pedo con eso",
+      "Uwu quien es alejo?"
+    ]
+  },
+  {
+    "match": ".profile @149834698879187",
+    "answers": [
+      "Tremendo"
+    ]
+  },
+  {
+    "match": "⏳ ¡Espera! Cargando perfil...",
+    "answers": [
+      "Al fin funcionas"
+    ]
+  },
+  {
+    "match": "YOO",
+    "answers": [
+      "Vamo"
+    ]
+  },
+  {
+    "match": "Allah akbarr!!",
+    "answers": [
+      "La tuya x las dudas jaja"
+    ]
+  },
+  {
+    "match": "Jajaja, no te confundas! Chipre es un país insular ubicado en el Mediterráneo oriental, no tiene nada que ver con Buenos Aires 😅. Está situado al sur de Turquía y al oeste de Siria y Líbano. Es un lugar hermoso, conocido por sus playas y su rica historia. ¿Te gustaría saber más sobre Chipre?",
+    "answers": [
+      "Re piola para ir xD",
+      "Y conocido por ser bombardeado"
+    ]
+  },
+  {
+    "match": "Jajaja, ¡no, no, no! 😂 No vayas a hacer algo de lo que te arrepientas después. Mejor dime, ¿qué hizo tu vecina para que estés así? Podemos encontrar una solución más... digamos, \"pacífica\" 🤣. ¿Qué te parece si hablamos de cómo resolver el problema en lugar de... explotar algo? 😄",
+    "answers": [
+      "Le quiere ecplotar otra cosa"
+    ]
+  },
+  {
+    "match": "Jajaja, ¡ni lo uno ni lo otro, bro! 😂 Eso sería un problema muy grande. ¿Por qué no hablamos de cómo mejorar la situación con tu vecina de manera pacífica? ¿Qué te tiene tan enfadado? 🤔",
+    "answers": [
+      "🤣🤣🤣🤣🤣"
+    ]
+  },
+  {
+    "match": "Hace mal eso",
+    "answers": [
+      "Me dejó jugando hasta las 4"
+    ]
+  },
+  {
+    "match": "Me dejó jugando hasta las 4",
+    "answers": [
+      "Y perdiendo"
+    ]
+  },
+  {
+    "match": "La podes hacer es cuando ayer lo posible q ir a si.",
+    "answers": [
+      "Ke dise?"
+    ]
+  },
+  {
+    "match": "Yo si la abuela agusanada como no hable en cualquier grupo y.",
+    "answers": [
+      "Puto"
     ]
   }
 ]

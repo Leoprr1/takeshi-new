@@ -1327,13 +1327,13 @@
     "precisionBonus": 298.5
   },
   "223256997032099@lid": {
-    "nivel": 593,
-    "xp": 14091,
-    "hp": 13302,
-    "hpMax": 11880,
-    "mana": 6020,
-    "manamax": 6020,
-    "monedas": 3561517076773986,
+    "nivel": 592,
+    "xp": 40789,
+    "hp": 13276,
+    "hpMax": 11860,
+    "mana": 6010,
+    "manamax": 6010,
+    "monedas": 3561517076728986,
     "arma": {
       "code": "H05",
       "nombre": "🌑 Guante de zeno Sama 🌙⚔️",
@@ -1425,21 +1425,11 @@
     "lastHunt": 1772791274560,
     "lastMine": 1772791278763,
     "lastFish": 1772791278976,
-    "lastDungeon": 1772903468977,
+    "lastDungeon": 1772854025221,
     "lastGuildMission": 0,
     "nick": "👑⛧ᏞᎬᎾᏢᎡᎡ⛧👑",
     "gremio": "Aventureros",
-    "misionesActivas": [
-      "flores",
-      "lobos",
-      "ruinas",
-      "ogro",
-      "principe",
-      "mago",
-      "dragon",
-      "rey-demonio",
-      "salvar-mundo"
-    ],
+    "misionesActivas": [],
     "misionesCompletadas": [
       "flores",
       "flores",
@@ -2243,7 +2233,7 @@
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1764952416153,
+    "lastRegen": 1764833616153,
     "homeChest": [
       {
         "code": "H01",
@@ -2322,19 +2312,19 @@
       "flores": 1772854049308,
       "dragon": 1772854082813
     },
-    "manaMax": 3910,
+    "manaMax": 3900,
     "lastManaRegen": 0,
     "inmunidadKO": false,
     "inmunidadKOStart": 0,
     "academia": {
       "especialidades": {
-        "fuerza": 111,
-        "agilidad": 111,
-        "defensa": 111,
-        "magia": 111,
-        "curacion": 111,
-        "controlEspada": 111,
-        "manaMax": 111,
+        "fuerza": 108,
+        "agilidad": 108,
+        "defensa": 108,
+        "magia": 108,
+        "curacion": 108,
+        "controlEspada": 108,
+        "manaMax": 108,
         "controlespada": 0,
         "manamax": 1
       },
@@ -2342,24 +2332,24 @@
         "fuerza": 1,
         "agilidad": {
           "count": 3,
-          "last": 1772903924027
+          "last": 1772854122244
         },
         "defensa": {
           "count": 3,
-          "last": 1772903924104
+          "last": 1772854122303
         },
         "magia": 1,
         "curacion": {
           "count": 3,
-          "last": 1772903932257
+          "last": 1772854128662
         },
         "controlEspada": {
           "count": 3,
-          "last": 1772903932321
+          "last": 1772854134793
         },
         "manaMax": {
           "count": 3,
-          "last": 1772903940179
+          "last": 1772854140212
         },
         "controlespada": {
           "count": 0,
@@ -2371,12 +2361,12 @@
         }
       }
     },
-    "fuerzaBonus": 222,
-    "agilidadBonus": 166.5,
-    "defensaBonus": 199.8000000000003,
-    "magiaBonus": 244.1999999999995,
-    "curacionBonus": 222,
-    "precisionBonus": 166.5,
+    "fuerzaBonus": 216,
+    "agilidadBonus": 162,
+    "defensaBonus": 194.40000000000026,
+    "magiaBonus": 237.59999999999954,
+    "curacionBonus": 216,
+    "precisionBonus": 162,
     "mascotas": [],
     "mascotaEquipada": {
       "uid": "mf9xj4rr67falu",

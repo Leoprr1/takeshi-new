@@ -1,18 +1,21 @@
-
+para correr este bot debes de tener instalado node
 
 para la instalacion del bot copia y pega esto en el cmd
 cd C:\ruta donde quieras que se instale
 git clone https://github.com/Leoprr1/takeshi-new.git
 
-una vez completado arranca el bot con esto para enlazar el bot al whatsapp con el QR cuando ya alla enlazado el bot al whatsapp, cerra el cmd
-npm start
+una vez completado arranca el bot con npm start para enlazar el bot al whatsapp con el QR, 
+cuando ya alla enlazado el bot al whatsapp cerra el proceso con control+C
 
 para actualizar el bot con las nuevas modificaciones del github pone esto
 cd C:\ruta donde instalaste el bot
-git pull
+git pull https://github.com/Leoprr1/takeshi-new.git
+
+luego para arrancar el bot con los siguientes comandos debes de instalar pm2
+npm install -g pm2
 
 para arrancar el bot luego de hacer npm start y cerrar el cmd
-copia y pega en el cmd todo esto(la primera vez.hasta pm2 save)
+copia y pega en el cmd todo esto hasta pm2 save
 
 pm2 install pm2-logrotate
 
@@ -37,7 +40,7 @@ pm2 monit
 (no hace falta poner el cd:\ruta donde instalaste el bot---)
 
 
-esto es para actualizar todas las librerias
+esto es un check update, se encarga de buscar las ultimas actualizaciones de las librerias
 cd C:\ruta donde instalaste el bot
 npm install -g npm-check-updates 
 
