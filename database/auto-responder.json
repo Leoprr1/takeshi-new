@@ -898,7 +898,8 @@
       "si",
       "Piola como es",
       "Nooooo",
-      "Cajeta"
+      "Cajeta",
+      "No amigo"
     ]
   },
   {
@@ -920,7 +921,8 @@
       "El negrito es jn carbon encendido",
       "Mirala",
       "Ush",
-      "Poneme admi"
+      "Poneme admi",
+      "Q paso?"
     ]
   },
   {
@@ -1782,7 +1784,8 @@
   {
     "match": "q paso",
     "answers": [
-      "Ni idea la verdad"
+      "Ni idea la verdad",
+      "Se me re apago el celu jajaja"
     ]
   },
   {
@@ -6589,7 +6592,8 @@
       "no",
       "Tu celular no anda? Pregunto x preguntar",
       "mentiroso, son las 12",
-      "12:29"
+      "12:29",
+      "JAJAJAJJAJAJA"
     ]
   },
   {
@@ -12360,7 +12364,8 @@
     "match": "Que seria a lo mesi?",
     "answers": [
       "Messi*",
-      "q Messi mea sentado"
+      "q Messi mea sentado",
+      "que es bien a lo messi"
     ]
   },
   {
@@ -18802,6 +18807,86 @@
     "answers": [
       "@37302495653948",
       "Ookk ya me uno"
+    ]
+  },
+  {
+    "match": "Se me re apago el celu jajaja",
+    "answers": [
+      "Ushh"
+    ]
+  },
+  {
+    "match": "Y juan?",
+    "answers": [
+      "Jajajja"
+    ]
+  },
+  {
+    "match": "Y también salte mucho",
+    "answers": [
+      "Como asi?"
+    ]
+  },
+  {
+    "match": "El seguía jugando",
+    "answers": [
+      "Y que paso?"
+    ]
+  },
+  {
+    "match": "Y que paso?",
+    "answers": [
+      "Nose"
+    ]
+  },
+  {
+    "match": "Yo me fui a ig",
+    "answers": [
+      "Ahh d1 d1"
+    ]
+  },
+  {
+    "match": "Quien despierto",
+    "answers": [
+      "Esa foto...",
+      ".ban",
+      "Que desperdicio de torta😔💔"
+    ]
+  },
+  {
+    "match": "Hacemos?",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "Que desperdicio de torta😔💔",
+    "answers": [
+      "Jajaja"
+    ]
+  },
+  {
+    "match": "ME LLEGARON 5MIL PESOS DE UN CAPLOS GABRIEL TORANZO NO SE QUIEN CONCHA ES",
+    "answers": [
+      "Noo clw, me equivoqué"
+    ]
+  },
+  {
+    "match": "Biemmm y vos?",
+    "answers": [
+      "Bien recién me despierto y vos que hacer"
+    ]
+  },
+  {
+    "match": "@38053578064008 te voy a mandar soli por el MC",
+    "answers": [
+      "Buenooo"
+    ]
+  },
+  {
+    "match": "Me los devolves Cande?🥺😬",
+    "answers": [
+      "mm"
     ]
   }
 ]

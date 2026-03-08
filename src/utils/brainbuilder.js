@@ -1,5 +1,4 @@
-// 🔥 brainbuilder.js
-const fs = require("fs");
+const fs = require("fs").promises; // usar la versión de promesas
 const path = require("path");
 const crypto = require("crypto");
 
@@ -10,9 +9,7 @@ const GENERATED_FILE = path.resolve(databasePath, "generated-memory.json");
 
 let lastHash = null;
 
-/* ===========================
-   UTILIDADES
-=========================== */
+// ✅ Lectura segura de JSON (síncrona sigue estando bien)
 function readJSONSafe(file, def = []) {
   try {
     if (!fs.existsSync(file)) return def;
@@ -23,12 +20,15 @@ function readJSONSafe(file, def = []) {
   }
 }
 
-function writeJSONSafe(file, data) {
-  try {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
-  } catch (err) {
-    console.error("❌ Error escribiendo JSON:", err);
-  }
+// 🔹 Escritura asíncrona con timeout
+function writeJSONSafeAsync(file, data) {
+  setTimeout(async () => {
+    try {
+      await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
+    } catch (err) {
+      console.error("❌ Error escribiendo JSON:", err);
+    }
+  }, 50);
 }
 
 function normalize(text) {
@@ -52,9 +52,6 @@ function generateHash(data) {
     .digest("hex");
 }
 
-/* ===========================
-   DETECCIÓN DE TOPICS
-=========================== */
 function detectTopic(text) {
   const topicMap = {
     edad: ["edad", "años"],
@@ -66,33 +63,27 @@ function detectTopic(text) {
   };
 
   for (const [topic, keywords] of Object.entries(topicMap)) {
-    if (keywords.some(k => text.includes(k))) {
-      return topic;
-    }
+    if (keywords.some(k => text.includes(k))) return topic;
   }
 
   return "general";
 }
 
-/* ===========================
-   ELIMINAR DUPLICADOS EN ARRAYS
-=========================== */
 function uniqueArray(arr) {
   return [...new Set(arr)];
 }
 
-/* ===========================
-   CONSTRUCTOR DEL CEREBRO
-=========================== */
-function buildBrain() {
-  const autoData = readJSONSafe(AUTO_FILE, []);
-  const lb2Data = readJSONSafe(LB2_FILE, []);
+async function buildBrain() {
+  const { getDB } = require("./jsoncache"); 
 
-  // Combinar ambos datos para calcular hash
+  const autoDataRaw = getDB("auto-responder");
+  const lb2DataRaw = getDB("learningbot2");
+
+  const autoData = Array.isArray(autoDataRaw) ? autoDataRaw : [];
+  const lb2Data = Array.isArray(lb2DataRaw) ? lb2DataRaw.map(String) : [];
+
   const combinedData = { autoData, lb2Data };
   const currentHash = generateHash(combinedData);
-
-  // 🚫 Evita reconstrucción innecesaria
   if (currentHash === lastHash) return;
   lastHash = currentHash;
 
@@ -109,37 +100,27 @@ function buildBrain() {
     }
   };
 
-  /* ===== Función para procesar mensajes ===== */
   function processEntry(sentence) {
     const normalizedSentence = normalize(sentence);
     if (!normalizedSentence) return;
 
     const topic = detectTopic(normalizedSentence);
     if (!brain.topics[topic]) {
-      brain.topics[topic] = {
-        keywords: [],
-        sentences: [],
-        wordFrequency: {},
-        bigrams: {},
-        totalSentences: 0
-      };
+      brain.topics[topic] = { keywords: [], sentences: [], wordFrequency: {}, bigrams: {}, totalSentences: 0 };
     }
 
-    const words = normalizedSentence.split(/\s+/);
     const topicData = brain.topics[topic];
+    const words = normalizedSentence.split(/\s+/);
 
-    // Evitar duplicados exactos de sentences
     if (!topicData.sentences.includes(normalizedSentence)) {
       topicData.sentences.push(normalizedSentence);
       topicData.totalSentences++;
       brain.global.totalSentences++;
     }
 
-    // Actualizar keywords sin duplicados
     topicData.keywords.push(...words);
     topicData.keywords = uniqueArray(topicData.keywords);
 
-    // Actualizar wordFrequency y bigrams
     words.forEach((word, index) => {
       addFrequency(topicData.wordFrequency, word);
       addFrequency(brain.global.wordFrequency, word);
@@ -151,99 +132,74 @@ function buildBrain() {
     });
   }
 
-  /* ===== Procesar auto-responder.json (match + answers) ===== */
-  autoData.forEach(entry => {
+  // 🔹 Función para procesar arrays en chunks sin bloquear
+  function processArrayInChunks(arr, processFn, chunkSize = 20, delay = 1, callback) {
+    let index = 0;
+    function nextChunk() {
+      const end = Math.min(index + chunkSize, arr.length);
+      for (; index < end; index++) {
+        processFn(arr[index]);
+      }
+      if (index < arr.length) {
+        setTimeout(nextChunk, delay);
+      } else if (callback) callback();
+    }
+    nextChunk();
+  }
+
+  // 🔹 Procesar autoData suavemente
+  processArrayInChunks(autoData, entry => {
     if (!entry.match) return;
-
     processEntry(entry.match);
-
     const answers = entry.answers || (entry.answer ? [entry.answer] : []);
     answers.forEach(ans => processEntry(ans));
   });
 
-  /* ===== Procesar learningbot2.json exactamente como antes ===== */
-  lb2Data.forEach(msg => processEntry(msg));
+  // 🔹 Procesar lb2Data suavemente
+  processArrayInChunks(lb2Data, msg => processEntry(msg));
 
-  /* ===== Combinar con generate-memory.json existente ===== */
-  const existingBrain = readJSONSafe(GENERATED_FILE, null);
-  if (existingBrain) {
-    Object.entries(existingBrain.topics).forEach(([topic, data]) => {
-      if (!brain.topics[topic]) {
-        brain.topics[topic] = data;
-      } else {
-        brain.topics[topic].sentences = uniqueArray([
-          ...brain.topics[topic].sentences,
-          ...data.sentences
-        ]);
-        brain.topics[topic].keywords = uniqueArray([
-          ...brain.topics[topic].keywords,
-          ...data.keywords
-        ]);
-        for (const [w, count] of Object.entries(data.wordFrequency)) {
-          brain.topics[topic].wordFrequency[w] =
-            (brain.topics[topic].wordFrequency[w] || 0) + count;
-        }
-        for (const [b, count] of Object.entries(data.bigrams)) {
-          brain.topics[topic].bigrams[b] =
-            (brain.topics[topic].bigrams[b] || 0) + count;
-        }
-        brain.topics[topic].totalSentences =
-          brain.topics[topic].sentences.length;
+  // 🔹 Combinar con generated-memory existente y escribir con timeout
+  setTimeout(() => {
+    const fsSync = require("fs");
+    let existingBrain = null;
+    if (fsSync.existsSync(GENERATED_FILE)) {
+      try {
+        existingBrain = JSON.parse(fsSync.readFileSync(GENERATED_FILE, "utf8"));
+      } catch (err) {
+        console.warn("⚠️ generated-memory.json vacío o corrupto, se creará uno nuevo");
       }
-    });
-  }
+    }
 
-  writeJSONSafe(GENERATED_FILE, brain);
-  console.log("🧠 Cerebro generado / actualizado automáticamente (duplicados eliminados).");
+    if (existingBrain) {
+      Object.entries(existingBrain.topics).forEach(([topic, data]) => {
+        if (!brain.topics[topic]) brain.topics[topic] = data;
+        else {
+          brain.topics[topic].sentences = uniqueArray([...brain.topics[topic].sentences, ...data.sentences]);
+          brain.topics[topic].keywords = uniqueArray([...brain.topics[topic].keywords, ...data.keywords]);
+          for (const [w, count] of Object.entries(data.wordFrequency)) {
+            brain.topics[topic].wordFrequency[w] = (brain.topics[topic].wordFrequency[w] || 0) + count;
+          }
+          for (const [b, count] of Object.entries(data.bigrams)) {
+            brain.topics[topic].bigrams[b] = (brain.topics[topic].bigrams[b] || 0) + count;
+          }
+          brain.topics[topic].totalSentences = brain.topics[topic].sentences.length;
+        }
+      });
+    }
+
+    writeJSONSafeAsync(GENERATED_FILE, brain);
+    console.log("🧠 Cerebro generado / actualizado sin bloquear el bot.");
+  }, 50);
 }
 
-/* ===========================
-   WATCHER AUTOMÁTICO INTERNO
-=========================== */
+// 🔹 Watcher simple, arranca 5 segundos después
 function initWatcher() {
-  console.log("👁 BrainBuilder activo observando archivos...");
-
-  // Vigilar auto-responder.json
-  if (fs.existsSync(AUTO_FILE)) {
-    fs.watch(AUTO_FILE, { persistent: true }, (eventType) => {
-      if (eventType === "change") setTimeout(buildBrain, 200);
-    });
-  } else {
-    console.log("⚠ auto-responder.json no existe todavía.");
-  }
-
-  // Vigilar learningbot2.json
-  if (fs.existsSync(LB2_FILE)) {
-    fs.watch(LB2_FILE, { persistent: true }, (eventType) => {
-      if (eventType === "change") setTimeout(buildBrain, 200);
-    });
-  }
-
-  // Primera construcción
-  buildBrain();
-}
-/* ===========================
-   WATCHER SIMPLIFICADO CON INTERVALO DE 30 SEGUNDOS
-=========================== */
-function initWatcher() {
-  console.log("👁 BrainBuilder activo observando archivos...");
-
-  // Primera construcción
-  buildBrain();
-
-  // Intervalo de 30 segundos para reconstruir el cerebro
-  setInterval(() => {
+  setTimeout(() => {
     buildBrain();
-  }, 30 * 1000);
-  buildBrain();
+    setInterval(() => buildBrain(), 60 * 1000); // cada 30 minutos
+  }, 5000);
 }
 
-/* ===========================
-   AUTO-INICIO
-=========================== */
 initWatcher();
 
-/* ===========================
-   EXPORT OPCIONAL
-=========================== */
 module.exports = { buildBrain };
