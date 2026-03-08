@@ -1,7 +1,7 @@
 const { getBaileysHelpers } = require(`${BASE_DIR}/utils/baileys_adapter`);
 
 const { readMore } = require(`${BASE_DIR}/utils`);
-const { listAutoResponderItems } = require(`${BASE_DIR}/utils/database`);
+const { listAutoResponderItems } = require(`${BASE_DIR}/utils/auto-responder`);
 
 const { PREFIX } = require(`${BASE_DIR}/config`);
 

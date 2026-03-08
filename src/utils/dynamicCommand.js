@@ -20,14 +20,14 @@ const {
 } = require("../middlewares");
 const {
   isActiveGroup,
-  getAutoResponderResponse,
-  isActiveAutoResponderGroup,
   isActiveAntiLinkGroup,
   isActiveOnlyAdmins,
   getPrefix,
   readUserProfiles,
   saveUserProfiles,
 } = require("./database");
+const {getAutoResponderResponse,
+  isActiveAutoResponderGroup} = require("./auto-responder")
 const { errorLog } = require("../utils/logger");
 const { ONLY_GROUP_ID, PREFIX, BOT_EMOJI } = require("../config");
 const { badMacHandler } = require("./badMacHandler");

@@ -1,7 +1,7 @@
 const {
   removeAutoResponderItemByKey,
   getAutoResponderItemByKey,
-} = require(`${BASE_DIR}/utils/database`);
+} = require(`${BASE_DIR}/utils/auto-responder`);
 
 const { PREFIX } = require(`${BASE_DIR}/config`);
 const { InvalidParameterError } = require(`${BASE_DIR}/errors`);

@@ -3,7 +3,7 @@ const { InvalidParameterError } = require(`${BASE_DIR}/errors`);
 const {
   activateAutoResponderGroup,
   deactivateAutoResponderGroup,
-} = require(`${BASE_DIR}/utils/database`);
+} = require(`${BASE_DIR}/utils/auto-responder`);
 
 module.exports = {
   name: "auto-responder",

@@ -18,7 +18,7 @@ module.exports = {
   description:
     "Silencia um usuário no grupo (apaga as mensagens do usuário automaticamente).",
   commands: ["mute", "mutar"],
-  usage: `${PREFIX}mute @usuario ou responda a mensagem do usuário`,
+  usage: `${PREFIX}mute @usuario o responde a un mensaje del usuario`,
   
   handle: async ({
     args,
@@ -33,7 +33,7 @@ module.exports = {
   }) => {
 
     if (!isGroup) {
-      throw new DangerError("Este comando só pode ser usado em grupos.");
+      throw new DangerError("este comando solo podes usarlo en grupos");
     }
 
     const target =
@@ -43,16 +43,16 @@ module.exports = {
 
     if (!target) {
       throw new DangerError(
-        `Você precisa mencionar um usuário ou responder a mensagem.\n\nExemplo: ${PREFIX}mute @usuario`
+        `tenes que mencionar a un usaurio para mutearlo.\n\nejemplo: ${PREFIX}mute @usuario`
       );
     }
 
     if (target === toUserJid(BOT_NUMBER)) {
-      throw new DangerError("Você não pode mutar o bot.");
+      throw new DangerError("no podes mutear al bot");
     }
 
     if (target === userJid) {
-      throw new DangerError("Você não pode mutar a si mesmo!");
+      throw new DangerError("no te podes mutear a vos mismo");
     }
 
     const groupMetadata = await getGroupMetadata();
@@ -62,7 +62,7 @@ module.exports = {
     );
 
     if (!isUserInGroup) {
-      return sendErrorReply("O usuário não está neste grupo.", [target]);
+      return sendErrorReply("este usuario no esta en el grupo", [target]);
     }
 
     const isTargetAdmin = groupMetadata.participants.some(
@@ -70,17 +70,17 @@ module.exports = {
     );
 
     if (isTargetAdmin) {
-      throw new DangerError("Você não pode mutar um administrador.");
+      throw new DangerError("no podes mutuear a un admin");
     }
 
     if (checkIfMemberIsMuted(remoteJid, target)) {
-      return sendErrorReply("Este usuário já está mutado neste grupo.", [target]);
+      return sendErrorReply("este usuario ya esta muteado!", [target]);
     }
 
     muteMember(remoteJid, target);
 
     await sendSuccessReply(
-      "Usuário mutado com sucesso!",
+      "usuario muteado con exito!",
       [target]
     );
   },

@@ -22,7 +22,7 @@ function cleanMemory() {
     if (Array.isArray(global.EVENT_QUEUE)) global.EVENT_QUEUE.length = 0;
 
     // Logs: limpiar solo si superan 1000 entradas
-    if (Array.isArray(global.LOGS) && global.LOGS.length > 100) {
+    if (Array.isArray(global.LOGS) && global.LOGS.length > 20) {
       global.LOGS.length = 0;
     }
 
@@ -49,7 +49,7 @@ function aggressiveClean() {
     if (Array.isArray(global.EVENT_QUEUE)) global.EVENT_QUEUE.length = 0;
 
     // Logs solo si son muy grandes
-    if (Array.isArray(global.LOGS) && global.LOGS.length > 2000) global.LOGS.length = 0;
+    if (Array.isArray(global.LOGS) && global.LOGS.length > 20) global.LOGS.length = 0;
 
     if (global.gc) global.gc();
 

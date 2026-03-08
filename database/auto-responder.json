@@ -1502,7 +1502,8 @@
   {
     "match": "Sii",
     "answers": [
-      "no"
+      "no",
+      "Entraa"
     ]
   },
   {
@@ -1881,7 +1882,9 @@
   {
     "match": "@all quien para un plato?",
     "answers": [
-      "yo m r duermo gto jajaja"
+      "yo m r duermo gto jajaja",
+      "Yo wuacho",
+      "Sii"
     ]
   },
   {
@@ -2905,7 +2908,8 @@
     "match": "mal",
     "answers": [
       "JAJAJAJAJAJ",
-      "mira ésto"
+      "mira ésto",
+      "🥲"
     ]
   },
   {
@@ -6725,7 +6729,10 @@
       "Si por vafor",
       "Si por favor",
       "Si",
-      "no"
+      "no",
+      "ya no causa risa sabes",
+      "otro mas",
+      "me robas el chiste"
     ]
   },
   {
@@ -15949,7 +15956,8 @@
   {
     "match": "Te amamos",
     "answers": [
-      "Ahora dicen eso"
+      "Ahora dicen eso",
+      "Graciass"
     ]
   },
   {
@@ -18331,6 +18339,232 @@
     "match": "A vos te amo mas",
     "answers": [
       "no"
+    ]
+  },
+  {
+    "match": "De dónde sonnn",
+    "answers": [
+      "China"
+    ]
+  },
+  {
+    "match": "Feliz día mujere",
+    "answers": [
+      "Racia",
+      "Gracias, igualmente"
+    ]
+  },
+  {
+    "match": "Igualmentee",
+    "answers": [
+      "Tenkiu very macho"
+    ]
+  },
+  {
+    "match": "Gracias, igualmente",
+    "answers": [
+      "Ay feliz diaa",
+      "De ndaa, gracias gracias"
+    ]
+  },
+  {
+    "match": "Tenkiu very macho",
+    "answers": [
+      "De naddasss"
+    ]
+  },
+  {
+    "match": "Ay feliz diaa",
+    "answers": [
+      "Gracias, igualmente"
+    ]
+  },
+  {
+    "match": "Bueno ahora hay q hacer todos los vídeos @202044321316883",
+    "answers": [
+      "Que videos"
+    ]
+  },
+  {
+    "match": "Que videos",
+    "answers": [
+      "Para agusss"
+    ]
+  },
+  {
+    "match": "coronaste @37302495653948",
+    "answers": [
+      "No wacho jaja"
+    ]
+  },
+  {
+    "match": "Vamos a poner la de \"yo soy tu amigo fiel YOO SOY TU AMIGO FIELL\"",
+    "answers": [
+      "Jajajaja",
+      "Siiiii"
+    ]
+  },
+  {
+    "match": "No wacho jaja",
+    "answers": [
+      "Te amamos"
+    ]
+  },
+  {
+    "match": "La proxima que me saquen fotos durmiendo avisenme despues como minimo",
+    "answers": [
+      "Ay perdón,fui yo"
+    ]
+  },
+  {
+    "match": "@all no jodan con cosas personales x las dudas",
+    "answers": [
+      "A vos si"
+    ]
+  },
+  {
+    "match": "A vos si",
+    "answers": [
+      "A vo te voy a cojer"
+    ]
+  },
+  {
+    "match": "@37302495653948",
+    "answers": [
+      "Mande"
+    ]
+  },
+  {
+    "match": "Ay perdón,fui yo",
+    "answers": [
+      "Ya ne parecia"
+    ]
+  },
+  {
+    "match": "No se te metió más el perro del vecino?",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "A vo te voy a cojer",
+    "answers": [
+      "Q rico"
+    ]
+  },
+  {
+    "match": "Todas las noches lo tengo que corree",
+    "answers": [
+      "JAJJAJAJAJA"
+    ]
+  },
+  {
+    "match": "JAJJAJAJAJA",
+    "answers": [
+      "Encerio bld"
+    ]
+  },
+  {
+    "match": "callense",
+    "answers": [
+      "Yo recién empiezo a hablar 😑"
+    ]
+  },
+  {
+    "match": "Q perro clw",
+    "answers": [
+      "Ahora le tiro un gomerazo desde la puerta y ni salgo al patio"
+    ]
+  },
+  {
+    "match": "negros d mierda",
+    "answers": [
+      "Me representa"
+    ]
+  },
+  {
+    "match": ".Tag bienvenidos a los nuevos presentense por favor",
+    "answers": [
+      "Me presento?"
+    ]
+  },
+  {
+    "match": "Ahora le tiro un gomerazo desde la puerta y ni salgo al patio",
+    "answers": [
+      "Si te va a comer jajaja"
+    ]
+  },
+  {
+    "match": "bienvenidos a los nuevos presentense por favor",
+    "answers": [
+      "me presento?"
+    ]
+  },
+  {
+    "match": "flashean chistosos tmb",
+    "answers": [
+      "da"
+    ]
+  },
+  {
+    "match": "Si te va a comer jajaja",
+    "answers": [
+      "Tjr jaja"
+    ]
+  },
+  {
+    "match": "se los cojio un payaso o se la chuparon",
+    "answers": [
+      "los dos",
+      "Las dos"
+    ]
+  },
+  {
+    "match": "son r giles",
+    "answers": [
+      "No nos dejan presentarnos amigo"
+    ]
+  },
+  {
+    "match": "No nos dejan presentarnos amigo",
+    "answers": [
+      "mal"
+    ]
+  },
+  {
+    "match": "🥲",
+    "answers": [
+      "yo me presenté igual"
+    ]
+  },
+  {
+    "match": "4 anos🤨🤤",
+    "answers": [
+      "si mami"
+    ]
+  },
+  {
+    "match": "Yo wuacho",
+    "answers": [
+      "Entra wacho"
+    ]
+  },
+  {
+    "match": "PUUUAJAJJAJAJAJAJJAJA",
+    "answers": [
+      "E?"
+    ]
+  },
+  {
+    "match": "@223256997032099 ahora tu bot no me tiene odio si no ganas",
+    "answers": [
+      "JAJAJAJAJAJ"
+    ]
+  },
+  {
+    "match": "Entraa",
+    "answers": [
+      "Para"
     ]
   }
 ]
