@@ -3,8 +3,8 @@
 
 const { infoLog, warningLog } = require("./src/utils/logger");
 
-const NORMAL_INTERVAL = 20_000; // 1 min limpieza normal
-const RECONNECT_INTERVAL = 10_000; // 15s limpieza agresiva si reconecta
+const NORMAL_INTERVAL = 10_000; // 1 min limpieza normal
+const RECONNECT_INTERVAL = 5_000; // 15s limpieza agresiva si reconecta
 const MEMORY_THRESHOLD_MB = 150; // aviso si supera 500MB
 
 // ✅ Limpieza normal (solo basura temporal, segura)

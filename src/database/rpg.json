@@ -1327,13 +1327,13 @@
     "precisionBonus": 298.5
   },
   "223256997032099@lid": {
-    "nivel": 595,
-    "xp": 19091,
-    "hp": 13342,
-    "hpMax": 11920,
-    "mana": 6040,
-    "manamax": 6040,
-    "monedas": 3561517076783986,
+    "nivel": 597,
+    "xp": 34821,
+    "hp": 13388,
+    "hpMax": 11960,
+    "mana": 6060,
+    "manamax": 6065,
+    "monedas": 3561517077018467,
     "arma": {
       "code": "H05",
       "nombre": "🌑 Guante de zeno Sama 🌙⚔️",
@@ -1420,26 +1420,16 @@
         "uid": "mlh7iptu946"
       }
     ],
-    "lastDaily": 1772825591660,
+    "lastDaily": 1772922817346,
     "lastWork": 1772573526198,
     "lastHunt": 1772791274560,
     "lastMine": 1772791278763,
     "lastFish": 1772791278976,
-    "lastDungeon": 1772903468977,
+    "lastDungeon": 1772922784220,
     "lastGuildMission": 0,
     "nick": "👑⛧ᏞᎬᎾᏢᎡᎡ⛧👑",
     "gremio": "Aventureros",
-    "misionesActivas": [
-      "flores",
-      "lobos",
-      "ruinas",
-      "ogro",
-      "principe",
-      "mago",
-      "dragon",
-      "rey-demonio",
-      "salvar-mundo"
-    ],
+    "misionesActivas": [],
     "misionesCompletadas": [
       "flores",
       "flores",
@@ -2239,11 +2229,20 @@
       "mago",
       "dragon",
       "rey-demonio",
+      "salvar-mundo",
+      "flores",
+      "lobos",
+      "ruinas",
+      "ogro",
+      "principe",
+      "mago",
+      "dragon",
+      "rey-demonio",
       "salvar-mundo"
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1764974016153,
+    "lastRegen": 1765121616153,
     "homeChest": [
       {
         "code": "H01",
@@ -2311,30 +2310,30 @@
       "lastKO": 0
     },
     "misionesCooldown": {
-      "salvar-mundo": 1772854093864,
-      "rey-demonio": 1772854088391,
+      "salvar-mundo": 1772922814727,
+      "rey-demonio": 1772922812287,
       "dragón": 1772726694792,
-      "mago": 1772854066545,
-      "principe": 1772854066518,
-      "ogro": 1772854060969,
-      "ruinas": 1772854055338,
-      "lobos": 1772854055336,
-      "flores": 1772854049308,
-      "dragon": 1772854082813
+      "mago": 1772922803504,
+      "principe": 1772922801330,
+      "ogro": 1772922799011,
+      "ruinas": 1772922796990,
+      "lobos": 1772922794850,
+      "flores": 1772922789287,
+      "dragon": 1772922805927
     },
-    "manaMax": 3930,
+    "manaMax": 3950,
     "lastManaRegen": 0,
     "inmunidadKO": false,
     "inmunidadKOStart": 0,
     "academia": {
       "especialidades": {
-        "fuerza": 111,
-        "agilidad": 111,
-        "defensa": 111,
-        "magia": 111,
-        "curacion": 111,
-        "controlEspada": 111,
-        "manaMax": 111,
+        "fuerza": 114,
+        "agilidad": 114,
+        "defensa": 114,
+        "magia": 114,
+        "curacion": 114,
+        "controlEspada": 114,
+        "manaMax": 114,
         "controlespada": 0,
         "manamax": 1
       },
@@ -2342,24 +2341,24 @@
         "fuerza": 1,
         "agilidad": {
           "count": 3,
-          "last": 1772903924027
+          "last": 1772922839957
         },
         "defensa": {
           "count": 3,
-          "last": 1772903924104
+          "last": 1772922841460
         },
         "magia": 1,
         "curacion": {
           "count": 3,
-          "last": 1772903932257
+          "last": 1772922844141
         },
         "controlEspada": {
           "count": 3,
-          "last": 1772903932321
+          "last": 1772922845144
         },
         "manaMax": {
           "count": 3,
-          "last": 1772903940179
+          "last": 1772922846647
         },
         "controlespada": {
           "count": 0,
@@ -2371,12 +2370,12 @@
         }
       }
     },
-    "fuerzaBonus": 222,
-    "agilidadBonus": 166.5,
-    "defensaBonus": 199.8000000000003,
-    "magiaBonus": 244.1999999999995,
-    "curacionBonus": 222,
-    "precisionBonus": 166.5,
+    "fuerzaBonus": 228,
+    "agilidadBonus": 171,
+    "defensaBonus": 205.20000000000033,
+    "magiaBonus": 250.79999999999947,
+    "curacionBonus": 228,
+    "precisionBonus": 171,
     "mascotas": [],
     "mascotaEquipada": {
       "uid": "mf9xj4rr67falu",
