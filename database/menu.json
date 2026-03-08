@@ -101,6 +101,7 @@
     { "command": "pm", "desc": "descargar audios como música" },
     { "command": "pv", "desc": "descargar videos" },
     { "command": "mp3", "desc": "descargar audios como música en mp3" },
+    { "command": "tts", "desc": "convierte un texto en audio" },
     { "command": "abrazar", "desc": "" },
     { "command": "besar", "desc": "" },
     { "command": "bofetada", "desc": "" },

@@ -91,6 +91,14 @@ loadJSONFolder(path.join(__dirname, "src/database"))
 
 startAutoSave(60000);
 
+global.IDROPS = global.IDROPS || [];
+global.TEMP_QUEUE = global.TEMP_QUEUE || [];
+global.EVENT_QUEUE = global.EVENT_QUEUE || [];
+global.LOGS = global.LOGS || [];
+global.reconnecting = global.reconnecting || false;
+
+// 🔹 Inicializar cleaner optimizado 🔹
+require("./cleaner.js");
 
 let socketGlobal;
 let reconnecting = false;
