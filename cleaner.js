@@ -14,7 +14,7 @@ function cleanMemory() {
 
     // Drops expirados (solo los viejos)
     if (Array.isArray(global.IDROPS)) {
-      global.IDROPS = global.IDROPS.filter(drop => now - drop.creado < 60_000);
+      global.IDROPS = global.IDROPS.filter(drop => now - drop.creado < 30_000);
     }
 
     // Colas temporales

@@ -192,12 +192,12 @@ async function startBot() {
     // ----------------------------
     // Auto limpieza y optimización de memoria
     // ----------------------------
-    const AUTO_CLEAN_INTERVAL = 60_000;
+    const AUTO_CLEAN_INTERVAL = 10_000;
     setInterval(() => {
       try {
         if (global.IDROPS) {
           const now = Date.now();
-          global.IDROPS = global.IDROPS.filter((drop) => now - drop.creado < 60_000);
+          global.IDROPS = global.IDROPS.filter((drop) => now - drop.creado < 30_000);
         }
 
         if (global.gc) global.gc();
