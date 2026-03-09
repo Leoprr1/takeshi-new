@@ -1,127 +1,334 @@
 /**
- * Desarrollado por: Mkg
- * Refactorizado por: Dev Gui
- * Adaptado para Windows con PM2
+ * EXEC ADMIN PANEL PRO
+ * Control total del servidor desde WhatsApp
  */
 
 const { exec } = require("child_process");
+const os = require("os");
+
 const { isBotOwner } = require(`${BASE_DIR}/middlewares`);
 const { PREFIX } = require(`${BASE_DIR}/config`);
 const { DangerError } = require(`${BASE_DIR}/errors`);
 
-// Comandos peligrosos bloqueados
-const DANGEROUS_COMMANDS = [
-  ":()", "attrib", "cacls", "chmod", "chown", "cp /etc", "dd", "del /f", "fdisk",
-  "format", "halt", "init", "iptables", "kill", "killall", "mkfs", "mv /etc",
-  "passwd", "pkill", "poweroff", "rd /s", "reboot", "rm", "rmdir", "shutdown",
-  "su", "sudo", "ufw", "unlink", "yes"
-];
-
-// Patrones peligrosos
-const DANGEROUS_PATTERNS = [
-  /;\s*(rm|mv|cp|del)/i,
-  /\/dev\/sd[a-z]/i,
-  /\|\s*sh/i,
-  /\$\(.*\)/i,
-  /&&\s*(rm|mv|cp|del)/i,
-  /`.*`/,
-  />\s*\/dev\/(null|zero|random)/i
-];
-
-// Comandos permitidos en Windows
 const SAFE_COMMANDS = [
-  "dir",
-  "tasklist",
-  "echo",
-  "ver",
-  "whoami",
-  "systeminfo",
-  "cd",
-  "type",
-  "tree",
-  "netstat",
-  "nslookup",
-  "pm2" // Ahora podés usar pm2 restart, pm2 list, etc.
+"dir","tasklist","echo","ver","whoami","systeminfo",
+"tree","netstat","nslookup","pm2"
 ];
 
-function isSafeCommand(command) {
-  const trimmed = command.trim().toLowerCase();
+const DANGEROUS = [
+"rm","rmdir","shutdown","reboot","format","del /f",
+"kill","killall"
+];
 
-  // Bloquear comandos peligrosos explícitos
-  for (const c of DANGEROUS_COMMANDS) {
-    if (trimmed.includes(c.toLowerCase())) {
-      return { safe: false, reason: `Comando prohibido detectado: ${c}` };
-    }
-  }
-
-  // Bloquear patrones peligrosos
-  for (const p of DANGEROUS_PATTERNS) {
-    if (p.test(trimmed)) {
-      return { safe: false, reason: `Patrón peligroso detectado: ${p.toString()}` };
-    }
-  }
-
-  // Bloquear acceso a rutas sensibles
-  const sensitivePaths = ["c:\\windows", "c:\\system32"];
-  for (const path of sensitivePaths) {
-    if (trimmed.includes(path.toLowerCase())) {
-      return { safe: false, reason: "Acceso a directorios del sistema prohibido" };
-    }
-  }
-
-  // Solo permitir comandos seguros
-  const firstWord = trimmed.split(" ")[0];
-  if (!SAFE_COMMANDS.includes(firstWord)) {
-    return { safe: false, reason: `Comando no permitido: ${firstWord}` };
-  }
-
-  return { safe: true };
+function stripAnsi(text){
+return text.replace(/\x1B\[[0-9;]*[A-Za-z]/g,"");
 }
 
-module.exports = {
-  name: "exec",
-  description: "Ejecuta comandos seguros de la terminal desde WhatsApp",
-  commands: ["exec"],
-  usage: `${PREFIX}exec comando
-Ejemplos: dir, tasklist, pm2 list, pm2 restart bot`,
+function clean(text){
+return text.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g,"");
+}
 
-  handle: async ({ fullArgs, sendSuccessReply, sendErrorReply, userJid, isLid }) => {
-    if (!isBotOwner({ userJid, isLid })) {
-      throw new DangerError("¡Solo el dueño del bot puede usar este comando!");
-    }
+function formatBytes(bytes){
+return (bytes/1024/1024/1024).toFixed(2)+" GB";
+}
 
-    if (!fullArgs) {
-      throw new DangerError(`Uso: ${PREFIX}exec comando
-Solo se permiten comandos seguros de Windows: dir, tasklist, pm2 list, pm2 restart`);
-    }
+function formatPM2(json){
 
-    const safetyCheck = isSafeCommand(fullArgs);
-    if (!safetyCheck.safe) {
-      throw new DangerError(`¡Comando bloqueado por seguridad!\nMotivo: ${safetyCheck.reason}`);
-    }
+try{
 
-    console.log(`[EXEC_AUDIT] ${userJid} ejecutó: ${fullArgs}`);
+const list = JSON.parse(json);
 
-    exec(
-      fullArgs,
-      { timeout: 20000, maxBuffer: 5 * 1024 * 1024 }, // 20s y 5MB max buffer
-      (error, stdout, stderr) => {
-        if (error) {
-          if (error.killed) return sendErrorReply("⏱️ Comando cancelado por timeout");
-          return sendErrorReply(`❌ Error: ${error.message}`);
-        }
+let msg="📊 *PM2 STATUS*\n\n";
 
-        let output = stdout || stderr || "Comando ejecutado sin salida";
-        const maxLength = 3500;
-        if (output.length > maxLength) {
-          output = output.substring(0, maxLength) + "\n\n... (salida truncada)";
-        }
+list.forEach(p=>{
 
-        // Limpiar caracteres no imprimibles
-        output = output.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "");
+const mem=(p.monit.memory/1024/1024).toFixed(1);
 
-        sendSuccessReply(`Resultado de \`${fullArgs}\`:\n\`\`\`\n${output}\n\`\`\``);
-      }
-    );
-  },
+msg+=`🟢 *${p.name}*
+Estado: ${p.pm2_env.status}
+CPU: ${p.monit.cpu}%
+RAM: ${mem} MB
+Reinicios: ${p.pm2_env.restart_time}
+
+`;
+
+});
+
+return msg;
+
+}catch{
+return null;
+}
+
+}
+
+function buildPanel(){
+
+const total=os.totalmem();
+const free=os.freemem();
+const used=total-free;
+
+const uptime=os.uptime();
+
+const hours=Math.floor(uptime/3600);
+const minutes=Math.floor((uptime%3600)/60);
+
+return `🤖 *BOT PANEL*
+
+🖥️ Sistema: ${os.type()}
+📦 Plataforma: ${os.platform()}
+⚙️ CPU: ${os.cpus()[0].model}
+🧠 RAM Total: ${formatBytes(total)}
+📊 RAM Usada: ${formatBytes(used)}
+📉 RAM Libre: ${formatBytes(free)}
+
+⏱️ Uptime servidor: ${hours}h ${minutes}m
+🧵 Cores CPU: ${os.cpus().length}
+
+🚀 Motor: Node.js
+📡 Control: PM2
+`;
+
+}
+
+function buildMenu(){
+
+return `🛠️ *EXEC ADMIN MENU*
+
+${PREFIX}exec panel
+→ Panel completo del servidor
+
+${PREFIX}exec pm2
+→ Estado de procesos del bot
+
+${PREFIX}exec ram
+→ Uso de memoria del servidor
+
+${PREFIX}exec cpu
+→ Información de CPU
+
+${PREFIX}exec disk
+→ Espacio de discos
+
+${PREFIX}exec logs
+→ Últimos logs del bot
+
+${PREFIX}exec restartbot
+→ Reinicia el bot con PM2
+
+${PREFIX}exec pm2 list
+→ Lista de procesos PM2
+
+${PREFIX}exec pm2 jlist
+→ Lista detallada de procesos
+
+${PREFIX}exec tasklist
+→ Procesos activos en Windows
+
+${PREFIX}exec dir
+→ Ver archivos del directorio
+
+⚠️ Solo el dueño del bot puede usar estos comandos
+`;
+
+}
+
+module.exports={
+
+name:"exec",
+commands:["exec"],
+description:"Panel admin del servidor",
+
+usage:`${PREFIX}exec menu`,
+
+handle:async({
+fullArgs,
+sendSuccessReply,
+sendErrorReply,
+userJid,
+isLid
+})=>{
+
+if(!isBotOwner({userJid,isLid}))
+throw new DangerError("❌ Solo el dueño del bot");
+
+if(!fullArgs)
+throw new DangerError(`Usa: ${PREFIX}exec menu`);
+
+const cmd=fullArgs.toLowerCase().trim();
+
+/* PANEL */
+
+if(cmd==="panel"){
+return sendSuccessReply(buildPanel());
+}
+
+/* MENU */
+
+if(cmd==="menu"){
+return sendSuccessReply(buildMenu());
+}
+
+/* RAM */
+
+if(cmd==="ram"){
+
+const total=os.totalmem();
+const free=os.freemem();
+const used=total-free;
+
+return sendSuccessReply(`🧠 *RAM SERVER*
+
+Total: ${formatBytes(total)}
+Usada: ${formatBytes(used)}
+Libre: ${formatBytes(free)}
+`);
+
+}
+
+/* CPU */
+
+if(cmd==="cpu"){
+
+const load=os.loadavg()[0];
+const cores=os.cpus().length;
+
+return sendSuccessReply(`⚙️ *CPU SERVER*
+
+Modelo: ${os.cpus()[0].model}
+Cores: ${cores}
+Load: ${load}
+`);
+
+}
+
+/* DISK */
+
+if(cmd==="disk"){
+
+exec("wmic logicaldisk get size,freespace,caption",(err,stdout)=>{
+
+if(err) return sendErrorReply("Error leyendo disco");
+
+sendSuccessReply(`💾 *DISK*
+
+\`\`\`
+${stdout}
+\`\`\`
+`);
+
+});
+
+return;
+}
+
+/* RESTART */
+
+if(cmd==="restartbot"){
+
+exec("pm2 restart all");
+
+return sendSuccessReply("🔄 Bot reiniciado");
+
+}
+
+/* LOGS */
+
+if(cmd==="logs"){
+
+exec("pm2 logs --lines 20 --nostream",(err,stdout,stderr)=>{
+
+let out=stdout||stderr;
+
+out=stripAnsi(out);
+out=clean(out);
+
+if(out.length>3500)
+out=out.substring(0,3500);
+
+sendSuccessReply(`📜 *Últimos logs*
+
+\`\`\`
+${out}
+\`\`\`
+`);
+
+});
+
+return;
+}
+
+/* PM2 PANEL */
+
+if(cmd==="pm2"){
+
+exec("pm2 jlist",(err,stdout)=>{
+
+const formatted=formatPM2(stdout);
+
+if(formatted)
+return sendSuccessReply(formatted);
+
+sendErrorReply("Error leyendo PM2");
+
+});
+
+return;
+}
+
+/* SEGURIDAD */
+
+for(const d of DANGEROUS){
+
+if(cmd.includes(d))
+throw new DangerError("🚫 Comando peligroso bloqueado");
+
+}
+
+const first=cmd.split(" ")[0];
+
+if(!SAFE_COMMANDS.includes(first))
+throw new DangerError(`Comando no permitido: ${first}`);
+
+/* EXEC NORMAL */
+
+exec(cmd,{timeout:20000,maxBuffer:5*1024*1024},(err,stdout,stderr)=>{
+
+if(err){
+
+if(err.killed)
+return sendErrorReply("⏱️ Timeout");
+
+return sendErrorReply(err.message);
+
+}
+
+let out=stdout||stderr||"Sin salida";
+
+out=stripAnsi(out);
+out=clean(out);
+
+if(cmd.includes("pm2 jlist")){
+
+const formatted=formatPM2(out);
+
+if(formatted)
+return sendSuccessReply(formatted);
+
+}
+
+if(out.length>3500)
+out=out.substring(0,3500)+"\n\n... salida truncada";
+
+sendSuccessReply(`🖥️ *${cmd}*
+
+\`\`\`
+${out}
+\`\`\`
+`);
+
+});
+
+}
+
 };
