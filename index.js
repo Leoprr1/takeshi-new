@@ -82,6 +82,8 @@ const {
 } = require("./src/utils/logger");
 const { startTyCSystem } = require("./src/utils/newstyc");
 const { loadJSONFolder, startAutoSave } = require("./src/utils/jsoncache");
+const startCleaner = require("./cleaner.js");
+
 
 // ----------------------------
 // Cargar bases de datos JSON
@@ -90,17 +92,19 @@ loadJSONFolder(path.join(__dirname, "database"));
 loadJSONFolder(path.join(__dirname, "src/database"));
 startAutoSave(60000);
 
-// ----------------------------
-// Variables globales
-// ----------------------------
 global.IDROPS = global.IDROPS || [];
 global.TEMP_QUEUE = global.TEMP_QUEUE || [];
 global.EVENT_QUEUE = global.EVENT_QUEUE || [];
 global.LOGS = global.LOGS || [];
 global.reconnecting = global.reconnecting || false;
 
-// Inicializar cleaner optimizado
-require("./cleaner.js");
+startCleaner(global, {
+  IDROPS: global.IDROPS,
+  TEMP_QUEUE: global.TEMP_QUEUE,
+  EVENT_QUEUE: global.EVENT_QUEUE,
+  LOGS: global.LOGS
+});
+
 
 let socketGlobal;
 let reconnecting = false;

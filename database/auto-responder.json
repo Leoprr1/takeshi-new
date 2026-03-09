@@ -6,6 +6,12 @@
     ]
   },
   {
+    "match": "7",
+    "answers": [
+      "Bueno, me voy a pegar 7 tiros deah"
+    ]
+  },
+  {
     "match": "17",
     "answers": [
       "AHAHAJ RE PEQUEÑO SOS"
@@ -60,7 +66,10 @@
       "Todo bien bro, y ustedes?",
       "Me alegro",
       "Si vos bro?",
-      "Si todo bien recién me despierto y ustedes qué onda"
+      "Si todo bien recién me despierto y ustedes qué onda",
+      "Me alegro q ande bien",
+      "No",
+      "Todo bien y vos amogo"
     ]
   },
   {
@@ -115,7 +124,8 @@
   {
     "match": "buen día",
     "answers": [
-      "¡Buen día! Que tengas un día genial."
+      "¡Buen día! Que tengas un día genial.",
+      "Que honda bro?"
     ]
   },
   {
@@ -527,7 +537,8 @@
     "match": "te odio",
     "answers": [
       "ok",
-      "Te amo"
+      "Te amo",
+      "Y yo te quiero"
     ]
   },
   {
@@ -964,7 +975,9 @@
       "Si dijiste q no lo conoces",
       "No no no, me haces dar una bronca",
       "No que?",
-      "Fa me voy a tener que poner en 4"
+      "Fa me voy a tener que poner en 4",
+      "Por?",
+      "quienes"
     ]
   },
   {
@@ -1241,7 +1254,9 @@
       "PvP? O miedo 😏",
       "Gil",
       "Corte ninguno es feo",
-      "Me reeee rei"
+      "Me reeee rei",
+      "Ysi",
+      "Decime que no x lo menos jajaja"
     ]
   },
   {
@@ -1693,7 +1708,8 @@
       "xq m dijo q lo una en grupos",
       "Jajja",
       "Porque no",
-      "Xq me mandaste"
+      "Xq me mandaste",
+      "Porque tengo sueño"
     ]
   },
   {
@@ -1730,7 +1746,8 @@
   {
     "match": "T cojo",
     "answers": [
-      "Xq no me los coho yo a los 2?"
+      "Xq no me los coho yo a los 2?",
+      "Eh"
     ]
   },
   {
@@ -1742,7 +1759,8 @@
   {
     "match": "párate de mano",
     "answers": [
-      "voy"
+      "voy",
+      "Dale"
     ]
   },
   {
@@ -1863,7 +1881,8 @@
   {
     "match": ".kick",
     "answers": [
-      "🍉᪲ Hola, la bot debe ser Administradora para ejecutar este Comando."
+      "🍉᪲ Hola, la bot debe ser Administradora para ejecutar este Comando.",
+      "Down"
     ]
   },
   {
@@ -2219,7 +2238,8 @@
       "a dormir",
       "Hola",
       "Ola",
-      "olaa"
+      "olaa",
+      "Hola bb"
     ]
   },
   {
@@ -2262,7 +2282,8 @@
       "So re agresiva vo",
       "JAJAJAJA",
       "Mentira amiga",
-      "Se pasho se pasho"
+      "Se pasho se pasho",
+      "Bueno cerra el orto amigo me tenés podrido con tus mensajitos de mierda de virgen q mandas todo el día mandando mensajes parece que nunca salís o vivís debajo del puente planero negro de mierda siempre te la pasas metido en la pantalla gordo virgen seguro te haces la paja con ese ñoki asesino que tenes y en el momento de encarar a una mina te congelas vividito del orto no levantas ni un papel anoréxico desnutrido esquelético de mierda intenta arreglar esa cara de pateado que tenes se nota q a vos te sacaron de la panza a martillazos digo, x el autismo y el deformismo q presentas, para destacar también lo especial que sos y mariconeas xq en el momento de pelear te tiras al piso y llamas a tu mami para que te busquen ya q te gusta bardear x pantallita pero se te moja la tanguita cuando te presentas en la situación, sos un pendejo sucio que nunca se baña mugroso negro indigente un olor insoportable a papa tenes, peor q oler culo de ciruja, cartonero que pide limosna por toda la esquina, que solamente te alcanza para comer mierda de rata, la concha puta negra moribunda asquerosa mugrients de tu recalcada madre, vago ultrajado ese techo de chapa en el que vivís y tenés menos IQ q babosa con un kg de sal encima, sos el gordito asmático que se cansa de correr cada 2 segundos, que pide agua a gritos, todo traspirado el obeso, cómo necesitas tu maquinita respirar, no podés ni trotar con esos kg de sobrepeso que tenes peor que una vaca en lecho de muerte, sos de los que dicen que el fútbol es tu vida pero en los picaditos te mandan directamente al arco que ni para eso servís por esa grasa que se te acumula en los párpados que ni te dejan ver, Para recalcar que también que sos un pelotudito que si te ponen en un torneo de el más mogolico te ganarias todos los títulos invictamente, con ese autismo ni a la más fea negra villera levantas, Gordo asmático grasoso destructor de serenitos"
     ]
   },
   {
@@ -4153,7 +4174,9 @@
       "Tu madre",
       "Calla traga pitos",
       "Tu maldito padre hijo de la grandísima puta",
-      "Tu creador"
+      "Tu creador",
+      "tu mami",
+      "Jajajaja"
     ]
   },
   {
@@ -4607,7 +4630,8 @@
   {
     "match": "soy cande",
     "answers": [
-      "Mentira"
+      "Mentira",
+      "Y quien es cande?"
     ]
   },
   {
@@ -5918,7 +5942,8 @@
       "Que?",
       "Xd",
       "Ahh wueño",
-      "Eeh"
+      "Eeh",
+      "Ve a le escuela pues"
     ]
   },
   {
@@ -6121,7 +6146,8 @@
   {
     "match": "yo",
     "answers": [
-      "Cuanto tienes"
+      "Cuanto tienes",
+      "soy cande"
     ]
   },
   {
@@ -6691,7 +6717,8 @@
       "mentiroso, son las 12",
       "12:29",
       "JAJAJAJJAJAJA",
-      "Eso"
+      "Eso",
+      "Mentira"
     ]
   },
   {
@@ -7557,7 +7584,8 @@
   {
     "match": "¡Yo también te aprecio mucho!",
     "answers": [
-      "Crack"
+      "Crack",
+      "Mucho mucho?"
     ]
   },
   {
@@ -7661,7 +7689,8 @@
     "answers": [
       "No",
       "Qlq bro",
-      "Buenas"
+      "Buenas",
+      "Q onda"
     ]
   },
   {
@@ -7848,7 +7877,9 @@
     "answers": [
       "Que",
       "Tu hermana",
-      "UF"
+      "UF",
+      "Queres pelear?",
+      ".rpg kill"
     ]
   },
   {
@@ -8662,7 +8693,8 @@
   {
     "match": "callame esta 🖕🏻",
     "answers": [
-      ":0"
+      ":0",
+      "Dale"
     ]
   },
   {
@@ -8940,7 +8972,8 @@
     "match": "mira quien lo dice xD",
     "answers": [
       "Culoroto",
-      "Hdp nmms XD"
+      "Hdp nmms XD",
+      "Bueno tenes razón"
     ]
   },
   {
@@ -9430,7 +9463,8 @@
       ".reg Romeo 15",
       "Eee no",
       "No quiero registrarme amigo",
-      "cerra el orto"
+      "cerra el orto",
+      "Noquiero"
     ]
   },
   {
@@ -10435,7 +10469,12 @@
       "Chinga tu madre",
       "JAJAJJAAJAJJA",
       ".tts",
-      "No juego mierdas"
+      "No juego mierdas",
+      "Si\nPvP?",
+      "Te voy a llamar\nPixi",
+      "Vamos a hacer pvp",
+      "Dale pa",
+      "PvP"
     ]
   },
   {
@@ -11031,8 +11070,12 @@
     "answers": [
       "Cabron ya no me copies",
       "Hijo puta",
-      "D X",
-      "Maldito como te odio jaja"
+      "Dx",
+      "Maldito como te odio jaja",
+      "Oye",
+      "Bot\nQuieres quedarte conmigo",
+      "Pixi tu q piensas de los celosos",
+      "Obvio mi rey\nAprende de tu maestro"
     ]
   },
   {
@@ -11203,7 +11246,10 @@
       "ok",
       "chupala",
       "apa",
-      "ala"
+      "ala",
+      "AJAJAJAJAJQUQ",
+      "Gil",
+      "UUUUUUUUUU"
     ]
   },
   {
@@ -12895,7 +12941,10 @@
     "answers": [
       "puto",
       "Se pasho se pasho",
-      "Tu creador"
+      "Tu creador",
+      "Opa",
+      "Jajajajja",
+      ".kick"
     ]
   },
   {
@@ -13364,7 +13413,8 @@
   {
     "match": "Vaya*",
     "answers": [
-      "Valla"
+      "Valla",
+      "Le peleas a 1 bot jajajaj"
     ]
   },
   {
@@ -13376,7 +13426,9 @@
   {
     "match": "Valla",
     "answers": [
-      "Vaia💜"
+      "Vaia💜",
+      "VAYA*",
+      "Idiota"
     ]
   },
   {
@@ -13943,7 +13995,8 @@
     "match": "Tanto tiempo",
     "answers": [
       "Si lko tdbn",
-      "Si cuantos años de no hablar nunca"
+      "Si cuantos años de no hablar nunca",
+      "Te rompen"
     ]
   },
   {
@@ -17368,7 +17421,8 @@
     "match": "Sii, re, me enojo rápido, mis hermanos me quisieron enseñar y terminaron jugando ellos, EN MI CELULAR y yo tenia que quedarme viendo, nah",
     "answers": [
       "Jaja XD",
-      "Jajaja uy no\n\nPero si, tu juegas y puede que te guste\nFree tiene muchos modos de juegos no sólo uno\nPero es más divertido jugar con amigos"
+      "Jajaja uy no\n\nPero si, tu juegas y puede que te guste\nFree tiene muchos modos de juegos no sólo uno\nPero es más divertido jugar con amigos",
+      "Jajaja"
     ]
   },
   {
@@ -17549,7 +17603,8 @@
   {
     "match": "Q onda",
     "answers": [
-      "Eu vo vas a querer la plata?"
+      "Eu vo vas a querer la plata?",
+      "Todo bien??"
     ]
   },
   {
@@ -17938,7 +17993,8 @@
   {
     "match": "Siiiii",
     "answers": [
-      "D1 bancame que termine de armar esto nms"
+      "D1 bancame que termine de armar esto nms",
+      "quien seria?"
     ]
   },
   {
@@ -17957,7 +18013,8 @@
   {
     "match": "D1 bancame que termine de armar esto nms",
     "answers": [
-      "Gueno"
+      "Gueno",
+      "Oki"
     ]
   },
   {
@@ -18248,7 +18305,8 @@
   {
     "match": "Mueranse",
     "answers": [
-      "Matame"
+      "Matame",
+      "Vos también"
     ]
   },
   {
@@ -18329,7 +18387,8 @@
   {
     "match": "Bien bien",
     "answers": [
-      "Me alegro bro"
+      "Me alegro bro",
+      "Me alegou"
     ]
   },
   {
@@ -18772,7 +18831,8 @@
   {
     "match": "Bieeen siempre del lado correcto",
     "answers": [
-      "SIEMPRE"
+      "SIEMPRE",
+      "Eso eso\nTu y yo seremos imparables"
     ]
   },
   {
@@ -19954,7 +20014,9 @@
     "match": "Uu",
     "answers": [
       "678365681",
-      "Daleee"
+      "Daleee",
+      "Paso algo?",
+      "Jajaja"
     ]
   },
   {
@@ -19974,7 +20036,8 @@
     "match": "Habla al priv",
     "answers": [
       "XDDDDDD",
-      "JAJAJA QUE-"
+      "JAJAJA QUE-",
+      "Escríbeme"
     ]
   },
   {
@@ -20030,7 +20093,8 @@
     "answers": [
       "Por lo menos en uno en el que no aparezco",
       "Acá tendría que estar…",
-      "Si soy"
+      "Si soy",
+      "ay weyy"
     ]
   },
   {
@@ -20043,7 +20107,10 @@
       "La pijaes el alias la pija",
       "Eeeee no uso mp",
       "Nono",
-      "Não"
+      "Não",
+      "A q te refieres con el alias",
+      "A q te refieres con eso",
+      "El alias"
     ]
   },
   {
@@ -22419,7 +22486,8 @@
   {
     "match": "mentira amiga",
     "answers": [
-      "Me vras ma"
+      "Me vras ma",
+      "Unu"
     ]
   },
   {
@@ -23037,7 +23105,8 @@
   {
     "match": "Valla valla",
     "answers": [
-      "Ahora no"
+      "Ahora no",
+      "Vaya*"
     ]
   },
   {
@@ -23636,7 +23705,9 @@
   {
     "match": "Bueno, pero pasas el ig?",
     "answers": [
-      "pásala vos dije"
+      "pásala vos dije",
+      "JAJAJAJ NO E",
+      "JAJAJAA"
     ]
   },
   {
@@ -23685,6 +23756,671 @@
     "match": "@223256997032099 tengo el texto transcrito",
     "answers": [
       "para?"
+    ]
+  },
+  {
+    "match": "Guenas",
+    "answers": [
+      "Wenas"
+    ]
+  },
+  {
+    "match": "Buennnn día geentee",
+    "answers": [
+      "Buenasa"
+    ]
+  },
+  {
+    "match": "Cómo estánnn",
+    "answers": [
+      "Bien bien"
+    ]
+  },
+  {
+    "match": "A fines de marzo me vuelvo a Chile",
+    "answers": [
+      "Llevame"
+    ]
+  },
+  {
+    "match": "Que honda bro?",
+    "answers": [
+      "Q onda bro tdbn y vos",
+      "Buen día Bro"
+    ]
+  },
+  {
+    "match": "Buendiaaa",
+    "answers": [
+      "Buen diaa"
+    ]
+  },
+  {
+    "match": "Terrible montañita",
+    "answers": [
+      "Pa que aguante toda la mañana jajaja"
+    ]
+  },
+  {
+    "match": "Pa que aguante toda la mañana jajaja",
+    "answers": [
+      "Claaa jajaj"
+    ]
+  },
+  {
+    "match": "Que yerba es?",
+    "answers": [
+      "La verdeflor"
+    ]
+  },
+  {
+    "match": "La verdeflor",
+    "answers": [
+      "Uhh nunca la probé jajs"
+    ]
+  },
+  {
+    "match": "No me gusta pero se me termino la canarias y no la venden en mi pueblo jajaj",
+    "answers": [
+      "Yo Recien pregunté aca y esta 6000"
+    ]
+  },
+  {
+    "match": "Uhh nunca la probé jajs",
+    "answers": [
+      "Esta pasable"
+    ]
+  },
+  {
+    "match": "Yo Recien pregunté aca y esta 6000",
+    "answers": [
+      "D1"
+    ]
+  },
+  {
+    "match": "Dlnde yo la compro me same 4900",
+    "answers": [
+      "Barato"
+    ]
+  },
+  {
+    "match": "Na ni idea jaja",
+    "answers": [
+      "Lo que tiene es que es mucho yuyo"
+    ]
+  },
+  {
+    "match": "Barato",
+    "answers": [
+      "Dentro de todo"
+    ]
+  },
+  {
+    "match": "Aca te arrancan la cabeza",
+    "answers": [
+      "Me di cuenta jaja"
+    ]
+  },
+  {
+    "match": "La tengo que pasar con azucar sino no me gusta",
+    "answers": [
+      "Claro mi mamá tmb toma con una Yerba asi"
+    ]
+  },
+  {
+    "match": "Claro mi mamá tmb toma con una Yerba asi",
+    "answers": [
+      "Claro claro, con esa yerba toma mi abuelo"
+    ]
+  },
+  {
+    "match": "Pero igual no soy mucho de tomar mates porque no tengo el propio y no me gusta jsjs",
+    "answers": [
+      "Yo me gane el termo en corrientes cuando fui de vacaciones y el mate me lo regalaron hace como 4 años"
+    ]
+  },
+  {
+    "match": "Buen día Bro",
+    "answers": [
+      "Todo bien??"
+    ]
+  },
+  {
+    "match": "Yo me gane el termo en corrientes cuando fui de vacaciones y el mate me lo regalaron hace como 4 años",
+    "answers": [
+      "Que piolaaaa"
+    ]
+  },
+  {
+    "match": "Pero estan súper caros",
+    "answers": [
+      "Ni idea cuanto estan"
+    ]
+  },
+  {
+    "match": "Me alegro q ande bien",
+    "answers": [
+      "X2"
+    ]
+  },
+  {
+    "match": "Todo mal",
+    "answers": [
+      "Xq tan asi"
+    ]
+  },
+  {
+    "match": "No vamos a hacer nada el video",
+    "answers": [
+      "No pasa nd jaja"
+    ]
+  },
+  {
+    "match": "Xq tan asi",
+    "answers": [
+      "Xq no puedo ir a la escuela"
+    ]
+  },
+  {
+    "match": "Que contas?",
+    "answers": [
+      "Nada medio bajo pero bueno tratando salir adelante"
+    ]
+  },
+  {
+    "match": "Nada medio bajo pero bueno tratando salir adelante",
+    "answers": [
+      "Que te anda pasando wacho?"
+    ]
+  },
+  {
+    "match": "El alisado dijiste ayer?",
+    "answers": [
+      "Q alisado?"
+    ]
+  },
+  {
+    "match": "Pero es urbano o que?",
+    "answers": [
+      "Yes si vivo en 3l campo"
+    ]
+  },
+  {
+    "match": "Q alisado?",
+    "answers": [
+      "Creo que dijiste qje te estabas x hacer eso en el pelo ayer"
+    ]
+  },
+  {
+    "match": "Yes si vivo en 3l campo",
+    "answers": [
+      "X2 jaja"
+    ]
+  },
+  {
+    "match": "X2 jaja",
+    "answers": [
+      "Q mal jaja"
+    ]
+  },
+  {
+    "match": "Que brg",
+    "answers": [
+      "Jajajaj si"
+    ]
+  },
+  {
+    "match": "Wenos dia",
+    "answers": [
+      "Wendia",
+      "Wuena"
+    ]
+  },
+  {
+    "match": "Wendia",
+    "answers": [
+      "Wendia",
+      "Todo bien??"
+    ]
+  },
+  {
+    "match": "Listop, te acepte, me había olvidadoo",
+    "answers": [
+      "Jaja XD"
+    ]
+  },
+  {
+    "match": "Porque tengo sueño",
+    "answers": [
+      "Y dormi"
+    ]
+  },
+  {
+    "match": "Te pusiste que??",
+    "answers": [
+      "Skala"
+    ]
+  },
+  {
+    "match": "Skala",
+    "answers": [
+      "O algo asi",
+      "Ahh no ni idea de que es eso jaja"
+    ]
+  },
+  {
+    "match": "Y tengo que ir al colegio",
+    "answers": [
+      "Dale que tenes qje sacar el pais adelante"
+    ]
+  },
+  {
+    "match": "Ahh no ni idea de que es eso jaja",
+    "answers": [
+      "Una crema brasileña"
+    ]
+  },
+  {
+    "match": "Una crema brasileña",
+    "answers": [
+      "Ahh jajaja"
+    ]
+  },
+  {
+    "match": "Todo bien y vos amigo",
+    "answers": [
+      "Me alegro"
+    ]
+  },
+  {
+    "match": "Dale que tenes qje sacar el pais adelante",
+    "answers": [
+      "JAJAJAJA"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS INFIELES DEL GRUPO* 🔥\n\n#1 👤 @79092040892514\n 💔 Nivel de infiel: 16%\n\n#2 👤 @142275170545667\n 💔 Nivel de infiel: 8%\n\n#3 👤 @273856275165243\n 💔 Nivel de infiel: 41%\n\n#4 👤 @145617057787995\n 💔 Nivel de infiel: 18%\n\n#5 👤 @241355804655651\n 💔 Nivel de infiel: 50%\n\n#6 👤 @161787676729345\n 💔 Nivel de infiel: 8%\n\n#7 👤 @110986719670373\n 💔 Nivel de infiel: 79%\n\n#8 👤 @54941439803441\n 💔 Nivel de infiel: 8%\n\n#9 👤 @179049200644194\n 💔 Nivel de infiel: 83%\n\n#10 👤 @223256997032099\n 💔 Nivel de infiel: 99%",
+    "answers": [
+      "Hay verdades ahí",
+      "83!???",
+      "Así si\nOsea\nEstar de último\nPorq infiel jamas"
+    ]
+  },
+  {
+    "match": "Regalame un corte vo",
+    "answers": [
+      "Wueno"
+    ]
+  },
+  {
+    "match": "vo deci?",
+    "answers": [
+      "Siiiii"
+    ]
+  },
+  {
+    "match": "Wueno",
+    "answers": [
+      "D1 pasa ub"
+    ]
+  },
+  {
+    "match": "D1 pasa ub",
+    "answers": [
+      "Entre rios"
+    ]
+  },
+  {
+    "match": "Que nivel para estar tomando un lunes a la 12 45 del mediodia jajaja",
+    "answers": [
+      "Jajajaj y bueno"
+    ]
+  },
+  {
+    "match": "Entre rios",
+    "answers": [
+      "Metete el corte gratis donde te quede comodo jajajaja"
+    ]
+  },
+  {
+    "match": "Metete el corte gratis donde te quede comodo jajajaja",
+    "answers": [
+      "We jajaja"
+    ]
+  },
+  {
+    "match": "Jajajaj y bueno",
+    "answers": [
+      "Encima ni un \"vamo a toma\" jajaja"
+    ]
+  },
+  {
+    "match": "We jajaja",
+    "answers": [
+      "Joda amigo"
+    ]
+  },
+  {
+    "match": "quien seria?",
+    "answers": [
+      "No te puedo decir"
+    ]
+  },
+  {
+    "match": "Ni un santafesino me cruze en el grupo",
+    "answers": [
+      "El año que viene voy a vivir a Santa Fe capas"
+    ]
+  },
+  {
+    "match": "No te puedo decir",
+    "answers": [
+      "por que"
+    ]
+  },
+  {
+    "match": "A que zona??",
+    "answers": [
+      "Ni idea tengo que ver el departamento"
+    ]
+  },
+  {
+    "match": "Ni idea tengo que ver el departamento",
+    "answers": [
+      "Ahhh d1d1"
+    ]
+  },
+  {
+    "match": "Porque me voy a estudiar alla viste x eso",
+    "answers": [
+      "A capital entonces?"
+    ]
+  },
+  {
+    "match": "A capital entonces?",
+    "answers": [
+      "Seguramente"
+    ]
+  },
+  {
+    "match": "Y que vas a estudiar",
+    "answers": [
+      "Periodismo deportivo"
+    ]
+  },
+  {
+    "match": "Periodismo deportivo",
+    "answers": [
+      "D1d1"
+    ]
+  },
+  {
+    "match": "Tengo que averiguar Aver q onda",
+    "answers": [
+      "Claro claro"
+    ]
+  },
+  {
+    "match": "Llevame",
+    "answers": [
+      "Jajajaja"
+    ]
+  },
+  {
+    "match": "Esa no",
+    "answers": [
+      "Jajaja"
+    ]
+  },
+  {
+    "match": "Igualita a carolina",
+    "answers": [
+      "Mira como te bardean @202044321316883",
+      "Ni me conoce"
+    ]
+  },
+  {
+    "match": "Mira como te bardean @202044321316883",
+    "answers": [
+      "Idiotas"
+    ]
+  },
+  {
+    "match": "Vos también",
+    "answers": [
+      "vos igual"
+    ]
+  },
+  {
+    "match": "@17201797030138 tenías que venir caminando",
+    "answers": [
+      "Re irresponsale esa chica",
+      "Ni a palo jaja"
+    ]
+  },
+  {
+    "match": "Shut your bitch ass out",
+    "answers": [
+      "No sé inglés 🙄"
+    ]
+  },
+  {
+    "match": "No sé inglés 🙄",
+    "answers": [
+      "Jajaj"
+    ]
+  },
+  {
+    "match": "Che relax",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "A las piñas",
+    "answers": [
+      "párate de mano"
+    ]
+  },
+  {
+    "match": "Q es sacafo?",
+    "answers": [
+      "Sacado*"
+    ]
+  },
+  {
+    "match": "Mas que yo no pelean",
+    "answers": [
+      "decia"
+    ]
+  },
+  {
+    "match": "A q te refieres con el alias",
+    "answers": [
+      "El alias"
+    ]
+  },
+  {
+    "match": "La pijaes el alias la pija",
+    "answers": [
+      "Jajajaj\nYo soy alias virus\nPorq dejó temblando y en la cama"
+    ]
+  },
+  {
+    "match": "Ni a palo jaja",
+    "answers": [
+      "Dale que tienen que sacar el pais adelante"
+    ]
+  },
+  {
+    "match": "no acepten las Solis eh",
+    "answers": [
+      "Ya dijiste eso"
+    ]
+  },
+  {
+    "match": "Ya dijiste eso",
+    "answers": [
+      "bno"
+    ]
+  },
+  {
+    "match": "Escríbeme",
+    "answers": [
+      "Dile q no"
+    ]
+  },
+  {
+    "match": "ay gente q no sabe quién soy no??",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "quienes",
+    "answers": [
+      "Yo"
+    ]
+  },
+  {
+    "match": "Y quien es cande?",
+    "answers": [
+      "ok"
+    ]
+  },
+  {
+    "match": "me hiciste sentir mal ya",
+    "answers": [
+      "Vamo a jugar plato"
+    ]
+  },
+  {
+    "match": "Dile q no",
+    "answers": [
+      "Jajaja"
+    ]
+  },
+  {
+    "match": "Vamo a jugar plato",
+    "answers": [
+      "vamo"
+    ]
+  },
+  {
+    "match": "vamo",
+    "answers": [
+      "adonde querés ir vos"
+    ]
+  },
+  {
+    "match": "adonde querés ir vos",
+    "answers": [
+      "y vos q"
+    ]
+  },
+  {
+    "match": "Banearon al bot",
+    "answers": [
+      "no me di cuenta eh, alta novedad"
+    ]
+  },
+  {
+    "match": "Down",
+    "answers": [
+      "tu madre",
+      "Mira quien habla eh."
+    ]
+  },
+  {
+    "match": "no me di cuenta eh, alta novedad",
+    "answers": [
+      "Si viste"
+    ]
+  },
+  {
+    "match": "A vo",
+    "answers": [
+      "respeta hdp"
+    ]
+  },
+  {
+    "match": "El juan?",
+    "answers": [
+      "Juanpi torrico",
+      "@juan"
+    ]
+  },
+  {
+    "match": "Que te anda pasando wacho?",
+    "answers": [
+      "Nada ayer me pelee con mi novia eso me tiene re bajón"
+    ]
+  },
+  {
+    "match": "Eso eso\nTu y yo seremos imparables",
+    "answers": [
+      "Es un npc xd"
+    ]
+  },
+  {
+    "match": "Es un npc xd",
+    "answers": [
+      "Creo que el lo sabe"
+    ]
+  },
+  {
+    "match": "Le peleas a 1 bot jajajaj",
+    "answers": [
+      "Mjm si."
+    ]
+  },
+  {
+    "match": "Mjm si.",
+    "answers": [
+      "Q onda lili"
+    ]
+  },
+  {
+    "match": "Q onda lili",
+    "answers": [
+      "Mjm, tdo bn."
+    ]
+  },
+  {
+    "match": "❌ ¡Error! Subcomando inválido.\n\n╭━━⪩ 🎮RPG ⪨━━\n▢\n▢ • `.aventura`<-- *da esta lista en un mensaje sin todo el menu*\n▢ • `.rpg setname` <-- *para ponerte nombre en el juego*\n▢ • `.rpg stats` <-- *para ver tus estadisticas*\n▢ • `.rpg inventory` <-- *para ver tu inventario*\n▢ • `.rpg daily` <-- *reclama la recompensa diaria*\n▢ • `.rpg hunt | mine | fish | work` <-- *trabajas te da xp y dinero*\n▢ • `.rpg gremio` <-- *para ver el gremio*\n▢ • `.rpg academia` <-- *para estudiar habilidades*\n▢ • `.rpg casino` <-- *la timba bro*\n▢ • `.rpg dungeon D1/D2/D3` <-- *da xp, dinero y objetos -- la D1 desde nivel 0, D2 desde nivel 20, D3 desde nivel 40*\n▢ • `.rpg isla corrupta I1/I2/I3` <-- *da xp, dinero y objetos -- la I1 desde nivel 60, I2 desde nivel 80, I3 desde nivel 100*\n▢ • `.rpg mazmorra legendaria L1/L2/L3` <-- *da xp, dinero y objetos -- la L1 desde nivel 150, L2 desde nivel 200, L3 desde nivel 250*\n▢ • `.rpg evento-mascota` <-- *se juega de a 3 usuarios y podes conseguir un pokemon*\n▢ • `.rpg shop` <-- *es una tienda basica de objetos*\n▢ • `.rpg home` <-- *para comprarte una casa y demas*\n▢ • `.rpg buy <código>` <-- *para comprar un item en la shop*\n▢ • `.rpg equip <código>` <-- *para equiparte items*\n▢ • `.rpg equip mascota <código>` <-- *para equipar la mascota*\n▢ • `.rpg unequip arma/armadura/mascota` <-- *para quitarte objetos equipados*\n▢ • `.rpg use <código> (solo pociones)` <-- *para tomar posiones*\n▢ • `.rpg magia curar` <-- *para curarte a vos mismo*\n▢ • `.rpg magia curar @otrouser` <-- *para curar a otro usuario*\n▢ • `.rpg duel @usuario` <-- *para un mano a mano con otro usuario*\n▢ • `.rpg asesinar @usuario` <-- *se la metes mientras duerme el otro usuario XD*\n▢ • `.rpg ranking` <-- *donde podes ver tu posicion y de los top globals*\n▢ • `.rpg list <código> <precio>` <-- *para vender items*\n▢ • `.rpg dar <dinero/item> <cantidad/código> @usuario` <-- *le das monedas a un pobre*\n▢ • `.rpg market` <-- *aca se listan los items que venden otros usuarios y los podes comprar vos*\n▢ • `.rpg buyplayer <código> <vendedor>` <-- *para comprar en el market*\n▢\n╰━━─「⭐」─━━",
+    "answers": [
+      ".kill"
+    ]
+  },
+  {
+    "match": "Mjm, tdo bn.",
+    "answers": [
+      "Me alegrou"
+    ]
+  },
+  {
+    "match": "Hola bb",
+    "answers": [
+      ".casarse"
+    ]
+  },
+  {
+    "match": "Noquiero",
+    "answers": [
+      "JAJAJ"
+    ]
+  },
+  {
+    "match": "@223256997032099 anda atrevido tu bot",
+    "answers": [
+      "JAJAJAJA",
+      "JAJAJA"
+    ]
+  },
+  {
+    "match": "No es real",
+    "answers": [
+      "YA SE PTM"
     ]
   }
 ]

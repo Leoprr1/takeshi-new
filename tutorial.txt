@@ -8,7 +8,7 @@ una vez completado arranca el bot con npm start para enlazar el bot al whatsapp 
 cuando ya alla enlazado el bot al whatsapp cerra el proceso con control+C
 
 para actualizar el bot con las nuevas modificaciones del github pone esto
-cd C:\ruta donde instalaste el bot
+cd C:\misma ruta que elegiste cuando hiciste git clone (por que si lo haces dentro de la carpeta del bot no se actualizan todas las cosas)
 git pull https://github.com/Leoprr1/takeshi-new.git
 
 luego para arrancar el bot con los siguientes comandos debes de instalar pm2
@@ -21,11 +21,9 @@ pm2 install pm2-logrotate
 
 cd C:\ruta donde instalaste el bot
 
-pm2 start cleaner.js --name "c" --node-args="--expose-gc"
+pm2 start index.js --node-args="--expose-gc" --max-memory-restart 350M
 
 pm2 start backup-rpg.js --name "b"
-
-pm2 start index.js --name "a"
 
 pm2 save
 
@@ -35,7 +33,7 @@ si se te borran los procesos menos el pm2 logrotate en el pm2 monit
 copia y pega en el cmd solo desde el cd:\ruta donde instalaste el bot----, hasta el pm2 save
 (y bueno si se te borraron todos los procesos incluso el pm2 logrotate copia todo)
 
-para ver todos los procesos solo pone 
+para ver todos los procesos solo pone(con las flechitas del teclado podes moverte del monit)
 pm2 monit
 (no hace falta poner el cd:\ruta donde instalaste el bot---)
 
@@ -52,10 +50,10 @@ npm install
 
 
 para reiniciar el proceso del bot del pm2
-pm2 restart a
+pm2 restart index
 
 para pararlo
-pm2 stop a
+pm2 stop index
 
 para parar todos los procesos
 pm2 stop all
