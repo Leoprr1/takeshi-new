@@ -16,7 +16,7 @@ module.exports = function(bot, queues = {}) {
 
       // Drops expirados
       if (Array.isArray(IDROPS)) {
-        IDROPS.splice(0, IDROPS.length, ...IDROPS.filter(drop => now - drop.creado < 30_000));
+        IDROPS.splice(0, IDROPS.length, ...IDROPS.filter(drop => now - drop.creado < 20_000));
       }
 
       // Colas temporales

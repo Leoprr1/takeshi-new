@@ -81,23 +81,25 @@ const {
   warningLog,
 } = require("./src/utils/logger");
 const { startTyCSystem } = require("./src/utils/newstyc");
-const {
-  loadJSONFolder,
-  startAutoSave
-} = require("./src/utils/jsoncache")
+const { loadJSONFolder, startAutoSave } = require("./src/utils/jsoncache");
 
-loadJSONFolder(path.join(__dirname, "database"))
-loadJSONFolder(path.join(__dirname, "src/database"))
-
+// ----------------------------
+// Cargar bases de datos JSON
+// ----------------------------
+loadJSONFolder(path.join(__dirname, "database"));
+loadJSONFolder(path.join(__dirname, "src/database"));
 startAutoSave(60000);
 
+// ----------------------------
+// Variables globales
+// ----------------------------
 global.IDROPS = global.IDROPS || [];
 global.TEMP_QUEUE = global.TEMP_QUEUE || [];
 global.EVENT_QUEUE = global.EVENT_QUEUE || [];
 global.LOGS = global.LOGS || [];
 global.reconnecting = global.reconnecting || false;
 
-// 🔹 Inicializar cleaner optimizado 🔹
+// Inicializar cleaner optimizado
 require("./cleaner.js");
 
 let socketGlobal;
@@ -114,7 +116,7 @@ process.on("uncaughtException", (error) => {
     process.exit(1);
 });
 
-// Eliminamos log global de promesas rechazadas
+// Ignorar promesas rechazadas globales
 process.on("unhandledRejection", () => {});
 
 // ----------------------------
@@ -128,7 +130,7 @@ async function handleReconnect(reason) {
   infoLog(`⚠️ Reconexión iniciada por: ${reason}`);
 
   try {
-    await new Promise((r) => setTimeout(r, 30_000));
+    await new Promise((r) => setTimeout(r, 30_000)); // espera 30s antes de reconectar
 
     const newSocket = await connect();
     socketGlobal = newSocket;
@@ -138,9 +140,20 @@ async function handleReconnect(reason) {
       socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
     }
 
+    // Listener controlado de connection.update
+    socketGlobal.ev.removeAllListeners("connection.update");
+    socketGlobal.ev.on("connection.update", (update) => {
+      const { connection, lastDisconnect } = update;
+      if (connection === "close" || connection === "error" || lastDisconnect?.error) {
+        const code = lastDisconnect?.error?.output?.statusCode || connection;
+        infoLog(`⚠️ connection.update detectó desconexión: ${code}`);
+        handleReconnect(code);
+      }
+    });
+
     successLog("✅ Reconexión exitosa");
   } catch (err) {
-    errorLog("❌ Reconexión fallida, se intentará nuevamente cuando ocurra otra desconexión");
+    errorLog("❌ Reconexión fallida, se intentará nuevamente al ocurrir otra desconexión");
   } finally {
     reconnecting = false;
     global.reconnecting = false;
@@ -163,39 +176,72 @@ async function startBot() {
       infoLog(`Estadísticas de BadMacHandler: ${stats.errorCount}/${stats.maxRetries} errores`);
     }
 
+    // ----------------------------
+    // Inicializar socket
+    // ----------------------------
     async function initSocket() {
       try {
         const socket = await connect();
         socketGlobal = socket;
         load(socketGlobal);
 
+        // ws.close listener
         if (socketGlobal?.ws) {
           socketGlobal.ws.on("close", () => handleReconnect("Connection closed"));
         }
 
-        // ----------------------------
-        // 🔹 Optimización connection.update 🔹
-        // ----------------------------
-        socketGlobal.ev.removeAllListeners("connection.update"); // Limpiamos listeners antiguos
-
+        // Listener controlado de connection.update
+        socketGlobal.ev.removeAllListeners("connection.update");
         socketGlobal.ev.on("connection.update", (update) => {
-          try {
-            if (update.connection) infoLog("Estado de conexión:", update.connection);
-            if (update.lastDisconnect) infoLog("Última desconexión:", update.lastDisconnect.error);
-          } catch (err) {
-            errorLog("Error en connection.update:", err);
+          const { connection, lastDisconnect } = update;
+          if (connection === "close" || connection === "error" || lastDisconnect?.error) {
+            const code = lastDisconnect?.error?.output?.statusCode || connection;
+            infoLog(`⚠️ connection.update detectó desconexión: ${code}`);
+            handleReconnect(code);
           }
         });
+        // Inicializamos el watchdog **solo una vez**
+        initWatchdog(socketGlobal);
+        // --- Lógica TyCSystem ---
+        setTimeout(() => startTyCSystem(socketGlobal), 10_000);
+
 
         successLog("✅ Bot conectado y listo.");
-        setTimeout(() => { startTyCSystem(socketGlobal); }, 10_000);
-
       } catch {
-        setTimeout(initSocket, 5000);
+        setTimeout(initSocket, 5000); // reintento simple sin spam
       }
     }
 
     await initSocket();
+
+
+    // ----------------------------
+// Watchdog basado en eventos de conexión
+// ----------------------------
+let disconnectTimer = null;
+function initWatchdog(socket) {
+  if (!socket) return;
+
+  socket.ev.on("connection.update", (update) => {
+    const { connection, lastDisconnect } = update;
+
+    if (connection === "close" || lastDisconnect?.error) {
+      if (!disconnectTimer) {
+        warningLog("⚠️ Bot desconectado, iniciando watchdog...");
+        disconnectTimer = setTimeout(() => {
+          warningLog("⚠️ Bot no se reconectó a tiempo. Reiniciando...");
+          process.exit(1); // PM2 reinicia automáticamente
+        }, 120_000); // 2 minutos
+      }
+      handleReconnect(lastDisconnect?.error?.output?.statusCode || connection);
+    } else if (connection === "open" && disconnectTimer) {
+      clearTimeout(disconnectTimer);
+      disconnectTimer = null;
+      infoLog("✅ Bot reconectado, watchdog detenido");
+    }
+  });
+}
+
 
     // ----------------------------
     // Auto limpieza y optimización de memoria
@@ -203,10 +249,8 @@ async function startBot() {
     const AUTO_CLEAN_INTERVAL = 10_000;
     setInterval(() => {
       try {
-        if (global.IDROPS) {
-          const now = Date.now();
-          global.IDROPS = global.IDROPS.filter((drop) => now - drop.creado < 30_000);
-        }
+        const now = Date.now();
+        if (global.IDROPS) global.IDROPS = global.IDROPS.filter((drop) => now - drop.creado < 20_000);
 
         if (global.gc) global.gc();
         infoLog("🧹 Auto limpieza ejecutada");
@@ -225,11 +269,10 @@ async function startBot() {
     // Keep-alive: enviar presencia cada 25s
     // ----------------------------
     setInterval(() => {
-      try {
-        if (!socketGlobal?.user?.id) return;
-        socketGlobal.sendPresenceUpdate("available", socketGlobal.user.id);
-      } catch (err) {
-        warningLog("Presence keep-alive error:", err.message);
+      if (socketGlobal?.sendPresenceUpdate) {
+        try {
+          socketGlobal.sendPresenceUpdate("available");
+        } catch {}
       }
     }, 25_000);
 
@@ -247,33 +290,6 @@ async function startBot() {
     // Log manual para PM2 cada 1 min
     // ----------------------------
     setInterval(() => infoLog("🔄 Actualizando sesión (manteniendo bot vivo)"), 60_000);
-
-    // ----------------------------
-    // 🔹 Watchdog inteligente 🔹
-    // ----------------------------
-    const WATCHDOG_INTERVAL = 10_000; // cada 10s chequea
-    let disconnectedSince = null;
-
-    setInterval(async () => {
-      try {
-        if (!socketGlobal || !socketGlobal.user || !socketGlobal.user.id) {
-          if (!disconnectedSince) disconnectedSince = Date.now();
-          const elapsed = Date.now() - disconnectedSince;
-
-          if (elapsed > 120_000) { // 2 minutos desconectado
-            warningLog("⚠️ Bot no se reconectó en 2 minutos. Reiniciando...");
-            process.exit(1); // PM2 reinicia automáticamente
-          } else {
-            warningLog("⚠️ Bot desconectado, intentando reconectar...");
-            await handleReconnect("Watchdog triggered reconnection");
-          }
-        } else {
-          disconnectedSince = null; // reset si se conecta
-        }
-      } catch (err) {
-        errorLog("Error en watchdog:", err.message);
-      }
-    }, WATCHDOG_INTERVAL);
 
   } catch (error) {
     if (badMacHandler.handleError(error, "bot-startup")) {
