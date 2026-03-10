@@ -53,10 +53,10 @@ let usersCache = readUserProfiles();
 /* cache admins 60s */
 async function isAdminCached({ remoteJid, userJid, socket }) {
 
-  const cached = adminCache.get(remoteJid);
+  const globalCache = global.GROUP_CACHE?.[remoteJid];
 
-  if (cached && Date.now() - cached.time < 60000) {
-    return cached.admins.includes(userJid);
+  if (globalCache && Date.now() - globalCache.time < 600000) {
+    return globalCache.admins.includes(userJid);
   }
 
   const metadata = await socket.groupMetadata(remoteJid);
@@ -65,13 +65,15 @@ async function isAdminCached({ remoteJid, userJid, socket }) {
     .filter(p => p.admin)
     .map(p => p.id);
 
-  adminCache.set(remoteJid, {
+  global.GROUP_CACHE[remoteJid] = {
     admins,
+    participants: metadata.participants.length,
     time: Date.now()
-  });
+  };
 
   return admins.includes(userJid);
 }
+
 
 /* cache comandos */
 function getCommandCached(name) {

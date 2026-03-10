@@ -25,8 +25,8 @@ const { messageHandler } = require("./messageHandler");
 const groupStats = require("../database/groupStats");
 const learningBot = require("../utils/learningBot");
 
-// 🧠 IMPORTAR LEARNING BOT 2 (solo texto, generate-memory)
-const { learnFromAllMessages } = require('../utils/learningBot2');
+// 🧠 IMPORTAR LEARNING BOT 2
+const { learnFromAllMessages } = require("../utils/learningBot2");
 
 // 🧠 IMPORTAR ELMOBOTIA
 const { getElmoBotiaResponse } = require("../utils/elmobotia");
@@ -39,37 +39,60 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
   if (!messages || !messages.length) return;
 
   for (const webMessage of messages) {
-    try { 
-      
-      const jid = webMessage?.key?.remoteJid
+    try {
 
-    if (!jid) return
+      const jid = webMessage?.key?.remoteJid;
+      if (!jid) continue;
 
-    // marcar como disponible
-    await socket.sendPresenceUpdate('available', jid)
+      // 🔥 ===== CACHE DE METADATA DEL GRUPO =====
+      if (jid.endsWith("@g.us")) {
 
-    // marcar como leído
-    await socket.readMessages([webMessage])
+        if (!global.GROUP_CACHE) global.GROUP_CACHE = {};
 
-    const messageId = webMessage?.key?.id;
+        if (!global.GROUP_CACHE[jid]) {
+          try {
 
-      
+            const metadata = await socket.groupMetadata(jid);
 
-      // 🚫 IGNORAR MENSAJES DEL PROPIO BOT (ANTI-LOOP)
+            global.GROUP_CACHE[jid] = {
+              admins: metadata.participants
+                .filter(p => p.admin)
+                .map(p => p.id),
+
+              participants: metadata.participants.map(p => p.id),
+
+              subject: metadata.subject,
+
+              size: metadata.participants.length,
+
+              time: Date.now()
+            };
+
+          } catch (err) {
+            errorLog(`Error cargando metadata del grupo: ${err.message}`);
+          }
+        }
+      }
+      // 🔥 ======================================
+
+      // marcar como disponible
+      await socket.sendPresenceUpdate("available", jid);
+
+      // marcar como leído
+      await socket.readMessages([webMessage]);
+
+      const messageId = webMessage?.key?.id;
+
+      // 🚫 IGNORAR MENSAJES DEL PROPIO BOT
       if (webMessage?.key?.fromMe) continue;
 
-      // 🚫 IGNORAR MENSAJES DUPLICADOS
+      // 🚫 IGNORAR DUPLICADOS
       if (messageId) {
         if (processedMessages.has(messageId)) continue;
-        
-        // 🔹 LEARNING BOT 2 (guardar todos los mensajes de texto en generate-memory.json)
+
         learnFromAllMessages(webMessage);
-
-
-        // 🔹 LEARNING BOT 1 (triggers/respuestas)
         learningBot.learnFromMessage(webMessage);
 
-      
         processedMessages.add(messageId);
         setTimeout(() => processedMessages.delete(messageId), 60_000);
       }
@@ -88,11 +111,14 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
 
       // 🔥 ========= SISTEMA AFK / STATS ========= 🔥
       if (webMessage?.message) {
+
         const remoteJid = webMessage?.key?.remoteJid;
         const userJid = webMessage?.key?.participant || remoteJid;
 
         if (remoteJid && remoteJid.endsWith("@g.us") && userJid) {
+
           if (!groupStats[remoteJid]) groupStats[remoteJid] = {};
+
           if (!groupStats[remoteJid][userJid]) {
             groupStats[remoteJid][userJid] = {
               messages: 0,
@@ -103,6 +129,7 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
 
           const userData = groupStats[remoteJid][userJid];
           const now = Date.now();
+
           userData.totalAfk += now - userData.lastMessage;
           userData.messages++;
           userData.lastMessage = now;
@@ -117,8 +144,11 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
       if (isAtLeastMinutesInPast(timestamp)) continue;
 
       if (isAddOrLeave.includes(webMessage.messageStubType)) {
+
         let action = "";
-        if (webMessage.messageStubType === GROUP_PARTICIPANT_ADD) action = "add";
+
+        if (webMessage.messageStubType === GROUP_PARTICIPANT_ADD)
+          action = "add";
         else if (webMessage.messageStubType === GROUP_PARTICIPANT_LEAVE)
           action = "remove";
 
@@ -157,7 +187,9 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
       // 🧠 ELMOBOTIA
       if (isActiveElmoBotiaGroup(webMessage.key.remoteJid)) {
         try {
+
           const elmoReply = getElmoBotiaResponse(webMessage);
+
           if (elmoReply) {
             await socket.sendMessage(
               webMessage.key.remoteJid,
@@ -165,12 +197,16 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
               { quoted: webMessage }
             );
           }
+
         } catch (err) {
           errorLog(`Error en ElmoBotia: ${err.message}`);
         }
       }
+
     } catch (error) {
+
       if (badMacHandler.handleError(error, "message-processing")) continue;
+
       if (badMacHandler.isSessionError(error)) {
         errorLog(`Error de sesión al procesar mensaje: ${error.message}`);
         continue;

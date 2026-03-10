@@ -86,6 +86,11 @@ const { loadJSONFolder, startAutoSave } = require("./src/utils/jsoncache");
 const startCleaner = require("./cleaner.js");
 
 // ----------------------------
+// CACHE GLOBAL DE GRUPOS
+// ----------------------------
+global.GROUP_CACHE = global.GROUP_CACHE || {};
+
+// ----------------------------
 // Cargar bases de datos JSON
 // ----------------------------
 loadJSONFolder(path.join(__dirname, "database"));
@@ -107,6 +112,57 @@ startCleaner(global, {
 
 let socketGlobal;
 let reconnecting = false;
+
+// ----------------------------
+// FUNCION CACHEAR METADATA
+// ----------------------------
+async function cacheGroupMetadata(socket, jid) {
+  try {
+    const metadata = await socket.groupMetadata(jid);
+
+    global.GROUP_CACHE[jid] = {
+      admins: metadata.participants
+        .filter(p => p.admin)
+        .map(p => p.id),
+      participants: metadata.participants.length,
+      time: Date.now()
+    };
+
+  } catch {}
+}
+
+// ----------------------------
+// NUEVO: PRECARGAR TODOS LOS GRUPOS
+// ----------------------------
+async function preloadAllGroups(socket) {
+  try {
+
+    infoLog("⚡ Precargando metadata de todos los grupos...");
+
+    const groups = await socket.groupFetchAllParticipating();
+
+    for (const jid in groups) {
+
+      const metadata = groups[jid];
+
+      global.GROUP_CACHE[jid] = {
+        admins: metadata.participants
+          .filter(p => p.admin)
+          .map(p => p.id),
+
+        participants: metadata.participants.length,
+
+        time: Date.now()
+      };
+
+    }
+
+    successLog(`✅ ${Object.keys(global.GROUP_CACHE).length} grupos cargados en cache`);
+
+  } catch (err) {
+    warningLog("⚠️ No se pudieron precargar todos los grupos");
+  }
+}
 
 // ----------------------------
 // Manejo global de errores
@@ -152,6 +208,10 @@ async function handleReconnect(reason) {
       }
     });
 
+    socketGlobal.ev.on("group-participants.update", async (update) => {
+      await cacheGroupMetadata(socketGlobal, update.id);
+    });
+
     successLog("✅ Reconexión exitosa");
   } catch (err) {
     errorLog("❌ Reconexión fallida, se intentará nuevamente al ocurrir otra desconexión");
@@ -177,7 +237,7 @@ function preloadCommands(dir) {
       try {
         const cmdModule = require(fullPath);
         global.loadedCommands.push(cmdModule);
-        if (cmdModule.preload) cmdModule.preload(); // inicialización opcional
+        if (cmdModule.preload) cmdModule.preload();
       } catch (err) {
         errorLog(`❌ Error cargando comando ${fullPath}: ${err.message}`);
       }
@@ -201,9 +261,6 @@ async function startBot() {
       infoLog(`Estadísticas de BadMacHandler: ${stats.errorCount}/${stats.maxRetries} errores`);
     }
 
-    // ----------------------------
-    // Inicializar socket
-    // ----------------------------
     async function initSocket() {
       try {
         const socket = await connect();
@@ -217,6 +274,20 @@ async function startBot() {
         socketGlobal.ev.removeAllListeners("connection.update");
         socketGlobal.ev.on("connection.update", (update) => {
           const { connection, lastDisconnect } = update;
+
+          if (connection === "open") {
+
+            // ----------------------------
+            // NUEVO: precarga completa
+            // ----------------------------
+            preloadAllGroups(socketGlobal);
+
+            // refresco cada 10 minutos
+            setInterval(() => {
+              preloadAllGroups(socketGlobal);
+            }, 600000);
+          }
+
           if (connection === "close" || connection === "error" || lastDisconnect?.error) {
             const code = lastDisconnect?.error?.output?.statusCode || connection;
             infoLog(`⚠️ connection.update detectó desconexión: ${code}`);
@@ -224,13 +295,19 @@ async function startBot() {
           }
         });
 
+        socketGlobal.ev.on("messages.upsert", async ({ messages }) => {
+          const msg = messages?.[0];
+          const jid = msg?.key?.remoteJid;
+
+          if (jid && jid.endsWith("@g.us") && !global.GROUP_CACHE[jid]) {
+            await cacheGroupMetadata(socketGlobal, jid);
+          }
+        });
+
         initWatchdog(socketGlobal);
 
         setTimeout(() => startTyCSystem(socketGlobal), 10_000);
 
-        // ----------------------------
-        // Precargar todos los comandos
-        // ----------------------------
         setTimeout(() => {
           infoLog("⚡ Precargando todos los comandos...");
           preloadCommands(path.join(__dirname, "src/commands"));
@@ -245,9 +322,6 @@ async function startBot() {
 
     await initSocket();
 
-    // ----------------------------
-    // Watchdog basado en eventos de conexión
-    // ----------------------------
     let disconnectTimer = null;
     function initWatchdog(socket) {
       if (!socket) return;
@@ -272,9 +346,6 @@ async function startBot() {
       });
     }
 
-    // ----------------------------
-    // Keep-alive: enviar presencia cada 25s
-    // ----------------------------
     setInterval(() => {
       if (socketGlobal?.sendPresenceUpdate) {
         try {
@@ -283,9 +354,6 @@ async function startBot() {
       }
     }, 10_000);
 
-    // ----------------------------
-    // Logs BadMacHandler cada 5 minutos
-    // ----------------------------
     setInterval(() => {
       const currentStats = badMacHandler.getStats();
       if (currentStats.errorCount > 0) {
@@ -293,9 +361,6 @@ async function startBot() {
       }
     }, 300_000);
 
-    // ----------------------------
-    // Log manual para PM2 cada 1 min
-    // ----------------------------
     setInterval(() => infoLog("🔄 Actualizando sesión (manteniendo bot vivo)"), 30_000);
 
   } catch (error) {
