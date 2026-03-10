@@ -247,27 +247,6 @@ function initWatchdog(socket) {
 }
 
 
-    // ----------------------------
-    // Auto limpieza y optimización de memoria
-    // ----------------------------
-    const AUTO_CLEAN_INTERVAL = 10_000;
-    setInterval(() => {
-      try {
-        const now = Date.now();
-        if (global.IDROPS) global.IDROPS = global.IDROPS.filter((drop) => now - drop.creado < 20_000);
-
-        if (global.gc) global.gc();
-        infoLog("🧹 Auto limpieza ejecutada");
-
-        if (reconnecting) {
-          if (global.IDROPS) global.IDROPS = [];
-          if (global.gc) global.gc();
-          infoLog("⚡ Limpieza agresiva ejecutada durante reconexión");
-        }
-      } catch (err) {
-        errorLog("Error durante la auto limpieza:", err.message);
-      }
-    }, AUTO_CLEAN_INTERVAL);
 
     // ----------------------------
     // Keep-alive: enviar presencia cada 25s
