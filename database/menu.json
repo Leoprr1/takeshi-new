@@ -7,6 +7,7 @@
     { "name": "Instagram", "link": "https://www.instagram.com/elmomero200_?igsh=MXBlbGdoOGRvaTF5NQ==" }
   ],
   "owner": [
+    { "command": "private on/off", "desc": "activa y desactiva el bot del privado global" },
     { "command": "newtc on/off/status/reset", "desc": "para el sistema de noticias global" },
     { "command": "exec", "desc": "ejecuta comandos en el cmd" },
     { "command": "get-id", "desc": "Devuelve el LID del contacto mencionado" },

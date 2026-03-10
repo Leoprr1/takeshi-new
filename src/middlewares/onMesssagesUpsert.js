@@ -20,6 +20,7 @@ const { errorLog, infoLog } = require("../utils/logger");
 const { badMacHandler } = require("../utils/badMacHandler");
 const { checkIfMemberIsMuted } = require("../utils/database");
 const { messageHandler } = require("./messageHandler");
+const { isBotOwner } = require("../middlewares");
 
 // 🔥 IMPORTAR STATS GLOBAL
 const groupStats = require("../database/groupStats");
@@ -31,6 +32,7 @@ const { learnFromAllMessages } = require("../utils/learningBot2");
 // 🧠 IMPORTAR ELMOBOTIA
 const { getElmoBotiaResponse } = require("../utils/elmobotia");
 const { isActiveElmoBotiaGroup } = require("../utils/elmobotiamanager");
+const { isPrivateModeEnabled } = require("../utils/privatemode");
 
 // 🔥 SET PARA EVITAR MENSAJES DUPLICADOS
 const processedMessages = new Set();
@@ -43,7 +45,12 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
 
       const jid = webMessage?.key?.remoteJid;
       if (!jid) continue;
+const userJid = webMessage.key?.participant || webMessage.key?.remoteJid;
+const isLid = userJid.endsWith("@lid");
 
+if (!jid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ userJid, isLid })) {
+  continue;
+}
       // 🔥 ===== CACHE DE METADATA DEL GRUPO =====
       if (jid.endsWith("@g.us")) {
 

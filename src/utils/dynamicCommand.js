@@ -40,6 +40,8 @@ const { errorLog } = require("../utils/logger");
 const { ONLY_GROUP_ID, BOT_EMOJI } = require("../config");
 
 const { badMacHandler } = require("./badMacHandler");
+const { isPrivateModeEnabled } = require("./privatemode");
+
 
 
 /* =====================================================
@@ -235,6 +237,12 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
 
   const isCommandMessage = message.startsWith(prefix);
 
+  /* =========================================
+   🔹 BLOQUEAR COMANDOS EN PRIVADO
+========================================= */
+if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ userJid, isLid })) {
+  return;
+}
 
   if (!isCommandMessage) {
 
