@@ -4,7 +4,7 @@ const yts = require("yt-search");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
-const { spawn, exec } = require("child_process");
+const { spawn } = require("child_process");
 const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 
 const queue = require(`${BASE_DIR}/utils/queue`);
@@ -36,7 +36,6 @@ async function executePlay({
   sendSuccessReact,
   sendErrorReply,
 }) {
-
   const queryRaw = Array.isArray(fullArgs) ? fullArgs.join(" ") : String(fullArgs || "");
   const query = queryRaw.trim();
 
@@ -49,14 +48,11 @@ async function executePlay({
   let globalAttempt = 0;
 
   while (globalAttempt < maxGlobalAttempts) {
-
     globalAttempt++;
 
-    let finalFile;
     let cacheFile;
 
     try {
-
       let videoUrl, title, lengthSeconds, thumb, channel;
 
       /* ===============================
@@ -64,34 +60,24 @@ async function executePlay({
       ================================ */
 
       if (/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)/.test(query)) {
-
         videoUrl = query;
-
-        const basic = await yts({
-          videoId: query.split("v=")[1]?.split("&")[0]
-        });
-
+        const basic = await yts({ videoId: query.split("v=")[1]?.split("&")[0] });
         title = basic?.title || "Desconocido";
         lengthSeconds = basic?.seconds || 0;
         thumb = basic?.thumbnail;
         channel = basic?.author?.name || "Desconocido";
-
       } else {
-
         const res = await yts(query);
         const vid = res?.videos?.[0];
-
         if (!vid) {
           await sendErrorReply("❌ No encontré resultados en YouTube.");
           return;
         }
-
         videoUrl = vid.url;
         title = vid.title;
         lengthSeconds = vid.seconds;
         thumb = vid.thumbnail;
         channel = vid.author?.name || "Desconocido";
-
       }
 
       if (lengthSeconds > 30 * 60)
@@ -104,31 +90,42 @@ async function executePlay({
       const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
       cacheFile = path.join(CACHE_DIR, `${safeTitle}.opus`);
 
-      let fileSizeBytes;
-      let audioBitrate = "Desconocido";
+      const audioBitrate = "130k";
+      const estimatedBytes = (130000 / 8) * lengthSeconds;
+      const fileSizeMB = (estimatedBytes / (1024 * 1024)).toFixed(2);
+      const minutes = Math.floor(lengthSeconds / 60);
+      const seconds = lengthSeconds % 60;
+
+      /* ===============================
+         🔗 ENVIAR IMAGEN Y AUDIO SIMULTÁNEO
+      ================================ */
+
+      let imagePromise = Promise.resolve();
+      if (thumb) {
+        imagePromise = sendImageFromURL(
+          thumb,
+          `\`*Título*:\` ${title}
+\`*Duración*:\` ${minutes}m ${seconds}s
+\`*Canal*:\` ${channel}
+\`*Bitrate*:\` ${audioBitrate}
+\`*Peso*:\` ${fileSizeMB}MB`
+        ).catch(() => {});
+      }
+
+      let audioPromise;
 
       if (fs.existsSync(cacheFile)) {
-
         console.log("⚡ Usando audio cacheado");
-
-        finalFile = cacheFile;
-
-        const stats = fs.statSync(finalFile);
-        fileSizeBytes = stats.size;
-
-        audioBitrate = await getAudioBitrate(finalFile);
-
+        audioPromise = socket.sendMessage(remoteJid, {
+          audio: fs.readFileSync(cacheFile),
+          mimetype: "audio/ogg; codecs=opus",
+          ptt: true
+        });
       } else {
-
         const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
-        finalFile = path.join(os.tmpdir(), `${uniqueId}.opus`);
-
-        /* ===============================
-           ⚡ STREAM DIRECTO
-        ================================ */
+        const tempFile = path.join(os.tmpdir(), `${uniqueId}.opus`);
 
         const ytDlpPath = path.join(process.cwd(), "yt-dlp.exe");
-
         const yt = spawn(ytDlpPath, [
           "-f", "bestaudio",
           "--no-playlist",
@@ -144,8 +141,8 @@ async function executePlay({
         const ff = spawn(ffmpegPath, [
           "-i", "pipe:0",
           "-c:a", "libopus",
-          "-b:a", "128k",
-          finalFile
+          "-b:a", "130k",
+          tempFile
         ], {
           windowsHide: true,
           stdio: ["pipe", "ignore", "ignore"],
@@ -154,92 +151,46 @@ async function executePlay({
 
         yt.stdout.pipe(ff.stdin);
 
-        await new Promise((resolve, reject) => {
-
+        audioPromise = new Promise((resolve, reject) => {
           ff.on("error", reject);
-
-          ff.on("close", code => {
-
-            if (code === 0 && fs.existsSync(finalFile))
+          ff.on("close", async code => {
+            if (code === 0 && fs.existsSync(tempFile)) {
+              // ENVIAMOS AUDIO Y SUBIMOS LA IMAGEN AL MISMO TIEMPO
+              await Promise.all([
+                socket.sendMessage(remoteJid, {
+                  audio: fs.readFileSync(tempFile),
+                  mimetype: "audio/ogg; codecs=opus",
+                  ptt: true
+                }),
+                imagePromise
+              ]);
+              fs.copyFileSync(tempFile, cacheFile);
+              fs.unlinkSync(tempFile);
+              cleanCache();
               resolve();
-            else
+            } else {
               reject(new Error("Error generando audio opus"));
-
+            }
           });
-
-        });
-
-        const stats = fs.statSync(finalFile);
-        fileSizeBytes = stats.size;
-
-        audioBitrate = await getAudioBitrate(finalFile);
-
-        fs.copyFileSync(finalFile, cacheFile);
-        cleanCache();
-
-      }
-
-      /* ===============================
-         🔗 ENVIAR IMAGEN Y AUDIO
-      ================================ */
-
-      const minutes = Math.floor(lengthSeconds / 60);
-      const seconds = lengthSeconds % 60;
-
-      const fileSizeMB = (fileSizeBytes / (1024 * 1024)).toFixed(2);
-
-      if (thumb) {
-
-        const imagePromise = sendImageFromURL(
-          thumb,
-          `\`*Título*:\` ${title}
-\`*Duración*:\` ${minutes}m ${seconds}s
-\`*Canal*:\` ${channel}
-\`*Bitrate*:\` ${audioBitrate}
-\`*Peso*:\` ${fileSizeMB}MB`
-        ).catch(() => {});
-
-        const audioPromise = socket.sendMessage(remoteJid, {
-          audio: fs.readFileSync(finalFile),
-          mimetype: "audio/ogg; codecs=opus",
-          ptt: true
-        });
-
-        await Promise.all([imagePromise, audioPromise]);
-      } else {
-        await socket.sendMessage(remoteJid, {
-          audio: fs.readFileSync(finalFile),
-          mimetype: "audio/ogg; codecs=opus",
-          ptt: true
         });
       }
 
+      await audioPromise;
       await sendSuccessReact();
       return;
 
     } catch (err) {
-
       console.error(`Error en play (intento ${globalAttempt}):`, err);
 
       if (globalAttempt >= maxGlobalAttempts) {
-
         await sendErrorReply(`❌ Ocurrió un error: ${err?.message || err}`);
         return;
-
       }
 
       console.log("Reintentando comando completo...");
       await new Promise(r => setTimeout(r, 1500));
-
-    } finally {
-
-      if (finalFile && fs.existsSync(finalFile) && finalFile !== cacheFile)
-        fs.unlinkSync(finalFile);
-
     }
-
   }
-
 }
 
 /* ===============================
@@ -247,24 +198,15 @@ async function executePlay({
 =============================== */
 
 function cleanCache() {
-
   if (!fs.existsSync(CACHE_DIR)) return;
 
   const files = fs.readdirSync(CACHE_DIR).map(file => {
-
     const filePath = path.join(CACHE_DIR, file);
     const stats = fs.statSync(filePath);
-
-    return {
-      path: filePath,
-      size: stats.size,
-      mtime: stats.mtimeMs
-    };
-
+    return { path: filePath, size: stats.size, mtime: stats.mtimeMs };
   });
 
   let totalSize = files.reduce((acc, f) => acc + f.size, 0);
-
   const maxBytes = MAX_CACHE_MB * 1024 * 1024;
 
   if (totalSize <= maxBytes) return;
@@ -272,39 +214,12 @@ function cleanCache() {
   files.sort((a, b) => a.mtime - b.mtime);
 
   for (const file of files) {
-
     if (totalSize <= maxBytes) break;
-
     fs.unlinkSync(file.path);
     totalSize -= file.size;
-
   }
 
   console.log("🧹 Cache limpiado automáticamente para no superar 100MB.");
-
 }
 
-/* ===============================
-   🔍 BITRATE
-=============================== */
-
-function getAudioBitrate(filePath) {
-
-  return new Promise((resolve) => {
-
-    exec(`"${ffmpegPath}" -i "${filePath}" 2>&1`, (err, stdout, stderr) => {
-
-      const info = stderr || stdout;
-      const match = info.match(/bitrate:\s*(\d+ kb\/s)/i);
-
-      if (match)
-        resolve(match[1]);
-      else
-        resolve("Desconocido");
-
-    });
-
-  });
-
-}
 

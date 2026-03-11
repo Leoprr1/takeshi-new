@@ -3,7 +3,6 @@ const { toUserJid } = require("../../utils");
 
 // función para formatear tiempo correctamente
 function formatTime(ms) {
-
   let seconds = Math.floor(ms / 1000);
 
   const days = Math.floor(seconds / 86400);
@@ -16,7 +15,6 @@ function formatTime(ms) {
   seconds %= 60;
 
   const parts = [];
-
   if (days) parts.push(`${days}d`);
   if (hours) parts.push(`${hours}h`);
   if (minutes) parts.push(`${minutes}m`);
@@ -55,39 +53,41 @@ module.exports = {
     const metadata = await socket.groupMetadata(remoteJid);
     const participants = metadata.participants.map(p => p.id);
 
+    const now = Date.now();
+
     // 🔹 AGREGAR NUEVOS MIEMBROS
-    for (const jid of participants) {
+    for (const participant of metadata.participants) {
+      const jid = participant.id;
 
       if (!stats[jid]) {
+        // Si nunca enviaron un mensaje, usar la fecha de unión al grupo
+        const joinedTimestamp = participant?.joinedTimestamp || now; 
+        const afkTime = now - joinedTimestamp;
+
         stats[jid] = {
-          lastMessage: Date.now(),
-          totalAfk: 0,
+          lastMessage: joinedTimestamp,
+          totalAfk: afkTime, // AFK acumulado inicial
           messages: 0
         };
       }
-
     }
 
     // 🔹 LIMPIAR DB (usuarios que ya no están en el grupo)
     for (const jid of Object.keys(stats)) {
-
       if (!participants.includes(jid)) {
         delete stats[jid];
       }
-
     }
 
-    const now = Date.now();
     const users = Object.entries(stats);
 
-    // ordenar ranking
-    users.sort((a, b) => b[1].totalAfk - a[1].totalAfk);
+    // ordenar ranking por AFK actual (más inactivos primero)
+    users.sort((a, b) => (now - b[1].lastMessage) - (now - a[1].lastMessage));
 
-    let text = "💤 *RANKING AFK DEL GRUPO*\n\n";
+    let text = "💤 *AFK DEL GRUPO*\n\n";
     const mentions = [];
 
     for (const [jid, data] of users) {
-
       const number = jid.split("@")[0];
       mentions.push(jid);
 
@@ -107,4 +107,5 @@ module.exports = {
 
   },
 };
+
 
