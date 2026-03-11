@@ -5,17 +5,17 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { spawn, exec } = require("child_process");
+const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 
 const queue = require(`${BASE_DIR}/utils/queue`);
 
 const CACHE_DIR = path.join(__dirname, "../../cache/video");
 const MAX_CACHE_MB = 200;
-
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 module.exports = {
   name: "pv",
-  description: "Descarga y envía video desde YouTube optimizado",
+  description: "Descarga y envía video MP4 desde YouTube optimizado",
   commands: ["pv", "playv"],
   usage: `${PREFIX}play-video duki goteo`,
 
@@ -34,10 +34,7 @@ module.exports = {
         ? fullArgs.join(" ").trim()
         : String(fullArgs || "").trim();
 
-      if (!query) {
-        throw new InvalidParameterError("¡Necesitas decirme qué video buscar!");
-      }
-
+      if (!query) throw new InvalidParameterError("¡Necesitas decirme qué video buscar!");
       await sendWaitReact();
 
       const maxGlobalAttempts = 5;
@@ -45,7 +42,6 @@ module.exports = {
 
       while (globalAttempt < maxGlobalAttempts) {
         globalAttempt++;
-
         let tempFile;
         let finalFile;
         let cacheFile;
@@ -79,8 +75,7 @@ module.exports = {
             channel = vid.author?.name || "Desconocido";
           }
 
-          if (lengthSeconds > 30 * 60)
-            throw new WarningError("El video dura más de 30 minutos.");
+          if (lengthSeconds > 30 * 60) throw new WarningError("El video dura más de 30 minutos.");
 
           /* ===============================
              🔑 CACHE
@@ -95,22 +90,17 @@ module.exports = {
             fileSizeBytes = stats.size;
             resolution = await getVideoResolution(finalFile);
           } else {
-            /* ===============================
-               📁 TEMP FILE
-            ================================ */
             const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
             tempFile = path.join(os.tmpdir(), `${uniqueId}.mp4`);
             finalFile = tempFile;
 
             /* ===============================
-               ⬇ DESCARGAR CON YT-DLP
+               ⬇ DESCARGAR VIDEO DIRECTO
             ================================ */
             const ytDlpPath = path.join(process.cwd(), "yt-dlp.exe");
             const args = [
               "-f", "mp4[height<=480]/best[height<=480]",
               "--no-playlist",
-              "--concurrent-fragments", "4",
-              "--retries", "5",
               "--quiet",
               "-o", tempFile.replace(/\\/g, "/"),
               videoUrl
@@ -123,10 +113,7 @@ module.exports = {
                 creationFlags: 0x08000000
               });
 
-              child.on("error", err =>
-                reject(new Error("Error al ejecutar yt-dlp: " + err.message))
-              );
-
+              child.on("error", err => reject(new Error("Error al ejecutar yt-dlp: " + err.message)));
               child.on("close", code => {
                 if (code === 0 && fs.existsSync(tempFile)) resolve();
                 else reject(new Error("No se pudo descargar el video. Código: " + code));
@@ -145,7 +132,7 @@ module.exports = {
           }
 
           /* ===============================
-             📤 ENVIAR
+             📤 ENVIAR IMAGEN Y VIDEO
           ================================ */
           const minutes = Math.floor(lengthSeconds / 60);
           const seconds = lengthSeconds % 60;
@@ -154,7 +141,11 @@ module.exports = {
           if (thumb) {
             await sendImageFromURL(
               thumb,
-              `\`*Título*:\` ${title}\n\`*Duración*:\` ${minutes}m ${seconds}s\n\`*Canal*:\` ${channel}\n\`*Calidad*:\` ${resolution}\n\`*Peso*:\` ${fileSizeMB}MB`
+              `\`*Título*:\` ${title}
+\`*Duración*:\` ${minutes}m ${seconds}s
+\`*Canal*:\` ${channel}
+\`*Calidad*:\` ${resolution}
+\`*Peso*:\` ${fileSizeMB}MB`
             ).catch(() => {});
           }
 
@@ -164,18 +155,14 @@ module.exports = {
 
         } catch (err) {
           console.error(`Error en play-video (intento ${globalAttempt}):`, err);
-
           if (globalAttempt >= maxGlobalAttempts) {
             await sendErrorReply(`❌ Ocurrió un error: ${err.message}`);
             return;
           }
-
+          console.log("Reintentando comando completo...");
           await new Promise(r => setTimeout(r, 1500));
-
         } finally {
-          if (tempFile && fs.existsSync(tempFile) && tempFile !== cacheFile) {
-            fs.unlinkSync(tempFile);
-          }
+          if (tempFile && fs.existsSync(tempFile) && tempFile !== cacheFile) fs.unlinkSync(tempFile);
         }
       }
     });
@@ -196,7 +183,6 @@ function cleanCache() {
 
   let totalSize = files.reduce((acc, f) => acc + f.size, 0);
   const maxBytes = MAX_CACHE_MB * 1024 * 1024;
-
   if (totalSize <= maxBytes) return;
 
   files.sort((a, b) => a.mtime - b.mtime);
@@ -214,7 +200,6 @@ function cleanCache() {
 =============================== */
 function getVideoResolution(filePath) {
   return new Promise((resolve) => {
-    const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
     exec(`"${ffmpegPath}" -i "${filePath}" 2>&1`, (err, stdout, stderr) => {
       const info = stderr || stdout;
       const match = info.match(/Stream.*Video.* (\d{2,5})x(\d{2,5})/i);

@@ -9,7 +9,7 @@
   "owner": [
     { "command": "private on/off", "desc": "activa y desactiva el bot del privado global" },
     { "command": "newtc on/off/status/reset", "desc": "para el sistema de noticias global" },
-    { "command": "exec", "desc": "ejecuta comandos en el cmd" },
+    { "command": "exec menu", "desc": "menu de comandos para el cmd" },
     { "command": "get-id", "desc": "Devuelve el LID del contacto mencionado" },
     { "command": "off", "desc": "desactiva el bot en un grupo" },
     { "command": "on", "desc": "activa el bot en el grupo" },

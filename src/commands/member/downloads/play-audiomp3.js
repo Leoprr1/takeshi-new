@@ -9,25 +9,24 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 
 const queue = require(`${BASE_DIR}/utils/queue`);
 
-const CACHE_DIR = path.join(__dirname, "../../cache/mp3");
+const CACHE_DIR = path.join(__dirname, "../../cache/audio");
 const MAX_CACHE_MB = 100;
-
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 module.exports = {
   name: "mp3",
-  description: "Descarga y envía audio desde YouTube en MP3 reproducible",
-  commands: ["mp3"],
+  description: "Descarga y envía audio MP3 desde YouTube optimizado",
+  commands: ["mp3", "playmp3", "pam"],
   usage: `${PREFIX}mp3 duki goteo`,
 
   handle: async (ctx) => {
     await queue.add(async () => {
-      await executeMP3(ctx);
+      await executePlay(ctx);
     });
   },
 };
 
-async function executeMP3({
+async function executePlay({
   socket,
   remoteJid,
   sendImageFromURL,
@@ -48,7 +47,6 @@ async function executeMP3({
   while (globalAttempt < maxGlobalAttempts) {
     globalAttempt++;
 
-    let tempFile;
     let finalFile;
     let cacheFile;
 
@@ -92,64 +90,51 @@ async function executeMP3({
       let audioBitrate = "Desconocido";
 
       if (fs.existsSync(cacheFile)) {
-        console.log("⚡ Usando MP3 cacheado");
+        console.log("⚡ Usando audio MP3 cacheado");
         finalFile = cacheFile;
         const stats = fs.statSync(finalFile);
         fileSizeBytes = stats.size;
         audioBitrate = await getAudioBitrate(finalFile);
       } else {
         const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
-        tempFile = path.join(os.tmpdir(), `${uniqueId}.m4a`);
         finalFile = path.join(os.tmpdir(), `${uniqueId}.mp3`);
 
         /* ===============================
-           ⬇ DESCARGAR AUDIO
+           ⚡ STREAM DIRECTO MP3
         ================================ */
         const ytDlpPath = path.join(process.cwd(), "yt-dlp.exe");
-        const args = [
-          "-f", "bestaudio[ext=m4a]/bestaudio",
+
+        const yt = spawn(ytDlpPath, [
+          "-f", "bestaudio",
           "--no-playlist",
-          "--concurrent-fragments", "4",
-          "--retries", "5",
           "--quiet",
-          "-o", tempFile.replace(/\\/g, "/"),
+          "-o", "-",
           videoUrl
-        ];
-
-        await new Promise((resolve, reject) => {
-          const child = spawn(ytDlpPath, args, {
-            windowsHide: true,
-            stdio: "ignore",
-            creationFlags: 0x08000000
-          });
-
-          child.on("error", reject);
-          child.on("close", code => {
-            if (code === 0 && fs.existsSync(tempFile)) resolve();
-            else reject(new Error("No se pudo descargar el audio."));
-          });
+        ], {
+          windowsHide: true,
+          stdio: ["ignore", "pipe", "ignore"],
+          creationFlags: 0x08000000
         });
 
-        /* ===============================
-           🔊 CONVERTIR A MP3 (libmp3lame)
-        ================================ */
-        await new Promise((resolve, reject) => {
-          const ff = spawn(ffmpegPath, [
-            "-i", tempFile,
-            "-vn",
-            "-c:a", "libmp3lame",
-            "-ar", "44100",
-            "-ac", "2",
-            "-b:a", "320k",
-            finalFile
-          ], {
-            windowsHide: true,
-            stdio: "ignore",
-            creationFlags: 0x08000000
-          });
+        const ff = spawn(ffmpegPath, [
+          "-i", "pipe:0",
+          "-c:a", "libmp3lame",
+          "-b:a", "128k",
+          finalFile
+        ], {
+          windowsHide: true,
+          stdio: ["pipe", "ignore", "ignore"],
+          creationFlags: 0x08000000
+        });
 
+        yt.stdout.pipe(ff.stdin);
+
+        await new Promise((resolve, reject) => {
           ff.on("error", reject);
-          ff.on("close", code => code === 0 ? resolve() : reject(new Error("Error convirtiendo a MP3")));
+          ff.on("close", code => {
+            if (code === 0 && fs.existsSync(finalFile)) resolve();
+            else reject(new Error("Error generando audio MP3"));
+          });
         });
 
         const stats = fs.statSync(finalFile);
@@ -158,11 +143,10 @@ async function executeMP3({
 
         fs.copyFileSync(finalFile, cacheFile);
         cleanCache();
-        fs.unlinkSync(tempFile);
       }
 
       /* ===============================
-         📤 ENVIAR IMAGEN + MP3
+         🔗 ENVIAR IMAGEN Y AUDIO
       ================================ */
       const minutes = Math.floor(lengthSeconds / 60);
       const seconds = lengthSeconds % 60;
@@ -171,7 +155,11 @@ async function executeMP3({
       if (thumb) {
         await sendImageFromURL(
           thumb,
-          `\`*Título*:\` ${title}\n\`*Duración*:\` ${minutes}m ${seconds}s\n\`*Canal*:\` ${channel}\n\`*Bitrate*:\` ${audioBitrate}\n\`*Peso*:\` ${fileSizeMB}MB`
+          `\`*Título*:\` ${title}
+\`*Duración*:\` ${minutes}m ${seconds}s
+\`*Canal*:\` ${channel}
+\`*Bitrate*:\` ${audioBitrate}
+\`*Peso*:\` ${fileSizeMB}MB`
         ).catch(() => {});
       }
 
@@ -185,20 +173,22 @@ async function executeMP3({
       return;
 
     } catch (err) {
-      console.error(`Error en mp3 (intento ${globalAttempt}):`, err);
+      console.error(`Error en play MP3 (intento ${globalAttempt}):`, err);
       if (globalAttempt >= maxGlobalAttempts) {
         await sendErrorReply(`❌ Ocurrió un error: ${err?.message || err}`);
         return;
       }
+      console.log("Reintentando comando completo...");
       await new Promise(r => setTimeout(r, 1500));
     } finally {
-      if (finalFile && fs.existsSync(finalFile) && finalFile !== cacheFile) fs.unlinkSync(finalFile);
+      if (finalFile && fs.existsSync(finalFile) && finalFile !== cacheFile)
+        fs.unlinkSync(finalFile);
     }
   }
 }
 
 /* ===============================
-   🧹 LIMPIEZA CACHE 100MB
+   🧹 LIMPIEZA DE CACHE
 =============================== */
 function cleanCache() {
   if (!fs.existsSync(CACHE_DIR)) return;
@@ -210,7 +200,6 @@ function cleanCache() {
 
   let totalSize = files.reduce((acc, f) => acc + f.size, 0);
   const maxBytes = MAX_CACHE_MB * 1024 * 1024;
-
   if (totalSize <= maxBytes) return;
 
   files.sort((a, b) => a.mtime - b.mtime);
@@ -220,11 +209,11 @@ function cleanCache() {
     totalSize -= file.size;
   }
 
-  console.log("🧹 Cache MP3 limpiado automáticamente (100MB máximo).");
+  console.log("🧹 Cache limpiado automáticamente para no superar 100MB.");
 }
 
 /* ===============================
-   🔍 FUNCIONES AUXILIARES
+   🔍 BITRATE
 =============================== */
 function getAudioBitrate(filePath) {
   return new Promise((resolve) => {
