@@ -90,40 +90,40 @@ async function executePlay({
       const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
       cacheFile = path.join(CACHE_DIR, `${safeTitle}.mp3`);
 
-      const audioBitrate = "128k";
-      const estimatedBytes = (128000 / 8) * lengthSeconds;
+      const audioBitrate = "130k";
+      const estimatedBytes = (130000 / 8) * lengthSeconds;
       const fileSizeMB = (estimatedBytes / (1024 * 1024)).toFixed(2);
       const minutes = Math.floor(lengthSeconds / 60);
       const seconds = lengthSeconds % 60;
 
       /* ===============================
-         🔗 ENVIAR IMAGEN Y AUDIO SIMULTÁNEO
+         🔗 GENERAR / ENVIAR AUDIO
       ================================ */
 
-      let imagePromise = Promise.resolve();
-      if (thumb) {
-        imagePromise = sendImageFromURL(
-          thumb,
-          `\`*Título*:\` ${title}
+      if (fs.existsSync(cacheFile)) {
+        console.log("⚡ Usando audio MP3 cacheado");
+
+
+        // Luego enviamos la imagen
+        if (thumb) {
+          await sendImageFromURL(
+            thumb,
+            `\`*Título*:\` ${title}
 \`*Duración*:\` ${minutes}m ${seconds}s
 \`*Canal*:\` ${channel}
 \`*Bitrate*:\` ${audioBitrate}
 \`*Peso*:\` ${fileSizeMB}MB`
-        ).catch(() => {});
-      }
+          ).catch(() => {});
+        }
+        // Primero enviamos el audio
+        await socket.sendMessage(remoteJid, {
+          audio: fs.readFileSync(cacheFile),
+          mimetype: "audio/mpeg",
+          ptt: false
+        });
 
-      let audioPromise;
+       
 
-      if (fs.existsSync(cacheFile)) {
-        console.log("⚡ Usando audio MP3 cacheado");
-        audioPromise = Promise.all([
-          socket.sendMessage(remoteJid, {
-            audio: fs.readFileSync(cacheFile),
-            mimetype: "audio/mpeg",
-            ptt: false
-          }),
-          imagePromise
-        ]);
       } else {
         const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
         const tempFile = path.join(os.tmpdir(), `${uniqueId}.mp3`);
@@ -144,7 +144,7 @@ async function executePlay({
         const ff = spawn(ffmpegPath, [
           "-i", "pipe:0",
           "-c:a", "libmp3lame",
-          "-b:a", "128k",
+          "-b:a", audioBitrate,
           tempFile
         ], {
           windowsHide: true,
@@ -154,18 +154,30 @@ async function executePlay({
 
         yt.stdout.pipe(ff.stdin);
 
-        audioPromise = new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
           ff.on("error", reject);
           ff.on("close", async code => {
             if (code === 0 && fs.existsSync(tempFile)) {
-              await Promise.all([
-                socket.sendMessage(remoteJid, {
-                  audio: fs.readFileSync(tempFile),
-                  mimetype: "audio/mpeg",
-                  ptt: false
-                }),
-                imagePromise
-              ]);
+
+
+              // Luego enviamos la imagen
+              if (thumb) {
+                await sendImageFromURL(
+                  thumb,
+                  `\`*Título*:\` ${title}
+\`*Duración*:\` ${minutes}m ${seconds}s
+\`*Canal*:\` ${channel}
+\`*Bitrate*:\` ${audioBitrate}
+\`*Peso*:\` ${fileSizeMB}MB`
+                ).catch(() => {});
+              }
+              // Primero enviamos el audio
+              await socket.sendMessage(remoteJid, {
+                audio: fs.readFileSync(tempFile),
+                mimetype: "audio/mpeg",
+                ptt: false
+              });
+
               fs.copyFileSync(tempFile, cacheFile);
               fs.unlinkSync(tempFile);
               cleanCache();
@@ -177,7 +189,6 @@ async function executePlay({
         });
       }
 
-      await audioPromise;
       await sendSuccessReact();
       return;
 

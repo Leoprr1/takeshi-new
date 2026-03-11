@@ -9,16 +9,16 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 
 const queue = require(`${BASE_DIR}/utils/queue`);
 
-const CACHE_DIR = path.join(__dirname, "../../cache/audio");
-const MAX_CACHE_MB = 100;
+const CACHE_DIR = path.join(__dirname, "../../cache/video");
+const MAX_CACHE_MB = 200;
 
 if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 module.exports = {
-  name: "mp3",
-  description: "Descarga y envía audio MP3 desde YouTube en streaming",
-  commands: ["mp3", "playmp3", "pam"],
-  usage: `${PREFIX}mp3 duki goteo`,
+  name: "pv",
+  description: "Descarga y envía video MP4 desde YouTube optimizado",
+  commands: ["pv", "playv"],
+  usage: `${PREFIX}play-video duki goteo`,
 
   handle: async (ctx) => {
     await queue.add(async () => {
@@ -28,19 +28,19 @@ module.exports = {
 };
 
 async function executePlay({
-  socket,
-  remoteJid,
+  sendVideoFromURL,
   sendImageFromURL,
   fullArgs,
   sendWaitReact,
   sendSuccessReact,
   sendErrorReply,
 }) {
+
   const queryRaw = Array.isArray(fullArgs) ? fullArgs.join(" ") : String(fullArgs || "");
   const query = queryRaw.trim();
 
   if (!query)
-    throw new InvalidParameterError("¡Necesitas decirme qué canción buscar!");
+    throw new InvalidParameterError("¡Necesitas decirme qué video buscar!");
 
   await sendWaitReact();
 
@@ -50,6 +50,7 @@ async function executePlay({
   while (globalAttempt < maxGlobalAttempts) {
     globalAttempt++;
 
+    let tempFile;
     let cacheFile;
 
     try {
@@ -58,6 +59,7 @@ async function executePlay({
       /* ===============================
          🔎 BUSCAR VIDEO
       ================================ */
+
       if (/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)/.test(query)) {
         videoUrl = query;
         const basic = await yts({ videoId: query.split("v=")[1]?.split("&")[0] });
@@ -80,123 +82,124 @@ async function executePlay({
       }
 
       if (lengthSeconds > 30 * 60)
-        throw new WarningError("El audio dura más de 30 minutos.");
+        throw new WarningError("El video dura más de 30 minutos.");
 
       /* ===============================
          🔑 CACHE
       ================================ */
+
       const safeTitle = title.replace(/[^a-z0-9]/gi, "_").toLowerCase();
-      cacheFile = path.join(CACHE_DIR, `${safeTitle}.mp3`);
-      const audioBitrate = "128k";
+      cacheFile = path.join(CACHE_DIR, `${safeTitle}.mp4`);
+
+      const videoBitrate = 800_000; // 800 kbps aproximado para 480p
+      const estimatedBytes = (videoBitrate / 8) * lengthSeconds;
+      const fileSizeMB = (estimatedBytes / (1024 * 1024)).toFixed(2);
       const minutes = Math.floor(lengthSeconds / 60);
       const seconds = lengthSeconds % 60;
 
-      /* ===============================
-         🔗 STREAM AUDIO DIRECTO
-      ================================ */
-      if (fs.existsSync(cacheFile)) {
-        console.log("⚡ Usando audio MP3 cacheado (stream directo)");
-        // enviamos el audio cacheado primero
-        await socket.sendMessage(remoteJid, {
-          audio: fs.readFileSync(cacheFile),
-          mimetype: "audio/mpeg",
-          ptt: false
-        });
+      let finalFile;
 
+      if (fs.existsSync(cacheFile)) {
+        console.log("⚡ Usando video cacheado");
+        finalFile = cacheFile;
       } else {
-        const tempFile = path.join(os.tmpdir(), `${Date.now()}_${Math.floor(Math.random() * 9999)}.mp3`);
+        const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
+        tempFile = path.join(os.tmpdir(), `${uniqueId}.mp4`);
+        finalFile = tempFile;
+
         const ytDlpPath = path.join(process.cwd(), "yt-dlp.exe");
 
-        // yt-dlp -> ffmpeg -> archivo temporal
-        const yt = spawn(ytDlpPath, [
-          "-f", "bestaudio",
+        const args = [
+          "-f", "mp4[height<=480]/best[height<=480]",
           "--no-playlist",
           "--quiet",
-          "-o", "-",
+          "-o", tempFile.replace(/\\/g, "/"),
           videoUrl
-        ], { windowsHide: true, stdio: ["ignore", "pipe", "ignore"], creationFlags: 0x08000000 });
-
-        const ff = spawn(ffmpegPath, [
-          "-i", "pipe:0",
-          "-c:a", "libmp3lame",
-          "-b:a", audioBitrate,
-          "-f", "mp3",
-          "pipe:1"
-        ], { windowsHide: true, stdio: ["pipe", "pipe", "ignore"], creationFlags: 0x08000000 });
-
-        yt.stdout.pipe(ff.stdin);
-
-        let audioBuffers = [];
-        ff.stdout.on("data", chunk => audioBuffers.push(chunk));
+        ];
 
         await new Promise((resolve, reject) => {
-          ff.on("error", reject);
-          ff.on("close", async code => {
-            if (code === 0) {
-              const finalBuffer = Buffer.concat(audioBuffers);
-              // enviamos el audio apenas se completa el buffer
-              await socket.sendMessage(remoteJid, {
-                audio: finalBuffer,
-                mimetype: "audio/mpeg",
-                ptt: false
-              });
+          const child = spawn(ytDlpPath, args, {
+            windowsHide: true,
+            stdio: "ignore",
+            creationFlags: 0x08000000
+          });
 
-              // guardamos en cache
-              fs.writeFileSync(cacheFile, finalBuffer);
-              cleanCache();
-
-              resolve();
-            } else reject(new Error("Error generando audio MP3 en streaming"));
+          child.on("error", err => reject(new Error("Error al ejecutar yt-dlp: " + err.message)));
+          child.on("close", code => {
+            if (code === 0 && fs.existsSync(tempFile)) resolve();
+            else reject(new Error("No se pudo descargar el video. Código: " + code));
           });
         });
+
+        fs.copyFileSync(tempFile, cacheFile);
+        cleanCache();
       }
 
-      // finalmente enviamos la imagen
+      /* ===============================
+         📤 ENVIAR IMAGEN + VIDEO
+      ================================ */
+
+      let imagePromise = Promise.resolve();
       if (thumb) {
-        await sendImageFromURL(
+        imagePromise = sendImageFromURL(
           thumb,
           `\`*Título*:\` ${title}
 \`*Duración*:\` ${minutes}m ${seconds}s
 \`*Canal*:\` ${channel}
-\`*Bitrate*:\` ${audioBitrate}`
+\`*Calidad*:\` 480p
+\`*Peso*:\` ${fileSizeMB}MB`
         ).catch(() => {});
       }
+
+      await Promise.all([
+        sendVideoFromURL(finalFile),
+        imagePromise
+      ]);
 
       await sendSuccessReact();
       return;
 
     } catch (err) {
-      console.error(`Error en mp3 (intento ${globalAttempt}):`, err);
-
+      console.error(`Error en play-video (intento ${globalAttempt}):`, err);
       if (globalAttempt >= maxGlobalAttempts) {
         await sendErrorReply(`❌ Ocurrió un error: ${err?.message || err}`);
         return;
       }
-
       console.log("Reintentando comando completo...");
       await new Promise(r => setTimeout(r, 1500));
+    } finally {
+      if (tempFile && fs.existsSync(tempFile) && tempFile !== cacheFile)
+        fs.unlinkSync(tempFile);
     }
   }
+
 }
 
 /* ===============================
-   🧹 LIMPIEZA DE CACHE
+   🧹 LIMPIEZA CACHE
 =============================== */
+
 function cleanCache() {
   if (!fs.existsSync(CACHE_DIR)) return;
+
   const files = fs.readdirSync(CACHE_DIR).map(file => {
     const filePath = path.join(CACHE_DIR, file);
     const stats = fs.statSync(filePath);
     return { path: filePath, size: stats.size, mtime: stats.mtimeMs };
   });
+
   let totalSize = files.reduce((acc, f) => acc + f.size, 0);
   const maxBytes = MAX_CACHE_MB * 1024 * 1024;
+
   if (totalSize <= maxBytes) return;
+
   files.sort((a, b) => a.mtime - b.mtime);
+
   for (const file of files) {
     if (totalSize <= maxBytes) break;
     fs.unlinkSync(file.path);
     totalSize -= file.size;
   }
-  console.log("🧹 Cache limpiado automáticamente para no superar 100MB.");
+
+  console.log("🧹 Cache de video limpiado automáticamente (200MB máximo).");
 }

@@ -30,15 +30,51 @@
     ]
   },
   {
+    "match": "1.89",
+    "answers": [
+      "Ah,te gano"
+    ]
+  },
+  {
+    "match": "1.98",
+    "answers": [
+      "99⁹"
+    ]
+  },
+  {
     "match": "555",
     "answers": [
       "Por el culo te la inco x3"
     ]
   },
   {
+    "match": "10,92",
+    "answers": [
+      "100.678"
+    ]
+  },
+  {
+    "match": "100.678",
+    "answers": [
+      "574,627"
+    ]
+  },
+  {
+    "match": "574,627",
+    "answers": [
+      "1.000.5678"
+    ]
+  },
+  {
     "match": "6282632",
     "answers": [
       "@161787676729345 PVP con @223256997032099"
+    ]
+  },
+  {
+    "match": "1.000.5678",
+    "answers": [
+      "1,000,000,000,000,000"
     ]
   },
   {
@@ -118,7 +154,8 @@
     "match": "gracias",
     "answers": [
       "Nadapp",
-      "Presentense plis, foto de una vez, nombre y edad"
+      "Presentense plis, foto de una vez, nombre y edad",
+      "te amo"
     ]
   },
   {
@@ -676,7 +713,8 @@
       "E re lindo",
       "Jsjsjsjs",
       "Jajaja",
-      "Ush"
+      "Ush",
+      "9E^999999999999999"
     ]
   },
   {
@@ -982,7 +1020,8 @@
       "Dormiste",
       "okkk",
       "Bueno",
-      "Dale dale"
+      "Dale dale",
+      "Ta bien"
     ]
   },
   {
@@ -1023,7 +1062,8 @@
       "Ayy",
       "Así te gotean",
       "Ai",
-      "Me di cuenta"
+      "Me di cuenta",
+      "No sabria que decirte"
     ]
   },
   {
@@ -1640,7 +1680,8 @@
       "Entraa",
       "Chi",
       "Sii",
-      "Una bronca de verdad"
+      "Una bronca de verdad",
+      "Para cuando un partido?"
     ]
   },
   {
@@ -3304,7 +3345,8 @@
       "vos",
       "Trabajando 😕",
       "Ok",
-      "Voa"
+      "Voa",
+      "No tuve el pribilegio de ser una persona color carton humedo pero se jugar bastante jaja"
     ]
   },
   {
@@ -11567,7 +11609,8 @@
     "match": "Mentira",
     "answers": [
       "no",
-      "Ya me fui"
+      "Ya me fui",
+      "Nono ya me ofendi ahora"
     ]
   },
   {
@@ -28159,6 +28202,190 @@
     "match": "No te salio",
     "answers": [
       "no"
+    ]
+  },
+  {
+    "match": "Quien es ema?",
+    "answers": [
+      "Laquemamaste perro"
+    ]
+  },
+  {
+    "match": "ª",
+    "answers": [
+      "Joda perro, pasa que llevaba mas de 3 horas sin alburear a nadie"
+    ]
+  },
+  {
+    "match": "Y la Guada?",
+    "answers": [
+      "Me dijo que no queria entrar"
+    ]
+  },
+  {
+    "match": "y armamos racha",
+    "answers": [
+      "No tengo rachas"
+    ]
+  },
+  {
+    "match": "No tengo rachas",
+    "answers": [
+      "no te aparece?"
+    ]
+  },
+  {
+    "match": "cande es más pajera q un pibe",
+    "answers": [
+      "no",
+      "Sera? Jaja"
+    ]
+  },
+  {
+    "match": "xq yo me enamoro y soy fiel",
+    "answers": [
+      "de los tik toks?"
+    ]
+  },
+  {
+    "match": "Mido 1,66🥲",
+    "answers": [
+      "yo 1.66",
+      "io 1,54"
+    ]
+  },
+  {
+    "match": "yo 1.66",
+    "answers": [
+      "Es lo mismo"
+    ]
+  },
+  {
+    "match": "Sera? Jaja",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "io 1,54",
+    "answers": [
+      "Jajaj",
+      "Soy el mas alto tncs?"
+    ]
+  },
+  {
+    "match": "Soy el mas alto tncs?",
+    "answers": [
+      "Si",
+      "Y cuánto ?"
+    ]
+  },
+  {
+    "match": "Genetica de baloncesto :v",
+    "answers": [
+      "Yo soy negro🥲"
+    ]
+  },
+  {
+    "match": "Yo soy negro🥲",
+    "answers": [
+      "Sabes jugar, robar o rapear?"
+    ]
+  },
+  {
+    "match": "Y cuánto ?",
+    "answers": [
+      "1.89"
+    ]
+  },
+  {
+    "match": "Sabes jugar, robar o rapear?",
+    "answers": [
+      "Las primeras dos"
+    ]
+  },
+  {
+    "match": "Las primeras dos",
+    "answers": [
+      "Ahh bien ahi"
+    ]
+  },
+  {
+    "match": "Para cuando un partido?",
+    "answers": [
+      "Cuando vengas a cba"
+    ]
+  },
+  {
+    "match": "Yo 2,10",
+    "answers": [
+      "Yo 5.34"
+    ]
+  },
+  {
+    "match": "Yo 5.34",
+    "answers": [
+      "10,92"
+    ]
+  },
+  {
+    "match": "No tuve el pribilegio de ser una persona color carton humedo pero se jugar bastante jaja",
+    "answers": [
+      "🖕😔"
+    ]
+  },
+  {
+    "match": "Cuando vengas a cba",
+    "answers": [
+      "D1d1"
+    ]
+  },
+  {
+    "match": "1,000,000,000,000,000",
+    "answers": [
+      "9.999.9.999.9999"
+    ]
+  },
+  {
+    "match": "99⁹",
+    "answers": [
+      "Les gane a los dos"
+    ]
+  },
+  {
+    "match": "9E^999999999999999",
+    "answers": [
+      "Puto"
+    ]
+  },
+  {
+    "match": "Como insultan en este grupo",
+    "answers": [
+      "Mentira"
+    ]
+  },
+  {
+    "match": "Nono ya me ofendi ahora",
+    "answers": [
+      "Ush"
+    ]
+  },
+  {
+    "match": "si lo sacan a Agus tmb me salgo",
+    "answers": [
+      "chau"
+    ]
+  },
+  {
+    "match": "hice algo mejor",
+    "answers": [
+      "Gracias"
+    ]
+  },
+  {
+    "match": "ema me caes bien",
+    "answers": [
+      "Gracias"
     ]
   }
 ]

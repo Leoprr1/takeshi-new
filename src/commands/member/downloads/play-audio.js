@@ -97,30 +97,33 @@ async function executePlay({
       const seconds = lengthSeconds % 60;
 
       /* ===============================
-         🔗 ENVIAR IMAGEN Y AUDIO SIMULTÁNEO
+         🔗 GENERAR / ENVIAR AUDIO
       ================================ */
 
-      let imagePromise = Promise.resolve();
-      if (thumb) {
-        imagePromise = sendImageFromURL(
-          thumb,
-          `\`*Título*:\` ${title}
+      if (fs.existsSync(cacheFile)) {
+        console.log("⚡ Usando audio cacheado");
+
+
+        // Luego enviamos la imagen
+        if (thumb) {
+          await sendImageFromURL(
+            thumb,
+            `\`*Título*:\` ${title}
 \`*Duración*:\` ${minutes}m ${seconds}s
 \`*Canal*:\` ${channel}
 \`*Bitrate*:\` ${audioBitrate}
 \`*Peso*:\` ${fileSizeMB}MB`
-        ).catch(() => {});
-      }
-
-      let audioPromise;
-
-      if (fs.existsSync(cacheFile)) {
-        console.log("⚡ Usando audio cacheado");
-        audioPromise = socket.sendMessage(remoteJid, {
+          ).catch(() => {});
+        }
+        // Primero enviamos el audio
+        await socket.sendMessage(remoteJid, {
           audio: fs.readFileSync(cacheFile),
           mimetype: "audio/ogg; codecs=opus",
           ptt: true
         });
+
+       
+
       } else {
         const uniqueId = Date.now() + "_" + Math.floor(Math.random() * 9999);
         const tempFile = path.join(os.tmpdir(), `${uniqueId}.opus`);
@@ -141,7 +144,7 @@ async function executePlay({
         const ff = spawn(ffmpegPath, [
           "-i", "pipe:0",
           "-c:a", "libopus",
-          "-b:a", "130k",
+          "-b:a", audioBitrate,
           tempFile
         ], {
           windowsHide: true,
@@ -151,19 +154,30 @@ async function executePlay({
 
         yt.stdout.pipe(ff.stdin);
 
-        audioPromise = new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
           ff.on("error", reject);
           ff.on("close", async code => {
             if (code === 0 && fs.existsSync(tempFile)) {
-              // ENVIAMOS AUDIO Y SUBIMOS LA IMAGEN AL MISMO TIEMPO
-              await Promise.all([
-                socket.sendMessage(remoteJid, {
-                  audio: fs.readFileSync(tempFile),
-                  mimetype: "audio/ogg; codecs=opus",
-                  ptt: true
-                }),
-                imagePromise
-              ]);
+
+
+              // Luego enviamos la imagen
+              if (thumb) {
+                await sendImageFromURL(
+                  thumb,
+                  `\`*Título*:\` ${title}
+\`*Duración*:\` ${minutes}m ${seconds}s
+\`*Canal*:\` ${channel}
+\`*Bitrate*:\` ${audioBitrate}
+\`*Peso*:\` ${fileSizeMB}MB`
+                ).catch(() => {});
+              }
+              // Primero enviamos el audio
+              await socket.sendMessage(remoteJid, {
+                audio: fs.readFileSync(tempFile),
+                mimetype: "audio/ogg; codecs=opus",
+                ptt: false
+              });
+
               fs.copyFileSync(tempFile, cacheFile);
               fs.unlinkSync(tempFile);
               cleanCache();
@@ -175,7 +189,6 @@ async function executePlay({
         });
       }
 
-      await audioPromise;
       await sendSuccessReact();
       return;
 
