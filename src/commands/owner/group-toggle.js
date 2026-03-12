@@ -1,4 +1,5 @@
 const { PREFIX } = require(`${BASE_DIR}/config`);
+const { WarningError } = require(`${BASE_DIR}/errors`);
 const { activateGroup, deactivateGroup } = require(`${BASE_DIR}/utils/database`);
 const { isGroupGloballyDisabled } = require(`${BASE_DIR}/utils/globalGroups`);
 
@@ -16,7 +17,7 @@ module.exports = {
     commandName,
     sendSuccessReply,
     remoteJid,
-    isGroup
+    isGroup,
   }) => {
 
     if (!isGroup) {
