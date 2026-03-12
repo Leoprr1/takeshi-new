@@ -33,6 +33,7 @@ const { learnFromAllMessages } = require("../utils/learningBot2");
 const { getElmoBotiaResponse } = require("../utils/elmobotia");
 const { isActiveElmoBotiaGroup } = require("../utils/elmobotiamanager");
 const { isPrivateModeEnabled } = require("../utils/privatemode");
+const { isGroupGloballyDisabled } = require("../utils/globalGroups");
 
 // 🔥 SET PARA EVITAR MENSAJES DUPLICADOS
 const processedMessages = new Set();
@@ -45,8 +46,13 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
 
       const jid = webMessage?.key?.remoteJid;
       if (!jid) continue;
+const isGroup = jid.endsWith("@g.us");
 const userJid = webMessage.key?.participant || webMessage.key?.remoteJid;
 const isLid = userJid.endsWith("@lid");
+
+if (isGroup && isGroupGloballyDisabled(jid) && !isBotOwner({ userJid, isLid })) {
+  continue;
+}
 
 if (!jid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ userJid, isLid })) {
   continue;
