@@ -12,8 +12,6 @@
     { "command": "newtc on/off/status/reset", "desc": "para el sistema de noticias global" },
     { "command": "exec menu", "desc": "menu de comandos para el cmd" },
     { "command": "get-id", "desc": "Devuelve el LID del contacto mencionado" },
-    { "command": "off", "desc": "desactiva el bot en un grupo" },
-    { "command": "on", "desc": "activa el bot en el grupo" },
     { "command": "set-menu-image", "desc": "cambia la imagen del grupo" },
     { "command": "set-prefix", "desc": "este es para cambiar el prefijo del comando" },
     { "command": "ping", "desc": "verifica si el bot está en línea y tiempo de respuesta" }
@@ -25,6 +23,8 @@
     { "command": "profile @mencion", "desc": "para ver el perfil de otra persona" }
   ],
   "admins": [
+    { "command": "off", "desc": "desactiva el bot en un grupo" },
+    { "command": "on", "desc": "activa el bot en el grupo" },
     { "command": "only-admin (1/0)", "desc": "activa esto y solo los admins pueden usar el bot" },
     { "command": "add-auto-responder", "desc": "para agregar mensaje y respuesta" },
     { "command": "delete-auto-responder", "desc": "elimina el texto agregado" },
