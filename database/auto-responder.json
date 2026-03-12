@@ -29150,5 +29150,18 @@
     "answers": [
       ".entrargrupo"
     ]
+  },
+  {
+    "match": "Yo opino lo mismo pero a el carbón le parece divertido que ande jode y jode",
+    "answers": [
+      "JAJAJAJ pero si de otra forma no hablan hdpts"
+    ]
+  },
+  {
+    "match": "📢 *MENSAJE GLOBAL*\n\núnanse cracks\nhttps://chat.whatsapp.com/Hq6VgFZe5uZ20ORUW3mSEi?mode=gi_t",
+    "answers": [
+      "Qn sos",
+      "Y esto?"
+    ]
   }
 ]

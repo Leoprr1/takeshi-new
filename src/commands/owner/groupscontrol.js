@@ -32,9 +32,9 @@ module.exports = {
   commands: [
     "menugrupo",
     "grupolist",
-    "desactivegrup",
-    "activegrup",
-    "leavegroup",
+    "desactivegrupo",
+    "activegrupo",
+    "salirgrupo",
     "entrargrupo",
     "mensajeglobal"
   ],
@@ -65,16 +65,16 @@ module.exports = {
       text += `${PREFIX}grupolist\n\n`;
 
       text += "🚫 DESACTIVAR BOT\n";
-      text += `${PREFIX}desactivegrup 1\n`;
-      text += `${PREFIX}desactivegrup all\n\n`;
+      text += `${PREFIX}desactivegrupo 1\n`;
+      text += `${PREFIX}desactivegrupo all\n\n`;
 
       text += "✅ ACTIVAR BOT\n";
-      text += `${PREFIX}activegrup 1\n`;
-      text += `${PREFIX}activegrup all\n\n`;
+      text += `${PREFIX}activegrupo 1\n`;
+      text += `${PREFIX}activegrupo all\n\n`;
 
       text += "🚪 SALIR DE GRUPO\n";
-      text += `${PREFIX}leavegroup 1\n`;
-      text += `${PREFIX}leavegroup all\n\n`;
+      text += `${PREFIX}salirgrupo 1\n`;
+      text += `${PREFIX}salirgrupo all\n\n`;
 
       text += "➕ ENTRAR A GRUPO\n";
       text += `${PREFIX}entrargrupo link\n\n`;
@@ -121,12 +121,12 @@ module.exports = {
        🚫 DESACTIVAR GRUPO
     ========================= */
 
-    if (commandName === "desactivegrup") {
+    if (commandName === "desactivegrupo") {
 
       const list = await getGroupList(socket);
 
       if (!args[0]) {
-        return sendReply(`Uso:\n${PREFIX}desactivegrup 1`);
+        return sendReply(`Uso:\n${PREFIX}desactivegrupo 1`);
       }
 
       if (args[0].toLowerCase() === "all") {
@@ -150,12 +150,12 @@ module.exports = {
        ✅ ACTIVAR GRUPO
     ========================= */
 
-    if (commandName === "activegrup") {
+    if (commandName === "activegrupo") {
 
       const list = await getGroupList(socket);
 
       if (!args[0]) {
-        return sendReply(`Uso:\n${PREFIX}activegrup 1`);
+        return sendReply(`Uso:\n${PREFIX}activegrupo 1`);
       }
 
       if (args[0].toLowerCase() === "all") {
@@ -179,12 +179,12 @@ module.exports = {
        🚪 SALIR DE GRUPO
     ========================= */
 
-    if (commandName === "leavegroup") {
+    if (commandName === "salirgrupo") {
 
       const list = await getGroupList(socket);
 
       if (!args[0]) {
-        return sendReply(`Uso:\n${PREFIX}leavegroup 1`);
+        return sendReply(`Uso:\n${PREFIX}salirgrupo 1`);
       }
 
       if (args[0].toLowerCase() === "all") {
@@ -282,9 +282,9 @@ ${PREFIX}mensajeglobal all Hola a todos`
           const members = (group.participants || []).map(p => p.id);
 
           const text =
-`📢 *MENSAJE GLOBAL*
+`📢 \`*MENSAJE GLOBAL*\` 
 
-${message}`;
+     ${message}`;
 
           await socket.sendMessage(group.id, {
             text,
