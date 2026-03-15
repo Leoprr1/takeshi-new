@@ -115,11 +115,32 @@ exports.isBotOwner = ({ userJid, webMessage }) => {
 
 
 exports.checkPermission = async ({ type, socket, userJid, remoteJid }) => {
+
+  const isBotOwner =
+    compareUserJidWithOtherNumber({ userJid, otherNumber: OWNER_NUMBER }) ||
+    userJid === OWNER_LID;
+
+  // ✅ Permitir comandos owner en privado
+  if (!remoteJid.endsWith("@g.us")) {
+
+    if (type === "owner") {
+      return isBotOwner;
+    }
+
+    if (type === "member") {
+      return true;
+    }
+
+    return false;
+  }
+
+  // 🔽 lógica normal para grupos
   if (type === "member") {
     return true;
   }
 
   try {
+
     const { participants, owner } = await socket.groupMetadata(remoteJid);
 
     const participant = participants.find(
@@ -135,10 +156,6 @@ exports.checkPermission = async ({ type, socket, userJid, remoteJid }) => {
 
     const isAdmin = participant.admin === "admin";
 
-    const isBotOwner =
-      compareUserJidWithOtherNumber({ userJid, otherNumber: OWNER_NUMBER }) ||
-      userJid === OWNER_LID;
-
     if (type === "admin") {
       return isOwner || isAdmin || isBotOwner;
     }
@@ -148,7 +165,9 @@ exports.checkPermission = async ({ type, socket, userJid, remoteJid }) => {
     }
 
     return false;
+
   } catch (error) {
     return false;
   }
 };
+
