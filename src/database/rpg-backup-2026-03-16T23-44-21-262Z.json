@@ -1328,12 +1328,12 @@
   },
   "223256997032099@lid": {
     "nivel": 727,
-    "xp": 47650,
-    "hp": 16588,
+    "xp": 13250,
+    "hp": 16780,
     "hpMax": 14560,
     "mana": 9450,
     "manamax": 7420,
-    "monedas": 918454166886258600,
+    "monedas": 918454166879940600,
     "arma": {
       "code": "H05",
       "nombre": "🌑 Guante de zeno Sama 🌙⚔️",
@@ -2449,7 +2449,7 @@
     ],
     "profecion": null,
     "lid": "223256997032099@lid",
-    "lastRegen": 1773705516153,
+    "lastRegen": 1773704316153,
     "homeChest": [
       {
         "code": "H01",
@@ -2606,13 +2606,13 @@
       "inside": true,
       "paid": true,
       "lastBossTime": {
-        "10": 1773705683206,
-        "20": 1773705672481,
-        "30": 1773705657932,
-        "40": 1773705649486,
-        "50": 1773705640472,
-        "60": 1773705603649,
-        "70": 1773705586864
+        "10": 1773701442639,
+        "20": 1773701416594,
+        "30": 1773701373699,
+        "40": 1773701355045,
+        "50": 1773701342820,
+        "60": 1773701326404,
+        "70": 1773701320563
       }
     }
   },
@@ -5409,8 +5409,8 @@
   },
   "19310810534110@lid": {
     "nivel": 134,
-    "xp": 9089,
-    "hp": 0,
+    "xp": 8889,
+    "hp": 3580,
     "hpMax": 2750,
     "mana": 1490,
     "manamax": 1430,
@@ -5534,7 +5534,7 @@
     "misionesCompletadas": [],
     "profecion": null,
     "lid": "19310810534110@lid",
-    "lastRegen": 1758625298850,
+    "lastRegen": 1758610898850,
     "homeChest": [],
     "hasHouse": true,
     "enCasa": true,
@@ -5609,13 +5609,7 @@
     "defensaBonus": 10.8,
     "magiaBonus": 19.799999999999997,
     "curacionBonus": 12,
-    "precisionBonus": 9,
-    "ancestral": {
-      "floor": 0,
-      "inside": false,
-      "paid": false,
-      "lastBossTime": {}
-    }
+    "precisionBonus": 9
   },
   "98629712916662@lid": {
     "nivel": 386,

@@ -203,6 +203,12 @@ const ARMAS = [
   { code: "H04", nombre: "🌪️ Arco Absorvedor de Materia ⚡🏹", dano: 2000, precio: 1000000 },
   { code: "H05", nombre: "🌑 Guante de zeno Sama 🌙⚔️", dano: 2000, precio: 1000000 },
 
+// 5 armas ancestrales
+{ code: "X01", nombre: "🌌⚔️ Espada del Juicio Primordial 👑💀", dano: 10000, precio: 100000000 },
+{ code: "X02", nombre: "☄️🩸 Guadaña del Colapso Estelar 🔥🌠", dano: 10000, precio: 100000000 },
+{ code: "X03", nombre: "🐲🔥 Lanza del Dragón Ancestral del Vacío 🌌⚡", dano: 10000, precio: 100000000 },
+{ code: "X04", nombre: "🌪️🏹 Arco del Devorador de Universos ⚡🌑", dano: 10000, precio: 100000000 },
+{ code: "X05", nombre: "🕳️⚔️ Espada del Fin de los Tiempos ⏳💀", dano: 10000, precio: 100000000 },
 
 
 
@@ -271,6 +277,13 @@ const ARMADURAS = [
   { code: "H08", nombre: "❄️ Placas de Agujero Negro 👑🧊", defensa: 2000, precio: 1000000 },
   { code: "H09", nombre: "🌑 Armadura Absorvedora de Materia 🌙⚔️", defensa: 2000, precio: 1000000 },
   { code: "H10", nombre: "⚡ Manto de Zeno Sama 🌪️🌩️", defensa: 2000, precio: 1000000 },
+
+  // 5 armaduras ancestrales
+{ code: "X06", nombre: "🛡️👑 Armadura del Emperador del Vacío 🌌⚡", defensa: 10000, precio: 100000000 },
+{ code: "X07", nombre: "🔥🛡️ Coraza del Sol Eterno ☀️♨️", defensa: 10000, precio: 100000000 },
+{ code: "X08", nombre: "❄️🌑 Placas del Coloso del Abismo 🧊👑", defensa: 10000, precio: 100000000 },
+{ code: "X09", nombre: "🌌🛡️ Armadura de la Singularidad Suprema ⚡🕳️", defensa: 10000, precio: 100000000 },
+{ code: "X10", nombre: "⚡👑 Manto del Dios del Trueno Primordial 🌩️🌪️", defensa: 10000, precio: 100000000 },
 
 
 ];
@@ -357,11 +370,14 @@ function getUser(id) {
 
   // Forzar inicialización de maná según nivel (si falta)
   const manaBase = 100;
-  const manaPorNivel = 10;
-  if (typeof user.mana !== "number") user.mana = manaBase;
-  const nivel = typeof user.nivel === "number" ? user.nivel : 1;
+const manaPorNivel = 10;
+
+const nivel = typeof user.nivel === "number" ? user.nivel : 1;
+
+if (typeof user.manamax !== "number") {
   user.manamax = manaBase + (nivel - 1) * manaPorNivel;
-  if (user.mana > user.manamax) user.mana = user.manamax;
+}
+
 
   // Asegurar hp inicial si falta (por si hay entradas antiguas en DB)
   if (typeof user.hp !== "number") user.hp = user.hpMax || 100;
@@ -388,13 +404,19 @@ if (elapsed >= regenTime) {
   if (ticks > MAX_TICKS) ticks = MAX_TICKS;
 
   // Vida y maná total incluyendo buffs
-  const totalHP = (user.hpMax || 0)
-                  + (user.curacionBonus|| 0)
-                  + (user.golem?.hpBuff || 0)
-                  + (user.mascotaEquipada?.hpBuff || 0);
+  const aca = user.academia?.especialidades || {};
 
-  const totalMana = (user.manamax || 0)
-                    + (user.academia?.manaMax || 0);
+const totalHP = (user.hpMax || 0)
+              + (aca.curacion || 0) * 5
+              + (user.golem?.hpBuff || 0)
+              + (user.mascotaEquipada?.hpBuff || 0);
+
+const totalMana = (user.manamax || 0)
+                + (aca.manaMax || 0) * 10;
+
+if (user.hp > totalHP) user.hp = totalHP;
+if (user.mana > totalMana) user.mana = totalMana;
+
 
   if (Number.isNaN(totalHP) || Number.isNaN(totalMana)) {
     user.lastRegen += regenTime * ticks;
@@ -463,8 +485,8 @@ function addXP(user, amount) {
     user.hp = Math.min(user.hpMax, user.hp + 30);
     needed = xpForNextLevel(user.nivel);
     // subir mana max y curar un poco
-    user.manaMax += 10;
-    user.mana = Math.min(user.manaMax, user.mana + 30);
+    user.manamax += 10;
+user.mana = Math.min(user.manamax, user.mana + 30);
     needed = xpForNextLevel(user.nivel);
   }
   return subidas;
@@ -599,6 +621,7 @@ function helpText() {
 ▢ • \`${p}rpg isla corrupta I1/I2/I3\` <-- *da xp, dinero y objetos -- la I1 desde nivel 60, I2 desde nivel 80, I3 desde nivel 100*
 ▢ • \`${p}rpg mazmorra legendaria L1/L2/L3\` <-- *da xp, dinero y objetos -- la L1 desde nivel 150, L2 desde nivel 200, L3 desde nivel 250*
 ▢ • \`${p}rpg evento-mascota\` <-- *se juega de a 3 usuarios y podes conseguir un pokemon*
+▢ • \`${p}rpg menu dungeon\` <-- *dungeon ancestral*
 ▢ • \`${p}rpg shop\` <-- *es una tienda basica de objetos*
 ▢ • \`${p}rpg home\` <-- *para comprarte una casa y demas*
 ▢ • \`${p}rpg buy <código>\` <-- *para comprar un item en la shop*
@@ -612,6 +635,7 @@ function helpText() {
 ▢ • \`${p}rpg asesinar @usuario\` <-- *se la metes mientras duerme el otro usuario XD*
 ▢ • \`${p}rpg ranking\` <-- *donde podes ver tu posicion y de los top globals*
 ▢ • \`${p}rpg list <código> <precio>\` <-- *para vender items*
+▢ • \`${p}rpg list all\` <-- *para vender todos los items del inventario principal*
 ▢ • \`${p}rpg dar <dinero/item> <cantidad/código> @usuario\` <-- *le das monedas a un pobre*
 ▢ • \`${p}rpg market\` <-- *aca se listan los items que venden otros usuarios y los podes comprar vos*
 ▢ • \`${p}rpg buyplayer <código> <vendedor>\` <-- *para comprar en el market*
@@ -638,7 +662,7 @@ module.exports = {
   sendReply,
   sendSuccessReact,
   sendErrorReply,
-  mentions,
+  mentionedJid,
 }) => {
   try {
     // Unimos los args y limpiamos espacios extras
@@ -720,8 +744,11 @@ if (cmd === "stats") {
     xp: u.xp || 0,
     monedas: u.monedas || 0,
   }));
+
   rankingArr.sort((a, b) => (b.nivel - a.nivel) || (b.xp - a.xp) || (b.monedas - a.monedas));
+
   const posicion = rankingArr.findIndex(p => p.id === normalizedUserId) + 1;
+
   const rankingText = posicion === 1 ? "🥇👑 *Top 1 en el ranking*"
                     : posicion === 2 ? "🥈 *Top 2 en el ranking*"
                     : posicion === 3 ? "🥉 *Top 3 en el ranking*"
@@ -731,6 +758,9 @@ if (cmd === "stats") {
   const rangoInfo = getRangoAventurero(you.nivel || 0);
   const insigniaText = getInsignia(you);
 
+  // --- Piso Dungeon Ancestral ---
+  const pisoDungeon = you.ancestral?.floor || 0;
+
   // --- Equipados ---
   const armaTxt = you.arma ? `🗡️ ${you.arma.nombre} (+${you.arma.dano || 0} ATQ) | 💰 ${you.arma.precio?.toLocaleString("es-AR") || 0} | Usar: ${PREFIX}rpg equip ${you.arma.code}` : "Ninguna";
   const armTxt = you.armadura ? `🛡️ ${you.armadura.nombre} (+${you.armadura.defensa || 0} DEF) | 💰 ${you.armadura.precio?.toLocaleString("es-AR") || 0} | Usar: ${PREFIX}rpg equip ${you.armadura.code}` : "Ninguna";
@@ -739,18 +769,16 @@ if (cmd === "stats") {
     ? you.inventario.filter(i => i && i.nombre).map(i => `📦 ${i.code || "Desconocido"}`).join(", ")
     : "Vacío";
 
-// --- Mascota equipada ---
-let mascotaTxt = "Ninguna";
-if (you.mascotaEquipada) {
-  const m = you.mascotaEquipada;
-  const precio = m.precio ? ` | 💰 ${m.precio.toLocaleString("es-AR")}` : "";
-  const equipCode = m.uid || m.code || "Desconocido";
-  mascotaTxt = `${m.emoji || "🐾"} ${m.nombre || "Desconocida"} ` +
-               `(+${m.atkBuff || 0} ATK, +${m.defBuff || 0} DEF, +${m.hpBuff || 0} HP)` +
-               `${precio} | Usar: ${PREFIX}rpg equip ${equipCode}`;
-}
-
-
+  // --- Mascota equipada ---
+  let mascotaTxt = "Ninguna";
+  if (you.mascotaEquipada) {
+    const m = you.mascotaEquipada;
+    const precio = m.precio ? ` | 💰 ${m.precio.toLocaleString("es-AR")}` : "";
+    const equipCode = m.uid || m.code || "Desconocido";
+    mascotaTxt = `${m.emoji || "🐾"} ${m.nombre || "Desconocida"} ` +
+                 `(+${m.atkBuff || 0} ATK, +${m.defBuff || 0} DEF, +${m.hpBuff || 0} HP)` +
+                 `${precio} | Usar: ${PREFIX}rpg equip ${equipCode}`;
+  }
 
   // --- Otros datos ---
   const casaText = you.hasHouse ? `🏠 Sí` : `❌ No`;
@@ -769,9 +797,12 @@ if (you.mascotaEquipada) {
   }
 
   if (!you.academia) you.academia = { especialidades: {} };
+
   const aca = you.academia.especialidades || {};
   const espIcons = { fuerza: "💪", agilidad: "🏃", defensa: "🛡️", magia: "✨", curacion: "💖", controlEspada: "⚔️", manaMax: "🔮" };
+
   let acaText = "\n📚 *Especialidades de Academia* 📚\n";
+
   Object.entries(espIcons).forEach(([key, emoji]) => {
     const nivel = aca[key] || 0;
     const barra = "⭐".repeat(Math.min(nivel, 10)) + "✩".repeat(Math.max(0, 10 - nivel));
@@ -782,6 +813,7 @@ if (you.mascotaEquipada) {
   const totalMana = (you.manamax || 0) + ((aca.manaMax || 0) * 10);
   const totalAtk = getAttack(you);
   const totalDef = getDefense(you);
+
   const xpBar = getXpBar(you.xp || 0, xpForNextLevel(you.nivel || 0));
 
   const txt =
@@ -789,6 +821,7 @@ if (you.mascotaEquipada) {
     `${rankingText}\n` +
     `💠 Rango Aventurero: ${rangoInfo.emoji} *${rangoInfo.rango}* ${rangoInfo.medalla}\n` +
     `🏅 Misiones de Gremio: ${insigniaText}\n` +
+    `🏰 Piso Dungeon Ancestral superado: ${pisoDungeon}\n` +
     `🔹 Nivel: ${you.nivel || 0}\n` +
     `🔹 XP: ${you.xp || 0}/${xpForNextLevel(you.nivel || 0)} [${xpBar}]\n` +
     `❤️ Vida: ${you.hp || 0}/${totalHP} (+${bonusHP} regen)\n` +
@@ -916,86 +949,126 @@ if (cmd === "inventory" || cmd === "inv") {
 // SISTEMA DE MANÁ
 // -----------------------------
 if (cmd === "magia") {
-  // Asegurarse que el jugador tiene maná
+
   if (you.mana === undefined) you.mana = 100;
   if (you.manamax === undefined) you.manamax = 100;
   if (you.lastManaRegen === undefined) you.lastManaRegen = 0;
 
-  // Asegurar que academia existe
   if (!you.academia) you.academia = { especialidades: {} };
   const aca = you.academia.especialidades || {};
 
   const hechizo = rest[0]?.toLowerCase();
+
   if (!hechizo) {
     return sendReply(
       `✨ Comando Magia:\n` +
-      `.rpg magia curar (-25% maná máx)\n` +
-      `.rpg magia curar @usuario (-25% maná máx, cura a otro)\n` +
-      `.rpg use <código> (-recupera maná)`
+      `.rpg magia curar\n` +
+      `.rpg magia curar @usuario\n` +
+      `.rpg use <código>`
     );
   }
 
+  // ------------------------------------------------
+  // CURAR
+  // ------------------------------------------------
   if (hechizo === "curar") {
-  // ---- Calcular coste de maná total incluyendo buffs de academia ----
-  const totalMana = (you.manamax || 0) + ((aca.manaMax || 0));
 
-  const manaCostBase = Math.floor(totalMana * 0.25);
-  const manaReduction = Math.floor(manaCostBase * ((aca.magia || 0) * 0.05));
-  const cost = Math.max(manaCostBase - manaReduction);
+    const totalMana = (you.manamax || 0) + (aca.manaMax || 0) * 10;
 
-  if (you.mana < cost)
-    return sendErrorReply(`⚠️ No tienes suficiente maná (${cost} requerido).`);
+    const manaCostBase = Math.floor(totalMana * 0.25);
+    const manaReduction = Math.floor(manaCostBase * ((aca.magia || 0) * 0.05));
 
-  // --- OBTENER USUARIO MENCIONADO COMO EN DUEL ---
-  const rawMention = rest[1]?.replace(/\D/g, "");
-  let objetivo = you;
-  let objetivoNombre = "ti mismo";
-  let mentions = [];
+    const cost = Math.max(10, manaCostBase - manaReduction);
 
-  if (rawMention) {
-    const targetJidRaw = rawMention + "@s.whatsapp.net";
-    const normalizedTargetId = normalizeId(targetJidRaw);
-    if (normalizedTargetId && normalizedTargetId !== normalizedUserId) {
-      const targetUser = getUser(normalizedTargetId);
-      if (targetUser) {
+    if (you.mana < cost) {
+      return sendErrorReply(`⚠️ No tienes suficiente maná (${cost} requerido).`);
+    }
+
+    // ------------------------------------------------
+    // DETECTAR OBJETIVO
+    // ------------------------------------------------
+    const rawMention = rest[1]?.replace(/\D/g, "");
+
+    let objetivo = you;
+    let objetivoNombre = "ti mismo";
+    let mentions = [];
+
+    if (rawMention) {
+
+      const targetJidRaw = rawMention + "@s.whatsapp.net";
+      const normalizedTargetId = normalizeId(targetJidRaw);
+
+      if (normalizedTargetId && normalizedTargetId !== normalizedUserId) {
+
+        const targetUser = getUser(normalizedTargetId);
+
+        if (!targetUser) {
+          return sendErrorReply("❌ El usuario mencionado no tiene perfil RPG.");
+        }
+
         objetivo = targetUser;
         objetivoNombre = `@${normalizedTargetId.split("@")[0]}`;
         mentions.push(normalizedTargetId);
-      } else {
-        return sendErrorReply("❌ El usuario mencionado no tiene perfil RPG.");
+
       }
-    } else if (normalizedTargetId === normalizedUserId) {
-      objetivo = you;
-      objetivoNombre = "ti mismo";
+
     }
-  }
 
-  // ---- Aplicar coste de maná ----
-  you.mana -= cost;
+    // ------------------------------------------------
+    // RESTAR MANÁ
+    // ------------------------------------------------
+    you.mana -= cost;
 
-  // ---- Calcular curación según vida total + bonus de academia/golem/mascota ----
-  const totalHP = (objetivo.hpMax || 0)
-                  + ((objetivo.academia?.curacion || 0) * 5)
+    if (you.mana < 0) you.mana = 0;
+    if (you.mana > totalMana) you.mana = totalMana;
+
+    // ------------------------------------------------
+    // VIDA TOTAL (igual que tu sistema global)
+    // ------------------------------------------------
+    const acaTarget = objetivo.academia?.especialidades || {};
+
+    const totalHP = (objetivo.hpMax || 0)
+                  + (acaTarget.curacion || 0) * 5
                   + (objetivo.golem?.hpBuff || 0)
                   + (objetivo.mascotaEquipada?.hpBuff || 0);
 
-  const healMultiplier = 1 + ((aca.curacion || 0) * 0.05);
-  const healAmount = Math.floor(totalHP * 0.5 * healMultiplier);
+    const currentHP = objetivo.hp || 0;
 
-  objetivo.hp = Math.min(totalHP, (objetivo.hp || 0) + healAmount);
+    const missingHP = totalHP - currentHP;
 
-  saveDB();
-  await sendSuccessReact();
+    // ------------------------------------------------
+    // CURACIÓN BALANCEADA
+    // ------------------------------------------------
 
-  return sendReply(
-    `💖 Usaste curar sobre ${objetivoNombre} (+${healAmount} HP, -${cost} maná)\n` +
-    `HP de ${objetivoNombre}: ${objetivo.hp}/${totalHP}\n` +
-    `Tu maná: ${you.mana}/${totalMana}`,
-    null,
-    { mentions }
-  );
+    const healMultiplier = 1 + ((aca.curacion || 0) * 0.05);
+
+    // cura 100% de la vida faltante
+    let healAmount = Math.floor(missingHP * 0.35 * healMultiplier);
+
+    // --- Ajustar curación para no pasar HP máximo y mostrar solo lo curado ---
+if (healAmount > missingHP) {
+  healAmount = missingHP; // no cura más de lo que falta
 }
+
+    // aplicar curación
+    objetivo.hp = Math.min(totalHP, currentHP + healAmount);
+
+    // ------------------------------------------------
+    // GUARDAR
+    // ------------------------------------------------
+    saveDB();
+    await sendSuccessReact();
+
+    return sendReply(
+      `💖 Usaste curar sobre ${objetivoNombre} (+${healAmount} HP, -${cost} maná)\n` +
+      `HP de ${objetivoNombre}: ${objetivo.hp}/${totalHP}\n` +
+      `Tu maná: ${you.mana}/${totalMana}`,
+      null,
+      { mentions }
+    );
+  }
 }
+
 
 
 
@@ -1074,12 +1147,12 @@ if (cmd === "shop") {
 
   // Armas (excluyendo códigos C, Z y L)
   txt += "*Armas*\n";
-  ARMAS.filter(a => !["C","Z","L","H","F"].includes(a.code[0]))
+  ARMAS.filter(a => !["C","Z","L","H","F","X"].includes(a.code[0]))
        .forEach(a => txt += `• ${a.code} - ${a.nombre} | ATQ +${a.dano} | $${fmt(a.precio)}\n`);
 
   // Armaduras (excluyendo códigos C, Z y L)
   txt += "\n*Armaduras*\n";
-  ARMADURAS.filter(a => !["C","Z","L","H","F"].includes(a.code[0]))
+  ARMADURAS.filter(a => !["C","Z","L","H","F","X"].includes(a.code[0]))
             .forEach(a => txt += `• ${a.code} - ${a.nombre} | DEF +${a.defensa} | $${fmt(a.precio)}\n`);
 
   // Pociones
@@ -1097,6 +1170,59 @@ if (cmd === "shop") {
 // Poner un ítem propio a la venta
 if (cmd === "list") {
   if (!you.inventario) you.inventario = []; // inicializamos inventario si no existe
+
+  const rarezaMult = {
+    comun: 1,
+    raro: 1.5,
+    legendario: 2,
+    fantastico: 5,
+    mitico: 7.5
+  };
+
+  // --- LIST ALL ---
+  if (rest[0]?.toLowerCase() === "all") {
+    if (you.inventario.length === 0) return sendErrorReply("No tenés ítems para vender.");
+
+    if (!global.MARKET) global.MARKET = [];
+
+    let totalMonedas = 0;
+    const vendidos = [];
+
+    // recorremos todo el inventario
+    for (let i = you.inventario.length - 1; i >= 0; i--) {
+      const item = you.inventario[i];
+
+      // Buscar item base
+      const baseItem =
+        ARMAS.find(x => x.code.toUpperCase() === (item.code || "").toUpperCase()) ||
+        ARMADURAS.find(x => x.code.toUpperCase() === (item.code || "").toUpperCase()) ||
+        POCIONES.find(x => x.code.toUpperCase() === (item.code || "").toUpperCase()) ||
+        MASCOTAS.find(x => x.code.toUpperCase() === (item.code || "").toUpperCase());
+
+      let precio = item.precio || 1;
+
+      if (baseItem) {
+        const multiplicador = rarezaMult[item.rareza?.toLowerCase()] || 1;
+        const precioMax = Math.floor(baseItem.precio * multiplicador);
+        precio = precioMax; // usamos el máximo permitido
+      }
+
+      // agregar al MARKET
+      global.MARKET.push({ idVendedor: normalizedUserId, item, precio });
+      vendidos.push(`${item.nombre} (${item.rareza || "común"})`);
+      totalMonedas += precio;
+
+      // quitar del inventario
+      you.inventario.splice(i, 1);
+    }
+
+    you.monedas += totalMonedas;
+    saveDB();
+    await sendSuccessReact();
+    return sendReply(`✅ Vendiste todos los ítems de tu inventario al precio máximo permitido:\n${vendidos.join("\n")}\n\nRecibiste $${fmt(totalMonedas)}.`);
+  }
+
+  // --- LIST ITEM INDIVIDUAL --- (tu código original sigue igual)
   if (!rest || rest.length < 2) return sendErrorReply(`Uso: *${PREFIX}rpg list <código> <precio>*`);
 
   const codeOrUid = rest[0].toUpperCase();
@@ -1123,15 +1249,6 @@ if (cmd === "list") {
     POCIONES.find(x => x.code.toUpperCase() === (item.code || "").toUpperCase()) ||
     MASCOTAS.find(x => x.code.toUpperCase() === (item.code || "").toUpperCase());
 
-  // multiplicadores por rareza
-  const rarezaMult = {
-    comun: 1,
-    raro: 1.5,
-    legendario: 2,
-    fantastico: 5,
-    mitico: 7.5
-  };
-
   if (baseItem) {
     const multiplicador = rarezaMult[item.rareza?.toLowerCase()] || 1;
     const precioMax = Math.floor(baseItem.precio * multiplicador);
@@ -1153,6 +1270,7 @@ if (cmd === "list") {
   await sendSuccessReact();
   return sendReply(`✅ Pusiste a la venta *${item.nombre}* (${item.rareza || "común"}) por $${fmt(precio)} en el mercado y recibiste las monedas.`);
 }
+
 
 // Ver el mercado
 if (cmd === "market") {
@@ -1314,7 +1432,7 @@ if (cmd === "buy") {
   if (!item) return sendErrorReply("Código inválido.");
 
   // Bloquear solo los items exclusivos de dungeon
-  if (["C", "Z", "L", "H","F"].includes(item.code[0])) {
+  if (["C", "Z", "L", "H","F","X"].includes(item.code[0])) {
     return sendErrorReply("❌ No podés comprar este item, es exclusivo de mazmorra.");
   }
 
@@ -2722,6 +2840,385 @@ if (nivelJugador < dungeon.nivelReq) {
 }
 
 
+// ======================================
+// 🏰 DUNGEON ANCESTRAL
+// ======================================
+
+const MAX_FLOOR = 1000
+const ENTRADA_COSTO = 50000000
+
+const ENEMIGOS_ANCESTRAL = [
+  "Goblin Ancestral","Orco Guerrero","Espectro Perdido","Guardián de Piedra",
+  "Bestia del Abismo","Troll de Guerra","Caballero Maldito","Demonio Menor",
+  "Gárgola Viviente","Serpiente Colosal","Bestia Carmesí","Guerrero Espectral"
+]
+
+const BOSSES_ANCESTRAL = [
+  "Señor del Vacío","Titán de Obsidiana","Dragón de Sangre","Rey Lich",
+  "Coloso del Apocalipsis","Devorador de Mundos","Avatar Oscuro",
+  "Guardián Primordial","Dios Caído","Emperador del Fin"
+]
+
+const BOSSES_SECRETOS = [
+  "Hydra Eterna","Leviatán Antiguo","Fénix Inmortal","Kraken del Abismo"
+]
+
+// --------------------------------------
+// Inicializar datos del jugador
+// --------------------------------------
+if (!you.ancestral) {
+  you.ancestral = {
+    floor: 0,
+    inside: false,
+    paid: false,
+    lastBossTime: {} // 🕒 Registro de última vez que mató cada boss
+  }
+} else {
+  if (!you.ancestral.lastBossTime || typeof you.ancestral.lastBossTime !== 'object') {
+    you.ancestral.lastBossTime = {}
+  }
+}
+
+// --------------------------------------
+// PAGAR ENTRADA
+// --------------------------------------
+if (cmd === "pagar" && rest[0] === "entrada") {
+  if (you.ancestral.paid)
+    return sendReply("✅ Ya pagaste la entrada a la Dungeon Ancestral.")
+
+  if (you.monedas < ENTRADA_COSTO)
+    return sendErrorReply(`💰 Necesitas $${fmt(ENTRADA_COSTO)} monedas.`)
+
+  you.monedas -= ENTRADA_COSTO
+  you.ancestral.paid = true
+
+  await sendReply(
+    `💰 *ENTRADA PAGADA*
+
+Has pagado $${fmt(ENTRADA_COSTO)}
+
+🏛️ Ahora puedes entrar a la Dungeon Ancestral.
+
+Usa:
+${PREFIX}rpg ancestral dungeon entrar`
+  )
+
+  saveDB()
+  return
+}
+
+// --------------------------------------
+// ENEMIGOS NORMALES
+// --------------------------------------
+function generarEnemigo(floor) {
+  const baseHP = 5000
+  const baseATK = 500
+  const hp = baseHP + (baseHP * 0.10 * floor)
+  const atk = baseATK + (baseATK * 0.10 * floor)
+  return {
+    nombre: ENEMIGOS_ANCESTRAL[Math.floor(Math.random() * ENEMIGOS_ANCESTRAL.length)],
+    hp: Math.floor(hp),
+    atk: Math.floor(atk)
+  }
+}
+
+// --------------------------------------
+// BOSSES
+// --------------------------------------
+function generarBoss(floor) {
+  const baseHP = 10000
+  const baseATK = 800
+  const bossIndex = Math.floor(floor / 10)
+  const multiplier = 1 + (bossIndex * 0.50)
+  return {
+    nombre: BOSSES_ANCESTRAL[bossIndex % BOSSES_ANCESTRAL.length],
+    hp: Math.floor(baseHP * multiplier),
+    atk: Math.floor(baseATK * multiplier)
+  }
+}
+
+// --------------------------------------
+// BOSS SECRETOS
+// --------------------------------------
+function generarBossSecreto(floor) {
+  const baseHP = 15000
+  const baseATK = 1000
+  const bossIndex = Math.floor(floor / 50)
+  const multiplier = 1 + (bossIndex * 0.60)
+  return {
+    nombre: BOSSES_SECRETOS[Math.floor(Math.random() * BOSSES_SECRETOS.length)],
+    hp: Math.floor(baseHP * multiplier),
+    atk: Math.floor(baseATK * multiplier)
+  }
+}
+
+// ======================================
+// MENU
+// ======================================
+if (cmd === "menu" && rest[0] === "dungeon") {
+  await sendReply(
+    `🏛️ *DUNGEON ANCESTRAL*
+
+Una torre con *${MAX_FLOOR} pisos*.
+
+👹 Enemigos cada piso
+👑 Boss cada 10 pisos
+💀 Boss secreto cada 50
+🐉 Boss final en piso 1000
+
+💰 Entrada única: $${fmt(ENTRADA_COSTO)}
+
+📍 Tu progreso: Piso ${you.ancestral.floor}
+
+Comandos:
+
+${PREFIX}rpg pagar entrada
+${PREFIX}rpg ancestral dungeon entrar
+${PREFIX}rpg ancestral dungeon salir
+${PREFIX}rpg avanzar nivel ${you.ancestral.floor + 1}
+${PREFIX}rpg reintentar nivel`
+  )
+  return
+}
+
+// ======================================
+// ENTRAR
+// ======================================
+if (cmd === "ancestral" && rest[0] === "dungeon" && rest[1] === "entrar") {
+  if (!you.ancestral.paid)
+    return sendErrorReply(`💰 Primero debes pagar la entrada con:\n${PREFIX}rpg pagar entrada`)
+
+  you.ancestral.inside = true
+  await sendReply(
+    `🚪 Entraste a la *Dungeon Ancestral*
+
+Tu piso actual: ${you.ancestral.floor}
+
+Usa:
+${PREFIX}rpg avanzar nivel ${you.ancestral.floor + 1}`
+  )
+  saveDB()
+  return
+}
+
+// ======================================
+// SALIR
+// ======================================
+if (cmd === "ancestral" && rest[0] === "dungeon" && rest[1] === "salir") {
+  you.ancestral.inside = false
+  await sendReply(
+    `🚪 Saliste de la dungeon.
+
+Tu progreso quedó guardado en piso ${you.ancestral.floor}`
+  )
+  saveDB()
+  return
+}
+
+// ======================================
+// AVANZAR NIVEL
+// ======================================
+if (cmd === "avanzar" && rest[0] === "nivel") {
+  if (!you.ancestral.inside)
+    return sendErrorReply("🚪 Debes entrar a la dungeon.")
+
+  const floor = parseInt(rest[1])
+  if (floor !== you.ancestral.floor + 1)
+    return sendErrorReply("⚠️ Debes avanzar piso por piso.")
+  if (floor > MAX_FLOOR)
+    return sendReply("🏆 ¡Conquistaste la Dungeon Ancestral!")
+
+  await pelearPiso(floor, true)
+  return
+}
+
+// ======================================
+// REINTENTAR NIVEL
+// ======================================
+if (cmd === "reintentar" && rest[0] === "nivel") {
+  if (!you.ancestral.inside)
+    return sendErrorReply("🚪 Debes entrar a la dungeon.")
+
+  // Permitir piso opcional: si no se indica, se toma el actual
+  let floor = rest[1] ? parseInt(rest[1]) : you.ancestral.floor
+  if (isNaN(floor) || floor <= 0)
+    return sendErrorReply("⚠️ Piso inválido.")
+
+  if (floor > you.ancestral.floor)
+    return sendErrorReply(`⚠️ No puedes reintentar un piso que aún no alcanzaste. Tu máximo es ${you.ancestral.floor}.`)
+
+  await pelearPiso(floor, false) // reintentar no incrementa floor
+  return
+}
+
+
+// ======================================
+// FUNCIÓN GENERAL DE PELEA
+// ======================================
+async function pelearPiso(floor, avanzar) {
+  let enemy
+  let isBoss = false
+
+  if (floor === 1000) {
+    isBoss = true
+    const baseHP = 20000
+    const baseATK = 1500
+    const bossIndex = Math.floor(1000 / 10)
+    const multiplier = 1 + (bossIndex * 0.50)
+    enemy = { nombre: "🐉 Dragón Primordial", hp: Math.floor(baseHP * multiplier), atk: Math.floor(baseATK * multiplier) }
+  } else if (floor % 60 === 0) {
+    isBoss = true
+    enemy = generarBossSecreto(floor)
+  } else if (floor % 50 === 0) {
+    isBoss = true
+    enemy = generarBoss(floor)
+  } else if (floor % 10 === 0) {
+    isBoss = true
+    enemy = generarBoss(floor)
+  } else {
+    enemy = generarEnemigo(floor)
+  }
+
+  // --------------------------------------
+  // CHEQUEAR SI BOSS ESTÁ DISPONIBLE
+  // --------------------------------------
+  if(isBoss){
+    const now = Date.now()
+    const ONE_HOUR = 3600 * 1000
+    const lastTime = you.ancestral.lastBossTime[floor] || 0
+    if(now - lastTime < ONE_HOUR){
+      const remainingTime = ONE_HOUR - (now - lastTime)
+      const minutes = Math.floor(remainingTime / 60000)
+      const seconds = Math.floor((remainingTime % 60000) / 1000)
+      return await sendReply(`⏳ Este boss aún no ha reaparecido.  
+Faltan ${minutes}m ${seconds}s para volver a conseguir sus recompensas.`)
+    }
+  }
+
+  let player = { nombre: you.nick || normalizedUserId.split("@")[0], hp: you.hp, atk: getAttack(you), def: getDefense(you) }
+  const log = []
+  let round = 0
+
+  while (player.hp > 0 && enemy.hp > 0) {
+    round++
+    const dmg = Math.max(0, player.atk - Math.floor(enemy.atk * 0.2)) + Math.floor(Math.random() * 10)
+    enemy.hp -= dmg
+    if (round <= 10) log.push(`⚔️ ${player.nombre} golpea a ${enemy.nombre} por ${dmg}`)
+    if (enemy.hp <= 0) break
+    const edmg = Math.max(0, enemy.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 8)
+    player.hp -= edmg
+    if (round <= 10) log.push(`💀 ${enemy.nombre} golpea por ${edmg}`)
+  }
+
+  // --------------------------------------
+  // RESULTADO
+  // --------------------------------------
+  if(player.hp > 0){
+    you.hp = player.hp
+    if(avanzar) you.ancestral.floor = floor
+
+    await sendReply(
+      `🏹 *Piso ${floor} ${avanzar ? "completado" : "reintentado"}*
+
+${log.join("\n")}
+
+❤️ HP restante: ${player.hp}`
+    )
+
+    // --------------------------------------
+    // RECOMPENSAS BOSS
+    // --------------------------------------
+    if(isBoss){
+      const now = Date.now()
+      you.ancestral.lastBossTime[floor] = now
+
+      const coins = floor * 5000
+      const xp = floor * 120
+
+      let itemsGanados = []
+      let minDrop = 1, maxDrop = 2
+      if(floor >= 50){ minDrop = 1; maxDrop = 3 }
+      if(floor >= 200){ minDrop = 2; maxDrop = 4 }
+      const numItems = Math.floor(Math.random() * (maxDrop - minDrop + 1)) + minDrop
+
+      const comunes = ["MP1","MP2","P1","P2","C01","C02","C03","C04","C05","C06","C07","C08","C09","C10","C11","C12","C13","C14","C15","C16","C17","C18","C19","C20"];
+      const raros = ["MP3","MP4","P3","P4","Z01","Z02","Z03","Z04","Z05","Z06","Z07","Z08","Z09","Z10","Z11","Z12","Z13","Z14","Z15","Z16","Z17","Z18","Z19","Z20"];
+      const legendarios = ["MP5","MP6","P5","P6","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13","L14","L15","L16","L17","L18","L19","L20"];
+      const fantasticos = ["F01","F02","F03","F04","F05","F06","F07","F08","F09","F10"];
+      const miticos = ["H01","H02","H03","H04","H05","H06","H07","H08","H09","H10"];
+      const ancestrales = ["X01","X02","X03","X04","X05","X06","X07","X08","X09","X10"];
+
+      let dropChance = { comun: 0.2, raro: 0.2, legendario: 0.35, fantastico: 0.20, mitico: 0.045, ancestral: 0.005 }
+      if (floor >= 100) dropChance = { comun: 0.1, raro: 0.15, legendario: 0.4, fantastico: 0.25, mitico: 0.09, ancestral: 0.01 }
+      if (floor >= 300) dropChance = { comun: 0.05, raro: 0.05, legendario: 0.45, fantastico: 0.3, mitico: 0.13, ancestral: 0.02 }
+
+      for(let i=0;i<numItems;i++){
+        const roll = Math.random()
+        let selectedList, rarity
+        if(roll < dropChance.ancestral){ selectedList=[...ancestrales]; rarity="ancestral" }
+        else if(roll < dropChance.ancestral + dropChance.mitico){ selectedList=[...miticos]; rarity="mitico" }
+        else if(roll < dropChance.ancestral + dropChance.mitico + dropChance.fantastico){ selectedList=[...fantasticos]; rarity="fantastico" }
+        else if(roll < dropChance.ancestral + dropChance.mitico + dropChance.fantastico + dropChance.legendario){ selectedList=[...legendarios]; rarity="legendario" }
+        else if(roll < dropChance.ancestral + dropChance.mitico + dropChance.fantastico + dropChance.legendario + dropChance.raro){ selectedList=[...raros]; rarity="raro" }
+        else{ selectedList=[...comunes]; rarity="comun" }
+
+        if(!selectedList.length) continue
+        const index = Math.floor(Math.random()*selectedList.length)
+        const code = selectedList[index]
+        const item = findItemByCode(code)
+        if(!item) continue
+        pushInv(you,item)
+
+        const emoji = rarity==="comun"?"⚪":rarity==="raro"?"🔵":rarity==="legendario"?"🟣":rarity==="fantastico"?"🔶":rarity==="mitico"?"🐲":"🟥"
+        itemsGanados.push(`${emoji} *${item.nombre}*`)
+
+        if(rarity==="ancestral"){
+          await sendReply(
+            `🔥 *RELIQUIA ANCESTRAL DESPERTADA* 🔥
+
+👑 ${you.nick} obtuvo
+
+🟥 *${item.nombre}*
+
+⚔️ Poder ancestral liberado...
+🌌 Una reliquia nacida antes del primer universo.`,
+            { mentions: [you.nick] }
+          )
+        }
+      }
+
+      you.monedas += coins
+      addXP(you,xp)
+
+      await sendReply(
+        `📦 *Cofre del Boss*
+
+💰 +$${fmt(coins)}
+✨ +${xp} XP`
+      )
+
+      await sendReply("📦 Abriste un cofre... ¡Veamos qué hay dentro!")
+
+      await new Promise(r=>setTimeout(r,1500))
+
+      if(itemsGanados.length>0)
+        await sendReply(`🎉 Items:\n${itemsGanados.join("\n")}`)
+      else
+        await sendReply("😢 El cofre estaba vacío...")
+    }
+
+    saveDB()
+    return
+  } else {
+    you.hp = 0
+    await sendReply(`💀 Fuiste derrotado en el piso ${floor}\nTu progreso quedó guardado.`)
+    saveDB()
+    return
+  }
+}
+
+
+
 
 
 // -----------------------------
@@ -2734,148 +3231,215 @@ global.assassinations = global.assassinations || {};
 
 const GOLEM_KO_TIME = 5 * 60 * 1000; // 5 minutos
 
+// función para obtener menciones
+const mentioned = mentionedJid || [];
+
 // --- DUELO: Solicitud ---
 if (cmd === "duel") {
-  const raw = rest.join(" ").trim() || "";
-  const number = raw.replace(/\D/g, "");
-  if (!number) return sendErrorReply(`❌ Usá: *${PREFIX}rpg duel <número>*`);
 
-  const targetJidRaw = number + "@s.whatsapp.net";
-  const targetJid = normalizeId(targetJidRaw);
+  if (!mentioned[0])
+    return sendErrorReply(`❌ Usá: *${PREFIX}rpg duel @usuario*`);
+
+  const targetJid = normalizeId(mentioned[0]);
+
   if (!targetJid) return sendErrorReply("No se pudo identificar al rival.");
   if (targetJid === normalizedUserId) return sendErrorReply("No podés retarte a vos mismo.");
 
   const opp = getUser(targetJid);
+
   if (!opp) return sendErrorReply("El rival no tiene perfil RPG.");
   if (you.hp <= 0) return sendErrorReply("Estás K.O. y no podés pelear.");
   if (opp.hp <= 0) return sendErrorReply("El rival está K.O.");
 
   const duelKey = `${normalizedUserId}_${targetJid}`;
-  global.pendingDuels[duelKey] = { from: normalizedUserId, to: targetJid, timestamp: Date.now() };
-  return sendReply(`⚔️ ${you.nick||"Tú"} retó a ${opp.nick||"Rival"} a un duelo.\n`+
-                   `✅ ${opp.nick||"Rival"} puede aceptar con: ${PREFIX}rpg accept ${number}\n`+
-                   `❌ o rechazar con: ${PREFIX}rpg reject ${number}`);
+
+  global.pendingDuels[duelKey] = {
+    from: normalizedUserId,
+    to: targetJid,
+    timestamp: Date.now()
+  };
+
+  return sendReply(
+`⚔️ ${you.nick||"Tú"} retó a ${opp.nick||"Rival"} a un duelo.
+
+✅ ${opp.nick||"Rival"} puede aceptar con:
+${PREFIX}rpg accept @${normalizedUserId.split("@")[0]}
+
+❌ o rechazar con:
+${PREFIX}rpg reject @${normalizedUserId.split("@")[0]}`
+  );
 }
+
 
 // --- ACEPTAR DUEL ---
 if (cmd === "accept") {
-  const raw = rest.join(" ").trim() || "";
-  const number = raw.replace(/\D/g, "");
-  if (!number) return sendErrorReply("Escribí el número del jugador que retaste.");
-  const fromJidRaw = number + "@s.whatsapp.net";
-  const fromJid = normalizeId(fromJidRaw);
 
+  if (!mentioned[0])
+    return sendErrorReply("Debes mencionar al jugador que te retó.");
+
+  const fromJid = normalizeId(mentioned[0]);
   const duelKey = `${fromJid}_${normalizedUserId}`;
-  if (!global.pendingDuels[duelKey]) return sendErrorReply("No hay duelo pendiente de esa persona.");
+
+  if (!global.pendingDuels[duelKey])
+    return sendErrorReply("No hay duelo pendiente de esa persona.");
+
   delete global.pendingDuels[duelKey];
 
-  global.activeDuels[duelKey] = {
-    players: [fromJid, normalizedUserId],
-    turn: 0,
-    log: [],
-    started: Date.now()
+  const opp = getUser(fromJid);
+
+  if (!opp) return sendErrorReply("El rival no tiene perfil RPG.");
+
+  if (you.hp <= 0) return sendErrorReply("Estás K.O.");
+  if (opp.hp <= 0) return sendErrorReply("El rival está K.O.");
+
+  const log = [];
+
+  const A = {
+    id: opp.nick || fromJid.split("@")[0],
+    atk: getAttack(opp),
+    def: getDefense(opp),
+    hp: opp.hp
   };
-  return sendReply(`🏹 ¡Duelo iniciado entre ${getUser(fromJid).nick||"Jugador"} y ${you.nick||"Tú"}!\n`+
-                   `Usá ".rpg accion <ataque/magia/curar/bloquear>" para tu turno.`);
+
+  const B = {
+    id: you.nick || normalizedUserId.split("@")[0],
+    atk: getAttack(you),
+    def: getDefense(you),
+    hp: you.hp
+  };
+
+  for (let ronda = 1; ronda <= 6; ronda++) {
+
+    const aRoll = Math.max(0, A.atk - Math.floor(B.def * 0.6)) + Math.floor(Math.random() * 6);
+
+    if (aRoll > 0) B.hp = Math.max(0, B.hp - aRoll);
+
+    log.push(`Ronda ${ronda}: *${A.id}* golpea por ${aRoll}. ${B.id} queda en ${B.hp} HP.`);
+
+    if (B.hp <= 0) break;
+
+    const bRoll = Math.max(0, B.atk - Math.floor(A.def * 0.6)) + Math.floor(Math.random() * 6);
+
+    if (bRoll > 0) A.hp = Math.max(0, A.hp - bRoll);
+
+    log.push(`Ronda ${ronda}: *${B.id}* responde con ${bRoll}. ${A.id} queda en ${A.hp} HP.`);
+
+    if (A.hp <= 0) break;
+  }
+
+  opp.hp = A.hp;
+  you.hp = B.hp;
+
+  let result, coins, xpA, xpB;
+
+  if (A.hp === B.hp) {
+
+    result = "🤝 ¡Empate!";
+    coins = 5000;
+    xpA = xpB = 200;
+
+    opp.monedas += coins;
+    you.monedas += coins;
+
+  } else if (A.hp > B.hp) {
+
+    result = `${A.id} ganó el duelo`;
+    coins = 8000;
+    xpA = 800;
+    xpB = 200;
+
+    opp.monedas += coins;
+
+  } else {
+
+    result = `${B.id} ganó el duelo`;
+    coins = 8000;
+    xpA = 200;
+    xpB = 800;
+
+    you.monedas += coins;
+
+  }
+
+  addXP(opp, xpA);
+  addXP(you, xpB);
+
+  saveDB();
+
+  return sendReply(
+`⚔️ *DUELO*
+
+${log.join("\n")}
+
+Resultado: ${result}`
+  );
 }
+
 
 // --- RECHAZAR DUEL ---
 if (cmd === "reject") {
-  const raw = rest.join(" ").trim() || "";
-  const number = raw.replace(/\D/g, "");
-  if (!number) return sendErrorReply("Escribí el número del jugador que retaste.");
-  const fromJidRaw = number + "@s.whatsapp.net";
-  const fromJid = normalizeId(fromJidRaw);
 
+  if (!mentioned[0])
+    return sendErrorReply("Debes mencionar al jugador.");
+
+  const fromJid = normalizeId(mentioned[0]);
   const duelKey = `${fromJid}_${normalizedUserId}`;
-  if (!global.pendingDuels[duelKey]) return sendErrorReply("No hay duelo pendiente de esa persona.");
+
+  if (!global.pendingDuels[duelKey])
+    return sendErrorReply("No hay duelo pendiente de esa persona.");
+
   delete global.pendingDuels[duelKey];
 
-  return sendReply(`❌ ${you.nick||"Tú"} rechazó el duelo de ${getUser(fromJid).nick||"Jugador"}.`);
+  return sendReply(`❌ ${you.nick||"Tú"} rechazó el duelo.`);
 }
 
-// --- ACCION EN DUELO ---
-if (cmd === "accion") {
-  const duelKey = Object.keys(global.activeDuels).find(k => k.includes(normalizedUserId));
-  if (!duelKey) return sendErrorReply("No estás en un duelo activo.");
 
-  const duel = global.activeDuels[duelKey];
-  const currentPlayerId = duel.players[duel.turn % 2];
-  if (currentPlayerId !== normalizedUserId) return sendErrorReply("No es tu turno todavía.");
-
-  const action = rest[0]?.toLowerCase();
-  if (!action) return sendErrorReply("Escribí la acción a realizar: ataque, magia, curar, bloquear");
-
-  const [p1Jid, p2Jid] = duel.players;
-  const player1 = getUser(p1Jid);
-  const player2 = getUser(p2Jid);
-
-  const atacante = normalizedUserId === p1Jid ? player1 : player2;
-  const defensor = normalizedUserId === p1Jid ? player2 : player1;
-
-  const acaA = atacante.academia?.especialidades || {};
-  const acaD = defensor.academia?.especialidades || {};
-
-  let damage = 0;
-  let logEntry = "";
-
-  if (action === "ataque") {
-    const baseAtk = (atacante.arma?.dano || 0) + (atacante.fuerza || 0) + (acaA.fuerza || 0);
-    const defensa = (defensor.armadura?.defensa || 0) + (defensor.defensa || 0) + (acaD.defensa || 0);
-    const hitChance = 0.7 + (acaA.controlEspada || 0) * 0.02;
-    if (Math.random() < hitChance) {
-      damage = Math.max(0, baseAtk - Math.floor(defensa * 0.5));
-      defensor.hp = Math.max(0, defensor.hp - damage);
-      logEntry = `⚔️ ${atacante.nick||"Tú"} golpea a ${defensor.nick||"Rival"} por ${damage} HP.`;
-    } else {
-      logEntry = `❌ ${atacante.nick||"Tú"} falló su ataque.`;
-    }
-  } else if (action === "magia") {
-    const baseMagic = 10 + (acaA.magia || 0) * 3;
-    damage = Math.max(0, baseMagic - (acaD.defensa || 0));
-    defensor.hp = Math.max(0, defensor.hp - damage);
-    logEntry = `✨ ${atacante.nick||"Tú"} lanza hechizo y causa ${damage} de daño.`;
-  } else if (action === "curar") {
-    const heal = Math.floor(atacante.totalHP * (0.005 + (acaA.curacion || 0) * 0.01));
-    atacante.hp = Math.min(atacante.totalHP, atacante.hp + heal);
-    logEntry = `💖 ${atacante.nick||"Tú"} se cura ${heal} HP.`;
-  } else if (action === "bloquear") {
-    atacante.blocking = true;
-    logEntry = `🛡️ ${atacante.nick||"Tú"} se prepara para bloquear el próximo ataque.`;
-  } else return sendErrorReply("Acción inválida.");
-
-  duel.log.push(logEntry);
-
-  if (defensor.hp <= 0) {
-    defensor.hp = 0;
-    duel.log.push(`💥 ${defensor.nick||"Rival"} quedó K.O.! Fin del duelo.`);
-    atacante.monedas += 2000;
-    addXP(atacante, 500);
-    addXP(defensor, 200);
-    delete global.activeDuels[duelKey];
-  } else duel.turn++;
-
-  saveDB();
-  return sendReply(duel.log.slice(-5).join("\n"));
-}
 
 // --- ASSESINAR ---
 if (cmd === "asesinar") {
-  const raw = rest.join(" ").trim() || "";
-  const number = raw.replace(/\D/g, "");
-  if (!number) return sendErrorReply(`❌ ¡Error! Usá: *${PREFIX}rpg asesinar <número>*`);
 
-  const targetJidRaw = number + "@s.whatsapp.net";
-  const normalizedTargetId = normalizeId(targetJidRaw);
+  if (!mentioned[0])
+    return sendErrorReply(`❌ Usá: *${PREFIX}rpg asesinar @usuario*`);
+
+  const normalizedTargetId = normalizeId(mentioned[0]);
+
   if (!normalizedTargetId) return sendErrorReply("No se pudo identificar a la victima.");
   if (normalizedTargetId === normalizedUserId) return sendErrorReply("No podés asesinarte a vos mismo.");
   const opp = getUser(normalizedTargetId);
   if (!opp) return sendErrorReply("la victima no tiene perfil RPG todavía.");
 
+  // --- VERIFICAR INMUNIDAD ---
+const ahora = Date.now();
+const inmunidadTiempo = 60 * 60 * 1000; // 1 hora
+
+// Inmunidad atacante
+if (you.inmunidadKO && ahora - (you.inmunidadKOStart || 0) < inmunidadTiempo) {
+  const restante = inmunidadTiempo - (ahora - you.inmunidadKOStart);
+  const m = Math.floor(restante / 60000);
+  const s = Math.floor((restante % 60000) / 1000);
+  return sendErrorReply(`🛡️ Tenés inmunidad por KO.\nPodrás atacar en ${m}m ${s}s.`);
+} else if (you.inmunidadKO) {
+  // expiró
+  you.inmunidadKO = false;
+  you.inmunidadKOStart = 0;
+}
+
+// Inmunidad víctima
+if (opp.inmunidadKO && ahora - (opp.inmunidadKOStart || 0) < inmunidadTiempo) {
+  const restante = inmunidadTiempo - (ahora - opp.inmunidadKOStart);
+  const m = Math.floor(restante / 60000);
+  const s = Math.floor((restante % 60000) / 1000);
+  return sendErrorReply(`🛡️ La víctima tiene inmunidad por KO.\nPodrás atacarla en ${m}m ${s}s.`);
+} else if (opp.inmunidadKO) {
+  // expiró
+  opp.inmunidadKO = false;
+  opp.inmunidadKOStart = 0;
+}
+
+
   if (you.hp <= 0) return sendErrorReply("Estás K.O. Usá pociones o esperá a subir de nivel.");
   if (opp.hp <= 0) return sendErrorReply("La victima está muerta No hace falta rematarlo.");
 
-  const ahora = Date.now();
   const golemKOtime = 5 * 60 * 1000; // 5 minutos de gólem noqueado
 
   const log = [];
@@ -2898,15 +3462,15 @@ if (cmd === "asesinar") {
   }
 
   // --- Si atacante tenía inmunidad, se la quitamos ---
-  if (you.inmunidadKO) {
+  if (you.inmunidadTiempo) {
     you.inmunidadKO = false;
     you.inmunidadKOStart = 0;
     log.push(`⚔️ ${you.nick || "Tú"} pierde su inmunidad por atacar.`);
   }
 
   // --- Preparamos estadísticas del atacante ---
-  const A = { id: you.nick || normalizedUserId.split("@")[0], atk: getAttack(you), def: getDefense(you), hp: you.hp };
-  const B = { id: defensor.id || defensor.nick || normalizedTargetId.split("@")[0], atk: defensor.atk || getAttack(defensor), def: getDefense(defensor), hp: defensor.hp };
+  const A = { id: you.nick || mentioned[0], atk: getAttack(you), def: getDefense(you), hp: you.hp };
+  const B = { id: defensor.id || defensor.nick || mentioned[0], atk: defensor.atk || getAttack(defensor), def: getDefense(defensor), hp: defensor.hp };
 
   for (let ronda = 1; ronda <= 6; ronda++) {
     // --- ATAQUE DE A ---
@@ -2921,7 +3485,7 @@ if (cmd === "asesinar") {
         opp.golem.lastKO = ahora;
         log.push(`💥 ¡Derrotaste al gólem! Queda noqueado por 5 minutos.`);
       } else {
-        if (!opp.inmunidadKO) {
+        if (!opp.inmunidadTiempo) {
           opp.inmunidadKO = true;
           opp.inmunidadKOStart = ahora;
           log.push(`💥 ${B.id} esta muerto y gana inmunidad por 1 hora.`);
@@ -2937,7 +3501,7 @@ if (cmd === "asesinar") {
 
     if (A.hp <= 0) {
       A.hp = 0;
-      if (!you.inmunidadKO) {
+      if (!you.inmunidadTiempo) {
         you.inmunidadKO = true;
         you.inmunidadKOStart = ahora;
         log.push(`💥 ${A.id} esta muerto y gana inmunidad por 1 hora.`);
@@ -2967,7 +3531,7 @@ if (cmd === "asesinar") {
   } else if (A.hp > B.hp) {
     result = "asesinaste al rival";
     coins = 10000;
-    xpA = 800;
+    xpA = 1000;
     xpB = 100;
     you.monedas += coins;
     addXP(you, xpA);
@@ -2996,8 +3560,9 @@ if (cmd === "asesinar") {
       A.hp < B.hp ? `Victima: +$${fmt(coins)}, +${xpB} XP | Vos: +${xpA} XP` :
       `Ambos: +$${fmt(coins)}, +${xpA} XP`}`
   );
-  
 }
+
+
 
 // --- ASSESINAR ---
 if (cmd === "farm") {
@@ -3324,16 +3889,22 @@ if (cmd === "ranking" || cmd === "leaderboard") {
     nivel: u.nivel || 0,
     xp: u.xp || 0,
     monedas: u.monedas || 0,
+    piso: u.ancestral?.floor || 0
   }));
 
-  // Ordenamos por nivel, luego XP, luego monedas
-  arr.sort((a, b) => (b.nivel - a.nivel) || (b.xp - a.xp) || (b.monedas - a.monedas));
+  // Ordenamos por nivel, luego XP, luego piso de dungeon, luego monedas
+  arr.sort((a, b) =>
+    (b.nivel - a.nivel) ||
+    (b.xp - a.xp) ||
+    (b.piso - a.piso) ||
+    (b.monedas - a.monedas)
+  );
 
   const top = arr.slice(0, 10);
   if (!top.length) return sendReply("Aún no hay jugadores.");
 
-  const lvlColors = ["🟥","🟧","🟨","🟩","🟦","🟪","⬛","⬜","🟫","🔵"]; // 10 bloques distintos
-  const xpColors = ["🟩","🟦","🟪","🟧","🟥","🟨","⬛","⬜","🟫","🔵"]; // XP también gamificado
+  const lvlColors = ["🟥","🟧","🟨","🟩","🟦","🟪","⬛","⬜","🟫","🔵"];
+  const xpColors = ["🟩","🟦","🟪","🟧","🟥","🟨","⬛","⬜","🟫","🔵"];
 
   let txt = "🏅 *Ranking RPG* (Top 10)\n\n";
   const mentionsList = [];
@@ -3342,7 +3913,7 @@ if (cmd === "ranking" || cmd === "leaderboard") {
     const jugador = getUser(p.id);
     const displayName = jugador?.nick || p.id.split("@")[0];
 
-    // Emoji de premio para los tres primeros
+    // Emoji para el puesto
     let puestoEmoji;
     switch(index) {
       case 0: puestoEmoji = "🥇"; break;
@@ -3351,7 +3922,7 @@ if (cmd === "ranking" || cmd === "leaderboard") {
       default: puestoEmoji = `${index + 1}.`; break;
     }
 
-    // Barra de nivel (max 10 bloques)
+    // -------- BARRA NIVEL --------
     const lvlBlocks = 10;
     const lvlFilled = Math.min(p.nivel, lvlBlocks);
     let lvlBar = "";
@@ -3359,8 +3930,8 @@ if (cmd === "ranking" || cmd === "leaderboard") {
       lvlBar += i < lvlFilled ? lvlColors[i] : "⬜";
     }
 
-    // Barra de XP (max 10 bloques)
-    const xpPerLevel = 100; // Ajusta según tu RPG
+    // -------- BARRA XP --------
+    const xpPerLevel = 100;
     const xpBlocks = 10;
     const xpFilled = Math.floor((p.xp % xpPerLevel) / (xpPerLevel / xpBlocks));
     let xpBar = "";
@@ -3368,10 +3939,21 @@ if (cmd === "ranking" || cmd === "leaderboard") {
       xpBar += i < xpFilled ? xpColors[i] : "⬜";
     }
 
+    // -------- BARRA DUNGEON --------
+    const dungeonBlocks = 10;
+    const dungeonMax = 500;
+    const dungeonFilled = Math.floor((p.piso / dungeonMax) * dungeonBlocks);
+
+    let dungeonBar = "";
+    for (let i = 0; i < dungeonBlocks; i++) {
+      dungeonBar += i < dungeonFilled ? "🟥" : "⬜";
+    }
+
     txt += `${puestoEmoji} *${displayName}*\n`;
     txt += `Nivel: ${lvlBar} ⭐ ${p.nivel}\n`;
     txt += `XP: ${xpBar} (${p.xp} XP)\n`;
-    txt += `💰 Monedas: $${fmt(p.monedas)}\n\n`;
+    txt += `💰 Monedas: $${fmt(p.monedas)}\n`;
+    txt += `🏰 Dungeon: ${dungeonBar} Piso ${p.piso}\n\n`;
 
     mentionsList.push(p.id);
   });
@@ -3379,13 +3961,12 @@ if (cmd === "ranking" || cmd === "leaderboard") {
   return sendReply(txt, { mentions: mentionsList });
 }
 
+// Subcomando no reconocido
+return sendErrorReply("Subcomando inválido.\n\n" + helpText());
 
-    // Subcomando no reconocido
-    return sendErrorReply("Subcomando inválido.\n\n" + helpText());
-
-  } catch (err) {
-    console.error("[RPG] Error:", err);
-    return sendErrorReply(`Error en RPG: ${err.message}`);
-  }
-  },
+} catch (err) {
+  console.error("[RPG] Error:", err);
+  return sendErrorReply(`Error en RPG: ${err.message}`);
+}
+},
 };

@@ -74,6 +74,7 @@
     { "command": "rpg isla corrupta I1/I2/I3", "desc": "da xp, dinero y objetos" },
     { "command": "rpg mazmorra legendaria L1/L2/L3", "desc": "da xp, dinero y objetos" },
     { "command": "rpg evento-mascota", "desc": "se juega de a 3 usuarios y podes conseguir un pokemon" },
+    { "command": "rpg menu dungeon", "desc": "dungeon ancestral" },
     { "command": "rpg shop", "desc": "tienda básica de objetos" },
     { "command": "rpg home", "desc": "para comprarte una casa" },
     { "command": "rpg buy <código>", "desc": "comprar un item en la shop" },
@@ -87,6 +88,7 @@
     { "command": "rpg asesinar @usuario", "desc": "se la metes mientras duerme XD" },
     { "command": "rpg ranking", "desc": "ver top global" },
     { "command": "rpg list <código> <precio>", "desc": "vender items" },
+    { "command": "rpg list all", "desc": "para vender todos los items del inventario principal" },
     { "command": "rpg dar <dinero/item> <cantidad/código> @usuario", "desc": "dar monedas a alguien" },
     { "command": "rpg market", "desc": "comprar items de otros usuarios" },
     { "command": "rpg buyplayer <código> <vendedor>", "desc": "comprar de otro usuario" }
