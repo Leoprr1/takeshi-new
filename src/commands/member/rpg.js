@@ -351,12 +351,11 @@ function getUser(id) {
   // Crear usuario si no existe
   if (!DB[nid]) {
     const newUser = JSON.parse(JSON.stringify(START));
-    newUser.lid = nid; // Guardar el @lid correctamente
-    // inicializaciones seguras
+    newUser.lid = nid;
     if (newUser.mana === undefined) newUser.mana = 100;
     if (newUser.manamax === undefined) newUser.manamax = 100;
     if (newUser.lastRegen === undefined) newUser.lastRegen = 0;
-    // --- Academia / Especialidades ---
+
     if (!newUser.academia) {
       newUser.academia = {
         fuerza: 1,
@@ -366,136 +365,119 @@ function getUser(id) {
         espada: 1,
         defensa: 1,
         manaBonus: 0,
-        especialidades: {} // para futuros hechizos/skills
+        especialidades: {}
       };
     }
+
+    newUser.hp = newUser.hpMax || 100;
+    newUser.hpMax = newUser.hpMax || 100;
+    
     DB[nid] = newUser;
     saveDB();
   }
 
-  // Tomamos el usuario existente o recién creado
   const user = DB[nid];
 
-  // Forzar inicialización de maná según nivel (si falta)
   const manaBase = 100;
-const manaPorNivel = 10;
+  const manaPorNivel = 10;
+  const nivel = typeof user.nivel === "number" ? user.nivel : 1;
+  if (typeof user.manamax !== "number") {
+    user.manamax = manaBase + (nivel - 1) * manaPorNivel;
+  }
 
-const nivel = typeof user.nivel === "number" ? user.nivel : 1;
-
-if (typeof user.manamax !== "number") {
-  user.manamax = manaBase + (nivel - 1) * manaPorNivel;
-}
-
-
-  // Asegurar hp inicial si falta (por si hay entradas antiguas en DB)
-  if (typeof user.hp !== "number") user.hp = user.hpMax || 100;
-  if (typeof user.hpMax !== "number") user.hpMax = 100;
-
-// ----------------------------
-// Regeneración automática de maná y vida (cada X ms)
-// ----------------------------
-if (typeof user.lastRegen !== "number" || isNaN(user.lastRegen)) {
-  user.lastRegen = Date.now();
-}
-
-const regenTime = 5 * 60 * 1000; // 5 minutos
-const nowTime = Date.now();
-const elapsed = nowTime - user.lastRegen;
-
-if (elapsed >= regenTime) {
-  const homeMultiplier = user.enCasa ? 4 : 1; // x4 dentro de casa
-  const BASE_HP_PERCENT = 0.05; // 5% por tick (HP)
-  const BASE_MANA_PERCENT = 0.10; // 10% por tick (Mana)
-
-  let ticks = Math.floor(elapsed / regenTime);
-  const MAX_TICKS = 12;
-  if (ticks > MAX_TICKS) ticks = MAX_TICKS;
-
-  // Vida y maná total incluyendo buffs
+  // ----------------------------
+  // 💥 LIMIT BREAKER - DRENAJE PASIVO
+  // ----------------------------
   const aca = user.academia?.especialidades || {};
+  if (user.limitBreaker?.active) {
+    const now = Date.now();
+    if (!user.limitBreaker.lastTick) user.limitBreaker.lastTick = now;
+    const elapsedLB = now - user.limitBreaker.lastTick;
 
-const totalHP = 
-  (user.hpMax || 0)
-  + (aca.curacion || 0) * 5
-  + (user.golem?.hpBuff || 0)
-  + (user.mascotaEquipada?.hpBuff || 0);
+    if (elapsedLB >= 60000) {
+      let lbTicks = Math.floor(elapsedLB / 60000);
+      if (lbTicks > 60) lbTicks = 60;
 
-              
+      const manaLevel = (aca.manaMax || 0);
+      const reduction = Math.min(0.8, manaLevel * 0.01);
+      const BASE_DRAIN = 2000;
+      const drainPerMin = BASE_DRAIN * (1 - reduction);
+      const totalDrain = Math.floor(drainPerMin * lbTicks);
 
-const totalMana = (user.manamax || 0)
-                + (aca.manaMax || 0) * 10;
+      if (typeof user.mana !== "number") user.mana = 0;
+      user.mana -= totalDrain;
 
-   
+      if (user.mana <= 0) {
+        user.mana = 0;
+        user.limitBreaker.active = false;
+        user.limitBreaker.lastTick = 0;
+      } else {
+        user.limitBreaker.lastTick = now;
+      }
+       saveDB(); // opcional, si querés guardar cada drenaje
+    }
+  }
 
-if (user.hp > totalHP) user.hp = totalHP;
-if (user.mana > totalMana) user.mana = totalMana;
+  return user;
+}
 
+// ----------------------------
+// TICK GLOBAL DE REGENERACIÓN DE VIDA Y MANÁ
+// ----------------------------
+const regenTime = 5 * 60 * 1000; // 5 minutos por tick
 
-  if (Number.isNaN(totalHP) || Number.isNaN(totalMana)) {
-    user.lastRegen += regenTime * ticks;
-    saveDB();
-  } else {
-    const curHP = Number(user.hp || 0);
-    const curMana = Number(user.mana || 0);
+setInterval(() => {
+  const now = Date.now();
+  const BASE_HP_PERCENT = 0.05;
+  const BASE_MANA_PERCENT = 0.10;
+  const MAX_TICKS = 12;
+  let updated = false;
 
-    const rawRegenHP = Math.floor(totalHP * BASE_HP_PERCENT * homeMultiplier) * ticks;
-    const rawRegenMana = Math.floor(totalMana * BASE_MANA_PERCENT * homeMultiplier) * ticks;
+  for (let nid in DB) {
+    const u = DB[nid];
+    if (!u) continue;
 
-    const addHP = Math.min(rawRegenHP, Math.max(0, totalHP - curHP));
-    const addMana = Math.min(rawRegenMana, Math.max(0, totalMana - curMana));
+    if (typeof u.lastRegen !== "number" || isNaN(u.lastRegen)) u.lastRegen = now;
 
-    user.hp = Math.min(totalHP, curHP + addHP);
-    user.mana = Math.min(totalMana, curMana + addMana);
+    let elapsed = now - u.lastRegen;
+    if (elapsed < regenTime) continue;
 
-    user.lastRegen += regenTime * ticks;
-    saveDB();
+    let ticks = Math.floor(elapsed / regenTime);
+    if (ticks > MAX_TICKS) ticks = MAX_TICKS;
+
+    const homeMultiplier = u.enCasa ? 4 : 1;
+
+    const aca = u.academia?.especialidades || {};
+    const totalHP =
+      (u.hpMax || 0) +
+      (aca.curacion || 0) * 5 +
+      (u.golem?.hpBuff || 0) +
+      (u.mascotaEquipada?.hpBuff || 0);
+    const totalMana =
+      (u.manamax || 0) +
+      (aca.manaMax || 0) * 10;
+
+    const curHP = Number(u.hp || 0);
+    const curMana = Number(u.mana || 0);
+
+    const addHP = Math.min(Math.floor(totalHP * BASE_HP_PERCENT * homeMultiplier) * ticks, totalHP - curHP);
+    const addMana = Math.min(Math.floor(totalMana * BASE_MANA_PERCENT * homeMultiplier) * ticks, totalMana - curMana);
+
+    u.hp = Math.min(totalHP, curHP + addHP);
+    u.mana = Math.min(totalMana, curMana + addMana);
+
+    // ✅ Actualizamos lastRegen solo con los ticks aplicados
+    u.lastRegen += ticks * regenTime;
+
+    if (addHP > 0 || addMana > 0) updated = true;
 
     if (process.env.DEBUG_REGEN === "1") {
-      console.log(
-        `[REGEN] enCasa=${!!user.enCasa} ticks=${ticks} +HP=${addHP} (+${rawRegenHP} raw) +Mana=${addMana} (+${rawRegenMana} raw) newLast=${new Date(user.lastRegen).toISOString()}`
-      );
+      console.log(`[REGEN] ${u.lid} ticks=${ticks} +HP=${addHP} +Mana=${addMana} newLast=${new Date(u.lastRegen).toISOString()}`);
     }
   }
-}
 
-// ----------------------------
-// 💥 LIMIT BREAKER - DRENAJE PASIVO
-// ----------------------------
-const aca = user.academia?.especialidades || {};
-if (user.limitBreaker?.active) {
-  const now = Date.now();
-
-  if (!user.limitBreaker.lastTick) user.limitBreaker.lastTick = now;
-
-  const elapsedLB = now - user.limitBreaker.lastTick;
-
-  if (elapsedLB >= 60000) {
-    let lbTicks = Math.floor(elapsedLB / 60000);
-    if (lbTicks > 60) lbTicks = 60; // anti abuso
-
-    const manaLevel = (aca.manaMax || 0);
-    const reduction = Math.min(0.8, manaLevel * 0.01);
-    const BASE_DRAIN = 2000;
-    const drainPerMin = BASE_DRAIN * (1 - reduction);
-    const totalDrain = Math.floor(drainPerMin * lbTicks);
-
-    if (typeof user.mana !== "number") user.mana = 0;
-    user.mana -= totalDrain;
-
-    if (user.mana <= 0) {
-      user.mana = 0;
-      user.limitBreaker.active = false;
-      user.limitBreaker.lastTick = 0;
-    } else {
-      user.limitBreaker.lastTick = now;
-    }
-
-    saveDB(); // opcional, si querés guardar cada drenaje
-  }
-}
-
-return user;
-}
+  if (updated) saveDB();
+}, 60 * 1000); // chequea cada minuto si toca tick
 
 
 function now() {
@@ -1383,6 +1365,7 @@ if (cmd === "magia") {
                   + (acaTarget.curacion || 0) * 5
                   + (objetivo.golem?.hpBuff || 0)
                   + (objetivo.mascotaEquipada?.hpBuff || 0);
+     objetivo.hp = Math.max(0, Math.min(objetivo.hp || 0, totalHP));             
 
     const currentHP = objetivo.hp || 0;
 
@@ -3617,22 +3600,36 @@ ${log.join("\n")}
 
 
 
-
-
 // -----------------------------
-// RGP DUEL & ASSASSINATE COMPLETO (Mención estilo antiguo)
+// RGP DUEL & ASSASSINATE COMPLETO (FINAL FIX)
 // -----------------------------
 
 global.pendingDuels = global.pendingDuels || {};
 global.activeDuels = global.activeDuels || {};
 global.assassinations = global.assassinations || {};
 
-const GOLEM_KO_TIME = 5 * 60 * 1000; // 5 minutos
+const GOLEM_KO_TIME = 5 * 60 * 1000;
 
 // función para obtener menciones
 const mentioned = mentionedJid || [];
 
+// -----------------------------
+// 🔥 FUNCION HP REAL (CON BUFFS)
+// -----------------------------
+function getTotalHP(user) {
+  const aca = user.academia?.especialidades || {};
+
+  return (
+    (user.hpMax || 0) +
+    (aca.curacion || 0) * 5 +
+    (user.golem?.hpBuff || 0) +
+    (user.mascotaEquipada?.hpBuff || 0)
+  );
+}
+
+// -----------------------------
 // --- DUELO: Solicitud ---
+// -----------------------------
 if (cmd === "duel") {
 
   if (!mentioned[0])
@@ -3646,7 +3643,7 @@ if (cmd === "duel") {
   const opp = getUser(targetJid);
 
   if (!opp) return sendErrorReply("El rival no tiene perfil RPG.");
-  if (you.hp <= 0) return sendErrorReply("Estás K.O. y no podés pelear.");
+  if (you.hp <= 0) return sendErrorReply("Estás K.O.");
   if (opp.hp <= 0) return sendErrorReply("El rival está K.O.");
 
   const duelKey = `${normalizedUserId}_${targetJid}`;
@@ -3669,7 +3666,9 @@ ${PREFIX}rpg reject @${normalizedUserId.split("@")[0]}`
 }
 
 
-// --- ACEPTAR DUEL ---
+// -----------------------------
+// --- ACEPTAR DUEL (COMBATE NUEVO)
+// -----------------------------
 if (cmd === "accept") {
 
   if (!mentioned[0])
@@ -3679,94 +3678,85 @@ if (cmd === "accept") {
   const duelKey = `${fromJid}_${normalizedUserId}`;
 
   if (!global.pendingDuels[duelKey])
-    return sendErrorReply("No hay duelo pendiente de esa persona.");
+    return sendErrorReply("No hay duelo pendiente.");
 
   delete global.pendingDuels[duelKey];
 
   const opp = getUser(fromJid);
 
-  if (!opp) return sendErrorReply("El rival no tiene perfil RPG.");
+  if (!opp) return sendErrorReply("Rival inválido.");
 
   if (you.hp <= 0) return sendErrorReply("Estás K.O.");
   if (opp.hp <= 0) return sendErrorReply("El rival está K.O.");
 
-  const log = [];
-
-  const A = {
-    id: opp.nick || fromJid.split("@")[0],
-    atk: getAttack(opp),
-    def: getDefense(opp),
-    hp: opp.hp
-  };
-
-  const B = {
-    id: you.nick || normalizedUserId.split("@")[0],
+  let player = {
+    nombre: you.nick || normalizedUserId.split("@")[0],
+    hp: you.hp,
     atk: getAttack(you),
     def: getDefense(you),
-    hp: you.hp
+    maxHP: getTotalHP(you)
   };
 
-  let ronda = 0;
-  const roundLog = [];
+  let enemy = {
+    nombre: opp.nick || fromJid.split("@")[0],
+    hp: opp.hp,
+    atk: getAttack(opp),
+    def: getDefense(opp),
+    maxHP: getTotalHP(opp)
+  };
 
-  while (A.hp > 0 && B.hp > 0) {
-    ronda++;
+  const log = [];
+  let round = 0;
 
-    const aRoll = Math.max(0, A.atk - Math.floor(B.def * 0.6)) + Math.floor(Math.random() * 6);
+  while (player.hp > 0 && enemy.hp > 0) {
+    round++;
 
-    if (aRoll > 0) B.hp = Math.max(0, B.hp - aRoll);
+    const dmg = Math.max(0, player.atk - Math.floor(enemy.def * 0.3)) + Math.floor(Math.random() * 10);
+    enemy.hp -= dmg;
 
-    log.push(`Ronda ${ronda}: *${A.id}* golpea por ${aRoll}. ${B.id} queda en ${B.hp} HP.`);
+    if (round <= 10)
+      log.push(`⚔️ ${player.nombre} golpea a ${enemy.nombre} por ${dmg}`);
 
-    if (B.hp <= 0) break;
+    if (enemy.hp <= 0) break;
 
-    const bRoll = Math.max(0, B.atk - Math.floor(A.def * 0.6)) + Math.floor(Math.random() * 6);
+    const edmg = Math.max(0, enemy.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 8);
+    player.hp -= edmg;
 
-    if (bRoll > 0) A.hp = Math.max(0, A.hp - bRoll);
-
-    log.push(`Ronda ${ronda}: *${B.id}* responde con ${bRoll}. ${A.id} queda en ${A.hp} HP.`);
-
-    if (A.hp <= 0) break;
+    if (round <= 10)
+      log.push(`💀 ${enemy.nombre} golpea por ${edmg}`);
   }
-  // mostrar últimas 10
-  log.push(...roundLog.slice(-10));
 
-  opp.hp = A.hp;
-  you.hp = B.hp;
+  // 🔥 FIX VIDA
+  player.hp = Math.max(0, Math.min(player.hp, player.maxHP));
+  enemy.hp = Math.max(0, Math.min(enemy.hp, enemy.maxHP));
+
+  you.hp = player.hp;
+  opp.hp = enemy.hp;
 
   let result, coins, xpA, xpB;
 
-  if (A.hp === B.hp) {
-
-    result = "🤝 ¡Empate!";
+  if (player.hp === enemy.hp) {
+    result = "🤝 Empate";
     coins = 5000;
     xpA = xpB = 200;
-
-    opp.monedas += coins;
     you.monedas += coins;
-
-  } else if (A.hp > B.hp) {
-
-    result = `${A.id} ganó el duelo`;
+    opp.monedas += coins;
+  } else if (player.hp > enemy.hp) {
+    result = `${player.nombre} ganó`;
     coins = 8000;
     xpA = 800;
     xpB = 200;
-
-    opp.monedas += coins;
-
+    you.monedas += coins;
   } else {
-
-    result = `${B.id} ganó el duelo`;
+    result = `${enemy.nombre} ganó`;
     coins = 8000;
     xpA = 200;
     xpB = 800;
-
-    you.monedas += coins;
-
+    opp.monedas += coins;
   }
 
-  addXP(opp, xpA);
-  addXP(you, xpB);
+  addXP(you, xpA);
+  addXP(opp, xpB);
 
   saveDB();
 
@@ -3775,22 +3765,36 @@ if (cmd === "accept") {
 
 ${log.join("\n")}
 
-Resultado: ${result}`
+🏆 Resultado: ${result}
+
+❤️ ${player.nombre}: ${player.hp}/${player.maxHP}
+💀 ${enemy.nombre}: ${enemy.hp}/${enemy.maxHP}
+
+💰 Recompensas:
+${player.hp > enemy.hp ? 
+`Ganador: +$${fmt(coins)}, +${xpA} XP
+Perdedor: +${xpB} XP` :
+player.hp < enemy.hp ?
+`Ganador: +$${fmt(coins)}, +${xpB} XP
+Perdedor: +${xpA} XP` :
+`Ambos: +$${fmt(coins)}, +${xpA} XP`}`
   );
 }
 
 
+// -----------------------------
 // --- RECHAZAR DUEL ---
+// -----------------------------
 if (cmd === "reject") {
 
   if (!mentioned[0])
-    return sendErrorReply("Debes mencionar al jugador.");
+    return sendErrorReply("Debes mencionar.");
 
   const fromJid = normalizeId(mentioned[0]);
   const duelKey = `${fromJid}_${normalizedUserId}`;
 
   if (!global.pendingDuels[duelKey])
-    return sendErrorReply("No hay duelo pendiente de esa persona.");
+    return sendErrorReply("No hay duelo pendiente.");
 
   delete global.pendingDuels[duelKey];
 
@@ -3798,175 +3802,230 @@ if (cmd === "reject") {
 }
 
 
-
-// --- ASSESINAR ---
+// -----------------------------
+// --- ASESINAR (FINAL GOD FIX REAL)
+// -----------------------------
 if (cmd === "asesinar") {
 
   if (!mentioned[0])
     return sendErrorReply(`❌ Usá: *${PREFIX}rpg asesinar @usuario*`);
 
-  const normalizedTargetId = normalizeId(mentioned[0]);
+  const targetId = normalizeId(mentioned[0]);
+  if (!targetId) return sendErrorReply("ID inválido.");
+  if (targetId === normalizedUserId) return sendErrorReply("No podés hacer eso.");
 
-  if (!normalizedTargetId) return sendErrorReply("No se pudo identificar a la victima.");
-  if (normalizedTargetId === normalizedUserId) return sendErrorReply("No podés asesinarte a vos mismo.");
-  const opp = getUser(normalizedTargetId);
-  if (!opp) return sendErrorReply("la victima no tiene perfil RPG todavía.");
+  const opp = getUser(targetId);
+  if (!opp) return sendErrorReply("No tiene perfil.");
 
-  // --- VERIFICAR INMUNIDAD ---
   const ahora = Date.now();
-  const inmunidadTiempo = 60 * 60 * 1000; // 1 hora
-
+  const inmunidadTiempo = 60 * 60 * 1000;
   const log = [];
 
-  // --- Si atacante tenía inmunidad, se la quitamos ---
+  if (you.hp <= 0) return sendErrorReply("Estás K.O.");
+  if (opp.hp <= 0) return sendErrorReply("Ya está muerto.");
+
+  // -----------------------------
+  // 🔥 INMUNIDAD
+  // -----------------------------
   if (you.inmunidadKO) {
     you.inmunidadKO = false;
     you.inmunidadKOStart = 0;
-    log.push(`⚔️ ${you.nick || "Tú"} pierde su inmunidad por atacar.`);
+    log.push(`⚔️ ${you.nick} pierde su inmunidad.`);
   }
 
-  // Inmunidad víctima
   if (opp.inmunidadKO && ahora - (opp.inmunidadKOStart || 0) < inmunidadTiempo) {
     const restante = inmunidadTiempo - (ahora - opp.inmunidadKOStart);
-    const m = Math.floor(restante / 60000);
-    const s = Math.floor((restante % 60000) / 1000);
-    return sendErrorReply(`🛡️ La víctima tiene inmunidad por KO.\nPodrás atacarla en ${m}m ${s}s.`);
+    return sendErrorReply(`🛡️ Inmune por ${Math.floor(restante/60000)}m`);
   } else if (opp.inmunidadKO) {
     opp.inmunidadKO = false;
     opp.inmunidadKOStart = 0;
   }
 
-  if (you.hp <= 0) return sendErrorReply("Estás K.O. Usá pociones o esperá a subir de nivel.");
-  if (opp.hp <= 0) return sendErrorReply("La victima está muerta No hace falta rematarlo.");
+  // -----------------------------
+  // 🔥 DETECTAR DEFENSOR (GOLEM REAL)
+  // -----------------------------
+  let defender;
+  let tipo = "jugador";
 
-  const golemKOtime = 5 * 60 * 1000;
-
-  let defensorTipo = "jugador";
-  let B = { hp: 0, atk: 0, def: 0 };
-
-  // --- DETECTAR DEFENSOR ---
   if (opp.enCasa && opp.golem) {
-    if (opp.golem.lastKO && ahora - opp.golem.lastKO < golemKOtime) {
+
+    if (opp.golem.lastKO && ahora - opp.golem.lastKO < GOLEM_KO_TIME) {
       log.push(`⚔️ El gólem está noqueado, atacás directamente al jugador.`);
-      defensorTipo = "jugador";
-      B.hp = opp.hp;
-      B.atk = getAttack(opp);
-      B.def = getDefense(opp);
     } else {
-      log.push(`🛡️ ${opp.nick} tiene un gólem nivel ${opp.golem.nivel}.`);
-      defensorTipo = "golem";
-      B.hp = opp.golem.hp;
-      B.atk = opp.golem.atk;
-      B.def = 0;
+      tipo = "golem";
+
+      defender = {
+        nombre: `🗿 Gólem (Lv ${opp.golem.nivel || 1})`,
+        hp: opp.golem.hp,
+        atk: opp.golem.atk,
+        def: 0,
+        maxHP: opp.golem.hpMax || opp.golem.hp
+      };
+
+      log.push(`🛡️ ${opp.nick} está protegido por su gólem.`);
     }
-  } else {
-    B.hp = opp.hp;
-    B.atk = getAttack(opp);
-    B.def = getDefense(opp);
   }
 
-  const A = {
-    id: you.nick,
+  if (!defender) {
+    defender = {
+      nombre: opp.nick,
+      hp: opp.hp,
+      atk: getAttack(opp),
+      def: getDefense(opp),
+      maxHP: getTotalHP(opp)
+    };
+  }
+
+  // -----------------------------
+  // 🔥 ATACANTE
+  // -----------------------------
+  let player = {
+    nombre: you.nick,
+    hp: you.hp,
     atk: getAttack(you),
     def: getDefense(you),
-    hp: you.hp
+    maxHP: getTotalHP(you)
   };
 
-  let ronda = 0;
-  const roundLog = [];
+  let round = 0;
 
-  while (A.hp > 0 && B.hp > 0) {
-    ronda++;
+  while (player.hp > 0 && defender.hp > 0) {
+    round++;
 
-    // ataque A
-    const aRoll = Math.max(0, A.atk - Math.floor(B.def * 0.6)) + Math.floor(Math.random() * 6);
-    B.hp = Math.max(0, B.hp - aRoll);
+    const dmg = Math.max(0, player.atk - Math.floor(defender.def * 0.3)) + Math.floor(Math.random() * 10);
+    defender.hp -= dmg;
 
-    roundLog.push(`Ronda ${ronda}: ${A.id} golpea ${aRoll}. Rival queda en ${B.hp}`);
+    if (round <= 10)
+      log.push(`⚔️ ${player.nombre} golpea por ${dmg}`);
 
-    if (B.hp <= 0) {
-      if (defensorTipo === "golem") {
-        opp.golem.lastKO = ahora;
-        roundLog.push(`💥 Gólem derrotado. Volvé a atacar al jugador.`);
-      } else {
-        opp.hp = 0;
-        opp.inmunidadKO = true;
-        opp.inmunidadKOStart = ahora;
-        roundLog.push(`💀 ${opp.nick} murió.`);
-      }
-      break;
-    }
+    if (defender.hp <= 0) break;
 
-    // contraataque
-    const bRoll = Math.max(0, B.atk - Math.floor(A.def * 0.6)) + Math.floor(Math.random() * 6);
-    A.hp = Math.max(0, A.hp - bRoll);
+    const edmg = Math.max(0, defender.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 8);
+    player.hp -= edmg;
 
-    roundLog.push(`Ronda ${ronda}: Rival golpea ${bRoll}. ${A.id} queda en ${A.hp}`);
-
-    if (A.hp <= 0) {
-      you.inmunidadKO = true;
-      you.inmunidadKOStart = ahora;
-      roundLog.push(`💀 ${A.id} murió.`);
-      break;
-    }
+    if (round <= 10)
+      log.push(`💀 ${defender.nombre} responde por ${edmg}`);
   }
 
-  // mostrar últimas 10
-  log.push(...roundLog.slice(-10));
+  // -----------------------------
+  // 🔥 FIX VIDA
+  // -----------------------------
+  player.hp = Math.max(0, Math.min(player.hp, player.maxHP));
+  defender.hp = Math.max(0, defender.hp);
 
-  // --- GUARDAR VIDA CORRECTAMENTE ---
-  you.hp = A.hp;
+  you.hp = player.hp;
 
-  if (defensorTipo === "jugador") {
-    opp.hp = B.hp;
-  } else {
-    opp.golem.hp = B.hp;
+  // -----------------------------
+  // 🔥 RESULTADO VS GOLEM
+  // -----------------------------
+  if (tipo === "golem") {
+
+    if (defender.hp <= 0) {
+      // KO GOLEM
+      opp.golem.lastKO = ahora;
+      opp.golem.hp = defender.maxHP;
+
+      saveDB();
+
+      return sendReply(
+`⚔️ *ATAQUE AL GOLEM*
+
+${log.join("\n")}
+
+💥 Gólem derrotado
+⏳ Queda fuera por 5 minutos
+
+💡 Volvé a usar el comando para atacar al jugador`
+      );
+    }
+
+    // pierde contra golem
+    you.inmunidadKO = true;
+    you.inmunidadKOStart = ahora;
+
+    saveDB();
+
+    return sendReply(
+`⚔️ *ATAQUE FALLIDO*
+
+${log.join("\n")}
+
+💀 El gólem te derrotó
+🛡️ No podés atacar al jugador hasta vencerlo`
+    );
   }
 
-  // --- Recompensas ---
+  // -----------------------------
+  // 🔥 PELEA VS JUGADOR
+  // -----------------------------
+  opp.hp = defender.hp;
+
+  let muerteMsg = "";
+
+  if (defender.hp === 0) {
+    opp.inmunidadKO = true;
+    opp.inmunidadKOStart = ahora;
+
+    muerteMsg += `\n💀 ${opp.nick} murió y obtuvo inmunidad por 1 hora`;
+  }
+
+  if (player.hp === 0) {
+    you.inmunidadKO = true;
+    you.inmunidadKOStart = ahora;
+
+    muerteMsg += `\n💀 ${you.nick} murió y obtuvo inmunidad por 1 hora`;
+  }
+
   let result, coins, xpA, xpB;
-  if (A.hp === B.hp) {
-    result = "🤝 ¡Empate!";
-    coins = 5000;
-    xpA = xpB = 200;
-    you.monedas += coins;
-    opp.monedas += coins;
-    addXP(you, xpA);
-    addXP(opp, xpB);
-  } else if (A.hp > B.hp) {
-    result = "asesinaste al rival";
+
+  if (player.hp > defender.hp) {
+    result = "💀 Asesinaste al rival";
     coins = 10000;
     xpA = 1000;
     xpB = 100;
     you.monedas += coins;
-    addXP(you, xpA);
-    addXP(opp, xpB);
-  } else {
-    result = "te asesinaron";
-    coins = 1000;
+  } else if (player.hp < defender.hp) {
+    result = "💀 Te asesinaron";
+    coins = 10000;
     xpA = 100;
     xpB = 800;
     opp.monedas += coins;
-    addXP(you, xpA);
-    addXP(opp, xpB);
+  } else {
+    result = "🤝 Empate";
+    coins = 5000;
+    xpA = xpB = 200;
+    you.monedas += coins;
+    opp.monedas += coins;
   }
 
-  you.hp = Math.max(0, Math.min(you.hp, you.hpMax));
-  opp.hp = Math.max(0, Math.min(opp.hp, opp.hpMax));
+  addXP(you, xpA);
+  addXP(opp, xpB);
 
   saveDB();
 
-  await sendSuccessReact();
   return sendReply(
-    `⚔️ *ASESINATO*\n` +
-    log.join("\n") +
-    `\n\n${result}\n` +
-    `HP Final: ${A.id}: ${A.hp} | ${opp.nick || "Victima"}: ${opp.hp}\n` +
-    `Recompensas: ${A.hp > B.hp ? `Vos: +$${fmt(coins)}, +${xpA} XP | Victima: +${xpB} XP` :
-      A.hp < B.hp ? `Victima: +$${fmt(coins)}, +${xpB} XP | Vos: +${xpA} XP` :
-      `Ambos: +$${fmt(coins)}, +${xpA} XP`}`
+`⚔️ *ASESINATO*
+
+${log.join("\n")}
+
+${result}
+${muerteMsg}
+
+❤️ ${player.nombre}: ${player.hp}/${player.maxHP}
+💀 ${defender.nombre}: ${defender.hp}/${defender.maxHP}
+
+💰 Recompensas:
+${player.hp > defender.hp ? 
+`Vos: +$${fmt(coins)}, +${xpA} XP
+Victima: +${xpB} XP` :
+player.hp < defender.hp ?
+`Victima: +$${fmt(coins)}, +${xpB} XP
+Vos: +${xpA} XP` :
+`Ambos: +$${fmt(coins)}, +${xpA} XP`}`
   );
 }
+
+
 
 
 
