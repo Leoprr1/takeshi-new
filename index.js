@@ -90,6 +90,10 @@ const startCleaner = require("./cleaner.js");
 // ----------------------------
 global.GROUP_CACHE = global.GROUP_CACHE || {};
 
+// 🔥 CONTROL DE PRECARGA
+let groupsPreloaded = false;
+const MAX_GROUP_CACHE = 300;
+
 // ----------------------------
 // Cargar bases de datos JSON
 // ----------------------------
@@ -120,6 +124,12 @@ async function cacheGroupMetadata(socket, jid) {
   try {
     const metadata = await socket.groupMetadata(jid);
 
+    // 🔥 limite simple (FIFO)
+    if (Object.keys(global.GROUP_CACHE).length > MAX_GROUP_CACHE) {
+      const firstKey = Object.keys(global.GROUP_CACHE)[0];
+      delete global.GROUP_CACHE[firstKey];
+    }
+
     global.GROUP_CACHE[jid] = {
       admins: metadata.participants
         .filter(p => p.admin)
@@ -136,6 +146,10 @@ async function cacheGroupMetadata(socket, jid) {
 // ----------------------------
 async function preloadAllGroups(socket) {
   try {
+
+    // 🔥 evitar sobrecarga
+    if (global.reconnecting) return;
+    if (Object.keys(global.GROUP_CACHE).length > 200) return;
 
     infoLog("⚡ Precargando metadata de todos los grupos...");
 
@@ -275,14 +289,12 @@ async function startBot() {
         socketGlobal.ev.on("connection.update", (update) => {
           const { connection, lastDisconnect } = update;
 
-          if (connection === "open") {
+          if (connection === "open" && !groupsPreloaded) {
 
-            // ----------------------------
-            // NUEVO: precarga completa
-            // ----------------------------
+            groupsPreloaded = true;
+
             preloadAllGroups(socketGlobal);
 
-            // refresco cada 10 minutos
             setInterval(() => {
               preloadAllGroups(socketGlobal);
             }, 600000);

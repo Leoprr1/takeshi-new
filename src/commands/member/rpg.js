@@ -2,10 +2,10 @@ const fs = require("fs");
 const { connect } = require("http2");
 const path = require("path");
 const { PREFIX } = require(`${BASE_DIR}/config`);
-
+const { getDB } = require(`${BASE_DIR}/utils/jsoncache`);
 const DB_FILE = path.join(BASE_DIR,"database", "rpg.json");
-
-let DB = {};
+// 🔥 DB ahora viene del cache (RAM)
+let DB = getDB("rpg");
 
 // -----------------------------
 // Carga de DB
@@ -19,8 +19,15 @@ function loadDB() {
       fs.writeFileSync(DB_FILE, JSON.stringify({}, null, 2));
     }
     const raw = fs.readFileSync(DB_FILE, "utf8") || "{}";
-    DB = JSON.parse(raw);
-    if (typeof DB !== "object" || Array.isArray(DB)) DB = {};
+    const parsed = JSON.parse(raw);
+
+    if (typeof parsed !== "object" || Array.isArray(parsed)) {
+      DB = {};
+    } else {
+      // 🔥 sincroniza con cache sin romper referencia
+      Object.assign(DB, parsed);
+    }
+
   } catch (e) {
     console.error("[RPG] Error leyendo DB, re-creando:", e);
     DB = {};
@@ -59,9 +66,10 @@ async function saveDB(data) {
 // -----------------------------
 setInterval(() => {
   saveDB();
-}, 10 * 1000); // cada 30 segundos
+}, 10 * 1000); // cada 10 segundos
 
 module.exports = { DB, loadDB, saveDB };
+
 
 
 // -----------------------------
@@ -406,13 +414,18 @@ if (elapsed >= regenTime) {
   // Vida y maná total incluyendo buffs
   const aca = user.academia?.especialidades || {};
 
-const totalHP = (user.hpMax || 0)
-              + (aca.curacion || 0) * 5
-              + (user.golem?.hpBuff || 0)
-              + (user.mascotaEquipada?.hpBuff || 0);
+const totalHP = 
+  (user.hpMax || 0)
+  + (aca.curacion || 0) * 5
+  + (user.golem?.hpBuff || 0)
+  + (user.mascotaEquipada?.hpBuff || 0);
+
+              
 
 const totalMana = (user.manamax || 0)
                 + (aca.manaMax || 0) * 10;
+
+   
 
 if (user.hp > totalHP) user.hp = totalHP;
 if (user.mana > totalMana) user.mana = totalMana;
@@ -442,6 +455,42 @@ if (user.mana > totalMana) user.mana = totalMana;
         `[REGEN] enCasa=${!!user.enCasa} ticks=${ticks} +HP=${addHP} (+${rawRegenHP} raw) +Mana=${addMana} (+${rawRegenMana} raw) newLast=${new Date(user.lastRegen).toISOString()}`
       );
     }
+  }
+}
+
+// ----------------------------
+// 💥 LIMIT BREAKER - DRENAJE PASIVO
+// ----------------------------
+const aca = user.academia?.especialidades || {};
+if (user.limitBreaker?.active) {
+  const now = Date.now();
+
+  if (!user.limitBreaker.lastTick) user.limitBreaker.lastTick = now;
+
+  const elapsedLB = now - user.limitBreaker.lastTick;
+
+  if (elapsedLB >= 60000) {
+    let lbTicks = Math.floor(elapsedLB / 60000);
+    if (lbTicks > 60) lbTicks = 60; // anti abuso
+
+    const manaLevel = (aca.manaMax || 0);
+    const reduction = Math.min(0.8, manaLevel * 0.01);
+    const BASE_DRAIN = 2000;
+    const drainPerMin = BASE_DRAIN * (1 - reduction);
+    const totalDrain = Math.floor(drainPerMin * lbTicks);
+
+    if (typeof user.mana !== "number") user.mana = 0;
+    user.mana -= totalDrain;
+
+    if (user.mana <= 0) {
+      user.mana = 0;
+      user.limitBreaker.active = false;
+      user.limitBreaker.lastTick = 0;
+    } else {
+      user.limitBreaker.lastTick = now;
+    }
+
+    saveDB(); // opcional, si querés guardar cada drenaje
   }
 }
 
@@ -570,34 +619,94 @@ function takeFromInv(user, identifier) {
 }
 
 
-function getAttack(user,u = {}) {
+function formatTime(ms){
+  const h = Math.floor(ms / 3600000)
+  const m = Math.floor((ms % 3600000) / 60000)
+  const s = Math.floor((ms % 60000) / 1000)
+
+  let str = ""
+  if(h > 0) str += `${h}h `
+  if(m > 0) str += `${m}m `
+  if(s > 0) str += `${s}s`
+
+  return str.trim()
+}
+// ======================================
+// ⚔️ CÁLCULO DE ATAQUE Y DEFENSA (con magia)
+// ======================================
+
+// Ataque total del usuario
+function getAttack(user) {
   const base = 5 + (user.nivel || 0) * 1.5;
   const arma = user.arma?.dano || 0;
-  const aca = u.academia?.especialidades || {};
-  return Math.round(
-   
-    (u?.fuerza || 0) +
+  const aca = user.academia?.especialidades || {};
+
+  const fuerzaBonus = user.fuerzaBonus || 0;
+  const agilidadBonus = user.agilidadBonus || 0;
+  const precisionBonus = user.precisionBonus || 0;
+  const magiaBonus = user.magiaBonus || 0;
+
+  let total = Math.round(
+    (user.fuerza || 0) +
     (aca.fuerza || 0) +
     (aca.controlEspada || 0) +
-    (u.golem?.atkBuff || 0) +
-    (u.mascotaEquipada?.atkBuff || 0)+
-    base + arma );
+    (aca.agilidad || 0) +
+    (aca.magia || 0) +
+    fuerzaBonus +
+    agilidadBonus +
+    precisionBonus +
+    magiaBonus +
+    (user.golem?.atkBuff || 0) +
+    (user.mascotaEquipada?.atkBuff || 0) +
+    base +
+    arma
+  );
 
+  // 💥 LIMIT BREAKER
+  if (user.limitBreaker?.active) {
+    total *= 2;
+  }
+
+  return total;
 }
 
-function getDefense(user,u = {}) {
+
+// Defensa total del usuario
+function getDefense(user) {
   const base = 2 + (user.nivel || 0) * 1.2;
   const arm = user.armadura?.defensa || 0;
   const aca = user.academia?.especialidades || {};
-  return Math.round(
-    
-    (u?.defensa || 0) +
+
+  const defensaBonus = user.defensaBonus || 0;
+  const agilidadBonus = user.agilidadBonus || 0;
+  const precisionBonus = user.precisionBonus || 0;
+  const magiaBonus = user.magiaBonus || 0;
+
+  let total = Math.round(
+    (user.defensa || 0) +
     (aca.defensa || 0) +
-    Math.floor((aca.agilidad || 0) / 2) +
-    (u.golem?.defBuff || 0) +
-    (u.mascotaEquipada?.defBuff || 0)+
-    base + arm );
+    (aca.controlEspada || 0) +
+    (aca.agilidad || 0) +
+    (aca.magia || 0) +
+    defensaBonus +
+    agilidadBonus +
+    precisionBonus +
+    magiaBonus +
+    (user.golem?.defBuff || 0) +
+    (user.mascotaEquipada?.defBuff || 0) +
+    base +
+    arm
+  );
+
+  // 💥 LIMIT BREAKER
+  if (user.limitBreaker?.active) {
+    total *= 2;
+  }
+
+  return total;
 }
+
+
 
 
 // -----------------------------
@@ -608,9 +717,9 @@ function helpText() {
   return (
 `╭━━⪩ 🎮RPG ⪨━━
 ▢
-▢ • \`${p}aventura\`<-- *da esta lista en un mensaje sin todo el menu*
 ▢ • \`${p}rpg setname\` <-- *para ponerte nombre en el juego*
 ▢ • \`${p}rpg stats\` <-- *para ver tus estadisticas*
+▢ • \`${p}rpg cooldowns\` <-- *para ver los tiempos de espera activos de las actividades*
 ▢ • \`${p}rpg inventory\` <-- *para ver tu inventario*
 ▢ • \`${p}rpg daily\` <-- *reclama la recompensa diaria*
 ▢ • \`${p}rpg hunt | mine | fish | work\` <-- *trabajas te da xp y dinero*
@@ -624,6 +733,7 @@ function helpText() {
 ▢ • \`${p}rpg menu dungeon\` <-- *dungeon ancestral*
 ▢ • \`${p}rpg shop\` <-- *es una tienda basica de objetos*
 ▢ • \`${p}rpg home\` <-- *para comprarte una casa y demas*
+▢ • \`${p}rpg limit\` <-- *para activar el limit breaker que da x2 en ataque y defensa*
 ▢ • \`${p}rpg buy <código>\` <-- *para comprar un item en la shop*
 ▢ • \`${p}rpg equip <código>\` <-- *para equiparte items*
 ▢ • \`${p}rpg equip mascota <código>\` <-- *para equipar la mascota*
@@ -714,7 +824,6 @@ if (cmd === "stats") {
     return { rango: "F", emoji: "⚫", medalla: "⚫" };
   }
 
-  // --- Barra de XP ---
   function getXpBar(xp, nextLevelXp) {
     const totalBlocks = 10;
     const filledBlocks = Math.min(Math.floor((xp / nextLevelXp) * totalBlocks), totalBlocks);
@@ -722,7 +831,6 @@ if (cmd === "stats") {
     return "▓".repeat(filledBlocks) + "░".repeat(emptyBlocks);
   }
 
-  // --- Insignia según misiones completadas ---
   function getInsignia(u) {
     const total = Array.isArray(u.misionesCompletadas) ? u.misionesCompletadas.length :
                   typeof u.misionesCompletadas === "number" ? u.misionesCompletadas : 0;
@@ -737,7 +845,6 @@ if (cmd === "stats") {
     return total > 0 ? `${emoji} x${total}` : "Ninguna";
   }
 
-  // --- Ranking ---
   const rankingArr = Object.entries(DB).map(([id, u]) => ({
     id,
     nivel: u.nivel || 0,
@@ -758,10 +865,8 @@ if (cmd === "stats") {
   const rangoInfo = getRangoAventurero(you.nivel || 0);
   const insigniaText = getInsignia(you);
 
-  // --- Piso Dungeon Ancestral ---
   const pisoDungeon = you.ancestral?.floor || 0;
 
-  // --- Equipados ---
   const armaTxt = you.arma ? `🗡️ ${you.arma.nombre} (+${you.arma.dano || 0} ATQ) | 💰 ${you.arma.precio?.toLocaleString("es-AR") || 0} | Usar: ${PREFIX}rpg equip ${you.arma.code}` : "Ninguna";
   const armTxt = you.armadura ? `🛡️ ${you.armadura.nombre} (+${you.armadura.defensa || 0} DEF) | 💰 ${you.armadura.precio?.toLocaleString("es-AR") || 0} | Usar: ${PREFIX}rpg equip ${you.armadura.code}` : "Ninguna";
 
@@ -769,7 +874,6 @@ if (cmd === "stats") {
     ? you.inventario.filter(i => i && i.nombre).map(i => `📦 ${i.code || "Desconocido"}`).join(", ")
     : "Vacío";
 
-  // --- Mascota equipada ---
   let mascotaTxt = "Ninguna";
   if (you.mascotaEquipada) {
     const m = you.mascotaEquipada;
@@ -780,7 +884,6 @@ if (cmd === "stats") {
                  `${precio} | Usar: ${PREFIX}rpg equip ${equipCode}`;
   }
 
-  // --- Otros datos ---
   const casaText = you.hasHouse ? `🏠 Sí` : `❌ No`;
   const enCasaText = you.enCasa ? `✅ Sí (bonus aplicado)` : `❌ No`;
   const cofreText = (you.homeChest && you.homeChest.length > 0)
@@ -816,8 +919,17 @@ if (cmd === "stats") {
 
   const xpBar = getXpBar(you.xp || 0, xpForNextLevel(you.nivel || 0));
 
+  // 🔥 LIMIT BREAKER VISUAL
+  let limitText = "";
+  if (you.limitBreaker?.unlocked) {
+    limitText = you.limitBreaker.active
+      ? `💥 LIMIT BREAKER: 🔥 ACTIVO\n⚔️ ATK x2 | 🛡️ DEF x2 \n`
+      : `💥 LIMIT BREAKER: ❄️ Inactivo\n`;
+  }
+
   const txt =
     `✨🏹 *Tus Stats* 🏹✨\n\n` +
+    `${limitText}` +
     `${rankingText}\n` +
     `💠 Rango Aventurero: ${rangoInfo.emoji} *${rangoInfo.rango}* ${rangoInfo.medalla}\n` +
     `🏅 Misiones de Gremio: ${insigniaText}\n` +
@@ -842,6 +954,246 @@ if (cmd === "stats") {
   return sendReply(txt);
 }
 
+if(cmd === "cooldowns"){
+
+const now = Date.now()
+let activos = []
+
+function getCooldownDuration(path){
+
+  const name = path.toLowerCase()
+
+  if(name.includes("daily")) return 86400000
+  if(name.includes("work")) return 1800000
+  if(name.includes("hunt")) return 120000
+  if(name.includes("mine")) return 120000
+  if(name.includes("fish")) return 120000
+  if(name.includes("dungeon")) return 7200000
+  if(name.includes("boss")) return 3600000
+  if(name.includes("mision")) return 3600000
+  if(name.includes("cooldown")) return 3600000
+  if(name.includes("entreno")) return 3600000
+  if(name.includes("last")) return 3600000
+
+  return null
+}
+
+// 🔥 FORMATEADOR VISUAL
+function formatName(path){
+
+  const p = path.toLowerCase()
+
+  if(p.includes("daily")) return "🎁 Daily"
+  if(p.includes("work")) return "⚒️ Trabajo"
+  if(p.includes("hunt")) return "🐗 Caza"
+  if(p.includes("mine")) return "⛏️ Minería"
+  if(p.includes("fish")) return "🎣 Pesca"
+  if(p.includes("dungeon")) return "🏰 Mazmorra"
+  if(p.includes("boss")) return `👑 Boss Piso ${path.split(".").pop()}`
+  if(p.includes("mision")) return `📜 Misión: ${path.split(".").pop()}`
+  if(p.includes("entreno")) return `🏋️ Entreno: ${path.split(".")[2]}`
+  if(p.includes("regen")) return "❤️ Regeneración"
+
+  return null
+}
+
+// =========================
+// SCAN RECURSIVO
+// =========================
+function scan(obj, path = ""){
+
+  if(!obj || typeof obj !== "object") return
+
+  for(const key in obj){
+
+    const value = obj[key]
+    const currentPath = path ? `${path}.${key}` : key
+
+    if(typeof value === "object" && value !== null){
+      scan(value, currentPath)
+      continue
+    }
+
+    if(typeof value === "number" && value > 1600000000000){
+
+      let remaining = 0
+
+      if(value > now){
+        remaining = value - now
+      }
+      else{
+        const duration = getCooldownDuration(currentPath)
+        if(!duration) continue
+        remaining = duration - (now - value)
+      }
+
+      if(remaining > 0){
+
+        const name = formatName(currentPath)
+
+        if(name){
+          activos.push(`⏳ ${name}: ${formatTime(remaining)}`)
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+// 🔥 ESCANEAR TODO EL PLAYER
+scan(you)
+
+// 🔥 ORDENAR POR TIEMPO
+activos.sort((a, b) => {
+  const getTime = str => {
+    const match = str.match(/(\d+)h|(\d+)m|(\d+)s/g)
+    if(!match) return 0
+    let total = 0
+    match.forEach(t => {
+      if(t.includes("h")) total += parseInt(t)*3600
+      if(t.includes("m")) total += parseInt(t)*60
+      if(t.includes("s")) total += parseInt(t)
+    })
+    return total
+  }
+  return getTime(a) - getTime(b)
+})
+
+// --------------------------------------
+// RESULTADO
+// --------------------------------------
+if(activos.length === 0){
+  return sendReply("⏳ *COOLDOWNS ACTIVOS*\n\n✅ No tienes cooldowns activos.")
+}
+
+await sendReply(
+`⏳ *COOLDOWNS ACTIVOS*
+
+${activos.join("\n")}
+
+━━━━━━━━━━━━━━
+💡 Usa bien tus tiempos para progresar más rápido.`
+)
+
+return
+}
+
+
+
+// -------- LIMIT BREAKER --------
+if (cmd === "limit") {
+  const aca = you.academia.especialidades || {};
+  const action = rest[0]?.toLowerCase();
+
+  // init
+  if (!you.limitBreaker) {
+    you.limitBreaker = {
+      unlocked: false,
+      active: false,
+      lastTick: 0
+    };
+  }
+
+  const COST = 1_000_000_000;
+
+  // ---------------- INFO
+  if (!action) {
+    if (you.limitBreaker.unlocked) {
+      return sendReply(
+`💥 *LIMIT BREAKER*
+
+Estado: ${you.limitBreaker.active ? "🔥 ACTIVO" : "❄️ Inactivo"}
+Mana: ${you.mana}
+
+Consumo base: 2000/min
+Reducción por academia: ${Math.min(80, (aca.manaMax || 0) * 1)}%
+
+⚔️ ATK x2
+🛡️ DEF x2
+
+Comandos:
+.rpg limit activar
+.rpg limit desactivar`
+      );
+    }
+
+    return sendReply(
+`💥 *LIMIT BREAKER*
+
+Precio: $1,000,000,000 (pago unico)
+
+⚔️ ATK x2
+🛡️ DEF x2
+
+Consumo: 2000 mana/min
+
+Usa:
+.rpg limit comprar`
+    );
+  }
+
+  // ---------------- COMPRAR
+  if (action === "comprar") {
+
+    if (you.limitBreaker.unlocked) {
+      return sendErrorReply("⚠️ Ya lo tenés.");
+    }
+
+    if (you.monedas < COST) {
+      return sendErrorReply("💰 No te alcanza.");
+    }
+
+    you.monedas -= COST;
+
+    you.limitBreaker = {
+      unlocked: true,
+      active: false,
+      lastTick: 0
+    };
+
+    saveDB();
+    return sendReply("💥🔥 Limit Breaker desbloqueado.");
+  }
+
+  // ---------------- ACTIVAR
+  if (action === "activar") {
+
+    if (!you.limitBreaker.unlocked) {
+      return sendErrorReply("❌ No lo compraste.");
+    }
+
+    if (you.limitBreaker.active) {
+      return sendErrorReply("⚠️ Ya activo.");
+    }
+
+    if (!you.mana || you.mana <= 0) {
+      return sendErrorReply("❌ Sin mana.");
+    }
+
+    you.limitBreaker.active = true;
+    you.limitBreaker.lastTick = Date.now();
+
+    saveDB();
+    return sendReply("💥🔥 LIMIT BREAKER ACTIVADO");
+  }
+
+  // ---------------- DESACTIVAR
+  if (action === "desactivar") {
+
+    if (!you.limitBreaker.active) {
+      return sendErrorReply("⚠️ No está activo.");
+    }
+
+    you.limitBreaker.active = false;
+    you.limitBreaker.lastTick = 0;
+
+    saveDB();
+    return sendReply("❄️ Limit Breaker OFF");
+  }
+}
 
 
 
@@ -1060,8 +1412,8 @@ if (healAmount > missingHP) {
     await sendSuccessReact();
 
     return sendReply(
-      `💖 Usaste curar sobre ${objetivoNombre} (+${healAmount} HP, -${cost} maná)\n` +
-      `HP de ${objetivoNombre}: ${objetivo.hp}/${totalHP}\n` +
+      `💖 Usaste curar sobre ${objetivo.nick} (+${healAmount} HP, -${cost} maná)\n` +
+      `HP de ${objetivo.nick}: ${objetivo.hp}/${totalHP}\n` +
       `Tu maná: ${you.mana}/${totalMana}`,
       null,
       { mentions }
@@ -1113,13 +1465,14 @@ if (healAmount > missingHP) {
           break;
         }
         case "fish": {
+          const atk = getAttack(you);
           const roll = Math.random();
           if (roll < 0.25) {
             flavor = "Se te escaparon…";
-            gainXP = 15 + Math.floor(Math.random() * 55);
+            gainXP = 15 + Math.floor(Math.random() * (atk + 50));
           } else {
-            gainMoney = 150 + Math.floor(Math.random() * 55);
-            gainXP = 50 + Math.floor(Math.random() * 55);
+            gainMoney = 150 + Math.floor(Math.random() * (atk + 50));
+            gainXP = 50 + Math.floor(Math.random() * (atk + 50));
             flavor = "🎣 Pescaste algo decente.";
           }
           break;
@@ -1385,7 +1738,7 @@ if (cmd === "dar") {
 
     saveDB();
     await sendSuccessReact();
-    return sendReply(`💰 Le diste ${cantidad} monedas a @${rawMention}`, null, { mentions: [targetJidRaw] });
+    return sendReply(`💰 Le diste ${cantidad} monedas a ${targetUser.nick}`, null, { mentions: [targetUser.nick] });
 
   } else {
     const codeOrUid = rest[1].toUpperCase(); // código o UID
@@ -1410,7 +1763,7 @@ if (cmd === "dar") {
 
     saveDB();
     await sendSuccessReact();
-    return sendReply(`✅ Le diste *${item.nombre}* a @${rawMention} (${item.tipo === "mascota" ? "UID: " + item.uid : "Código: " + item.code})`, null, { mentions: [targetJidRaw] });
+    return sendReply(`✅ Le diste *${item.nombre}* a ${targetUser.nick} (${item.tipo === "mascota" ? "UID: " + item.uid : "Código: " + item.code})`, null, { mentions: [targetUser.nick] });
   }
 }
 
@@ -1562,21 +1915,42 @@ if (cmd === "equip" || cmd === "equipar") {
 
 
 
-   if (cmd === "use" || cmd === "usar") {
+if (cmd === "use" || cmd === "usar") {
   const code = rest.join(" ").toUpperCase().trim();
   if (!code) return sendErrorReply(`Uso: *${PREFIX}rpg use <código>* (ej: P1 o MP1)`);
 
-  const it = takeFromInv(you, code);
-  if (!it) return sendErrorReply("No tenés esa poción en tu inventario.");
+  // 🔥 BUSCAR Y ELIMINAR DEL INVENTARIO
+  if (!you.inventario || !Array.isArray(you.inventario))
+    return sendErrorReply("No tenés inventario.");
 
-  // ---- Calcular vida y maná totales ----
-  const totalHP = (you.hpMax || 0)
-                  + (you.curacionBonus || 0)
-                  + (you.golem?.hpBuff || 0)
-                  + (you.mascotaEquipada?.hpBuff || 0);
+  const index = you.inventario.findIndex(i => 
+    (typeof i === "string" ? i : i.code) === code
+  );
 
-  const totalMana = (you.manamax || 0)
-                    + (you.manaMax || 0);
+  if (index === -1)
+    return sendErrorReply("No tenés esa poción en tu inventario.");
+
+  const it = typeof you.inventario[index] === "string"
+    ? findItemByCode(you.inventario[index])
+    : you.inventario[index];
+
+  // 🔥 ELIMINAR ITEM
+  you.inventario.splice(index, 1);
+
+  if (!it) return sendErrorReply("Ese objeto no existe.");
+
+  // Vida y maná total incluyendo buffs
+  const aca = you.academia?.especialidades || {};
+
+  const totalHP = 
+    (you.hpMax || 0)
+    + (aca.curacion || 0) * 5
+    + (you.golem?.hpBuff || 0)
+    + (you.mascotaEquipada?.hpBuff || 0);
+
+  const totalMana = 
+    (you.manamax || 0)
+    + (aca.manaMax || 0) * 10;
 
   // Poción de vida
   if (it.curacion) {
@@ -1598,6 +1972,7 @@ if (cmd === "equip" || cmd === "equipar") {
 
   return sendErrorReply("Ese código no es una poción válida.");
 }
+
 
 
 // -------- HOME SYSTEM --------
@@ -2281,8 +2656,10 @@ const emojiMap = {
 };
 
 // ----------------- Función: generar drop -----------------
-function generarDrop(sendReply) {
+function generarDrop(sendMessage, grupo = global.LAST_RPG_GROUP) {
+  if (!grupo) return; // si no hay grupo, no hace nada
   if (global.IDROPS.length >= 5) return; // máximo 5 simultáneos
+
   const roll = Math.random();
   let acumulado = 0;
   let recompensa = null;
@@ -2326,30 +2703,27 @@ function generarDrop(sendReply) {
   const rarezaText = drop.tipo.replace("item_", "").toUpperCase();
   const emoji = emojiMap[drop.tipo] || "💥";
 
-  // Mensaje global: solo al último grupo RPG activo
-  if (global.LAST_RPG_GROUP) {
-    sendReply(global.LAST_RPG_GROUP, `💥 ¡Drop ${rarezaText} ha aparecido! ${emoji}\nUsá *${PREFIX}rpg agarrar ${drop.simpleId}* para reclamarlo antes de que desaparezca.`);
-  }
+  // Enviar mensaje directo al grupo (sin reply)
+  sendMessage(grupo, `💥 ¡Drop ${rarezaText} ha aparecido! ${emoji}\nUsá *${PREFIX}rpg agarrar ${drop.simpleId}* para reclamarlo antes de que desaparezca.`);
 
   // Expiración automática
   setTimeout(() => {
     const idx = global.IDROPS.findIndex(d => d.simpleId === drop.simpleId);
     if (idx !== -1) {
       global.IDROPS.splice(idx, 1);
-      if (global.LAST_RPG_GROUP)
-        sendReply(global.LAST_RPG_GROUP, `⌛ El drop ${drop.simpleId} (${rarezaText}) ha desaparecido...`);
+      sendMessage(grupo, `⌛ El drop ${drop.simpleId} (${rarezaText}) ha desaparecido...`);
     }
   }, 60 * 1000);
 }
 
 // ----------------- Ultra drops automáticos -----------------
 let lastDropTime = 0;
-function startUltraDrops() {
+function startUltraDrops(sendMessage) {
   async function loop() {
     const nowTime = Date.now();
 
     if (global.LAST_RPG_GROUP && (nowTime - lastDropTime >= 5 * 60 * 1000)) { // al menos 5 min
-      generarDrop((msg) => sendReply(global.LAST_RPG_GROUP, msg));
+      generarDrop(sendMessage);
       lastDropTime = nowTime;
     }
 
@@ -2367,7 +2741,10 @@ function startUltraDrops() {
 // ⚠️ Llamar solo una vez al iniciar el bot
 if (!global.ULTRA_DROPS_STARTED) {
   global.ULTRA_DROPS_STARTED = true;
-  startUltraDrops();
+  startUltraDrops((grupo, msg) => {
+    // Esta función envía mensajes normales al grupo
+    sendReply(grupo, msg);
+  });
 }
 
 // ----------------- Comando: agarrar -----------------
@@ -2381,7 +2758,6 @@ if (cmd === "agarrar") {
   const drop = global.IDROPS[idx];
   global.IDROPS.splice(idx, 1); // eliminar del array global
 
-  // Mensaje que vamos a enviar
   let msg = "";
 
   switch (drop.tipo) {
@@ -2394,7 +2770,6 @@ if (cmd === "agarrar") {
       msg = `✨ Agarraste +${drop.cantidad} XP del drop.`;
       break;
     default:
-      // Buscar item por código
       const item = findItemByCode(drop.itemCode);
       if (!item) return sendErrorReply("❌ Error, item no encontrado.");
       pushInv(you, item);
@@ -2407,6 +2782,7 @@ if (cmd === "agarrar") {
   await sendSuccessReact();
   return sendReply(msg);
 }
+
 
 
 
@@ -2437,27 +2813,36 @@ if (nivelJugador < dungeon.nivelReq) {
 
   // Copia de enemigos
   const enemies = dungeon.enemigos.map(e => ({ ...e }));
-  const log = [];
   let player = { nombre: you.nick || normalizedUserId.split("@")[0], hp: you.hp, atk: getAttack(you), def: getDefense(you) };
 
-  for (let ronda = 1; ronda <= 10; ronda++) {
-    if (player.hp <= 0 || enemies.every(e => e.hp <= 0)) break;
+  let ronda = 1;
+const log = [];
+const MAX_LOG = 10;
 
-    // Turno jugador
-    const target = enemies.find(e => e.hp > 0);
-    const damage = Math.max(0, player.atk - Math.floor(target.atk * 0.3)) + Math.floor(Math.random() * 6);
-    target.hp = Math.max(0, target.hp - damage);
-    log.push(`Ronda ${ronda}: 🗡️ ${player.nombre} golpea a ${target.nombre} por ${damage} HP. Quedan ${target.hp} HP.`);
+while (player.hp > 0 && enemies.some(e => e.hp > 0)) {
 
-    // Turno enemigos
-    enemies.forEach(e => {
-      if (e.hp > 0) {
-        const dmg = Math.max(0, e.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 4);
-        player.hp = Math.max(0, player.hp - dmg);
-        log.push(`Ronda ${ronda}: 💀 ${e.nombre} golpea a ${player.nombre} por ${dmg} HP. Te quedan ${player.hp} HP.`);
-      }
-    });
-  }
+  // Turno jugador
+  const target = enemies.find(e => e.hp > 0);
+  const damage = Math.max(0, player.atk - Math.floor(target.atk * 0.3)) + Math.floor(Math.random() * 6);
+  target.hp = Math.max(0, target.hp - damage);
+
+  log.push(`Ronda ${ronda}: 🗡️ ${player.nombre} golpea a ${target.nombre} por ${damage} HP. Quedan ${target.hp} HP.`);
+  if (log.length > MAX_LOG) log.shift();
+
+  // Turno enemigos
+  enemies.forEach(e => {
+    if (e.hp > 0) {
+      const dmg = Math.max(0, e.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 4);
+      player.hp = Math.max(0, player.hp - dmg);
+
+      log.push(`Ronda ${ronda}: 💀 ${e.nombre} golpea a ${player.nombre} por ${dmg} HP. Te quedan ${player.hp} HP.`);
+      if (log.length > MAX_LOG) log.shift();
+    }
+  });
+
+  ronda++;
+}
+
 
   // Resultado
   let result;
@@ -2587,27 +2972,35 @@ if (nivelJugador < dungeon.nivelReq) {
 
   // Copia de enemigos
   const enemies = dungeon.enemigos.map(e => ({ ...e }));
-  const log = [];
   let player = { nombre: you.nick || normalizedUserId.split("@")[0], hp: you.hp, atk: getAttack(you), def: getDefense(you) };
+let ronda = 1;
+const log = [];
+const MAX_LOG = 10;
 
-  for (let ronda = 1; ronda <= 10; ronda++) {
-    if (player.hp <= 0 || enemies.every(e => e.hp <= 0)) break;
+while (player.hp > 0 && enemies.some(e => e.hp > 0)) {
 
-    // Turno jugador
-    const target = enemies.find(e => e.hp > 0);
-    const damage = Math.max(0, player.atk - Math.floor(target.atk * 0.3)) + Math.floor(Math.random() * 6);
-    target.hp = Math.max(0, target.hp - damage);
-    log.push(`Ronda ${ronda}: 🗡️ ${player.nombre} golpea a ${target.nombre} por ${damage} HP. Quedan ${target.hp} HP.`);
+  // Turno jugador
+  const target = enemies.find(e => e.hp > 0);
+  const damage = Math.max(0, player.atk - Math.floor(target.atk * 0.3)) + Math.floor(Math.random() * 6);
+  target.hp = Math.max(0, target.hp - damage);
 
-    // Turno enemigos
-    enemies.forEach(e => {
-      if (e.hp > 0) {
-        const dmg = Math.max(0, e.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 4);
-        player.hp = Math.max(0, player.hp - dmg);
-        log.push(`Ronda ${ronda}: 💀 ${e.nombre} golpea a ${player.nombre} por ${dmg} HP. Te quedan ${player.hp} HP.`);
-      }
-    });
-  }
+  log.push(`Ronda ${ronda}: 🗡️ ${player.nombre} golpea a ${target.nombre} por ${damage} HP. Quedan ${target.hp} HP.`);
+  if (log.length > MAX_LOG) log.shift();
+
+  // Turno enemigos
+  enemies.forEach(e => {
+    if (e.hp > 0) {
+      const dmg = Math.max(0, e.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 4);
+      player.hp = Math.max(0, player.hp - dmg);
+
+      log.push(`Ronda ${ronda}: 💀 ${e.nombre} golpea a ${player.nombre} por ${dmg} HP. Te quedan ${player.hp} HP.`);
+      if (log.length > MAX_LOG) log.shift();
+    }
+  });
+
+  ronda++;
+}
+
 
   // Resultado
   let result;
@@ -2725,27 +3118,35 @@ if (nivelJugador < dungeon.nivelReq) {
 
   // Copia de enemigos
   const enemies = dungeon.enemigos.map(e => ({ ...e }));
-  const log = [];
   let player = { nombre: you.nick || normalizedUserId.split("@")[0], hp: you.hp, atk: getAttack(you), def: getDefense(you) };
+let ronda = 1;
+const log = [];
+const MAX_LOG = 10;
 
-  for (let ronda = 1; ronda <= 10; ronda++) {
-    if (player.hp <= 0 || enemies.every(e => e.hp <= 0)) break;
+while (player.hp > 0 && enemies.some(e => e.hp > 0)) {
 
-    // Turno jugador
-    const target = enemies.find(e => e.hp > 0);
-    const damage = Math.max(0, player.atk - Math.floor(target.atk * 0.3)) + Math.floor(Math.random() * 6);
-    target.hp = Math.max(0, target.hp - damage);
-    log.push(`Ronda ${ronda}: 🗡️ ${player.nombre} golpea a ${target.nombre} por ${damage} HP. Quedan ${target.hp} HP.`);
+  // Turno jugador
+  const target = enemies.find(e => e.hp > 0);
+  const damage = Math.max(0, player.atk - Math.floor(target.atk * 0.3)) + Math.floor(Math.random() * 6);
+  target.hp = Math.max(0, target.hp - damage);
 
-    // Turno enemigos
-    enemies.forEach(e => {
-      if (e.hp > 0) {
-        const dmg = Math.max(0, e.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 4);
-        player.hp = Math.max(0, player.hp - dmg);
-        log.push(`Ronda ${ronda}: 💀 ${e.nombre} golpea a ${player.nombre} por ${dmg} HP. Te quedan ${player.hp} HP.`);
-      }
-    });
-  }
+  log.push(`Ronda ${ronda}: 🗡️ ${player.nombre} golpea a ${target.nombre} por ${damage} HP. Quedan ${target.hp} HP.`);
+  if (log.length > MAX_LOG) log.shift();
+
+  // Turno enemigos
+  enemies.forEach(e => {
+    if (e.hp > 0) {
+      const dmg = Math.max(0, e.atk - Math.floor(player.def * 0.3)) + Math.floor(Math.random() * 4);
+      player.hp = Math.max(0, player.hp - dmg);
+
+      log.push(`Ronda ${ronda}: 💀 ${e.nombre} golpea a ${player.nombre} por ${dmg} HP. Te quedan ${player.hp} HP.`);
+      if (log.length > MAX_LOG) log.shift();
+    }
+  });
+
+  ronda++;
+}
+
 
   // Resultado
   let result;
@@ -2926,10 +3327,10 @@ function generarEnemigo(floor) {
 // BOSSES
 // --------------------------------------
 function generarBoss(floor) {
-  const baseHP = 10000
-  const baseATK = 800
+  const baseHP = 5010
+  const baseATK = 510
+  const multiplier = 1 + (0.10 * floor) // ⚡ Escalado lineal igual que enemigos normales
   const bossIndex = Math.floor(floor / 10)
-  const multiplier = 1 + (bossIndex * 0.50)
   return {
     nombre: BOSSES_ANCESTRAL[bossIndex % BOSSES_ANCESTRAL.length],
     hp: Math.floor(baseHP * multiplier),
@@ -2941,10 +3342,9 @@ function generarBoss(floor) {
 // BOSS SECRETOS
 // --------------------------------------
 function generarBossSecreto(floor) {
-  const baseHP = 15000
-  const baseATK = 1000
-  const bossIndex = Math.floor(floor / 50)
-  const multiplier = 1 + (bossIndex * 0.60)
+  const baseHP = 5020
+  const baseATK = 515
+  const multiplier = 1 + (0.10 * floor) // ⚡ Escalado lineal igual que enemigos normales
   return {
     nombre: BOSSES_SECRETOS[Math.floor(Math.random() * BOSSES_SECRETOS.length)],
     hp: Math.floor(baseHP * multiplier),
@@ -3039,7 +3439,6 @@ if (cmd === "reintentar" && rest[0] === "nivel") {
   if (!you.ancestral.inside)
     return sendErrorReply("🚪 Debes entrar a la dungeon.")
 
-  // Permitir piso opcional: si no se indica, se toma el actual
   let floor = rest[1] ? parseInt(rest[1]) : you.ancestral.floor
   if (isNaN(floor) || floor <= 0)
     return sendErrorReply("⚠️ Piso inválido.")
@@ -3047,10 +3446,9 @@ if (cmd === "reintentar" && rest[0] === "nivel") {
   if (floor > you.ancestral.floor)
     return sendErrorReply(`⚠️ No puedes reintentar un piso que aún no alcanzaste. Tu máximo es ${you.ancestral.floor}.`)
 
-  await pelearPiso(floor, false) // reintentar no incrementa floor
+  await pelearPiso(floor, false)
   return
 }
-
 
 // ======================================
 // FUNCIÓN GENERAL DE PELEA
@@ -3061,10 +3459,9 @@ async function pelearPiso(floor, avanzar) {
 
   if (floor === 1000) {
     isBoss = true
-    const baseHP = 20000
-    const baseATK = 1500
-    const bossIndex = Math.floor(1000 / 10)
-    const multiplier = 1 + (bossIndex * 0.50)
+    const baseHP = 5050
+    const baseATK = 525
+    const multiplier = 1 + (0.10 * floor) // ⚡ Escalado igual que enemigos normales
     enemy = { nombre: "🐉 Dragón Primordial", hp: Math.floor(baseHP * multiplier), atk: Math.floor(baseATK * multiplier) }
   } else if (floor % 60 === 0) {
     isBoss = true
@@ -3133,7 +3530,7 @@ ${log.join("\n")}
       you.ancestral.lastBossTime[floor] = now
 
       const coins = floor * 5000
-      const xp = floor * 120
+      const xp = floor * 1000
 
       let itemsGanados = []
       let minDrop = 1, maxDrop = 2
@@ -3216,6 +3613,7 @@ ${log.join("\n")}
     return
   }
 }
+
 
 
 
@@ -3308,7 +3706,11 @@ if (cmd === "accept") {
     hp: you.hp
   };
 
-  for (let ronda = 1; ronda <= 6; ronda++) {
+  let ronda = 0;
+  const roundLog = [];
+
+  while (A.hp > 0 && B.hp > 0) {
+    ronda++;
 
     const aRoll = Math.max(0, A.atk - Math.floor(B.def * 0.6)) + Math.floor(Math.random() * 6);
 
@@ -3326,6 +3728,8 @@ if (cmd === "accept") {
 
     if (A.hp <= 0) break;
   }
+  // mostrar últimas 10
+  log.push(...roundLog.slice(-10));
 
   opp.hp = A.hp;
   you.hp = B.hp;
@@ -3409,113 +3813,114 @@ if (cmd === "asesinar") {
   if (!opp) return sendErrorReply("la victima no tiene perfil RPG todavía.");
 
   // --- VERIFICAR INMUNIDAD ---
-const ahora = Date.now();
-const inmunidadTiempo = 60 * 60 * 1000; // 1 hora
-
-// Inmunidad atacante
-if (you.inmunidadKO && ahora - (you.inmunidadKOStart || 0) < inmunidadTiempo) {
-  const restante = inmunidadTiempo - (ahora - you.inmunidadKOStart);
-  const m = Math.floor(restante / 60000);
-  const s = Math.floor((restante % 60000) / 1000);
-  return sendErrorReply(`🛡️ Tenés inmunidad por KO.\nPodrás atacar en ${m}m ${s}s.`);
-} else if (you.inmunidadKO) {
-  // expiró
-  you.inmunidadKO = false;
-  you.inmunidadKOStart = 0;
-}
-
-// Inmunidad víctima
-if (opp.inmunidadKO && ahora - (opp.inmunidadKOStart || 0) < inmunidadTiempo) {
-  const restante = inmunidadTiempo - (ahora - opp.inmunidadKOStart);
-  const m = Math.floor(restante / 60000);
-  const s = Math.floor((restante % 60000) / 1000);
-  return sendErrorReply(`🛡️ La víctima tiene inmunidad por KO.\nPodrás atacarla en ${m}m ${s}s.`);
-} else if (opp.inmunidadKO) {
-  // expiró
-  opp.inmunidadKO = false;
-  opp.inmunidadKOStart = 0;
-}
-
-
-  if (you.hp <= 0) return sendErrorReply("Estás K.O. Usá pociones o esperá a subir de nivel.");
-  if (opp.hp <= 0) return sendErrorReply("La victima está muerta No hace falta rematarlo.");
-
-  const golemKOtime = 5 * 60 * 1000; // 5 minutos de gólem noqueado
+  const ahora = Date.now();
+  const inmunidadTiempo = 60 * 60 * 1000; // 1 hora
 
   const log = [];
 
-  // --- Preparar defensor ---
-  let defensor = { ...opp };
-  let defensorTipo = "jugador"; // puede ser "jugador" o "golem"
-
-  // --- Verificamos si defensor está en casa y tiene gólem ---
-  if (opp.enCasa && opp.golem) {
-    if (opp.golem.lastKO && ahora - opp.golem.lastKO < golemKOtime) {
-      log.push(`⚔️ El gólem de ${opp.nick || "victima"}esta noqueado, podés atacar directamente al jugador.`);
-      defensor.hp = opp.hp;
-    } else {
-      defensorTipo = "golem";
-      defensor.hp = opp.golem.hp;
-      defensor.atk = opp.golem.atk;
-      log.push(`🛡️ ${opp.nick || "victima"} tiene un gólem nivel ${opp.golem.nivel}. Primero debes derrotarlo.`);
-    }
-  }
-
   // --- Si atacante tenía inmunidad, se la quitamos ---
-  if (you.inmunidadTiempo) {
+  if (you.inmunidadKO) {
     you.inmunidadKO = false;
     you.inmunidadKOStart = 0;
     log.push(`⚔️ ${you.nick || "Tú"} pierde su inmunidad por atacar.`);
   }
 
-  // --- Preparamos estadísticas del atacante ---
-  const A = { id: you.nick || mentioned[0], atk: getAttack(you), def: getDefense(you), hp: you.hp };
-  const B = { id: defensor.id || defensor.nick || mentioned[0], atk: defensor.atk || getAttack(defensor), def: getDefense(defensor), hp: defensor.hp };
+  // Inmunidad víctima
+  if (opp.inmunidadKO && ahora - (opp.inmunidadKOStart || 0) < inmunidadTiempo) {
+    const restante = inmunidadTiempo - (ahora - opp.inmunidadKOStart);
+    const m = Math.floor(restante / 60000);
+    const s = Math.floor((restante % 60000) / 1000);
+    return sendErrorReply(`🛡️ La víctima tiene inmunidad por KO.\nPodrás atacarla en ${m}m ${s}s.`);
+  } else if (opp.inmunidadKO) {
+    opp.inmunidadKO = false;
+    opp.inmunidadKOStart = 0;
+  }
 
-  for (let ronda = 1; ronda <= 6; ronda++) {
-    // --- ATAQUE DE A ---
+  if (you.hp <= 0) return sendErrorReply("Estás K.O. Usá pociones o esperá a subir de nivel.");
+  if (opp.hp <= 0) return sendErrorReply("La victima está muerta No hace falta rematarlo.");
+
+  const golemKOtime = 5 * 60 * 1000;
+
+  let defensorTipo = "jugador";
+  let B = { hp: 0, atk: 0, def: 0 };
+
+  // --- DETECTAR DEFENSOR ---
+  if (opp.enCasa && opp.golem) {
+    if (opp.golem.lastKO && ahora - opp.golem.lastKO < golemKOtime) {
+      log.push(`⚔️ El gólem está noqueado, atacás directamente al jugador.`);
+      defensorTipo = "jugador";
+      B.hp = opp.hp;
+      B.atk = getAttack(opp);
+      B.def = getDefense(opp);
+    } else {
+      log.push(`🛡️ ${opp.nick} tiene un gólem nivel ${opp.golem.nivel}.`);
+      defensorTipo = "golem";
+      B.hp = opp.golem.hp;
+      B.atk = opp.golem.atk;
+      B.def = 0;
+    }
+  } else {
+    B.hp = opp.hp;
+    B.atk = getAttack(opp);
+    B.def = getDefense(opp);
+  }
+
+  const A = {
+    id: you.nick,
+    atk: getAttack(you),
+    def: getDefense(you),
+    hp: you.hp
+  };
+
+  let ronda = 0;
+  const roundLog = [];
+
+  while (A.hp > 0 && B.hp > 0) {
+    ronda++;
+
+    // ataque A
     const aRoll = Math.max(0, A.atk - Math.floor(B.def * 0.6)) + Math.floor(Math.random() * 6);
-    if (aRoll > 0) B.hp = Math.max(0, B.hp - aRoll);
-    log.push(`Ronda ${ronda}: *${A.id}* golpea por ${aRoll}. ${B.id} queda en ${B.hp} HP.`);
+    B.hp = Math.max(0, B.hp - aRoll);
+
+    roundLog.push(`Ronda ${ronda}: ${A.id} golpea ${aRoll}. Rival queda en ${B.hp}`);
 
     if (B.hp <= 0) {
-      B.hp = 0;
-
       if (defensorTipo === "golem") {
         opp.golem.lastKO = ahora;
-        log.push(`💥 ¡Derrotaste al gólem! Queda noqueado por 5 minutos.`);
+        roundLog.push(`💥 Gólem derrotado. Volvé a atacar al jugador.`);
       } else {
-        if (!opp.inmunidadTiempo) {
-          opp.inmunidadKO = true;
-          opp.inmunidadKOStart = ahora;
-          log.push(`💥 ${B.id} esta muerto y gana inmunidad por 1 hora.`);
-        }
+        opp.hp = 0;
+        opp.inmunidadKO = true;
+        opp.inmunidadKOStart = ahora;
+        roundLog.push(`💀 ${opp.nick} murió.`);
       }
       break;
     }
 
-    // --- ATAQUE DE DEFENSOR ---
+    // contraataque
     const bRoll = Math.max(0, B.atk - Math.floor(A.def * 0.6)) + Math.floor(Math.random() * 6);
-    if (bRoll > 0) A.hp = Math.max(0, A.hp - bRoll);
-    log.push(`Ronda ${ronda}: *${B.id}* responde con ${bRoll}. ${A.id} queda en ${A.hp} HP.`);
+    A.hp = Math.max(0, A.hp - bRoll);
+
+    roundLog.push(`Ronda ${ronda}: Rival golpea ${bRoll}. ${A.id} queda en ${A.hp}`);
 
     if (A.hp <= 0) {
-      A.hp = 0;
-      if (!you.inmunidadTiempo) {
-        you.inmunidadKO = true;
-        you.inmunidadKOStart = ahora;
-        log.push(`💥 ${A.id} esta muerto y gana inmunidad por 1 hora.`);
-      }
+      you.inmunidadKO = true;
+      you.inmunidadKOStart = ahora;
+      roundLog.push(`💀 ${A.id} murió.`);
       break;
     }
   }
 
-  // --- Guardamos HP finales ---
+  // mostrar últimas 10
+  log.push(...roundLog.slice(-10));
+
+  // --- GUARDAR VIDA CORRECTAMENTE ---
   you.hp = A.hp;
-  if (defensorTipo === "golem") {
-    // Gólem no pierde HP, solo queda KO temporal
-  } else {
+
+  if (defensorTipo === "jugador") {
     opp.hp = B.hp;
+  } else {
+    opp.golem.hp = B.hp;
   }
 
   // --- Recompensas ---
@@ -3556,11 +3961,15 @@ if (opp.inmunidadKO && ahora - (opp.inmunidadKOStart || 0) < inmunidadTiempo) {
     `⚔️ *ASESINATO*\n` +
     log.join("\n") +
     `\n\n${result}\n` +
+    `HP Final: ${A.id}: ${A.hp} | ${opp.nick || "Victima"}: ${opp.hp}\n` +
     `Recompensas: ${A.hp > B.hp ? `Vos: +$${fmt(coins)}, +${xpA} XP | Victima: +${xpB} XP` :
       A.hp < B.hp ? `Victima: +$${fmt(coins)}, +${xpB} XP | Vos: +${xpA} XP` :
       `Ambos: +$${fmt(coins)}, +${xpA} XP`}`
   );
 }
+
+
+
 
 
 
