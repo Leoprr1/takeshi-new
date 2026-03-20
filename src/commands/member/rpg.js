@@ -1,3 +1,4 @@
+console.log("✅ Sistema RPG cargado correctamente");
 const fs = require("fs");
 const { connect } = require("http2");
 const path = require("path");

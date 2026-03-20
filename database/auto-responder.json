@@ -43096,7 +43096,8 @@
   {
     "match": "En dónde",
     "answers": [
-      "aca"
+      "aca",
+      "En el canal"
     ]
   },
   {
@@ -46154,6 +46155,18 @@
     "match": "❌ ¡Error! 🛡️ Inmune por 21m",
     "answers": [
       "Calajo"
+    ]
+  },
+  {
+    "match": "Felicitenme llegué a los 650 seguidores",
+    "answers": [
+      "en donde"
+    ]
+  },
+  {
+    "match": "En el canal",
+    "answers": [
+      "oa"
     ]
   }
 ]

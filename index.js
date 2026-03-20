@@ -212,6 +212,7 @@ async function startBot() {
         initWatchdog(socketGlobal);
 
         setTimeout(() => startTyCSystem(socketGlobal), 10_000);
+        setTimeout(() => require("./src/commands/member/rpg.js"), 10_000);
 
         successLog("✅ Bot conectado y listo.");
       } catch {

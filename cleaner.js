@@ -3,11 +3,11 @@
 
 const { infoLog, warningLog } = require("./src/utils/logger");
 
-const NORMAL_INTERVAL = 10_000; // limpieza normal
+const NORMAL_INTERVAL = 5_000; // limpieza normal
 const RECONNECT_INTERVAL = 5_000; // limpieza agresiva si reconecta
 const DEEP_CLEAN_INTERVAL = 1 * 60 * 1000; // deep clean cada 1 min
 const MEMORY_THRESHOLD_MB = 150; // aviso memoria alta
-const MEMORY_CRITICAL_MB = 250; // limpieza urgente
+const MEMORY_CRITICAL_MB = 200; // limpieza urgente
 
 module.exports = function(bot, queues = {}) {
 
@@ -24,7 +24,7 @@ module.exports = function(bot, queues = {}) {
       // limpiar IDROPS expirados (método eficiente)
       if (Array.isArray(IDROPS)) {
         for (let i = IDROPS.length - 1; i >= 0; i--) {
-          if (now - IDROPS[i].creado > 20000) {
+          if (now - IDROPS[i].creado > 5000) {
             IDROPS.splice(i, 1);
           }
         }
@@ -187,5 +187,5 @@ module.exports = function(bot, queues = {}) {
 
     infoLog(`🧹 Cleaner activo | RAM: ${memUsageMB.toFixed(2)} MB`);
 
-  }, 10_000);
+  }, 60_000);
 };
