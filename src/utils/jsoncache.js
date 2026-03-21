@@ -155,7 +155,7 @@ function saveAllJSON() {
 // ======================
 // HOT RELOAD
 // ======================
-
+let saveCount = 0;
 function watchJSON(key) {
 
   const db = global.JSON_DB[key]
@@ -169,11 +169,17 @@ function watchJSON(key) {
       db.data = newData
       db.dirty = false
 
-      console.log(`🔄 JSON recargado → ${key}`)
+      saveCount++;
 
     } catch {}
 
   })
+  setInterval(() => {
+  if (saveCount > 0) {
+    console.log(`[JSON] cargado [${saveCount}]`);
+    saveCount = 0;
+  }
+}, 10 * 1000);
 
 }
 

@@ -3,7 +3,7 @@
 
 const { infoLog, warningLog } = require("./src/utils/logger");
 
-const NORMAL_INTERVAL = 5_000; // limpieza normal
+const NORMAL_INTERVAL = 10_000; // limpieza normal
 const RECONNECT_INTERVAL = 5_000; // limpieza agresiva si reconecta
 const DEEP_CLEAN_INTERVAL = 1 * 60 * 1000; // deep clean cada 1 min
 const MEMORY_THRESHOLD_MB = 150; // aviso memoria alta
@@ -44,8 +44,12 @@ module.exports = function(bot, queues = {}) {
         LOGS.splice(0, 450);
       }
 
-      if (global.gc) global.gc();
-
+      if (global.gc) {
+  const before = process.memoryUsage().heapUsed;
+  global.gc();
+  const after = process.memoryUsage().heapUsed;
+  console.log(`[CLEANER] Memoria limpiada| ${((before - after)/1024/1024).toFixed(2)} MB liberados`);
+}
       const memUsageMB = process.memoryUsage().heapUsed / 1024 / 1024;
 
       if (memUsageMB > MEMORY_THRESHOLD_MB) {

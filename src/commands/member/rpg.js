@@ -40,6 +40,7 @@ loadDB();
 // -----------------------------
 // Guardado con cola para evitar pisadas
 // -----------------------------
+let saveCount = 0;
 const saveQueue = [];
 let saving = false;
 
@@ -53,7 +54,8 @@ async function saveDB(data) {
     const dbToSave = saveQueue.shift();
     try {
       await fs.promises.writeFile(DB_FILE, JSON.stringify(dbToSave, null, 2));
-      console.log("[RPG] Guardado DB exitoso");
+      saveCount++;
+     if (global.gc) global.gc();
     } catch (err) {
       console.error("[RPG] Error guardando DB:", err);
     }
@@ -67,7 +69,11 @@ async function saveDB(data) {
 // -----------------------------
 setInterval(() => {
   saveDB();
-}, 10 * 1000); // cada 10 segundos
+  if (saveCount > 0) {
+    console.log(`[RPG] saveDB [${saveCount}]`);
+    saveCount = 0;
+  }
+}, 10 * 1000);
 
 module.exports = { DB, loadDB, saveDB };
 
