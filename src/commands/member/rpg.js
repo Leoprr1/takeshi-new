@@ -453,13 +453,16 @@ setInterval(() => {
     if (ticks > MAX_TICKS) ticks = MAX_TICKS;
 
     const homeMultiplier = u.enCasa ? 4 : 1;
-
+    const L = u.limitBreaker ||{};
     const aca = u.academia?.especialidades || {};
-    const totalHP =
-      (u.hpMax || 0) +
-      (aca.curacion || 0) * 5 +
-      (u.golem?.hpBuff || 0) +
-      (u.mascotaEquipada?.hpBuff || 0);
+    const baseHP = (u.hpMax || 0)
+  + (aca.curacion || 0) * 5
+  + (u.golem?.hpBuff || 0)
+  + (u.mascotaEquipada?.hpBuff || 0);
+
+const totalHP = baseHP * (L.active ? 2 : 1);
+
+
     const totalMana =
       (u.manamax || 0) +
       (aca.manaMax || 0) * 10;
@@ -901,7 +904,12 @@ if (cmd === "stats") {
     acaText += `${emoji} ${key}: Nivel ${nivel}\n[${barra}]\n`;
   });
 
-  const totalHP = (you.hpMax || 0) + ((aca.curacion || 0) * 5) + (you.golem?.hpBuff || 0) + (you.mascotaEquipada?.hpBuff || 0);
+ const baseHP = (you.hpMax || 0)
+             + (aca.curacion || 0) * 5
+             + (you.golem?.hpBuff || 0)
+             + (you.mascotaEquipada?.hpBuff || 0);
+
+const totalHP = baseHP * (you.limitBreaker?.active ? 2 : 1);
   const totalMana = (you.manamax || 0) + ((aca.manaMax || 0) * 10);
   const totalAtk = getAttack(you);
   const totalDef = getDefense(you);
@@ -1102,6 +1110,7 @@ Reducción por academia: ${Math.min(80, (aca.manaMax || 0) * 1)}%
 
 ⚔️ ATK x2
 🛡️ DEF x2
+❤️ HP x2
 
 Comandos:
 .rpg limit activar
@@ -1116,6 +1125,7 @@ Precio: $1,000,000,000 (pago unico)
 
 ⚔️ ATK x2
 🛡️ DEF x2
+❤️ HP x2
 
 Consumo: 2000 mana/min
 
@@ -1165,6 +1175,16 @@ Usa:
     you.limitBreaker.active = true;
     you.limitBreaker.lastTick = Date.now();
 
+    // 🔥 RECALCULAR HP Y CURAR FULL
+    const baseHP = (you.hpMax || 0)
+      + (aca.curacion || 0) * 5
+      + (you.golem?.hpBuff || 0)
+      + (you.mascotaEquipada?.hpBuff || 0);
+
+    const totalHP = baseHP * 2;
+
+    you.hp = totalHP;
+
     saveDB();
     return sendReply("💥🔥 LIMIT BREAKER ACTIVADO");
   }
@@ -1179,10 +1199,19 @@ Usa:
     you.limitBreaker.active = false;
     you.limitBreaker.lastTick = 0;
 
+    // ❄️ RECALCULAR HP NORMAL Y AJUSTAR
+    const baseHP = (you.hpMax || 0)
+      + (aca.curacion || 0) * 5
+      + (you.golem?.hpBuff || 0)
+      + (you.mascotaEquipada?.hpBuff || 0);
+
+    you.hp = Math.min(you.hp, baseHP);
+
     saveDB();
     return sendReply("❄️ Limit Breaker OFF");
   }
 }
+
 
 
 
@@ -1368,10 +1397,12 @@ if (cmd === "magia") {
     // ------------------------------------------------
     const acaTarget = objetivo.academia?.especialidades || {};
 
-    const totalHP = (objetivo.hpMax || 0)
+    const baseHP = (objetivo.hpMax || 0)
                   + (acaTarget.curacion || 0) * 5
                   + (objetivo.golem?.hpBuff || 0)
                   + (objetivo.mascotaEquipada?.hpBuff || 0);
+                
+const totalHP = baseHP * (objetivo.limitBreaker?.active ? 2 : 1);
      objetivo.hp = Math.max(0, Math.min(objetivo.hp || 0, totalHP));             
 
     const currentHP = objetivo.hp || 0;
@@ -1932,11 +1963,12 @@ if (cmd === "use" || cmd === "usar") {
   // Vida y maná total incluyendo buffs
   const aca = you.academia?.especialidades || {};
 
-  const totalHP = 
-    (you.hpMax || 0)
-    + (aca.curacion || 0) * 5
-    + (you.golem?.hpBuff || 0)
-    + (you.mascotaEquipada?.hpBuff || 0);
+   const baseHP = (you.hpMax || 0)
+             + (aca.curacion || 0) * 5
+             + (you.golem?.hpBuff || 0)
+             + (you.mascotaEquipada?.hpBuff || 0);
+
+const totalHP = baseHP * (you.limitBreaker?.active ? 2 : 1);
 
   const totalMana = 
     (you.manamax || 0)

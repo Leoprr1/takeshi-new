@@ -44,13 +44,20 @@
   {
     "match": "27",
     "answers": [
-      "E?"
+      "E?",
+      "28"
     ]
   },
   {
     "match": "61",
     "answers": [
       "Alto trava entonces jajajaja"
+    ]
+  },
+  {
+    "match": "78",
+    "answers": [
+      ".ban"
     ]
   },
   {
@@ -164,7 +171,7 @@
       "q onda bro",
       ".cum",
       "Hola",
-      "chau",
+      "Chau",
       "Ola",
       "Que",
       "Cómo estás",
@@ -215,7 +222,8 @@
       "Si bien tomando jeje",
       "Si todo bien",
       "Nop",
-      "todo bien vos?"
+      "todo bien vos?",
+      "Bien bien, vs?"
     ]
   },
   {
@@ -236,7 +244,8 @@
     "answers": [
       "pensando en el",
       "Responder mensajes y aprender.",
-      "Nd estoy al pedo"
+      "Nd estoy al pedo",
+      "trabajando vos?"
     ]
   },
   {
@@ -280,7 +289,8 @@
       "Hola",
       "La racha",
       "No",
-      "si chau"
+      "si chau",
+      "Morite"
     ]
   },
   {
@@ -370,7 +380,11 @@
     "match": "estúpido",
     "answers": [
       "¡Uy, qué fuerte! Pero sigo siendo un bot simpático, no como vos",
-      "Bue"
+      "Bue",
+      ".kill",
+      ".ban",
+      ".kick",
+      ".marry @202044321316883"
     ]
   },
   {
@@ -474,7 +488,8 @@
       ".besar",
       "A emmanuel lo llenaron JAJAJAJA",
       "quebrada number one",
-      "shh"
+      "shh",
+      "sh"
     ]
   },
   {
@@ -1152,7 +1167,7 @@
       "Jaja XD",
       "Ahh con razón",
       "No",
-      "si",
+      "Si ?",
       "Piola como es",
       "Noooo",
       "Cajeta",
@@ -1191,13 +1206,14 @@
       "igual abria que ver por que capa deba de modificar todo el rpg",
       "Y que paso",
       "hace banda de fue",
-      "ahí va"
+      "ahí va",
+      "Es muy a dicto o q?"
     ]
   },
   {
     "match": "no",
     "answers": [
-      "Si",
+      "si",
       "JAJAJAJAJA",
       "Parece delito ya esl en este grupo",
       "Matate",
@@ -1267,7 +1283,9 @@
       "Yo si",
       "no",
       "Negativo",
-      "Ta bien"
+      "Ta bien",
+      "D1 la dejo adentro entomces",
+      "no t pregunte a vos"
     ]
   },
   {
@@ -1627,7 +1645,8 @@
       "A vos no",
       "Hola bianca",
       "Nono",
-      "Enanos.albinos"
+      "Enanos.albinos",
+      "Si quere plata te digo pero ahora ya me lo estoy x apostar a 2 manos de truco"
     ]
   },
   {
@@ -1833,7 +1852,8 @@
     "match": "De donde sos",
     "answers": [
       "rio negro vos",
-      "tucumán"
+      "tucumán",
+      "la plata"
     ]
   },
   {
@@ -2077,7 +2097,8 @@
       "Etiquetar a cada rato",
       "déjenme con mi mal ortografía",
       "sabes que \nte cuento",
-      "anoche salí a la plaza \ntarde y tipo 10 cuando volvíamos se largo terrible lluvia\ntodos desabrigados\ny me agarró a doler todo desde esta mañana \n\nel frío será"
+      "anoche salí a la plaza \ntarde y tipo 10 cuando volvíamos se largo terrible lluvia\ntodos desabrigados\ny me agarró a doler todo desde esta mañana \n\nel frío será",
+      "Xq no compre"
     ]
   },
   {
@@ -2252,7 +2273,8 @@
     "match": ".kick",
     "answers": [
       "🍉᪲ Hola, la bot debe ser Administradora para ejecutar este Comando.",
-      "Down"
+      "Down",
+      "Tenes que ser admin"
     ]
   },
   {
@@ -2563,7 +2585,8 @@
     "match": "Tarde",
     "answers": [
       "JAJAJJAJA",
-      "que era?"
+      "que era?",
+      "si"
     ]
   },
   {
@@ -2644,7 +2667,8 @@
       "te hace la cola",
       "Enserio es un bot",
       "Chau bot de mierda",
-      "Hola jsjjsss"
+      "Hola jsjjsss",
+      "alo"
     ]
   },
   {
@@ -2653,7 +2677,9 @@
       "Wenas",
       "Chau",
       "Que tal Guada",
-      "jsj"
+      "jsj",
+      "Holaa",
+      "todo bien?"
     ]
   },
   {
@@ -2776,7 +2802,8 @@
   {
     "match": "Volví",
     "answers": [
-      "X fin"
+      "X fin",
+      "X2"
     ]
   },
   {
@@ -3064,7 +3091,8 @@
   {
     "match": "¡Función de auto-respuesta desactivado con éxito!",
     "answers": [
-      "cajetudo"
+      "cajetudo",
+      "Decu algo ahora bot de mierda"
     ]
   },
   {
@@ -4638,7 +4666,8 @@
     "match": "b",
     "answers": [
       "b que?",
-      "c?"
+      "c?",
+      "guada agendame vos"
     ]
   },
   {
@@ -4865,7 +4894,8 @@
   {
     "match": "Ta bien pue",
     "answers": [
-      "Jugué dos horas y sigo en el mismo rango"
+      "Jugué dos horas y sigo en el mismo rango",
+      "Dame la platw"
     ]
   },
   {
@@ -5423,7 +5453,8 @@
       "Que pasho vv",
       "No",
       "Deja de romper",
-      "Que pasa"
+      "Que pasa",
+      "Que puta quieren"
     ]
   },
   {
@@ -7468,7 +7499,8 @@
   {
     "match": "me voy a dormir",
     "answers": [
-      "Chau andate"
+      "Chau andate",
+      "sh"
     ]
   },
   {
@@ -8245,7 +8277,8 @@
       "Qlq bro",
       "Buenas",
       "Q onda",
-      "Que hace broo"
+      "Que hace broo",
+      "Bot puto"
     ]
   },
   {
@@ -9371,7 +9404,8 @@
       "Jajajaj",
       "Kskskjsjsjs",
       "Santi se cree leo mattioli",
-      "ysi"
+      "ysi",
+      "No es gracioso"
     ]
   },
   {
@@ -9780,7 +9814,8 @@
     "match": "Oka",
     "answers": [
       ".besar",
-      "Shi"
+      "Shi",
+      "Rapido"
     ]
   },
   {
@@ -9884,7 +9919,8 @@
   {
     "match": ".golpear",
     "answers": [
-      ".culear"
+      ".culear",
+      "Estúpido"
     ]
   },
   {
@@ -10067,7 +10103,10 @@
       ".reg Brayker 16",
       "PERRA",
       "ah la politzia",
-      "tu vieja se va a registrar"
+      "tu vieja se va a registrar",
+      "ah cierto",
+      "Shhh",
+      ".reg"
     ]
   },
   {
@@ -12083,7 +12122,8 @@
       "no",
       "Ya me fui",
       "Nono ya me ofendi ahora",
-      "Que me importa"
+      "Que me importa",
+      "Queres ver?"
     ]
   },
   {
@@ -12277,7 +12317,8 @@
   {
     "match": ".infomatrimonio",
     "answers": [
-      "Cómo se casa?"
+      "Cómo se casa?",
+      "sh"
     ]
   },
   {
@@ -14182,7 +14223,8 @@
     "answers": [
       "si",
       "Obviamente",
-      "podes caer asi a la fiesta, momo"
+      "podes caer asi a la fiesta, momo",
+      "No se aceptan boluditls"
     ]
   },
   {
@@ -14458,7 +14500,8 @@
   {
     "match": "putos",
     "answers": [
-      "Puta"
+      "Puta",
+      "Tu hueco"
     ]
   },
   {
@@ -15994,7 +16037,8 @@
   {
     "match": "No es gracioso",
     "answers": [
-      "Por?"
+      "Por?",
+      "Ci"
     ]
   },
   {
@@ -16608,7 +16652,8 @@
       "decilo cuando no lo seas💜",
       "Si",
       "Tu culo",
-      "El mo bot te quedo plata"
+      "El mo bot te quedo plata",
+      "ndqvr"
     ]
   },
   {
@@ -17515,7 +17560,8 @@
   {
     "match": "Y eso q es?",
     "answers": [
-      "Te odio"
+      "Te odio",
+      "Es un rejunte de mecanica, electronica y electromecanica"
     ]
   },
   {
@@ -17788,7 +17834,8 @@
   {
     "match": "todos giles",
     "answers": [
-      "Te la aguantai?"
+      "Te la aguantai?",
+      "Si"
     ]
   },
   {
@@ -17900,7 +17947,8 @@
   {
     "match": "deja de llorar",
     "answers": [
-      "Déjame 😔"
+      "Déjame 😔",
+      "Me pudrio"
     ]
   },
   {
@@ -18916,7 +18964,9 @@
       "Matame",
       "Por?",
       "Ok",
-      "Morite vo"
+      "Morite vo",
+      "Yen2",
+      "Dale yen2"
     ]
   },
   {
@@ -21598,7 +21648,8 @@
   {
     "match": "Necesito",
     "answers": [
-      "un psicologo"
+      "un psicologo",
+      "Cuanto pue"
     ]
   },
   {
@@ -25878,7 +25929,8 @@
       "Gracias",
       "dale",
       "Vo me re dejaste de hablar",
-      "Déjame terminar"
+      "Déjame terminar",
+      "daleeeee"
     ]
   },
   {
@@ -29301,7 +29353,8 @@
       "Yo  hoy plante semillas",
       "Te amo",
       "Jajajaja tranquiiiiii",
-      "y que decís si te cojo?"
+      "y que decís si te cojo?",
+      "Compalta pue"
     ]
   },
   {
@@ -29946,7 +29999,8 @@
   {
     "match": ".menu",
     "answers": [
-      "*lo desactiva"
+      "*lo desactiva",
+      "y el menú?"
     ]
   },
   {
@@ -31420,11 +31474,12 @@
     "match": "Ci",
     "answers": [
       "Añadime",
-      "no",
+      "No",
       "No mw pasá",
       "JAAJA",
       "oc",
-      "llora"
+      "llora",
+      "Si q"
     ]
   },
   {
@@ -32497,7 +32552,8 @@
     "answers": [
       "Fa",
       "No te hablava a vs igual",
-      "Y vs sos?"
+      "Y vs sos?",
+      "Fa pa tra"
     ]
   },
   {
@@ -32565,7 +32621,8 @@
   {
     "match": "q hago",
     "answers": [
-      "Esa persona te hace mal"
+      "Esa persona te hace mal",
+      "agendame"
     ]
   },
   {
@@ -33097,7 +33154,8 @@
   {
     "match": "si amor",
     "answers": [
-      "T amo"
+      "T amo",
+      "Te la saco entonces"
     ]
   },
   {
@@ -33903,7 +33961,8 @@
   {
     "match": "Q vergüenza",
     "answers": [
-      "La carol me dijo"
+      "La carol me dijo",
+      "ok"
     ]
   },
   {
@@ -36533,7 +36592,8 @@
     "match": "De que",
     "answers": [
       "digo",
-      "tuya"
+      "tuya",
+      "Un auto que estamos armando"
     ]
   },
   {
@@ -39813,7 +39873,8 @@
   {
     "match": "JAJAJAJAJAJAJA",
     "answers": [
-      "El chiste viene en burro papi?"
+      "El chiste viene en burro papi?",
+      "está lluvia que no para dios"
     ]
   },
   {
@@ -40318,7 +40379,8 @@
     "answers": [
       "No",
       "Ella manda en todas las relaciones",
-      "Pues que te digo bro"
+      "Pues que te digo bro",
+      "eh?"
     ]
   },
   {
@@ -44712,7 +44774,8 @@
   {
     "match": "ah ok",
     "answers": [
-      "Sisi"
+      "Sisi",
+      "Ok"
     ]
   },
   {
@@ -46917,7 +46980,9 @@
   {
     "match": "@all quien para peliar?",
     "answers": [
-      "Yo"
+      "Yo",
+      "Nadie",
+      "sexo"
     ]
   },
   {
@@ -46931,6 +46996,852 @@
     "answers": [
       "Dale dale",
       ".golpear"
+    ]
+  },
+  {
+    "match": "y esa culona?",
+    "answers": [
+      "CULONA"
+    ]
+  },
+  {
+    "match": "Alg tiene 4500 pa los 🚬🚬🚬",
+    "answers": [
+      "Te paso?",
+      "yo pero efectivo pa",
+      "Cállate q mi papá se enojo conmigo x esa mrda"
+    ]
+  },
+  {
+    "match": "Nono transferime plata a mercado pago 😉",
+    "answers": [
+      "Mas seco que ensalada de escombros"
+    ]
+  },
+  {
+    "match": "Mas seco que ensalada de escombros",
+    "answers": [
+      "Jajajaja"
+    ]
+  },
+  {
+    "match": "CULONA",
+    "answers": [
+      "pasa su insta \no su num"
+    ]
+  },
+  {
+    "match": "Cállate q mi papá se enojo conmigo x esa mrda",
+    "answers": [
+      "por?",
+      "Como vas a andar fumanfo en la esquina guadalupe"
+    ]
+  },
+  {
+    "match": "Fa pa tra",
+    "answers": [
+      "Morite"
+    ]
+  },
+  {
+    "match": "Como vas a andar fumanfo en la esquina guadalupe",
+    "answers": [
+      "El quiere fumar yo no"
+    ]
+  },
+  {
+    "match": "Xq no compre",
+    "answers": [
+      "uh"
+    ]
+  },
+  {
+    "match": "Esta re malo",
+    "answers": [
+      "Xq no compraste?",
+      "hay bot acá?"
+    ]
+  },
+  {
+    "match": "Xq no compraste?",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "Vamos a seguir jugando?",
+    "answers": [
+      "Volví jaja"
+    ]
+  },
+  {
+    "match": "hay bot acá?",
+    "answers": [
+      "Shi"
+    ]
+  },
+  {
+    "match": "🎉 Items:\n🟣 *Lanza Celestial*\n⚪ *Armadura de Tela*\n🔵 *Poción de Vida (300)*\n\n💰 Monedas: +$100.000\n\n✨ XP: +7000",
+    "answers": [
+      "Tremendo"
+    ]
+  },
+  {
+    "match": "/menu",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "y el menú?",
+    "answers": [
+      ".slap"
+    ]
+  },
+  {
+    "match": "Necesito plata",
+    "answers": [
+      "Quere?"
+    ]
+  },
+  {
+    "match": "Volví jaja",
+    "answers": [
+      "Vamo a juga jaja"
+    ]
+  },
+  {
+    "match": "Si quere plata te digo pero ahora ya me lo estoy x apostar a 2 manos de truco",
+    "answers": [
+      "Si quiero"
+    ]
+  },
+  {
+    "match": "Cuanto pue",
+    "answers": [
+      "4500 pa los 🚬🚬"
+    ]
+  },
+  {
+    "match": "4500 pa los 🚬🚬",
+    "answers": [
+      "Eso necesito",
+      "D1 manito"
+    ]
+  },
+  {
+    "match": "Pero para gomitas",
+    "answers": [
+      "Jajajaj"
+    ]
+  },
+  {
+    "match": "Perdi la llave de mi diario",
+    "answers": [
+      "eutanasia"
+    ]
+  },
+  {
+    "match": "eutanasia",
+    "answers": [
+      "What's"
+    ]
+  },
+  {
+    "match": "What's",
+    "answers": [
+      "a?"
+    ]
+  },
+  {
+    "match": "guada agendame vos",
+    "answers": [
+      "Para q"
+    ]
+  },
+  {
+    "match": "Para q",
+    "answers": [
+      "ah ok"
+    ]
+  },
+  {
+    "match": "Tenes que ser admin",
+    "answers": [
+      "mentira"
+    ]
+  },
+  {
+    "match": "Y punto",
+    "answers": [
+      "Ta bien pue"
+    ]
+  },
+  {
+    "match": "Dame la platw",
+    "answers": [
+      "Bueno pue"
+    ]
+  },
+  {
+    "match": "Bueno pue",
+    "answers": [
+      "Yuju"
+    ]
+  },
+  {
+    "match": "pasa su insta \no su num",
+    "answers": [
+      "te voy a mandar pero una piña por correo"
+    ]
+  },
+  {
+    "match": ".marry @202044321316883",
+    "answers": [
+      "ninguno le salía JAJAJAJ"
+    ]
+  },
+  {
+    "match": "ninguno le salía JAJAJAJ",
+    "answers": [
+      "Que comando es ese?"
+    ]
+  },
+  {
+    "match": "podré ser gila y q me parezcan lindos todos pero solo cuando no estoy con nadie si estoy con alguien no jodo mas",
+    "answers": [
+      "Mala mia"
+    ]
+  },
+  {
+    "match": "Que comando es ese?",
+    "answers": [
+      ".casar"
+    ]
+  },
+  {
+    "match": ".infomomatrimonio",
+    "answers": [
+      "infomo"
+    ]
+  },
+  {
+    "match": "💍 *INFORMACIÓN DE MATRIMONIO* 💍\n\n🤵 @148137834471521\n👰 @17201797030138\n\n📅 Fecha de boda: 23/2/2026\n\n⏳ Tiempo juntos:\n❤️ 25 días\n🕒 12 horas\n⏱ 7 minutos\n\nQue viva el amor ✨",
+    "answers": [
+      "que"
+    ]
+  },
+  {
+    "match": ".fake-chat @193093643059248 todas iguales",
+    "answers": [
+      "q idiota"
+    ]
+  },
+  {
+    "match": "⚠️ ¡Atención! ¡Parámetros inválidos! Uso incorrecto del comando. Ejemplo: .fake-chat @usuario / texto citado / mensaje que se enviará",
+    "answers": [
+      "No entendi xd"
+    ]
+  },
+  {
+    "match": ".fake-chat @93991584428135 todos iguales/si todos iguales",
+    "answers": [
+      "Idiota"
+    ]
+  },
+  {
+    "match": ".fake-chat @93991584428135 / todos iguales / si todos iguales",
+    "answers": [
+      "Aaaaaaa"
+    ]
+  },
+  {
+    "match": "Asi no",
+    "answers": [
+      "si cabeza d chota"
+    ]
+  },
+  {
+    "match": "Hay una mancha en el espejo",
+    "answers": [
+      "podria ser"
+    ]
+  },
+  {
+    "match": "dormis en algun momento?",
+    "answers": [
+      "ola"
+    ]
+  },
+  {
+    "match": "malaahi con q yo le envié un mensaje alas 22:48 y se desconecte x última vez alas 00:30",
+    "answers": [
+      "uh no amiga \ndate cuenta",
+      "es al pedo tener activa la ultima vez , la confirmación d lectura y esas cosas. te maquinas peor la cabeza , mejor tener todo desactivado y ya",
+      "cuernos"
+    ]
+  },
+  {
+    "match": "Nuuuu la peor ahi perro jajajaja",
+    "answers": [
+      "Una gana de llorar, ahora voy a prender fuego las llantas del vecino q contagio mi planta el gto no quiso cortar la suya"
+    ]
+  },
+  {
+    "match": "Una gana de llorar, ahora voy a prender fuego las llantas del vecino q contagio mi planta el gto no quiso cortar la suya",
+    "answers": [
+      "Que hdp"
+    ]
+  },
+  {
+    "match": "Quemale la casa y todo jaja",
+    "answers": [
+      "Si sale José c paz pibe prende fuego la casa del vecino"
+    ]
+  },
+  {
+    "match": "Si sale José c paz pibe prende fuego la casa del vecino",
+    "answers": [
+      "Siii ajajjaja"
+    ]
+  },
+  {
+    "match": "@all revivan el server",
+    "answers": [
+      "q flashas discord"
+    ]
+  },
+  {
+    "match": "q flashas discord",
+    "answers": [
+      "Te molesta."
+    ]
+  },
+  {
+    "match": "Te molesta.",
+    "answers": [
+      "si amor"
+    ]
+  },
+  {
+    "match": "Boba",
+    "answers": [
+      "elmo decime una cancion"
+    ]
+  },
+  {
+    "match": "Te la saco entonces",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "Bien bien, vs?",
+    "answers": [
+      "me alegro!! todo bien yo"
+    ]
+  },
+  {
+    "match": "me alegro!! todo bien yo",
+    "answers": [
+      "Me alegro"
+    ]
+  },
+  {
+    "match": "Le tenes que escribir jaja",
+    "answers": [
+      "q la chupe"
+    ]
+  },
+  {
+    "match": "trabajando vos?",
+    "answers": [
+      "Aca al p2 nms jaja"
+    ]
+  },
+  {
+    "match": "Aca al p2 nms jaja",
+    "answers": [
+      "q suerte"
+    ]
+  },
+  {
+    "match": "Pasa que yo trabajo de tardecita",
+    "answers": [
+      "quien?"
+    ]
+  },
+  {
+    "match": "q suerte",
+    "answers": [
+      "Ahora es suerte"
+    ]
+  },
+  {
+    "match": "Mañana se trabaja todl el dia jaja",
+    "answers": [
+      "domingo? q bajon"
+    ]
+  },
+  {
+    "match": "la plata",
+    "answers": [
+      "D1 d1"
+    ]
+  },
+  {
+    "match": "domingo? q bajon",
+    "answers": [
+      "See"
+    ]
+  },
+  {
+    "match": "See",
+    "answers": [
+      "yo hasta el miercoles no trabajo xsuerte"
+    ]
+  },
+  {
+    "match": "yo hasta el miercoles no trabajo xsuerte",
+    "answers": [
+      "Uuu que suerte"
+    ]
+  },
+  {
+    "match": "Uuu que suerte",
+    "answers": [
+      "simmal"
+    ]
+  },
+  {
+    "match": "Pasa que estamos con un proyecto",
+    "answers": [
+      "de que ?"
+    ]
+  },
+  {
+    "match": "entones comete esta XD",
+    "answers": [
+      "allá se la estan comiendo y vos pelotudeando aca"
+    ]
+  },
+  {
+    "match": "Un auto que estamos armando",
+    "answers": [
+      "a bien bien"
+    ]
+  },
+  {
+    "match": "de q trabajas",
+    "answers": [
+      "Mecanica"
+    ]
+  },
+  {
+    "match": "Mecanica",
+    "answers": [
+      "q buena onda"
+    ]
+  },
+  {
+    "match": "Decu algo ahora bot de mierda",
+    "answers": [
+      "pq responde"
+    ]
+  },
+  {
+    "match": "es el bot el q responde",
+    "answers": [
+      "El bot"
+    ]
+  },
+  {
+    "match": "q buena onda",
+    "answers": [
+      "Aparte estudio mecatronica jaja"
+    ]
+  },
+  {
+    "match": "Aparte estudio mecatronica jaja",
+    "answers": [
+      "y eso q es"
+    ]
+  },
+  {
+    "match": "uh no amiga \ndate cuenta",
+    "answers": [
+      "ay cállate juan"
+    ]
+  },
+  {
+    "match": "sh",
+    "answers": [
+      "q mierda te pica",
+      "callate",
+      ".mute",
+      "deja de callarme o te muteo devuelta"
+    ]
+  },
+  {
+    "match": "es al pedo tener activa la ultima vez , la confirmación d lectura y esas cosas. te maquinas peor la cabeza , mejor tener todo desactivado y ya",
+    "answers": [
+      "neh"
+    ]
+  },
+  {
+    "match": "Es un rejunte de mecanica, electronica y electromecanica",
+    "answers": [
+      "a re bien,que buena onda"
+    ]
+  },
+  {
+    "match": "neh",
+    "answers": [
+      "Yo me re dormi anoche jajaja"
+    ]
+  },
+  {
+    "match": "a re bien,que buena onda",
+    "answers": [
+      "Vs de que trabajas?"
+    ]
+  },
+  {
+    "match": "Yo me re dormi anoche jajaja",
+    "answers": [
+      "chu"
+    ]
+  },
+  {
+    "match": "q mierda te pica",
+    "answers": [
+      "sh"
+    ]
+  },
+  {
+    "match": "Yo estaba x salir para el rio y cuandl miro x la ventana se estaba re diluviando jajaja",
+    "answers": [
+      "acaba de llegar la lluvia acá"
+    ]
+  },
+  {
+    "match": "Que puta quieren",
+    "answers": [
+      "Nada",
+      "uuu"
+    ]
+  },
+  {
+    "match": "la cago a piñas",
+    "answers": [
+      "Sorry no soy violenta"
+    ]
+  },
+  {
+    "match": "ndqv una cosa con la otra",
+    "answers": [
+      "Qsy"
+    ]
+  },
+  {
+    "match": "hacete respetar guada",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "match": "Ni se q es ruchi",
+    "answers": [
+      "es corte una persona falsa"
+    ]
+  },
+  {
+    "match": "soy re muerto",
+    "answers": [
+      "De q equipo sos"
+    ]
+  },
+  {
+    "match": "argentina",
+    "answers": [
+      "Muy bien"
+    ]
+  },
+  {
+    "match": "Ojala te lleve una sirena",
+    "answers": [
+      "Y esa quien es? Jaja"
+    ]
+  },
+  {
+    "match": "Y esa quien es? Jaja",
+    "answers": [
+      "Qsy"
+    ]
+  },
+  {
+    "match": "Va a salir en la portada de noticias \"el agus se muere xq la guada lo dijo\"",
+    "answers": [
+      "Si"
+    ]
+  },
+  {
+    "match": "Manifiesto",
+    "answers": [
+      "Ella jura"
+    ]
+  },
+  {
+    "match": "Ella jura",
+    "answers": [
+      "Si",
+      "Agustín hace algo"
+    ]
+  },
+  {
+    "match": "Agustín hace algo",
+    "answers": [
+      "Como que?"
+    ]
+  },
+  {
+    "match": "Como que?",
+    "answers": [
+      "Con mi aburrimiento"
+    ]
+  },
+  {
+    "match": "Tenés grupos?",
+    "answers": [
+      "Uno pero no soy admin"
+    ]
+  },
+  {
+    "match": "Uno pero no soy admin",
+    "answers": [
+      "Añadime"
+    ]
+  },
+  {
+    "match": "O pedile a alguien q me añada",
+    "answers": [
+      "Oka"
+    ]
+  },
+  {
+    "match": "Banca que contesten jaja",
+    "answers": [
+      "Ush"
+    ]
+  },
+  {
+    "match": "Esa música no es para deprimirse",
+    "answers": [
+      "La letra"
+    ]
+  },
+  {
+    "match": "Es fea",
+    "answers": [
+      "Naaaa"
+    ]
+  },
+  {
+    "match": "Mejor es la de Pablo alboran de Saturno",
+    "answers": [
+      "Una del chaqueño palavecino"
+    ]
+  },
+  {
+    "match": "Una del chaqueño palavecino",
+    "answers": [
+      "Asu",
+      "Mujer niña y amiga"
+    ]
+  },
+  {
+    "match": "agendame",
+    "answers": [
+      "No quiero."
+    ]
+  },
+  {
+    "match": "Mujer niña y amiga",
+    "answers": [
+      "Seeeee",
+      "Vo baila hoy?",
+      "ah los nocheros"
+    ]
+  },
+  {
+    "match": "Asu",
+    "answers": [
+      "Mare we"
+    ]
+  },
+  {
+    "match": "Vo baila hoy?",
+    "answers": [
+      "Noop"
+    ]
+  },
+  {
+    "match": "Noop",
+    "answers": [
+      "Faaa q brg"
+    ]
+  },
+  {
+    "match": "Se suspendió",
+    "answers": [
+      "Pobre cami"
+    ]
+  },
+  {
+    "match": "ah los nocheros",
+    "answers": [
+      "Noop destino san Javier"
+    ]
+  },
+  {
+    "match": "Lo pasa para el finde que viene?",
+    "answers": [
+      "No para mñn"
+    ]
+  },
+  {
+    "match": "cuernos",
+    "answers": [
+      "si"
+    ]
+  },
+  {
+    "match": "⚠️ ¡Atención! Uso: .reg Nombre Edad\nEjemplo: .reg Leo 23",
+    "answers": [
+      ".reg Juan 16"
+    ]
+  },
+  {
+    "match": "✅ usuario muteado con exito!",
+    "answers": [
+      "cómo que muteado?",
+      "sh"
+    ]
+  },
+  {
+    "match": "Ey mano",
+    "answers": [
+      "Mande"
+    ]
+  },
+  {
+    "match": "Dice la profe q q posibilidad hay de q le alcances el pañuelo blanco",
+    "answers": [
+      "Uuuu"
+    ]
+  },
+  {
+    "match": "te chupo el culo pendeja",
+    "answers": [
+      "Para clw"
+    ]
+  },
+  {
+    "match": "o",
+    "answers": [
+      "Te baneo clw"
+    ]
+  },
+  {
+    "match": "Para clw",
+    "answers": [
+      "a quien le dijo eso"
+    ]
+  },
+  {
+    "match": "deja de mandar huevadas",
+    "answers": [
+      "que me aburro",
+      "sh"
+    ]
+  },
+  {
+    "match": "Miruuu",
+    "answers": [
+      "Lit ns de donde saque ese papel jajaja"
+    ]
+  },
+  {
+    "match": "deja de callarme o te muteo devuelta",
+    "answers": [
+      "sh"
+    ]
+  },
+  {
+    "match": "una mierda los tres",
+    "answers": [
+      "Facto",
+      "Facturas"
+    ]
+  },
+  {
+    "match": "Facto",
+    "answers": [
+      "x3"
+    ]
+  },
+  {
+    "match": "Chau te robó los stickers",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "La del tiktok🤣",
+    "answers": [
+      "sii"
+    ]
+  },
+  {
+    "match": "esto esta más muerto q mis ganas de vivir",
+    "answers": [
+      "Tjr"
+    ]
+  },
+  {
+    "match": "@148137834471521 e puedo usar el bot",
+    "answers": [
+      "para que"
+    ]
+  },
+  {
+    "match": "corte meterlo a un grupo",
+    "answers": [
+      "no"
+    ]
+  },
+  {
+    "match": "en ese caso tendrías q preguntarle a el",
+    "answers": [
+      "eso"
+    ]
+  },
+  {
+    "match": "q idiota",
+    "answers": [
+      "x donde le pregunto"
+    ]
+  },
+  {
+    "match": "Recien veo como lo tiene agendado a @193093643059248 jajajaja",
+    "answers": [
+      "Jajajajajaja"
+    ]
+  },
+  {
+    "match": "Argentino",
+    "answers": [
+      "Che argentino"
     ]
   }
 ]
