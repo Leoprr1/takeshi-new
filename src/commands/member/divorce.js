@@ -1,5 +1,5 @@
 const { onlyNumbers } = require(`${BASE_DIR}/utils`);
-const { divorce, getPartner, isMarried } = require(`${BASE_DIR}/utils/marriageDB`);
+const { divorce, marry, isMarried } = require(`${BASE_DIR}/utils/marriageDB`);
 
 module.exports = {
   name: "divorce",
@@ -16,7 +16,7 @@ module.exports = {
       return;
     }
 
-    const partner = getPartner(userJid);
+    const partner = marry(userJid);
 
     divorce(userJid);
 

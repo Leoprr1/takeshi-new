@@ -18,7 +18,6 @@ const startCleaner = require("./cleaner.js");
 // CACHE GLOBAL DE GRUPOS
 // ----------------------------
 global.GROUP_CACHE = global.GROUP_CACHE || {};
-let groupsPreloaded = false;
 const MAX_GROUP_CACHE = 300;
 
 // ----------------------------
@@ -65,36 +64,6 @@ async function cacheGroupMetadata(socket, jid) {
     };
 
   } catch {}
-}
-
-// ----------------------------
-// NUEVO: PRECARGAR TODOS LOS GRUPOS
-// ----------------------------
-async function preloadAllGroups(socket) {
-  try {
-    if (global.reconnecting) return;
-    if (Object.keys(global.GROUP_CACHE).length > 200) return;
-
-    infoLog("⚡ Precargando metadata de todos los grupos...");
-
-    const groups = await socket.groupFetchAllParticipating();
-
-    for (const jid in groups) {
-      const metadata = groups[jid];
-
-      global.GROUP_CACHE[jid] = {
-        admins: metadata.participants
-          .filter(p => p.admin)
-          .map(p => p.id),
-        participants: metadata.participants.length,
-        time: Date.now()
-      };
-    }
-
-    successLog(`✅ ${Object.keys(global.GROUP_CACHE).length} grupos cargados en cache`);
-  } catch (err) {
-    warningLog("⚠️ No se pudieron precargar todos los grupos");
-  }
 }
 
 // ----------------------------
@@ -183,15 +152,6 @@ async function startBot() {
         socketGlobal.ev.removeAllListeners("connection.update");
         socketGlobal.ev.on("connection.update", (update) => {
           const { connection, lastDisconnect } = update;
-
-          if (connection === "open" && !groupsPreloaded) {
-            groupsPreloaded = true;
-            preloadAllGroups(socketGlobal);
-
-            setInterval(() => {
-              preloadAllGroups(socketGlobal);
-            }, 600000);
-          }
 
           if (connection === "close" || connection === "error" || lastDisconnect?.error) {
             const code = lastDisconnect?.error?.output?.statusCode || connection;

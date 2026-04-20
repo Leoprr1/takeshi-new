@@ -31,6 +31,7 @@ exports.load = (socket) => {
   };
 
   socket.ev.on("messages.upsert", async (data) => {
+
     const startProcess = Date.now();
 
     // Ejecutamos con timeout pero dentro de async

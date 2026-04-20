@@ -17,7 +17,7 @@ function loadDB() {
       fs.mkdirSync(path.dirname(DB_FILE), { recursive: true });
     }
     if (!fs.existsSync(DB_FILE)) {
-      fs.writeFileSync(DB_FILE, JSON.stringify({}, null, 2));
+      fs.writeFileSync(DB_FILE, JSON.stringify({}));
     }
     const raw = fs.readFileSync(DB_FILE, "utf8") || "{}";
     const parsed = JSON.parse(raw);
@@ -29,10 +29,14 @@ function loadDB() {
       Object.assign(DB, parsed);
     }
 
+    // 🔥 snapshot inicial para detectar cambios
+    global._lastDBSnapshot = JSON.stringify(DB);
+
   } catch (e) {
     console.error("[RPG] Error leyendo DB, re-creando:", e);
     DB = {};
-    fs.writeFileSync(DB_FILE, JSON.stringify(DB, null, 2));
+    fs.writeFileSync(DB_FILE, JSON.stringify(DB));
+    global._lastDBSnapshot = JSON.stringify(DB);
   }
 }
 loadDB();
@@ -45,7 +49,15 @@ const saveQueue = [];
 let saving = false;
 
 async function saveDB(data) {
-  saveQueue.push(data || DB);
+  const dbData = data || DB;
+
+  // 🔥 detectar cambios reales
+  const currentSnapshot = JSON.stringify(dbData);
+  if (currentSnapshot === global._lastDBSnapshot) return;
+
+  global._lastDBSnapshot = currentSnapshot;
+
+  saveQueue.push(dbData);
 
   if (saving) return;
   saving = true;
@@ -53,9 +65,9 @@ async function saveDB(data) {
   while (saveQueue.length > 0) {
     const dbToSave = saveQueue.shift();
     try {
-      await fs.promises.writeFile(DB_FILE, JSON.stringify(dbToSave, null, 2));
+      // 🔥 sin indentación (menos CPU)
+      await fs.promises.writeFile(DB_FILE, JSON.stringify(dbToSave));
       saveCount++;
-     if (global.gc) global.gc();
     } catch (err) {
       console.error("[RPG] Error guardando DB:", err);
     }
@@ -69,14 +81,17 @@ async function saveDB(data) {
 // -----------------------------
 setInterval(() => {
   saveDB();
+
   if (saveCount > 0) {
     console.log(`[RPG] saveDB [${saveCount}]`);
     saveCount = 0;
   }
-}, 10 * 1000);
+
+  
+
+}, 30 * 1000);
 
 module.exports = { DB, loadDB, saveDB };
-
 
 
 // -----------------------------

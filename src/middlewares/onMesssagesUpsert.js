@@ -46,47 +46,18 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
 
       const jid = webMessage?.key?.remoteJid;
       if (!jid) continue;
-const isGroup = jid.endsWith("@g.us");
-const userJid = webMessage.key?.participant || webMessage.key?.remoteJid;
-const isLid = userJid.endsWith("@lid");
 
-if (isGroup && isGroupGloballyDisabled(jid) && !isBotOwner({ userJid, isLid })) {
-  continue;
-}
+      const isGroup = jid.endsWith("@g.us");
+      const userJid = webMessage.key?.participant || webMessage.key?.remoteJid;
+      const isLid = userJid.endsWith("@lid");
 
-if (!jid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ userJid, isLid })) {
-  continue;
-}
-      // 🔥 ===== CACHE DE METADATA DEL GRUPO =====
-      if (jid.endsWith("@g.us")) {
-
-        if (!global.GROUP_CACHE) global.GROUP_CACHE = {};
-
-        if (!global.GROUP_CACHE[jid]) {
-          try {
-
-            const metadata = await socket.groupMetadata(jid);
-
-            global.GROUP_CACHE[jid] = {
-              admins: metadata.participants
-                .filter(p => p.admin)
-                .map(p => p.id),
-
-              participants: metadata.participants.map(p => p.id),
-
-              subject: metadata.subject,
-
-              size: metadata.participants.length,
-
-              time: Date.now()
-            };
-
-          } catch (err) {
-            errorLog(`Error cargando metadata del grupo: ${err.message}`);
-          }
-        }
+      if (isGroup && isGroupGloballyDisabled(jid) && !isBotOwner({ userJid, isLid })) {
+        continue;
       }
-      // 🔥 ======================================
+
+      if (!jid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ userJid, isLid })) {
+        continue;
+      }
 
       // marcar como disponible
       await socket.sendPresenceUpdate("available", jid);

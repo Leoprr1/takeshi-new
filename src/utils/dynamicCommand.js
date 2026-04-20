@@ -43,51 +43,22 @@ const { badMacHandler } = require("./badMacHandler");
 const { isPrivateModeEnabled } = require("./privatemode");
 
 
-
 /* =====================================================
    🔹 CACHE SYSTEM (MEJORA DE PERFORMANCE)
 ===================================================== */
 
 const commandCache = new Map();
-const adminCache = new Map();
 let usersCache = readUserProfiles();
-
-/* cache admins 60s */
-async function isAdminCached({ remoteJid, userJid, socket }) {
-
-  const globalCache = global.GROUP_CACHE?.[remoteJid];
-
-  if (globalCache && Date.now() - globalCache.time < 600000) {
-    return globalCache.admins.includes(userJid);
-  }
-
-  const metadata = await socket.groupMetadata(remoteJid);
-
-  const admins = metadata.participants
-    .filter(p => p.admin)
-    .map(p => p.id);
-
-  global.GROUP_CACHE[remoteJid] = {
-    admins,
-    participants: metadata.participants.length,
-    time: Date.now()
-  };
-
-  return admins.includes(userJid);
-}
 
 
 /* cache comandos */
 function getCommandCached(name) {
-
   if (commandCache.has(name)) {
     return commandCache.get(name);
   }
 
   const cmd = findCommandImport(name);
-
   commandCache.set(name, cmd);
-
   return cmd;
 }
 
@@ -96,14 +67,13 @@ setInterval(() => {
   try {
     saveUserProfiles(usersCache);
   } catch {}
-}, 30000);
+}, 300000);
 
 
 /**
  * Verifica si el usuario está registrado
  */
 async function requireRegistration(userJid, sendWarningReply) {
-
   if (!usersCache[userJid]) {
     await sendWarningReply(
       "⚠️ Necesitas registrarte primero usando:\n.reg TuNombre Edad"
@@ -118,7 +88,6 @@ async function requireRegistration(userJid, sendWarningReply) {
  * Registra o actualiza usuario
  */
 function registerUser(userJid, name, age, profilePic = null) {
-
   const now = Date.now();
 
   if (!usersCache[userJid]) {
@@ -145,7 +114,6 @@ function registerUser(userJid, name, age, profilePic = null) {
  * Incrementa contador de comandos usados
  */
 function incrementCommandCount(userJid) {
-
   if (usersCache[userJid]) {
     usersCache[userJid].commandsUsed =
       (usersCache[userJid].commandsUsed || 0) + 1;
@@ -176,7 +144,6 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
   } = paramsHandler;
 
   const message = (fullMessage || "").trim();
-
   const activeGroup = isActiveGroup(remoteJid);
 
 
@@ -187,7 +154,6 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
   if (activeGroup && isActiveAntiLinkGroup(remoteJid)) {
 
     if (!userJid) return;
-
     if (webMessage.key.fromMe) return;
 
     if (
@@ -201,11 +167,7 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
 
       if (linkRegex.test(message)) {
 
-        const userIsAdmin = await isAdminCached({
-          remoteJid,
-          userJid,
-          socket,
-        });
+        const userIsAdmin = await isAdmin({ remoteJid, userJid, socket });
 
         if (!userIsAdmin) {
 
@@ -237,47 +199,29 @@ exports.dynamicCommand = async (paramsHandler, startProcess) => {
 
   const isCommandMessage = message.startsWith(prefix);
 
-  /* =========================================
-   🔹 BLOQUEAR COMANDOS EN PRIVADO
-========================================= */
-if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ userJid, isLid })) {
-  return;
-}
+  if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ userJid, isLid })) {
+    return;
+  }
 
   if (!isCommandMessage) {
 
     if (isActiveAutoResponderGroup(remoteJid)) {
-
       const response = getAutoResponderResponse(message);
-
-      if (response) {
-        await sendReply(response);
-      }
+      if (response) await sendReply(response);
     }
 
     return;
   }
 
 
-  /* =========================================
-     🔹 EXTRAER COMANDO
-  ========================================= */
-
   const withoutPrefix = message.slice(prefix.length).trim();
-
   const [cmd, ...args] = withoutPrefix.split(/\s+/);
 
-
-  /* =========================================
-     🔹 REGISTRO
-  ========================================= */
 
   if (cmd === "reg" || cmd === "reg2") {
 
     if (args.length < 2) {
-      await sendWarningReply(
-        "Uso: .reg Nombre Edad\nEjemplo: .reg Leo 23"
-      );
+      await sendWarningReply("Uso: .reg Nombre Edad\nEjemplo: .reg Leo 23");
       return;
     }
 
@@ -305,47 +249,26 @@ if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ use
   }
 
 
-  /* =========================================
-     🔹 BUSCAR COMANDO
-  ========================================= */
-
   const { type, command } = getCommandCached(commandName);
 
 
   if (!hasTypeAndCommand({ type, command })) {
 
     if (isActiveAutoResponderGroup(remoteJid)) {
-
       const response = getAutoResponderResponse(message);
-
-      if (response) {
-        await sendReply(response);
-      }
+      if (response) await sendReply(response);
     }
 
     return;
   }
 
 
-  /* =========================================
-     🔹 VERIFICAR REGISTRO
-  ========================================= */
-
-  if (!(await requireRegistration(userJid, sendWarningReply))) {
-    return;
-  }
+  if (!(await requireRegistration(userJid, sendWarningReply))) return;
 
   incrementCommandCount(userJid);
 
+  if (ONLY_GROUP_ID && ONLY_GROUP_ID !== remoteJid) return;
 
-  if (ONLY_GROUP_ID && ONLY_GROUP_ID !== remoteJid) {
-    return;
-  }
-
-
-  /* =========================================
-     🔹 PERMISOS EN GRUPO
-  ========================================= */
 
   if (activeGroup) {
 
@@ -353,16 +276,6 @@ if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ use
       !verifyPrefix(prefix, remoteJid) ||
       !hasTypeAndCommand({ type, command })
     ) {
-
-      if (isActiveAutoResponderGroup(remoteJid)) {
-
-        const response = getAutoResponderResponse(message);
-
-        if (response) {
-          await sendReply(response);
-        }
-      }
-
       return;
     }
 
@@ -373,7 +286,7 @@ if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ use
 
     if (
       isActiveOnlyAdmins(remoteJid) &&
-      !(await isAdminCached({ remoteJid, userJid, socket }))
+      !(await isAdmin({ remoteJid, userJid, socket }))
     ) {
       await sendWarningReply(
         "¡Solo los administradores pueden ejecutar comandos!"
@@ -383,61 +296,38 @@ if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ use
   }
 
 
-  /* =========================================
-     🔹 GRUPOS DESACTIVADOS
-  ========================================= */
-
   if (!isBotOwner({ userJid, isLid }) && !activeGroup) {
 
     if (verifyPrefix(prefix, remoteJid) && hasTypeAndCommand({ type, command })) {
 
       if (command.name !== "on") {
-
         await sendWarningReply(
           "¡Este grupo está desactivado! ¡Pide al dueño del grupo que active el bot!"
         );
-
         return;
       }
 
       if (!(await checkPermission({ type, ...paramsHandler }))) {
-
-        await sendErrorReply(
-          "¡No tienes permiso para ejecutar este comando!"
-        );
-
+        await sendErrorReply("¡No tienes permiso para ejecutar este comando!");
         return;
       }
 
-    } else {
-      return;
-    }
+    } else return;
   }
 
 
-  if (!verifyPrefix(prefix, remoteJid)) {
-    return;
-  }
-
+  if (!verifyPrefix(prefix, remoteJid)) return;
 
   const groupPrefix = getPrefix(remoteJid);
 
-
   if (message === groupPrefix) {
-
     await sendReact(BOT_EMOJI);
-
     await sendReply(
       `¡Este es mi prefijo! ¡Usa ${groupPrefix}menu para ver los comandos disponibles!`
     );
-
     return;
   }
 
-
-  /* =========================================
-     🔹 ANTI-SPAM
-  ========================================= */
 
   if (!isBotOwner({ userJid, isLid })) {
 
@@ -446,13 +336,10 @@ if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ use
     if (antiSpam.blocked) {
 
       if (antiSpam.suspended) {
-
         await sendErrorReply(
           `🚫 Has sido suspendido por spam.\nIntenta nuevamente en ${antiSpam.remainingMinutes} minuto(s).`
         );
-
       } else {
-
         await sendWarningReply(
           `⏳ Espera ${antiSpam.remainingSeconds}s antes de usar otro comando.\nAdvertencias restantes: ${antiSpam.remainingWarnings}`
         );
@@ -471,10 +358,6 @@ if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ use
     [];
 
 
-  /* =========================================
-     🔹 EJECUTAR COMANDO
-  ========================================= */
-
   try {
 
     await command.handle({
@@ -488,58 +371,34 @@ if (!remoteJid.endsWith("@g.us") && !isPrivateModeEnabled() && !isBotOwner({ use
   } catch (error) {
 
     if (badMacHandler.handleError(error, `command:${command?.name}`)) {
-
       await sendWarningReply(
         "Error temporal de sincronización. Inténtalo de nuevo en unos segundos."
       );
-
       return;
     }
 
     if (badMacHandler.isSessionError(error)) {
-
       errorLog(
         `Error de sesión durante la ejecución del comando ${command?.name}: ${error.message}`
       );
-
       await sendWarningReply(
         "Error de comunicación. Intenta ejecutar el comando nuevamente."
       );
-
       return;
     }
 
     if (error instanceof InvalidParameterError) {
-
       await sendWarningReply(`¡Parámetros inválidos! ${error.message}`);
-
     } else if (error instanceof WarningError) {
-
       await sendWarningReply(error.message);
-
     } else if (error instanceof DangerError) {
-
       await sendErrorReply(error.message);
-
-    } else if (error.isAxiosError) {
-
-      const messageText = error.response?.data?.message || error.message;
-      const url = error.config?.url || "URL no disponible";
-      const isSpiderAPIError = url.includes("api.spiderx.com.br");
-
-      await sendErrorReply(
-        `Ocurrió un error al ejecutar una llamada remota a ${
-          isSpiderAPIError ? "la API de Spider X" : url
-        } en el comando ${command.name}!\n📄 *Detalles*: ${messageText}`
-      );
-
     } else {
-
       errorLog("Error al ejecutar comando", error);
-
       await sendErrorReply(
         `Ocurrió un error al ejecutar el comando ${command.name}!\n📄 *Detalles*: ${error.message}`
       );
     }
   }
 };
+
