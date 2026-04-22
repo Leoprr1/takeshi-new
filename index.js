@@ -20,12 +20,7 @@ const startCleaner = require("./cleaner.js");
 global.GROUP_CACHE = global.GROUP_CACHE || {};
 const MAX_GROUP_CACHE = 300;
 
-// ----------------------------
-// Cargar bases de datos JSON
-// ----------------------------
-loadJSONFolder(path.join(__dirname, "database"));
-loadJSONFolder(path.join(__dirname, "src/database"));
-startAutoSave(60000);
+
 
 global.IDROPS = global.IDROPS || [];
 global.TEMP_QUEUE = global.TEMP_QUEUE || [];
@@ -128,6 +123,14 @@ async function handleReconnect(reason) {
 // ----------------------------
 async function startBot() {
   try {
+
+    // ----------------------------
+// Cargar bases de datos JSON
+// ----------------------------
+await loadJSONFolder(path.join(__dirname, "database"));
+await loadJSONFolder(path.join(__dirname, "src/database"));
+startAutoSave(60000);
+
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     process.setMaxListeners(1500);
 

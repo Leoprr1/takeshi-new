@@ -1,14 +1,41 @@
 const fs = require("fs")
 const path = require("path")
+const { Worker } = require("worker_threads")
 
 global.JSON_DB = {}
 const SAVE_QUEUE = {}
 
 // ======================
+// WORKER
+// ======================
+
+const worker = new Worker(path.join(__dirname, "worker.js"))
+
+let taskId = 0
+const pending = new Map()
+
+worker.on("message", (msg) => {
+  const { id, success, data, error } = msg
+  const resolve = pending.get(id)
+  if (!resolve) return
+
+  pending.delete(id)
+  resolve({ success, data, error })
+})
+
+function runWorker(task) {
+  return new Promise((resolve) => {
+    const id = taskId++
+    pending.set(id, resolve)
+    worker.postMessage({ ...task, id })
+  })
+}
+
+// ======================
 // CARGAR CARPETA JSON
 // ======================
 
-function loadJSONFolder(folderPath) {
+async function loadJSONFolder(folderPath) {
 
   if (!fs.existsSync(folderPath)) return
 
@@ -24,10 +51,15 @@ function loadJSONFolder(folderPath) {
 
     try {
 
-      const data = JSON.parse(fs.readFileSync(filePath, "utf8"))
+      const res = await runWorker({
+        type: "load",
+        path: filePath
+      })
+
+      if (!res.success) throw new Error(res.error)
 
       global.JSON_DB[key] = {
-        data,
+        data: res.data,
         path: filePath,
         dirty: false
       }
@@ -89,9 +121,9 @@ function scheduleSave(key, delay = 5000) {
 
   if (SAVE_QUEUE[key]) return
 
-  SAVE_QUEUE[key] = setTimeout(() => {
+  SAVE_QUEUE[key] = setTimeout(async () => {
 
-    saveJSON(key)
+    await saveJSON(key)
     delete SAVE_QUEUE[key]
 
   }, delay)
@@ -102,19 +134,18 @@ function scheduleSave(key, delay = 5000) {
 // GUARDAR UN JSON
 // ======================
 
-function saveJSON(key) {
+async function saveJSON(key) {
 
   const db = global.JSON_DB[key]
   if (!db || !db.dirty) return
 
-  const backupPath = db.path + ".bak"
-
   try {
 
-    const json = JSON.stringify(db.data, null, 2)
-
-    fs.writeFileSync(backupPath, json)
-    fs.writeFileSync(db.path, json)
+    await runWorker({
+      type: "save",
+      path: db.path,
+      data: db.data
+    })
 
     db.dirty = false
 
@@ -131,7 +162,7 @@ function saveJSON(key) {
 // GUARDAR TODOS
 // ======================
 
-function saveAllJSON() {
+async function saveAllJSON() {
 
   let saved = 0
 
@@ -140,7 +171,7 @@ function saveAllJSON() {
     const db = global.JSON_DB[key]
 
     if (db.dirty) {
-      saveJSON(key)
+      await saveJSON(key)
       saved++
     }
 
@@ -155,31 +186,39 @@ function saveAllJSON() {
 // ======================
 // HOT RELOAD
 // ======================
+
 let saveCount = 0;
+
 function watchJSON(key) {
 
   const db = global.JSON_DB[key]
 
-  fs.watchFile(db.path, () => {
+  fs.watchFile(db.path, async () => {
 
     try {
 
-      const newData = JSON.parse(fs.readFileSync(db.path, "utf8"))
+      const res = await runWorker({
+        type: "load",
+        path: db.path
+      })
 
-      db.data = newData
+      if (!res.success) return
+
+      db.data = res.data
       db.dirty = false
 
-      saveCount++;
+      saveCount++
 
     } catch {}
 
   })
+
   setInterval(() => {
-  if (saveCount > 0) {
-    console.log(`[JSON] cargado [${saveCount}]`);
-    saveCount = 0;
-  }
-}, 10 * 1000);
+    if (saveCount > 0) {
+      console.log(`[JSON] cargado [${saveCount}]`)
+      saveCount = 0
+    }
+  }, 10000)
 
 }
 
@@ -189,10 +228,8 @@ function watchJSON(key) {
 
 function startAutoSave(interval = 60000) {
 
-  setInterval(() => {
-
-    saveAllJSON()
-
+  setInterval(async () => {
+    await saveAllJSON()
   }, interval)
 
 }
