@@ -1,5 +1,28 @@
 {
-  "groupsEnabled": [],
-  "lastPosts": [],
+  "groupsEnabled": [
+    "120363170281901951@g.us"
+  ],
+  "lastPosts": [
+    {
+      "url": "https://www.instagram.com/tycsports/p/DWHXWXeFJ3H/",
+      "hash": "c19e83c83f80d223a4942b019bac9443a377910f"
+    },
+    {
+      "url": "https://www.instagram.com/tycsports/p/DWHgpc3FLUg/",
+      "hash": "50664f33553c19c4f0815b677254f12cb7e846f2"
+    },
+    {
+      "url": "https://www.instagram.com/tycsports/reel/DWHYiRAlaWc/",
+      "hash": "fdf2763a991ce33f32385d8d9a333b88ed8d6ea1"
+    },
+    {
+      "url": "https://www.instagram.com/tycsports/p/DWHdovYgczQ/",
+      "hash": "b748533fc99298764bc9836d978ee6ac8e30ea45"
+    },
+    {
+      "url": "https://www.instagram.com/tycsports/p/DWHZq7OFiME/",
+      "hash": "9e24ff14f5ba686d7f321e40f85c6f1b8a7dd3f9"
+    }
+  ],
   "enabled": false
 }

@@ -61,7 +61,7 @@ async function loadJSONFolder(folderPath) {
       global.JSON_DB[key] = {
         data: res.data,
         path: filePath,
-        dirty: false
+        dirty: true
       }
 
       watchJSON(key)

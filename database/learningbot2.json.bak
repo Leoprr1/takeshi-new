@@ -4648,9 +4648,5 @@
   "rpg avanzar nivel 30",
   "rpg reintentar nivel 30",
   "rpg list all",
-  "ping",
-  "rpg stats",
-  "menu",
-  "exec pm2 reset all",
-  "exec pm2"
+  "ping"
 ]
