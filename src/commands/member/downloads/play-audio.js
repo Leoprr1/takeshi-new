@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { spawn } = require("child_process");
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+const ffmpegPath = require("ffmpeg-static");
 
 const queue = require(`${BASE_DIR}/utils/queue`);
 
