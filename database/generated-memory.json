@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "createdAt": 1776934787354,
+    "createdAt": 1776938285468,
     "source": "incremental-brain"
   },
   "topics": {
@@ -28723,7 +28723,9 @@
         "pv tussywarrios therian",
         "pv asan slat",
         "pm una foto remix",
-        "pm fuckcluv cro"
+        "pm fuckcluv cro",
+        "pm asan emocional",
+        "pm ella"
       ],
       "wordFrequency": {
         "0": 426,
@@ -30556,7 +30558,7 @@
         "valioso": 1,
         "olvides": 3,
         "mejore": 1,
-        "pm": 47,
+        "pm": 49,
         "pv": 12,
         "fallen": 1,
         "error": 40,
@@ -31056,7 +31058,7 @@
         "apostar": 1,
         "manos": 7,
         "romper": 8,
-        "ella": 53,
+        "ella": 54,
         "caso": 14,
         "dije": 60,
         "ahhhh": 6,
@@ -37151,7 +37153,7 @@
         "marron": 3,
         "hincha": 1,
         "promedio": 3,
-        "asan": 4,
+        "asan": 5,
         "wachiturro": 1,
         "mediamente": 1,
         "mezi": 1,
@@ -38699,7 +38701,7 @@
         "wann": 1,
         "43426447933485": 2,
         "apollo": 1,
-        "emocional": 1,
+        "emocional": 2,
         "mantita": 1,
         "calentar": 2,
         "pataaaaas": 1,
@@ -82478,7 +82480,7 @@
         "voy hacer": 1,
         "el dni": 1,
         "profile 65919745306692": 1,
-        "pm asan": 2,
+        "pm asan": 3,
         "asan slat": 2,
         "restart 4": 1,
         "rpg dayli": 1,
@@ -82552,9 +82554,11 @@
         "pv asan": 1,
         "foto remix": 1,
         "pm fuckcluv": 1,
-        "fuckcluv cro": 1
+        "fuckcluv cro": 1,
+        "asan emocional": 1,
+        "pm ella": 1
       },
-      "totalSentences": 16149
+      "totalSentences": 16151
     },
     "saludo": {
       "keywords": [
@@ -91529,7 +91533,7 @@
       "valioso": 1,
       "olvides": 3,
       "mejore": 1,
-      "pm": 48,
+      "pm": 50,
       "pv": 12,
       "fallen": 1,
       "error": 41,
@@ -92031,7 +92035,7 @@
       "apostar": 5,
       "manos": 7,
       "romper": 8,
-      "ella": 54,
+      "ella": 55,
       "caso": 14,
       "dije": 62,
       "ahhhh": 6,
@@ -98872,7 +98876,7 @@
       "marron": 3,
       "hincha": 1,
       "promedio": 3,
-      "asan": 4,
+      "asan": 5,
       "wachiturro": 1,
       "mediamente": 1,
       "mezi": 1,
@@ -100375,7 +100379,7 @@
       "wann": 1,
       "43426447933485": 2,
       "apollo": 1,
-      "emocional": 1,
+      "emocional": 2,
       "mantita": 1,
       "calentar": 2,
       "pataaaaas": 1,
@@ -102933,6 +102937,6 @@
       "fuckcluv": 1,
       "cro": 1
     },
-    "totalSentences": 16499
+    "totalSentences": 16501
   }
 }

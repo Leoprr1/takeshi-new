@@ -261,6 +261,7 @@ async function startBot() {
 
         setTimeout(() => startTyCSystem(socketGlobal), 10000);
         setTimeout(() => require("./src/commands/member/rpg.js"), 10000);
+        setTimeout(() => {require("./yt-dlp-update")();}, 10000);
 
         successLog("✅ Bot conectado y listo.");
       } catch {

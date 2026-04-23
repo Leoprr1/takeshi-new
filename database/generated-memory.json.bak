@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "createdAt": 1776934536552,
+    "createdAt": 1776938044187,
     "source": "incremental-brain"
   },
   "topics": {
@@ -12570,7 +12570,9 @@
         "xxxxxdrwsswwfgg",
         "pinf",
         "restartbot",
-        "ancentral"
+        "ancentral",
+        "fuckcluv",
+        "cro"
       ],
       "sentences": [
         "0",
@@ -28718,7 +28720,11 @@
         "rpg ancentral",
         "rpg menu dungeon",
         "pm tussywarrios therians",
-        "pv tussywarrios therian"
+        "pv tussywarrios therian",
+        "pv asan slat",
+        "pm una foto remix",
+        "pm fuckcluv cro",
+        "pm asan emocional"
       ],
       "wordFrequency": {
         "0": 426,
@@ -29989,7 +29995,7 @@
         "mi": 515,
         "autocorrector": 4,
         "es": 862,
-        "una": 349,
+        "una": 350,
         "especie": 1,
         "de": 3028,
         "senal": 3,
@@ -30551,8 +30557,8 @@
         "valioso": 1,
         "olvides": 3,
         "mejore": 1,
-        "pm": 45,
-        "pv": 11,
+        "pm": 48,
+        "pv": 12,
         "fallen": 1,
         "error": 40,
         "mierda": 75,
@@ -30621,7 +30627,7 @@
         "mucha": 8,
         "holis": 8,
         "cambias": 3,
-        "foto": 45,
+        "foto": 46,
         "perfil": 9,
         "calzones": 1,
         "muerto": 21,
@@ -35400,7 +35406,7 @@
         "272069451362420": 5,
         "253893418209395": 1,
         "144049327624241": 2,
-        "remix": 2,
+        "remix": 3,
         "justo": 16,
         "ojete": 1,
         "chikillo": 1,
@@ -37146,7 +37152,7 @@
         "marron": 3,
         "hincha": 1,
         "promedio": 3,
-        "asan": 3,
+        "asan": 5,
         "wachiturro": 1,
         "mediamente": 1,
         "mezi": 1,
@@ -38694,7 +38700,7 @@
         "wann": 1,
         "43426447933485": 2,
         "apollo": 1,
-        "emocional": 1,
+        "emocional": 2,
         "mantita": 1,
         "calentar": 2,
         "pataaaaas": 1,
@@ -41253,7 +41259,7 @@
         "pajaritos": 1,
         "httpslabfundacionypforgtec": 1,
         "mesita": 1,
-        "slat": 1,
+        "slat": 2,
         "dayli": 1,
         "99999999999": 1,
         "ysksbs": 1,
@@ -41285,7 +41291,9 @@
         "xxxxxdrwsswwfgg": 1,
         "pinf": 1,
         "restartbot": 1,
-        "ancentral": 1
+        "ancentral": 1,
+        "fuckcluv": 1,
+        "cro": 1
       },
       "bigrams": {
         "bueno vamo": 1,
@@ -49200,7 +49208,7 @@
         "fake pueden": 1,
         "pueden dejar": 2,
         "dejar una": 1,
-        "una foto": 7,
+        "una foto": 8,
         "sus hermanas": 1,
         "hermanas primas": 1,
         "primas o": 1,
@@ -72545,7 +72553,7 @@
         "encima despues": 1,
         "despues hablan": 1,
         "hablan de": 1,
-        "pm una": 1,
+        "pm una": 2,
         "una vela": 1,
         "vela intoxicados": 1,
         "parece normal": 1,
@@ -82471,8 +82479,8 @@
         "voy hacer": 1,
         "el dni": 1,
         "profile 65919745306692": 1,
-        "pm asan": 2,
-        "asan slat": 1,
+        "pm asan": 3,
+        "asan slat": 2,
         "restart 4": 1,
         "rpg dayli": 1,
         "rpg casino": 5,
@@ -82541,9 +82549,14 @@
         "rpg ancentral": 1,
         "tussywarrios therians": 1,
         "pv tussywarrios": 1,
-        "tussywarrios therian": 1
+        "tussywarrios therian": 1,
+        "pv asan": 1,
+        "foto remix": 1,
+        "pm fuckcluv": 1,
+        "fuckcluv cro": 1,
+        "asan emocional": 1
       },
-      "totalSentences": 16146
+      "totalSentences": 16150
     },
     "saludo": {
       "keywords": [
@@ -90923,7 +90936,7 @@
       "mi": 526,
       "autocorrector": 4,
       "es": 880,
-      "una": 396,
+      "una": 397,
       "especie": 1,
       "de": 3275,
       "senal": 3,
@@ -91089,7 +91102,7 @@
       "nadapp": 1,
       "presentense": 11,
       "plis": 9,
-      "foto": 51,
+      "foto": 52,
       "vez": 65,
       "edad": 22,
       "amo": 46,
@@ -91518,8 +91531,8 @@
       "valioso": 1,
       "olvides": 3,
       "mejore": 1,
-      "pm": 46,
-      "pv": 11,
+      "pm": 49,
+      "pv": 12,
       "fallen": 1,
       "error": 41,
       "mierda": 81,
@@ -97061,7 +97074,7 @@
       "272069451362420": 5,
       "253893418209395": 1,
       "144049327624241": 2,
-      "remix": 2,
+      "remix": 3,
       "justo": 16,
       "ojete": 1,
       "chikillo": 1,
@@ -98861,7 +98874,7 @@
       "marron": 3,
       "hincha": 1,
       "promedio": 3,
-      "asan": 3,
+      "asan": 5,
       "wachiturro": 1,
       "mediamente": 1,
       "mezi": 1,
@@ -100364,7 +100377,7 @@
       "wann": 1,
       "43426447933485": 2,
       "apollo": 1,
-      "emocional": 1,
+      "emocional": 2,
       "mantita": 1,
       "calentar": 2,
       "pataaaaas": 1,
@@ -102888,7 +102901,7 @@
       "pajaritos": 1,
       "httpslabfundacionypforgtec": 1,
       "mesita": 1,
-      "slat": 1,
+      "slat": 2,
       "dayli": 1,
       "99999999999": 1,
       "ysksbs": 1,
@@ -102918,8 +102931,10 @@
       "xxxxxdrwsswwfgg": 1,
       "pinf": 1,
       "restartbot": 1,
-      "ancentral": 1
+      "ancentral": 1,
+      "fuckcluv": 1,
+      "cro": 1
     },
-    "totalSentences": 16496
+    "totalSentences": 16500
   }
 }
