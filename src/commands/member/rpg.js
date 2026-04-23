@@ -935,7 +935,7 @@ const totalHP = baseHP * (you.limitBreaker?.active ? 2 : 1);
   let limitText = "";
   if (you.limitBreaker?.unlocked) {
     limitText = you.limitBreaker.active
-      ? `💥 LIMIT BREAKER: 🔥 ACTIVO\n⚔️ ATK x2 | 🛡️ DEF x2 \n`
+      ? `💥 LIMIT BREAKER: 🔥 ACTIVO\n⚔️ ATK x2 | 🛡️ DEF x2 | ❤️ HP x2\n`
       : `💥 LIMIT BREAKER: ❄️ Inactivo\n`;
   }
 

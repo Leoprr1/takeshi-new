@@ -287,9 +287,9 @@
       "messages": 0
     },
     "7495355506786@lid": {
-      "messages": 19,
-      "lastMessage": 1774576883804,
-      "totalAfk": 1302014122
+      "messages": 20,
+      "lastMessage": 1776901896906,
+      "totalAfk": 3627027224
     },
     "112541682389087@lid": {
       "messages": 12,
@@ -1795,6 +1795,11 @@
       "messages": 4,
       "lastMessage": 1776742669871,
       "totalAfk": 41833
+    },
+    "120363407849013501@g.us": {
+      "messages": 24,
+      "lastMessage": 1776905432957,
+      "totalAfk": 66276
     }
   }
 }

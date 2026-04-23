@@ -67731,5 +67731,23 @@
     "answers": [
       ".pm verano maldito"
     ]
+  },
+  {
+    "match": "Makaku",
+    "answers": [
+      "Khe"
+    ]
+  },
+  {
+    "match": "@220890855948425 preséntate porfa y no mandes nada inapropiado",
+    "answers": [
+      "Hola Fran, me siento como el meme de los muchos spiderman jaja"
+    ]
+  },
+  {
+    "match": "@278429912006742 preséntate porfa",
+    "answers": [
+      "sipi, ahí voy"
+    ]
   }
 ]
