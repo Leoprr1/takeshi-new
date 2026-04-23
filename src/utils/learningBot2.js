@@ -1,40 +1,57 @@
-// 🔥 learningBot2.js
+// 🔥 learningBot2.js (OPTIMIZADO)
 require("./brainbuilder");
 require("../commands/admin/afk");
-const db = require("./database"); // Tu database.js
-const path = require("path");
+const db = require("./database");
 
-const NEW_FILE = path.resolve(__dirname, "../database/learningbot2.json");
+let buffer = [];
+let lastSavedLength = 0;
 
 /**
  * 🔹 Aprende todos los mensajes de texto entrantes
- * y los guarda en learningbot2.json de forma independiente.
- * Ignora mensajes del propio bot.
  */
 function learnFromAllMessages(webMessage) {
   if (!webMessage?.message) return;
-
-  // 🔹 Ignorar mensajes enviados por el bot
   if (webMessage.key?.fromMe) return;
 
-  // 🔹 Obtener texto
   const messageText = extractTextFromMessage(webMessage.message);
   if (!messageText || messageText.length < 2) return;
 
   const normalized = normalize(messageText);
   if (!normalized.trim()) return;
 
-  // 🔹 Leer JSON existente
-  const data = db.readJSON("learningbot2", []);
+  // evitar duplicado consecutivo en buffer
+  if (buffer.length && buffer[buffer.length - 1] === normalized) return;
 
-  // 🔹 Evitar duplicados exactos consecutivos
-  if (data.length && data[data.length - 1] === normalized) return;
-
-  // 🔹 Guardar mensaje
-  data.push(normalized);
-  db.writeJSON("learningbot2", data);
+  buffer.push(normalized);
 }
 
+/**
+ * 🔥 Guardado batch cada X tiempo
+ */
+setInterval(() => {
+  if (!buffer.length) return;
+
+  const data = db.readJSON("learningbot2", []);
+
+  // evitar duplicado con el último del archivo
+  if (data.length && buffer[0] === data[data.length - 1]) {
+    buffer.shift();
+  }
+
+  const newData = data.concat(buffer);
+
+  db.writeJSON("learningbot2", newData);
+
+  console.log("🧠 learningbot2 guardado:", buffer.length);
+
+  buffer = [];
+}, 10000); // cada 10 segundos
+
+/**
+ * ==============================
+ * 🔹 EXTRAER TEXTO
+ * ==============================
+ */
 function extractTextFromMessage(message) {
   if (!message) return "";
 
@@ -50,6 +67,11 @@ function extractTextFromMessage(message) {
   return "";
 }
 
+/**
+ * ==============================
+ * 🔹 NORMALIZAR TEXTO
+ * ==============================
+ */
 function normalize(text = "") {
   return text
     .toLowerCase()

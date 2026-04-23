@@ -1,4 +1,4 @@
-// 🔥 learningBot.js
+// 🔥 learningBot.js (OPTIMIZADO - INCREMENTAL REAL)
 require("./brainbuilder");
 const db = require("./database");
 const stringSimilarity = require("string-similarity");
@@ -58,88 +58,32 @@ function saveLearning(trigger, answer) {
 
 /**
  * ==============================
- * 🔥 REORGANIZAR AUTO-RESPONDER.JSON
- * ==============================
- * - Convierte formato viejo (answer → answers[])
- * - Agrupa duplicados por match
- * - Si respuesta es similar → reemplaza
- * - Si diferente → agrega
- */
-function reorganizeAutoResponder() {
-  const autoResponder = db.readJSON("auto-responder", []);
-  const grouped = {};
-
-  for (const item of autoResponder) {
-    if (!item.match) continue;
-
-    const normalizedMatch = normalize(item.match);
-
-    if (!grouped[normalizedMatch]) {
-      grouped[normalizedMatch] = {
-        match: item.match.trim(),
-        answers: [],
-      };
-    }
-
-    // 🔹 Unificar formato viejo
-    let answersToProcess = [];
-
-    if (Array.isArray(item.answers)) {
-      answersToProcess = item.answers;
-    } else if (item.answer) {
-      answersToProcess = [item.answer];
-    }
-
-    for (const ans of answersToProcess) {
-      const existingAnswers = grouped[normalizedMatch].answers;
-
-      const similarIndex = existingAnswers.findIndex(existing =>
-        stringSimilarity.compareTwoStrings(
-          normalize(existing),
-          normalize(ans)
-        ) >= SIMILARITY_THRESHOLD
-      );
-
-      if (similarIndex !== -1) {
-        // 🔥 Reemplazar similar
-        existingAnswers[similarIndex] = ans.trim();
-      } else {
-        // 🔥 Agregar diferente
-        existingAnswers.push(ans.trim());
-      }
-    }
-  }
-
-  // 🔥 Convertir objeto agrupado en array final
-  const reorganized = Object.values(grouped);
-
-  db.writeJSON("auto-responder", reorganized);
-}
-
-/**
- * ==============================
- * 🔹 EXPORTAR LEARNING A AUTO-RESPONDER
+ * 🔥 EXPORTAR LEARNING A AUTO-RESPONDER (INCREMENTAL)
  * ==============================
  */
 function checkAndExportToAutoResponder() {
   const learning = db.readJSON(LEARNING_FILE, []);
+  if (!learning.length) return;
+
   const autoResponder = db.readJSON("auto-responder", []);
 
+  let changed = false;
+
   for (const item of learning) {
-    const index = autoResponder.findIndex(
-      (r) => normalize(r.match) === normalize(item.trigger)
+    const normalizedTrigger = normalize(item.trigger);
+
+    let existing = autoResponder.find(
+      (r) => normalize(r.match) === normalizedTrigger
     );
 
-    if (index !== -1) {
-
-      if (!Array.isArray(autoResponder[index].answers)) {
-        autoResponder[index].answers = autoResponder[index].answer
-          ? [autoResponder[index].answer]
-          : [];
-        delete autoResponder[index].answer;
+    if (existing) {
+      // asegurar formato moderno
+      if (!Array.isArray(existing.answers)) {
+        existing.answers = existing.answer ? [existing.answer] : [];
+        delete existing.answer;
       }
 
-      const similarIndex = autoResponder[index].answers.findIndex(ans =>
+      const similarIndex = existing.answers.findIndex((ans) =>
         stringSimilarity.compareTwoStrings(
           normalize(ans),
           normalize(item.answer)
@@ -147,24 +91,31 @@ function checkAndExportToAutoResponder() {
       );
 
       if (similarIndex !== -1) {
-        autoResponder[index].answers[similarIndex] = item.answer;
+        existing.answers[similarIndex] = item.answer.trim();
       } else {
-        autoResponder[index].answers.push(item.answer);
+        existing.answers.push(item.answer.trim());
       }
 
+      changed = true;
+
     } else {
+      // 🔥 SOLO agrega nuevo (NO reconstruye todo)
       autoResponder.push({
-        match: item.trigger,
-        answers: [item.answer],
+        match: item.trigger.trim(),
+        answers: [item.answer.trim()],
       });
+
+      changed = true;
     }
   }
 
-  db.writeJSON("auto-responder", autoResponder);
-  db.writeJSON(LEARNING_FILE, []);
+  // 🔥 SOLO guardar si hubo cambios
+  if (changed) {
+    db.writeJSON("auto-responder", autoResponder);
+  }
 
-  // 🔥 REORGANIZAR TODO EL ARCHIVO DESPUÉS
-  reorganizeAutoResponder();
+  // limpiar learning
+  db.writeJSON(LEARNING_FILE, []);
 }
 
 /**

@@ -3640,7 +3640,8 @@
       "12 + 1?",
       "ala",
       "Ojalá",
-      "Calla"
+      "Calla",
+      "kukatrap"
     ]
   },
   {
@@ -13904,7 +13905,8 @@
   {
     "match": "Bbb",
     "answers": [
-      "Bhhh*"
+      "Bhhh*",
+      "Bernabéu"
     ]
   },
   {
@@ -48123,7 +48125,8 @@
   {
     "match": "Es un rejunte de mecanica, electronica y electromecanica",
     "answers": [
-      "a re bien,que buena onda"
+      "a re bien,que buena onda",
+      "ala mier"
     ]
   },
   {
@@ -67748,6 +67751,30 @@
     "match": "@278429912006742 preséntate porfa",
     "answers": [
       "sipi, ahí voy"
+    ]
+  },
+  {
+    "match": "Si XD",
+    "answers": [
+      "ala"
+    ]
+  },
+  {
+    "match": "kukatrap",
+    "answers": [
+      "semitin"
+    ]
+  },
+  {
+    "match": "Pillo eh, tranquilito conmigo",
+    "answers": [
+      "boee re agresivo"
+    ]
+  },
+  {
+    "match": "https://chat.whatsapp.com/FfbNKWtoTDa7a3CPmjJAvC?mode=gi_t",
+    "answers": [
+      "y eso que es?"
     ]
   }
 ]
