@@ -47007,7 +47007,8 @@
   {
     "match": "Me alegro, bien bien",
     "answers": [
-      "gracias me alegro tambien"
+      "gracias me alegro tambien",
+      "nadie te habló a vos"
     ]
   },
   {
@@ -67775,6 +67776,90 @@
     "match": "https://chat.whatsapp.com/FfbNKWtoTDa7a3CPmjJAvC?mode=gi_t",
     "answers": [
       "y eso que es?"
+    ]
+  },
+  {
+    "match": "🏓 ¡Pong!\n\n📶 Velocidad de respuesta: 371ms\n⏱️ Tiempo de actividad: 0h 52m 37s",
+    "answers": [
+      ".tts"
+    ]
+  },
+  {
+    "match": "Debe ser como la que fuimos",
+    "answers": [
+      "Vos no estas en mendoza?"
+    ]
+  },
+  {
+    "match": "Vos no estas en mendoza?",
+    "answers": [
+      "Yzi"
+    ]
+  },
+  {
+    "match": "Che xq salió tu novia?",
+    "answers": [
+      "Nose"
+    ]
+  },
+  {
+    "match": "Te equivocaste de chat xddd",
+    "answers": [
+      "nu"
+    ]
+  },
+  {
+    "match": "🔥 *TOP 10 MÁS INFIELES DEL GRUPO* 🔥\n\n#1 👤 @61091732287517\n 💔 Nivel de infiel: 64%\n\n#2 👤 @259635453935764\n 💔 Nivel de infiel: 86%\n\n#3 👤 @177112187191364\n 💔 Nivel de infiel: 24%\n\n#4 👤 @148137834471521\n 💔 Nivel de infiel: 69%\n\n#5 👤 @112541682389087\n 💔 Nivel de infiel: 72%\n\n#6 👤 @171605586141203\n 💔 Nivel de infiel: 8%\n\n#7 👤 @122604958572601\n 💔 Nivel de infiel: 29%\n\n#8 👤 @110986719670373\n 💔 Nivel de infiel: 48%\n\n#9 👤 @241502252982276\n 💔 Nivel de infiel: 93%\n\n#10 👤 @49705807536244\n 💔 Nivel de infiel: 46%",
+    "answers": [
+      "yo que😔"
+    ]
+  },
+  {
+    "match": "QUE ONDA LOS THERIANS",
+    "answers": [
+      "todo bien wachin y vos?"
+    ]
+  },
+  {
+    "match": "todo bien wachin y vos?",
+    "answers": [
+      "Todo tranquiii"
+    ]
+  },
+  {
+    "match": "Todo tranquiii",
+    "answers": [
+      "me alegro pa"
+    ]
+  },
+  {
+    "match": "Es que tengo como 30 grupos de compraventa y aveces se me pasa",
+    "answers": [
+      "Xd"
+    ]
+  },
+  {
+    "match": "No no",
+    "answers": [
+      "shh"
+    ]
+  },
+  {
+    "match": "la admin anda regalando petes a domicilio",
+    "answers": [
+      "JAJAJAJJAJAJAJ"
+    ]
+  },
+  {
+    "match": "Nadie nunca me papeo tanto en mi vida",
+    "answers": [
+      "siempre hay una primera vez"
+    ]
+  },
+  {
+    "match": "noc ami me tratas mal aveces",
+    "answers": [
+      "y bueno flaco, yo te creé"
     ]
   }
 ]

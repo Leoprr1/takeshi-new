@@ -13,9 +13,21 @@
     {
       "name": "Instagram",
       "link": "https://www.instagram.com/elmomero200_?igsh=MXBlbGdoOGRvaTF5NQ=="
+    },
+    {
+      "name": "Tik Tok",
+      "link": "https://www.tiktok.com/@elmomero200_?_r=1&_t=ZS-95XpP3xXUps"
+    },
+    {
+      "name": "para consultas o informes de errores",
+      "link": "wa.me/+5492944800960"
     }
   ],
   "owner": [
+    {
+      "command": "updateytdlp",
+      "desc": "actualiza el sistema de descarga de musica y demas"
+    },
     {
       "command": "menugrupo",
       "desc": "menu para administrar grupos globalmente"
@@ -39,10 +51,6 @@
     {
       "command": "set-menu-image",
       "desc": "cambia la imagen del grupo"
-    },
-    {
-      "command": "set-prefix",
-      "desc": "este es para cambiar el prefijo del comando"
     },
     {
       "command": "ping",

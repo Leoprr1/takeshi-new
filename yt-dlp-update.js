@@ -44,8 +44,8 @@ async function updateYtDlp(options = {}) {
     delay = 5000,
   } = options;
 
-  if (hasRun) return; // 🔥 solo una vez
-  hasRun = true;
+  if (hasRun && !options?.force) return;
+hasRun = true;
 
   const ytPath = path.join(process.cwd(), fileName);
 
