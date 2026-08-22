@@ -1,10 +1,10 @@
 const path = require("path");
 const BASE_DIR = path.resolve(__dirname, "../../..");
 
-const { OWNER_NUMBER } = require("../../config");
-const { PREFIX, BOT_NUMBER } = require(`${BASE_DIR}/src/config`);
+const { PREFIX, BOT_NUMBER, OWNER_NUMBER } = require(`${BASE_DIR}/src/config`);
 const { InvalidParameterError } = require(`${BASE_DIR}/src/errors`);
 const { toUserJid, onlyNumbers } = require(`${BASE_DIR}/src/utils`);
+const { isBotOwner } = require(`${BASE_DIR}/src/middlewares`);
 
 module.exports = {
   name: "ban",
@@ -33,21 +33,30 @@ module.exports = {
     }
 
     const memberNumber = onlyNumbers(target);
-    const botJid = toUserJid(BOT_NUMBER);
+    const userNumber = onlyNumbers(userJid);
+    const ownerNumber = onlyNumbers(OWNER_NUMBER);
+    const botNumber = onlyNumbers(BOT_NUMBER);
 
-    if (target === userJid) {
+    // 1. Evitar auto-ban
+    if (target === userJid || (memberNumber && memberNumber === userNumber)) {
       return await sendReply("❌ No puedes eliminarte a ti mismo.");
     }
 
-    if (memberNumber === OWNER_NUMBER) {
+    // 2. Evitar eliminar al dueño (Usando comprobación por middleware o comparación limpia de números)
+    const isTargetOwner = 
+      (typeof isBotOwner === "function" && isBotOwner({ userJid: target, isLid: target.includes("@lid") })) ||
+      (ownerNumber && memberNumber && (memberNumber === ownerNumber || memberNumber.includes(ownerNumber) || ownerNumber.includes(memberNumber)));
+
+    if (isTargetOwner) {
       return await sendReply("❌ No puedes eliminar al dueño del bot.");
     }
 
-    if (target === botJid) {
+    // 3. Evitar eliminar al bot
+    if (botNumber && memberNumber && (memberNumber === botNumber || botNumber.includes(memberNumber))) {
       return await sendReply("❌ No puedes eliminarme a mí.");
     }
 
-    // --- PROTECCIÓN PARA ADMINISTRADORES ---
+    // 4. PROTECCIÓN PARA ADMINISTRADORES DEL GRUPO
     try {
       const groupMetadata = await socket.groupMetadata(remoteJid);
       const participants = groupMetadata?.participants || [];
@@ -58,9 +67,13 @@ module.exports = {
         .map((p) => p.id);
 
       // Si el objetivo es administrador (por JID exacto o por número), no lo banea
-      const isAdmin = groupAdmins.some(
-        (adminJid) => adminJid === target || onlyNumbers(adminJid) === memberNumber
-      );
+      const isAdmin = groupAdmins.some((adminJid) => {
+        const adminNumber = onlyNumbers(adminJid);
+        return (
+          adminJid === target ||
+          (adminNumber && memberNumber && adminNumber === memberNumber)
+        );
+      });
 
       if (isAdmin) {
         return await sendReply("❌ No se puede eliminar a un administrador del grupo.");
@@ -68,8 +81,8 @@ module.exports = {
     } catch (error) {
       console.error("[BAN METADATA ERROR]", error);
     }
-    // ----------------------------------------
 
+    // 5. Expulsar participante
     try {
       await socket.groupParticipantsUpdate(remoteJid, [target], "remove");
 
@@ -85,4 +98,5 @@ module.exports = {
     }
   },
 };
+
 
