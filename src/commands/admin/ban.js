@@ -47,6 +47,29 @@ module.exports = {
       return await sendReply("❌ No puedes eliminarme a mí.");
     }
 
+    // --- PROTECCIÓN PARA ADMINISTRADORES ---
+    try {
+      const groupMetadata = await socket.groupMetadata(remoteJid);
+      const participants = groupMetadata?.participants || [];
+
+      // Obtenemos los JIDs de los administradores del grupo
+      const groupAdmins = participants
+        .filter((p) => p.admin === "admin" || p.admin === "superadmin")
+        .map((p) => p.id);
+
+      // Si el objetivo es administrador (por JID exacto o por número), no lo banea
+      const isAdmin = groupAdmins.some(
+        (adminJid) => adminJid === target || onlyNumbers(adminJid) === memberNumber
+      );
+
+      if (isAdmin) {
+        return await sendReply("❌ No se puede eliminar a un administrador del grupo.");
+      }
+    } catch (error) {
+      console.error("[BAN METADATA ERROR]", error);
+    }
+    // ----------------------------------------
+
     try {
       await socket.groupParticipantsUpdate(remoteJid, [target], "remove");
 
@@ -62,3 +85,4 @@ module.exports = {
     }
   },
 };
+
