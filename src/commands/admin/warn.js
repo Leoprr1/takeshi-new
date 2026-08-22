@@ -2,8 +2,9 @@ const path = require("path");
 const BASE_DIR = path.resolve(__dirname, "../../../");
 
 const { toUserJid, onlyNumbers } = require(`${BASE_DIR}/src/utils`);
-const { PREFIX, BOT_NUMBER, OWNER_NUMBER } = require(`${BASE_DIR}/src/config`);
+const { PREFIX, BOT_NUMBER } = require(`${BASE_DIR}/src/config`);
 const { DangerError } = require(`${BASE_DIR}/src/errors`);
+const { isBotOwner } = require(`${BASE_DIR}/src/middlewares`);
 
 const {
   muteMember,
@@ -41,11 +42,20 @@ module.exports = {
         `❌ Debes mencionar a un usuario o responder su mensaje.`
       );
 
-    if (
-      target === toUserJid(BOT_NUMBER) ||
-      onlyNumbers(target) === OWNER_NUMBER
-    )
-      return sendErrorReply("❌ No podés advertir al bot ni al dueño.");
+    // 🛡️ PROTECCIÓN ANTI-WARN AL BOT
+    if (target === toUserJid(BOT_NUMBER)) {
+      return sendErrorReply("❌ No podés advertir al bot.");
+    }
+
+    // 🛡️ PROTECCIÓN ANTI-WARN AL OWNER
+    const isTargetOwner = isBotOwner({
+      userJid: target,
+      isLid: target.endsWith("@lid"),
+    });
+
+    if (isTargetOwner) {
+      return sendErrorReply("❌ No podés advertir al dueño del bot.");
+    }
 
     // Inicializar DB
     global.mutedDB = global.mutedDB || {};
@@ -119,3 +129,4 @@ module.exports = {
     );
   },
 };
+

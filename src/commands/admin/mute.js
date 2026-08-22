@@ -12,6 +12,7 @@ const {
 
 const { PREFIX, BOT_NUMBER } = require(`${BASE_DIR}/config`);
 const { DangerError } = require(`${BASE_DIR}/errors`);
+const { isBotOwner } = require(`${BASE_DIR}/middlewares`);
 
 module.exports = {
   name: "mute",
@@ -55,6 +56,16 @@ module.exports = {
       throw new DangerError("no te podes mutear a vos mismo");
     }
 
+    // 🛡️ PROTECCIÓN ANTI-MUTE AL OWNER
+    const isTargetOwner = isBotOwner({
+      userJid: target,
+      isLid: target.endsWith("@lid"),
+    });
+
+    if (isTargetOwner) {
+      throw new DangerError("no podes mutear al dueño del bot");
+    }
+
     const groupMetadata = await getGroupMetadata();
 
     const isUserInGroup = groupMetadata.participants.some(
@@ -85,3 +96,5 @@ module.exports = {
     );
   },
 };
+
+

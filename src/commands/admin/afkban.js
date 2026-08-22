@@ -1,6 +1,7 @@
 const groupStats = require("../../database/groupStats");
-const { OWNER_NUMBER, BOT_NUMBER } = require("../../config");
-const { onlyNumbers, toUserJid } = require("../../utils");
+const { BOT_NUMBER } = require("../../config");
+const { onlyNumbers } = require("../../utils");
+const { isBotOwner } = require("../../middlewares");
 
 const AFK_LIMIT = 7 * 24 * 60 * 60 * 1000; // 7 días
 
@@ -38,13 +39,20 @@ module.exports = {
 
       const jid = participant.id;
 
-      // ignorar admins
+      // 1. Ignorar administradores
       if (participant.admin) continue;
 
+      // 2. Ignorar al Bot
       const number = onlyNumbers(jid);
+      if (number === onlyNumbers(BOT_NUMBER)) continue;
 
-      if (number === OWNER_NUMBER) continue;
-      if (number === BOT_NUMBER) continue;
+      // 3. 🛡️ PROTECCIÓN ANTI-BAN AL OWNER
+      const isTargetOwner = isBotOwner({
+        userJid: jid,
+        isLid: jid.endsWith("@lid"),
+      });
+
+      if (isTargetOwner) continue;
 
       const data = stats[jid];
 
@@ -88,3 +96,5 @@ module.exports = {
 
   },
 };
+
+

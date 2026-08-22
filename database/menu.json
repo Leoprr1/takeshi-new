@@ -153,6 +153,10 @@
       "desc": "para eliminar gente del grupo"
     },
     {
+      "command": "mas-activos",
+      "desc": "muestra los mas activos"
+    },
+    {
       "command": "afk",
       "desc": "da información de los inactivos"
     },

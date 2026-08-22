@@ -4,7 +4,7 @@
     "age": 23,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/620485926_1206638688260707_2153868945442048660_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa3wFsx_qZjifc35bhJRLTlYkWmLvkIF33aUmV_A_uu5qH2A&oe=69B559BF&_nc_sid=5e03e0&_nc_cat=107",
     "registeredAt": 1772594534960,
-    "commandsUsed": 13106
+    "commandsUsed": 13131
   },
   "148137834471521@lid": {
     "name": "cande",
@@ -319,14 +319,14 @@
     "age": 20,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/679356979_1354072720147342_4551973371344186433_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa5QEEBtxdKV6VwCXXKHg13YpQ-GspkXVXxj-Sjhe4JVD09A&oe=6A89D031&_nc_sid=5e03e0&_nc_cat=110",
     "registeredAt": 1786559548788,
-    "commandsUsed": 1363
+    "commandsUsed": 1405
   },
   "234003441414306@lid": {
     "name": "tobias",
     "age": 21,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/656722380_1806543197456188_3743579937494416790_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa5QFPwLFLqrYca6QUuhUBnAb_EXl9K8_aqc3-h3qWHQxVFA&oe=6A92C91B&_nc_sid=5e03e0&_nc_cat=108",
     "registeredAt": 1786565088375,
-    "commandsUsed": 266
+    "commandsUsed": 268
   },
   "32801067950278@lid": {
     "name": "Gabriel",
@@ -361,7 +361,7 @@
     "age": 1,
     "profilePic": null,
     "registeredAt": 1786575707704,
-    "commandsUsed": 1794
+    "commandsUsed": 1838
   },
   "56114485940456@lid": {
     "name": "Ian",
@@ -676,14 +676,14 @@
     "age": 19,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/646860913_1051291613942474_7892933644669953608_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa5QHPQCldpbCaJBUNUsYEHXwFWeVwqUqh9X6NINA0GBVzdg&oe=6A90BD8B&_nc_sid=5e03e0&_nc_cat=100",
     "registeredAt": 1787009864964,
-    "commandsUsed": 208
+    "commandsUsed": 212
   },
   "255649355153654@lid": {
     "name": "abraham",
     "age": 20,
     "profilePic": "https://pps.whatsapp.net/v/t61.24694-24/723904141_1726107028512678_9075667635524520672_n.jpg?stp=dst-jpg_s96x96_tt6&ccb=11-4&oh=01_Q5Aa5QFqG3yLBUueun3XnewssI9owW1cIsCSVSSsieIUkgwzgg&oe=6A90B75A&_nc_sid=5e03e0&_nc_cat=101",
     "registeredAt": 1787009880806,
-    "commandsUsed": 15
+    "commandsUsed": 16
   },
   "20783581675624@lid": {
     "name": "negri,",
@@ -994,11 +994,11 @@
     "commandsUsed": 1
   },
   "67947070513183@lid": {
-    "name": "Pablo",
-    "age": 31,
+    "name": "juan",
+    "age": 98,
     "profilePic": null,
     "registeredAt": 1787277395623,
-    "commandsUsed": 29
+    "commandsUsed": 30
   },
   "74230708330744@lid": {
     "name": "Carol",
@@ -1047,6 +1047,6 @@
     "age": 21,
     "profilePic": null,
     "registeredAt": 1787421149464,
-    "commandsUsed": 3
+    "commandsUsed": 6
   }
 }

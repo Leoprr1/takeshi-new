@@ -62,7 +62,8 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
       }
 
       // 🚫 🔥 CHEQUEO PRIORITARIO DE SILENCIADO (MUTE) PARA TODO TIPO DE CONTENIDO
-      if (isGroup && userJid) {
+      // Excluye automáticamente al Owner usando isBotOwner
+      if (isGroup && userJid && !isBotOwner({ userJid, isLid })) {
         const isMuted = await checkIfMemberIsMuted(jid, userJid);
         if (isMuted) {
           try {
@@ -208,4 +209,6 @@ exports.onMessagesUpsert = async ({ socket, messages, startProcess }) => {
     }
   }
 };
+
+
 
